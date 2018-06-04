@@ -77,6 +77,9 @@
                 <!-- Check latest version on Maven Central -->
                 <version>1.1.0</version>
                 <configuration>
+                    <authentication>
+                        <serverId>azure-auth</serverId>
+                    </authentication>
                     <resourceGroup>csci5308group12devint</resourceGroup>
                     <appName>csci5308group12devint</appName>
                     <linuxRuntime>tomcat 8.5-jre8</linuxRuntime>
