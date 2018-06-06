@@ -11,6 +11,7 @@ $(document).ready(function () {
         let creditCardNumber = $("#user-credit-card").val();
         let expireDate = $("#expire-date").val();
         let securityCode = $("#security-code").val();
+        securityCode = parseInt(securityCode, 10);
 
         var tutorData = {
             "email": email,
