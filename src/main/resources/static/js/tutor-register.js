@@ -29,8 +29,8 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text",
             ContentType: "application/json; charset=UTF-8"
-        }).done(function (json) {
-            if (text === "success") {
+        }).done(function (text) {
+            if (text === "registration success") {
                 alert("Registration succeed!");
                 window.location.replace("../index.html");
             } else {
