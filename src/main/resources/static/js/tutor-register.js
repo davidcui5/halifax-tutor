@@ -25,11 +25,11 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: "https://csci5308group12devint.azurewebsites.net/tutor",
-            data: tutorData,
+            url: "https://csci5308group12devint.azurewebsit/tutor",
+            data: JSON.stringify(tutorData),
             type: "POST",
-            dataType: "text",
-            ContentType: "application/json; charset=UTF-8"
+            contentType: "application/json",
+            dataType: "text"
         }).done(function (text) {
             if (text === "registration success") {
                 alert("Registration succeed!");
