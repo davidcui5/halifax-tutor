@@ -13,23 +13,29 @@ $(document).ready(function () {
         let securityCode = $("#security-code").val();
 
         var tutorData = {
-                    "email": email,
-                    "password": password,
-                    "phoneNumber": phoneNumber,
-                    "firstName": firstName,
-                    "lastName": lastName,
-                    "creditCardNumber": creditCardNumber,
-                    "expireDate": expireDate,
-                    "securityCode": securityCode
+            "email": email,
+            "password": password,
+            "phoneNumber": phoneNumber,
+            "firstName": firstName,
+            "lastName": lastName,
+            "creditCardNumber": creditCardNumber,
+            "expireDate": expireDate,
+            "securityCode": securityCode
         };
 
         $.ajax({
-                    url: "https://csci5308group12devint.azurewebsites.net/tutor",
-                    data: tutorData,
-                    type: "POST",
-                    dataType: "json",
-                    ContentType: "application/json; charset=UTF-8"
+            url: "https://csci5308group12devint.azurewebsites.net/tutor",
+            data: tutorData,
+            type: "POST",
+            dataType: "text",
+            ContentType: "application/json; charset=UTF-8"
         }).done(function (json) {
+            if (text === "success") {
+                alert("Registration succeed!");
+                window.location.replace("../index.html");
+            } else {
+                alert("Something went wrong: " + text);
+            }
 
         }).fail(function (xhr, status, errorThrown) {
 

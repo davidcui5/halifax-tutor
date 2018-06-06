@@ -23,10 +23,15 @@ $(document).ready(function () {
             url: "https://csci5308group12devint.azurewebsites.net/student",
             data: studentData,
             type: "POST",
-            dataType: "json",
+            dataType: "text",
             ContentType: "application/json; charset=UTF-8"
-        }).done(function (json) {
-
+        }).done(function (text) {
+            if (text === "success") {
+                alert("Registration succeed!");
+                window.location.replace("../index.html");
+            } else {
+                alert("Something went wrong: " + text);
+            }
         }).fail(function (xhr, status, errorThrown) {
 
         });
