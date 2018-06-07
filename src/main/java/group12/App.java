@@ -6,7 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@SpringBootApplication
 @EnableAutoConfiguration
 public class App extends SpringBootServletInitializer {
 
