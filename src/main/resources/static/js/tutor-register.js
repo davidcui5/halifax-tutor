@@ -25,7 +25,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: "https://csci5308group12devint.azurewebsit.net/tutor",
+            url: "https://csci5308group12devint.azurewebsites.net/tutor",
             data: JSON.stringify(tutorData),
             type: "POST",
             contentType: "application/json",
