@@ -11,11 +11,11 @@
         </property>
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
-    <bean id="studentDAO" class="group12.StudentsDAO">
+    <bean id="studentDAO" class="group12.DBDAO">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="studentDAOJDBCTemplate" class="group12.StudentsDAO">
+    <bean id="studentDAOJDBCTemplate" class="group12.DBDAO">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 

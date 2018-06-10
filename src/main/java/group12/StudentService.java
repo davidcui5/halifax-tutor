@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class StudentService implements IStudentService {
 
     @Autowired
-    private IStudentsDao dao = new StudentsDAO();
+    private IDBDao dao = new DBDAO();
 
     @Override
     public boolean authorizeStudent(String email, String password) {
