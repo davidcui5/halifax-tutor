@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Repository
-public class DBDAO implements IStudentDao {
+public class StudentsDAO implements IStudentsDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -20,9 +20,7 @@ public class DBDAO implements IStudentDao {
         String sql = "SELECT * FROM Student Where Email =? And Password = ?";
         RowMapper<Student> rowMapper = new StudentRowMapper();
         Student student = jdbcTemplate.queryForObject(sql, rowMapper, email, password);
-        if (student != null)
-            return true;
-        return false;
+        return student.getEmail().equals(email);
     }
 
     @Override
