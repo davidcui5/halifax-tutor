@@ -4,18 +4,21 @@ import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
-@SpringBootApplication
-@EnableAutoConfiguration
-public class App extends SpringBootServletInitializer {
+import java.util.Collection;
+import java.util.Collections;
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(App.class);
-    }
+@SpringBootApplication
+@ComponentScan
+@ImportResource("classpath:spring.xml")
+public class App {
 
     public static void main(String[] args) throws Exception {
+
         SpringApplication.run(App.class, args);
     }
 }

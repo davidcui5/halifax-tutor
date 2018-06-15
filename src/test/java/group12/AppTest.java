@@ -10,7 +10,7 @@ public class AppTest {
     @Test
     public void testDBConnection() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        DBDAO dbda = context.getBean("studentDAOJDBCTemplate", DBDAO.class);
+        DBDAO dbda = context.getBean("studentDAO", DBDAO.class);
         assertTrue(dbda.authorizeStudent("zaher88abd@gmail.com", "zaher"));
     }
 }
