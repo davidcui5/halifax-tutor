@@ -29,9 +29,6 @@ public class DBDAO implements IDBDao {
     @Override
     public boolean authorizeStudent(String email, String password) {
         String sql = "SELECT * FROM Student Where Email =? And Password = ?";
-//        RowMapper<Student> rowMapper = new StudentRowMapper();
-//        Student student = jdbcTemplate.queryForObject(sql, rowMapper, email, password);
-//        return student.getEmail().equals(email);
         Student st = null;
         Connection con = null;
         PreparedStatement ps = null;
