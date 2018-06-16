@@ -6,6 +6,4 @@ public interface IDBDao {
     boolean authorizeTutor(String email, String password);
     boolean regStudent(Student student);
     boolean regTutor(Tutor tutor);
-
-
 }

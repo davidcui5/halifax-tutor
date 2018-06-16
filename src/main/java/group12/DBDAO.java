@@ -44,9 +44,9 @@ public class DBDAO implements IDBDao {
                 st.setFirstName(rs.getString("FirstName"));
                 st.setLastName(rs.getString("LastName"));
                 st.setEmail(rs.getString("Email"));
-                System.out.println("Employee Found::" + st);
+                System.out.println("Student Found::" + st);
             } else {
-                System.out.println("No Employee found with id=" + email);
+                System.out.println("No Student found with id=" + email);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -64,7 +64,38 @@ public class DBDAO implements IDBDao {
 
     @Override
     public boolean authorizeTutor(String email, String password) {
-        return false;
+        String sql = "SELECT * FROM Tutor Where Email =? And Password = ?";
+        Tutor tutor = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                tutor = new Tutor();
+                tutor.setFirstName(rs.getString("FirstName"));
+                tutor.setLastName(rs.getString("LastName"));
+                tutor.setEmail(rs.getString("Email"));
+                System.out.println("Tutor Found::" + tutor);
+            } else {
+                System.out.println("No Tutor found with id=" + email);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return tutor.getEmail().equals(email);
     }
 
     @Override
