@@ -17,8 +17,6 @@ import java.sql.SQLException;
 @Transactional
 @Component
 public class DBDAO implements IDBDao {
-//    @Autowired
-//    private JdbcTemplate jdbcTemplate;
 
     private DataSource dataSource;
 
@@ -100,7 +98,34 @@ public class DBDAO implements IDBDao {
 
     @Override
     public boolean regStudent(Student student) {
-        return false;
+        String sql = "INSERT INTO Student (FirstName, LastName, Email, Password, AccountActivation, School) VALUES (?,?,?,?,?,?)";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, student.getFirstName());
+            ps.setString(2, student.getLastName());
+            ps.setString(3, student.getEmail());
+            ps.setString(4, student.getPassword());
+            ps.setInt(5, 0);
+            ps.setString(6, student.getSchool());
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    return true;
+                } catch (SQLException ex) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override
