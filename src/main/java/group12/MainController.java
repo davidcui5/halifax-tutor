@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 public class MainController {
 
     @Autowired
-    private DatabaseMock db;
+    private DBDAO db=new DBDAO();
+
 
     @GetMapping(path="/user")
     public @ResponseBody String login(@RequestBody User user){
@@ -23,9 +24,9 @@ public class MainController {
     public @ResponseBody String studentRegister(@RequestBody Student student){
         String response = "";
 
-        if(!db.isEmailNew(student.getEmail()))
+        if(db.isEmailNew(student.getEmail()))
             response += "Email already registered\n";
-        if(!db.isPhoneNumberNew(student.getPhoneNumber()))
+        if(db.isPhoneNumberNew(student.getPhoneNumber()))
             response += "Phone already registered\n";
 
         if(response.equals("")){

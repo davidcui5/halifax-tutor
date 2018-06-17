@@ -10,14 +10,14 @@ public class AppTest {
     @Test
     public void testDBConnection() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        DBDAO dbda = context.getBean("studentDAO", DBDAO.class);
+        DBDAO dbda = context.getBean("DBDAO", DBDAO.class);
         assertTrue(dbda.authorizeStudent("zaher88abd@gmail.com", "zaher"));
     }
 
     @Test
     public void testRegStudent() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        DBDAO dbda = context.getBean("studentDAO", DBDAO.class);
+        DBDAO dbda = context.getBean("DBDAO", DBDAO.class);
         Student student = new Student();
         student.setEmail("zaher88abd@gmail.com");
         student.setFirstName("zaher");
@@ -30,7 +30,7 @@ public class AppTest {
     @Test
     public void testRegTutor() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        DBDAO dbda = context.getBean("studentDAO", DBDAO.class);
+        DBDAO dbda = context.getBean("DBDAO", DBDAO.class);
         Tutor tutor = new Tutor();
         tutor.setEmail("zaher88abd@gmail.com");
         tutor.setFirstName("zaher");

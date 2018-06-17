@@ -16,12 +16,85 @@ import java.sql.SQLException;
 
 @Transactional
 @Component
-public class DBDAO implements IDBDao {
+public class DBDAO implements DatabaseInterface {
 
     private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
+    }
+
+    @Override
+    public boolean isEmailNew(String email) {
+        String sql = "SELECT * FROM Student Where Email =?";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean result = false;
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            result = rs.first();
+            if (!result) {
+                sql = "SELECT * FROM Tutor Where Email =?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, email);
+                rs = ps.executeQuery();
+                result = rs.first();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean isPhoneNumberNew(String number) {
+        String sql = "SELECT * FROM Student Where PhoneNumber =?";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean result = false;
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, number);
+            rs = ps.executeQuery();
+            result = rs.first();
+            if (!result) {
+                sql = "SELECT * FROM Tutor Where PhoneNumber =?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, number);
+                rs = ps.executeQuery();
+                result = rs.first();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean isCreditCardNew(String creditCardNum) {
+        return false;
     }
 
     @Override
@@ -98,7 +171,7 @@ public class DBDAO implements IDBDao {
 
     @Override
     public boolean regStudent(Student student) {
-        String sql = "INSERT INTO Student (FirstName, LastName, Email, Password, AccountActivation, School) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO Student (FirstName, LastName, Email, Password, AccountActivation, School,PhoneNumber) VALUES (?,?,?,?,?,?,?)";
         Connection con = null;
         PreparedStatement ps;
         try {
@@ -110,6 +183,8 @@ public class DBDAO implements IDBDao {
             ps.setString(4, student.getPassword());
             ps.setInt(5, 0);
             ps.setString(6, student.getSchool());
+            ps.setString(7, student.getPhoneNumber());
+            //TODO send activation email
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
