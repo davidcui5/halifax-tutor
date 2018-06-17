@@ -100,8 +100,7 @@ public class DBDAO implements IDBDao {
     public boolean regStudent(Student student) {
         String sql = "INSERT INTO Student (FirstName, LastName, Email, Password, AccountActivation, School) VALUES (?,?,?,?,?,?)";
         Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        PreparedStatement ps;
         try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
@@ -130,6 +129,31 @@ public class DBDAO implements IDBDao {
 
     @Override
     public boolean regTutor(Tutor tutor) {
-        return false;
+        String sql = "INSERT INTO Tutor (FirstName, LastName, Email, Password, AccountActivation) VALUES (?, ?, ?, ?, ?)";
+        Connection con = null;
+        PreparedStatement ps;
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, tutor.getFirstName());
+            ps.setString(2, tutor.getLastName());
+            ps.setString(3, tutor.getEmail());
+            ps.setString(4, tutor.getPassword());
+            ps.setInt(5, 0);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    return true;
+                } catch (SQLException ex) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
