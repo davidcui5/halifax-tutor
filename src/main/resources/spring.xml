@@ -11,8 +11,28 @@
         </property>
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
+
     <bean id="DBDAO" class="group12.DBDAO">
         <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- SET default mail properties -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="587"/>
+        <property name="username" value="zaher88abd@gmail.com"/>
+        <property name="password" value="zhliupgxtxxxebgx"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="mailMail" class="group12.MailMail">
+        <property name="mailSender" ref="mailSender" />
     </bean>
 
 

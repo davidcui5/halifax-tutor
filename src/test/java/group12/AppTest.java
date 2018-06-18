@@ -2,7 +2,9 @@ package group12;
 
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
+import org.springframework.beans.factory.*;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.*;
 import static junit.framework.TestCase.assertTrue;
 
 public class AppTest {
@@ -37,5 +39,16 @@ public class AppTest {
         tutor.setLastName("Abd");
         tutor.setPhoneNumber("902212300");
         assertTrue(dbda.regTutor(tutor));
+    }
+
+    @Test
+    public void testSendingEmail()
+    {
+        Resource r=new ClassPathResource("spring.xml");
+        BeanFactory b=new XmlBeanFactory(r);
+        MailMail m=(MailMail)b.getBean("mailMail");
+        String sender="zaher88abd@gmail.com";//write here sender gmail id
+        String receiver="zaher88abd@gmail.com";//write here receiver id
+        m.sendMail(sender,receiver,"hi","welcome");
     }
 }
