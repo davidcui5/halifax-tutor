@@ -1,6 +1,7 @@
 package group12;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,9 @@ public class MainController {
     @Autowired
     private MailMail m = new MailMail();
 
+
+    @Value("${email.sender}")
+    String emailSender;
 
     @GetMapping(path = "/user")
     public @ResponseBody
@@ -28,7 +32,7 @@ public class MainController {
     public @ResponseBody
     String studentRegister(@RequestBody Student student) {
         String response = "";
-
+        System.out.println(emailSender);
         if (db.isEmailNew(student.getEmail()))
             response += "Email already registered\n";
         if (db.isPhoneNumberNew(student.getPhoneNumber()))
@@ -36,7 +40,7 @@ public class MainController {
 
         if (response.equals("")) {
             db.regStudent(student);
-            m.sendMail("zaher88abd@gmail.com", student.getEmail(), "Activation", "Plase activate the email");
+            m.sendMail(emailSender, student.getEmail(), "Activation", "Plase activate the email");
             return "registration success";
         } else
             return response;

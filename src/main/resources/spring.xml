@@ -32,7 +32,7 @@
     </bean>
 
     <bean id="mailMail" class="group12.MailMail">
-        <property name="mailSender" ref="mailSender" />
+        <property name="mailSender" ref="mailSender"/>
     </bean>
 
 

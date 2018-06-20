@@ -6,6 +6,7 @@ import org.springframework.mail.SimpleMailMessage;
 public class MailMail {
     private MailSender mailSender;
 
+
     public void setMailSender(MailSender mailSender) {
         this.mailSender = mailSender;
     }
