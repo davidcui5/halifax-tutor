@@ -16,4 +16,10 @@ public interface DatabaseInterface {
 
     boolean regTutor(Tutor tutor);
 
+    int getStudentId(String email);
+
+    int getTutorID(String email);
+
+    boolean saveActivationCode(String code);
+
 }

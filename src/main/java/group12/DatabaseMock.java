@@ -41,4 +41,19 @@ public class DatabaseMock implements DatabaseInterface {
         return true;
     }
 
+    @Override
+    public int getStudentId(String email) {
+        return 0;
+    }
+
+    @Override
+    public int getTutorID(String email) {
+        return 0;
+    }
+
+    @Override
+    public boolean saveActivationCode(String code) {
+        return false;
+    }
+
 }

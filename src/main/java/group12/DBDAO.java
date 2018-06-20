@@ -231,4 +231,63 @@ public class DBDAO implements DatabaseInterface {
         }
         return true;
     }
+
+    @Override
+    public int getStudentId(String email) {
+        String sql = "SELECT * FROM Student Where Email =?";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int result = 0;
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            rs.first();
+            result = rs.getInt("ID");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public int getTutorID(String email) {
+        return 0;
+    }
+
+    @Override
+    public boolean saveActivationCode(String code) {
+        String sql = "INSERT into ActivationTable (AcivationCode, Date) VALUES (?,NOW())";
+        Connection con = null;
+        PreparedStatement ps;
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, code);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    return true;
+                } catch (SQLException ex) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
