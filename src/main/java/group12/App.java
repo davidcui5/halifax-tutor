@@ -13,9 +13,13 @@ import java.util.Collection;
 import java.util.Collections;
 
 @SpringBootApplication
-@ComponentScan
-@ImportResource("classpath:spring.xml")
-public class App {
+@EnableAutoConfiguration
+public class App extends SpringBootServletInitializer {
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(App.class);
+    }
 
     public static void main(String[] args) throws Exception {
 

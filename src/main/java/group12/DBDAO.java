@@ -2,6 +2,8 @@ package group12;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ImportResource;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -16,6 +18,8 @@ import java.util.Date;
 
 @Transactional
 @Component
+@ComponentScan
+@ImportResource("classpath:spring.xml")
 public class DBDAO implements DatabaseInterface {
 
     private DataSource dataSource;
