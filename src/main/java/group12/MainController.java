@@ -84,8 +84,8 @@ public class MainController {
 
     @RequestMapping(value = "/student/studentid/{studentid}/activation/{activationcode}/", method = GET)
     @ResponseBody
-    public String activateStudent
-            (@PathVariable String studentid, @PathVariable String activationcode) {
+    public String activateStudent(@PathVariable int studentid, @PathVariable String activationcode) {
+        db.activateStudent(studentid,activationcode);
         return "Get a specific Bar with id=" + activationcode +
                 " from a Foo with id=" + studentid;
     }

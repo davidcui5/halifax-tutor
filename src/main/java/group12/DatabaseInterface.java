@@ -22,4 +22,6 @@ public interface DatabaseInterface {
 
     boolean saveActivationCode(String code);
 
+    boolean activateStudent(int id,String activateCode);
+
 }

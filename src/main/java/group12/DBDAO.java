@@ -1,9 +1,5 @@
 package group12;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Calendar;
+import java.util.Date;
 
 
 @Transactional
@@ -290,4 +290,47 @@ public class DBDAO implements DatabaseInterface {
         }
         return true;
     }
+
+    @Override
+    public boolean activateStudent(int id, String activateCode) {
+        String sql = "SELECT * From ActivationTable where AcivationCode like ?";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean result = false;
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, activateCode);
+            rs = ps.executeQuery();
+            rs.first();
+            Date date = rs.getDate("Date");
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            LocalDate pdate = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
+            LocalDate now = LocalDate.now();
+            Period diff = Period.between(pdate, now);
+            //Activate student
+            System.out.println(cal.get(Calendar.YEAR) + " " + cal.get(Calendar.MONTH) + " " + cal.get(Calendar.DAY_OF_MONTH));
+            System.out.println(diff.getDays() + " " + diff.getMonths() + " " + diff.getYears());
+            if (diff.getDays() <= 1 && diff.getYears() == 0 && diff.getMonths() == 1) {
+                sql = "update Student SET AccountActivation = 1 WHERE ID=?";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, id);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
 }
