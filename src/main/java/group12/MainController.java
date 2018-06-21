@@ -22,6 +22,9 @@ public class MainController {
     @Value("${email.sender}")
     String emailSender;
 
+    @Value("${server.url}")
+    String serverURL;
+
     @GetMapping(path = "/user")
     public @ResponseBody
     String login(@RequestBody User user) {
@@ -48,7 +51,7 @@ public class MainController {
             UUID uuid = UUID.randomUUID();
             db.saveActivationCode(uuid.toString());
             m.sendMail(emailSender, student.getEmail(), "Activation",
-                    "Activation http://localhost:8080/student/studentid/" + studentID + "/activation/" + uuid.toString() + "/");
+                    "Activation " + serverURL + "/student/studentid/" + studentID + "/activation/" + uuid.toString() + "/");
             return "registration success";
         } else
             return response;
@@ -81,7 +84,7 @@ public class MainController {
             UUID uuid = UUID.randomUUID();
             db.saveActivationCode(uuid.toString());
             m.sendMail(emailSender, tutor.getEmail(), "Activation",
-                    "Activation http://localhost:8080/tutor/tutorid/" + tutorID + "/activation/" + uuid.toString() + "/");
+                    "Activation " + serverURL + "/tutor/tutorid/" + tutorID + "/activation/" + uuid.toString() + "/");
             return "registration success";
         } else
             return response;
