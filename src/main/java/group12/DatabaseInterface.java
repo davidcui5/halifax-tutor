@@ -24,4 +24,6 @@ public interface DatabaseInterface {
 
     boolean activateStudent(int id,String activateCode);
 
+    boolean activateTutor(int id,String activateCode);
+
 }

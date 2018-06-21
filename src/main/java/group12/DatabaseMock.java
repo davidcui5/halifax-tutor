@@ -61,4 +61,9 @@ public class DatabaseMock implements DatabaseInterface {
         return false;
     }
 
+    @Override
+    public boolean activateTutor(int id, String activateCode) {
+        return false;
+    }
+
 }

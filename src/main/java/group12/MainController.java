@@ -48,7 +48,7 @@ public class MainController {
             UUID uuid = UUID.randomUUID();
             db.saveActivationCode(uuid.toString());
             m.sendMail(emailSender, student.getEmail(), "Activation",
-                    "<a href=http://localhost:8080/student/studentid/" + studentID + "/activation/" + uuid.toString() + "/>Activation</a>");
+                    "Activation http://localhost:8080/student/studentid/" + studentID + "/activation/" + uuid.toString() + "/");
             return "registration success";
         } else
             return response;
@@ -68,15 +68,20 @@ public class MainController {
 
         String response = "";
 
-        if (!db.isEmailNew(tutor.getEmail()))
+        if (db.isEmailNew(tutor.getEmail()))
             response += "Email already registered\n";
-        if (!db.isPhoneNumberNew(tutor.getPhoneNumber()))
+        if (db.isPhoneNumberNew(tutor.getPhoneNumber()))
             response += "Phone already registered\n";
-        if (!db.isCreditCardNew(tutor.getCreditCardNumber()))
+        if (db.isCreditCardNew(tutor.getCreditCardNumber()))
             response += "Card already registered";
 
         if (response.equals("")) {
             db.regTutor(tutor);
+            int tutorID = db.getTutorID(tutor.getEmail());
+            UUID uuid = UUID.randomUUID();
+            db.saveActivationCode(uuid.toString());
+            m.sendMail(emailSender, tutor.getEmail(), "Activation",
+                    "Activation http://localhost:8080/tutor/tutorid/" + tutorID + "/activation/" + uuid.toString() + "/");
             return "registration success";
         } else
             return response;
@@ -85,8 +90,16 @@ public class MainController {
     @RequestMapping(value = "/student/studentid/{studentid}/activation/{activationcode}/", method = GET)
     @ResponseBody
     public String activateStudent(@PathVariable int studentid, @PathVariable String activationcode) {
-        db.activateStudent(studentid,activationcode);
+        db.activateStudent(studentid, activationcode);
         return "Get a specific Bar with id=" + activationcode +
                 " from a Foo with id=" + studentid;
+    }
+
+    @RequestMapping(value = "/tutor/tutorid/{tutorid}/activation/{activationcode}/", method = GET)
+    @ResponseBody
+    public String activateTutor(@PathVariable int tutorid, @PathVariable String activationcode) {
+        db.activateTutor(tutorid, activationcode);
+        return "Get a specific Bar with id=" + activationcode +
+                " from a Foo with id=" + tutorid;
     }
 }
