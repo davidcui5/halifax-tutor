@@ -17,7 +17,7 @@ $(document).ready(function () {
             var elementValue = document.getElementById(inputs[i].id).value;
 
             // validate email
-            if(inputs[i].id == "user_email"){
+            if(inputs[i].id == "email"){
                 if(!validateEmail.test(String(elementValue).toLowerCase())){
                     alert("Invalid Email Address format");
                     element.focus();
@@ -27,7 +27,7 @@ $(document).ready(function () {
             }
 
             // validate password
-            if(inputs[i].id == "user_password"){
+            if(inputs[i].id == "password"){
 
                 if (validateName.test(elementValue)){
                     alert("Passwords must contain atleast one number");
@@ -49,8 +49,8 @@ $(document).ready(function () {
             }
 
             // validate confirm password
-            if(inputs[i].id == "user_repeat_password") {
-                var passwordValue = document.getElementById("user_password").value;
+            if(inputs[i].id == "confirm-password") {
+                var passwordValue = document.getElementById("password").value;
                 if (elementValue !==  passwordValue){
                     alert("Passwords do not match.");
                     element.focus();
@@ -59,7 +59,7 @@ $(document).ready(function () {
             }
 
             // validate phone number
-            if(inputs[i].id == "user_phone_number") {
+            if(inputs[i].id == "phone-number") {
                 if(!validatePhone.test(elementValue) || elementValue.length != 10){
                     alert("Invalid Phone Number format");
                     element.focus();
@@ -68,7 +68,7 @@ $(document).ready(function () {
             }
 
             // validate first name
-            if(inputs[i].id == "user_first_name") {
+            if(inputs[i].id == "user-first-name") {
                 if( !validateName.test(elementValue)){
                     alert("First Name can't contain a number");
                     element.focus();
@@ -77,7 +77,7 @@ $(document).ready(function () {
             }
 
             // validate last name
-            if(inputs[i].id == "user_last_name") {
+            if(inputs[i].id == "user-last-name") {
                 if( !validateName.test(elementValue)){
                     alert("Last Name can't contain a number");
                     element.focus();
@@ -86,7 +86,7 @@ $(document).ready(function () {
             }
 
             // validate credit card no
-            if(inputs[i].id == "user_credit_card") {
+            if(inputs[i].id == "user-credit-card") {
                 if (elementValue.length != 16){
                     alert("Invalid Credit Card Number format");
                     element.focus();
@@ -95,7 +95,7 @@ $(document).ready(function () {
             }
 
             // validate credit card date
-            if(inputs[i].id == "expire_date") {
+            if(inputs[i].id == "expire-date") {
                 //https://stackoverflow.com/questions/1531093/how-do-i-get-the-current-date-in-javascript
                 var today = new Date();
                 var month = today.getMonth()+1;
@@ -120,7 +120,7 @@ $(document).ready(function () {
             }
 
             // validate credit card security code
-            if(inputs[i].id == "security_code") {
+            if(inputs[i].id == "security-code") {
                 if (elementValue.length != 3){
                     alert("Invalid Security Code Format");
                     element.focus();
