@@ -11,6 +11,7 @@
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
           crossorigin="anonymous">
     <link rel="stylesheet" href="../css/student-register.css">
+
 </head>
 
 <body>
@@ -23,7 +24,7 @@
 </div>
 
 
-<form>
+<form name="user_form" onsubmit="return validateForm()">
     <div id="registration_content">
         <h2>Student Registration</h2>
         <table>
@@ -57,7 +58,7 @@
                 </td>
                 <td>
                     <input type="tel" id="phone-number" name="user_phone_number" required
-                           pattern="[0-9]{3}[-][0-9]{3}[-][0-9]{4}" placeholder="xxx-xxx-xxxx">
+                           placeholder="xxx-xxx-xxxx">
                 </td>
             </tr>
             <tr>
@@ -94,6 +95,7 @@
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
 <script src="../js/student-register.js"></script>
+<script src="../js/validator.js"></script>
 </body>
 
 </html>
