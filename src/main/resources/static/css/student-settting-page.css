@@ -2,6 +2,18 @@
     margin: 0 auto;
     text-align: center;
     top: 0;
+    display: -webkit-inline-box;
+    padding-left: 35%;
+}
+
+#header ul {
+    list-style: none;
+    display: -webkit-inline-box;
+}
+
+#header li {
+    padding: 10px;
+    padding-left: 15px;
 }
 
 table {
