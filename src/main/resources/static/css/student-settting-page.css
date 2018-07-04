@@ -20,9 +20,19 @@
     width: 75%;
     padding-left: 15%;
 }
-.page-body label{
+.page-body form{
+    margin-bottom: 25px;
+}
+
+.page-body label {
     width: 150px;
 }
+.page-body .log-label {
+    width: 150px;
+    margin-left: 23%;
+}
+
+
 
 table {
     text-align: left;
