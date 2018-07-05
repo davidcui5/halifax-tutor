@@ -1,5 +1,7 @@
 package group12;
 
+import group12.Registration.Student;
+import group12.Registration.Tutor;
 import org.springframework.stereotype.Component;
 
 @Component
