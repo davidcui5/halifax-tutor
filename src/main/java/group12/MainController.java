@@ -1,5 +1,8 @@
 package group12;
 
+import group12.Registration.Student;
+import group12.Registration.Tutor;
+import group12.Registration.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -26,8 +29,7 @@ public class MainController {
     String serverURL;
 
     @GetMapping(path = "/user")
-    public @ResponseBody
-    String login(@RequestBody User user) {
+    public @ResponseBody String login(@RequestBody User user) {
         if (db.authorizeStudent(user.getEmail(), user.getPassword()))
             return "student";
         if (db.authorizeTutor(user.getEmail(), user.getPassword()))
@@ -36,8 +38,7 @@ public class MainController {
     }
 
     @PostMapping(path = "/student")
-    public @ResponseBody
-    String studentRegister(@RequestBody Student student) {
+    public @ResponseBody String studentRegister(@RequestBody Student student) {
         String response = "";
         System.out.println(emailSender);
         if (db.isEmailNew(student.getEmail()))
@@ -66,8 +67,7 @@ public class MainController {
 
 
     @PostMapping(path = "/tutor")
-    public @ResponseBody
-    String teacherRegister(@RequestBody Tutor tutor) {
+    public @ResponseBody String teacherRegister(@RequestBody Tutor tutor) {
 
         String response = "";
 

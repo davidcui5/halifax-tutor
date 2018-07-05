@@ -1,5 +1,8 @@
 package group12;
 
+import group12.Registration.Student;
+import group12.Registration.Tutor;
+
 public interface DatabaseInterface {
 
     boolean isEmailNew(String email);
