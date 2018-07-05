@@ -6,7 +6,6 @@ import group12.Email.IMail;
 import group12.Email.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.UUID;
 
