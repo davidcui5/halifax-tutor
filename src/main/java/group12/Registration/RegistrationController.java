@@ -10,31 +10,26 @@ import java.util.UUID;
 @RestController
 public class RegistrationController {
 
+    private IRegister registerService;
+
+    //uses constructor to instantiate registerService
+    //I am aware Spring has some cool way to do it using autowired and injection
+    //but I wanted to limit on the use of Spring.
+    //can change the concrete RegistrationService in case logic changes.
+    public RegistrationController(){
+        this.registerService = new RegistrationService();
+    }
+
     @PostMapping(path = "/student")
     public RegistrationResponse registerStudent(@RequestBody Student student){
-
+        RegistrationResponse response = registerService.registerStudent(student);
+        return response;
     }
-    @PostMapping(path = "/student")
 
-
-    public RegistrationResponse studentRegister(@RequestBody Student student) {
-        String response = "";
-        System.out.println(emailSender);
-        if (db.isEmailNew(student.getEmail()))
-            response += "Email already registered\n";
-        if (db.isPhoneNumberNew(student.getPhoneNumber()))
-            response += "Phone already registered\n";
-
-        if (response.equals("")) {
-            db.regStudent(student);
-            int studentID = db.getStudentId(student.getEmail());
-            UUID uuid = UUID.randomUUID();
-            db.saveActivationCode(uuid.toString());
-            m.sendMail(emailSender, student.getEmail(), "Activation",
-                    "Activation " + serverURL + "/student/studentid/" + studentID + "/activation/" + uuid.toString() + "/");
-            return "registration success";
-        } else
-            return response;
+    @PostMapping(path = "/tutor")
+    public RegistrationResponse registerTutor(@RequestBody Tutor tutor){
+        RegistrationResponse response = registerService.registerTutor(tutor);
+        return response;
     }
 
 }

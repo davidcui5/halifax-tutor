@@ -4,7 +4,7 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
 //concrete implementation of IMail with Spring's MailSender
-public class MailMail implements IMail{
+public class MailService implements IMail{
     private MailSender mailSender;
 
     public void setMailSender(MailSender mailSender) {
