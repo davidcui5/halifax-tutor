@@ -1,6 +1,5 @@
 'use strict';
-$(document).ready(function () {
-    $("form").submit(function validateForm(){
+function validateForm(){
         var inputs = document.forms["user_form"].getElementsByTagName("input");
 
         // https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
@@ -137,5 +136,4 @@ $(document).ready(function () {
         else{
             return true;
         }
-    });
-});
+    }
