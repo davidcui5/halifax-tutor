@@ -1,6 +1,6 @@
 package group12;
 
-import group12.Registration.Student;
+import group12.Email.MailMail;
 import group12.Registration.Tutor;
 import group12.Registration.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,26 +37,7 @@ public class MainController {
         return "not found";
     }
 
-    @PostMapping(path = "/student")
-    public @ResponseBody String studentRegister(@RequestBody Student student) {
-        String response = "";
-        System.out.println(emailSender);
-        if (db.isEmailNew(student.getEmail()))
-            response += "Email already registered\n";
-        if (db.isPhoneNumberNew(student.getPhoneNumber()))
-            response += "Phone already registered\n";
 
-        if (response.equals("")) {
-            db.regStudent(student);
-            int studentID = db.getStudentId(student.getEmail());
-            UUID uuid = UUID.randomUUID();
-            db.saveActivationCode(uuid.toString());
-            m.sendMail(emailSender, student.getEmail(), "Activation",
-                    "Activation " + serverURL + "/student/studentid/" + studentID + "/activation/" + uuid.toString() + "/");
-            return "registration success";
-        } else
-            return response;
-    }
 
     @RequestMapping(value = "/student/activate/{email}")
     @ResponseBody
