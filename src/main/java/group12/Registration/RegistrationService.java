@@ -1,56 +1,99 @@
 package group12.Registration;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import group12.DBDAO;
+import group12.DatabaseInterface;
+import group12.Email.IMail;
+import group12.Email.MailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.UUID;
 
 public class RegistrationService implements IRegister {
 
-    public RegistrationResponse registerStudent(@RequestBody Student student) {
-        String response = "";
-        System.out.println(emailSender);
-        if (db.isEmailNew(student.getEmail()))
-            response += "Email already registered\n";
-        if (db.isPhoneNumberNew(student.getPhoneNumber()))
-            response += "Phone already registered\n";
+    @Autowired
+    private DatabaseInterface db = new DBDAO();
 
-        if (response.equals("")) {
+    @Autowired
+    private IMail mailer = new MailService();
+
+    @Value("${email.sender}")
+    String emailSender;
+
+    @Value("${server.url}")
+    String serverURL;
+
+    public RegistrationResponse registerStudent(Student student) {
+
+        RegistrationResponse response = new RegistrationResponse();
+        System.out.println(emailSender); //remove this later
+        if (db.isEmailNew(student.getEmail())){
+            response.setResult("Failure");
+            response.addDetail("Email already registered");
+        }
+
+        if (db.isPhoneNumberNew(student.getPhoneNumber())){
+            response.setResult("Failure");
+            response.addDetail("Phone already registered");
+        }
+
+        if(response.getResult().equals("Failure")){
+            return response;
+        }
+        else{
             db.regStudent(student);
             int studentID = db.getStudentId(student.getEmail());
             UUID uuid = UUID.randomUUID();
             db.saveActivationCode(uuid.toString());
-            m.sendMail(emailSender, student.getEmail(), "Activation",
+            mailer.sendMail(emailSender, student.getEmail(), "Activation",
                     "Activation " + serverURL + "/student/studentid/" + studentID + "/activation/" + uuid.toString() + "/");
-            return "registration success";
-        } else
+            response.setResult("Success");
             return response;
+        }
     }
 
-    public RegistrationResponse registerTutor(@RequestBody Tutor tutor) {
+    public RegistrationResponse registerTutor(Tutor tutor) {
 
-        String response = "";
+        RegistrationResponse response = new RegistrationResponse();
 
-        if (db.isEmailNew(tutor.getEmail()))
-            response += "Email already registered\n";
-        if (db.isPhoneNumberNew(tutor.getPhoneNumber()))
-            response += "Phone already registered\n";
-        if (db.isCreditCardNew(tutor.getCreditCardNumber()))
-            response += "Card already registered";
+        if (db.isEmailNew(tutor.getEmail())){
+            response.setResult("Failure");
+            response.addDetail("Email already registered");
+        }
+        if (db.isPhoneNumberNew(tutor.getPhoneNumber())){
+            response.setResult("Failure");
+            response.addDetail("Phone already registered");
+        }
+        if (db.isCreditCardNew(tutor.getCreditCardNumber())){
+            response.setResult("Failure");
+            response.addDetail("Card already registered");
+        }
 
-        if (response.equals("")) {
+        if(response.getResult().equals("Failure")){
+            return response;
+        }
+        else{
             db.regTutor(tutor);
             int tutorID = db.getTutorID(tutor.getEmail());
             UUID uuid = UUID.randomUUID();
             db.saveActivationCode(uuid.toString());
-            m.sendMail(emailSender, tutor.getEmail(), "Activation",
+            mailer.sendMail(emailSender, tutor.getEmail(), "Activation",
                     "Activation " + serverURL + "/tutor/tutorid/" + tutorID + "/activation/" + uuid.toString() + "/");
-            return "registration success";
-        } else
+            response.setResult("Success");
             return response;
+        }
     }
 
+    public String activateStudent(int studentID, String activationCode) {
+        db.activateStudent(studentID, activationCode);
+        return "Get a specific Bar with id=" + activationCode +
+                " from a Foo with id=" + studentID;
+    }
 
-
+    public String activateTutor(int tutorID, String activationCode) {
+        db.activateTutor(tutorID, activationCode);
+        return "Get a specific Bar with id=" + activationCode +
+                " from a Foo with id=" + tutorID;
+    }
 }

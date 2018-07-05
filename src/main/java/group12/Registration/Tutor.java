@@ -2,7 +2,6 @@ package group12.Registration;
 
 public class Tutor extends User {
 
-
     private String creditCardNumber;
     private String expireDate;
     private int securityCode;
@@ -27,4 +26,5 @@ public class Tutor extends User {
     public void setSecurityCode(int securityCode) {
         this.securityCode = securityCode;
     }
+
 }

@@ -4,6 +4,6 @@ package group12.Email;
 //S.O.L.I.D.
 public interface IMail {
 
-    void sendMail(String from, String to, String subject, String msg);
+    void sendMail(String from, String to, String subject, String message);
 
 }

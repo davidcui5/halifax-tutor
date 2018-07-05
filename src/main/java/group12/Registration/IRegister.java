@@ -6,4 +6,8 @@ public interface IRegister {
 
     RegistrationResponse registerTutor(Tutor tutor);
 
+    String activateStudent(int studentID, String activationCode);
+
+    String activateTutor(int tutorID, String activationCode);
+
 }

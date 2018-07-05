@@ -31,7 +31,7 @@
         </property>
     </bean>
 
-    <bean id="mailMail" class="group12.Email.MailMail">
+    <bean id="mailMail" class="group12.Email.MailService">
         <property name="mailSender" ref="mailSender"/>
     </bean>
 
