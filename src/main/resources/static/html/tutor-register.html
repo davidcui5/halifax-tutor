@@ -23,7 +23,7 @@
 </div>
 
 
-<form>
+<form name="user_form" onsubmit="return validateForm()">
     <div id="registration_content">
         <h2>Tutor Registration</h2>
         <table>
@@ -49,7 +49,7 @@
 
                 </td>
                 <td>
-                    <input type="password" id="confirm-password" name="user_password" required>
+                    <input type="password" id="confirm-password" name="user_repeat_password" required>
                 </td>
             </tr>
             <tr>
@@ -58,7 +58,7 @@
                 </td>
                 <td>
                     <input type="tel" id="phone-number" name="user_phone_number" required
-                           pattern="[0-9]{3}[-][0-9]{3}[-][0-9]{4}" placeholder="xxx-xxx-xxxx">
+                           placeholder="xxx-xxx-xxxx">
                 </td>
             </tr>
             <tr>
@@ -83,7 +83,6 @@
                 </td>
                 <td>
                     <input type="text" id="user-credit-card" name="user_credit_card" required
-                           pattern="[0-9]{4}[-][0-9]{4}[-][0-9]{4}[-][0-9]{4}"
                            placeholder="xxxx-xxxx-xxxx-xxxx">
                 </td>
             </tr>
@@ -92,7 +91,7 @@
                     <label for="expire-date">Expiration Date</label>
                 </td>
                 <td>
-                    <input type="month" id="expire-date" name="expire-date" required>
+                    <input type="month" id="expire-date" name="expire_date" required>
                 </td>
             </tr>
             <tr>
@@ -100,7 +99,7 @@
                     <label for="security-code">Security Code</label>
                 </td>
                 <td>
-                    <input type="text" id="security-code" name="security-code" required pattern="[0-9]{3}"
+                    <input type="password" id="security-code" name="security_code" required
                            placeholder="xxx">
                 </td>
             </tr>
@@ -123,6 +122,7 @@
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
 <script src="../js/tutor-register.js"></script>
+<script src="../js/validator.js"></script>
 </body>
 
 </html>
