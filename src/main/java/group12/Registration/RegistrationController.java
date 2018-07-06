@@ -1,19 +1,13 @@
 package group12.Registration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class RegistrationController {
 
-    private IRegister registerService;
-
-    //uses constructor to instantiate registerService
-    //I am aware Spring has some cool way to do it using autowired and injection
-    //but I wanted to limit on the use of Spring.
-    //can change the concrete RegistrationService in case logic changes.
-    public RegistrationController(){
-        registerService = new RegistrationService();
-    }
+    @Autowired
+    private IRegister registerService = new RegistrationService();
 
     @PostMapping(path = "/student")
     @ResponseBody

@@ -11,11 +11,8 @@ import java.util.UUID;
 
 public class RegistrationService implements IRegister {
 
-    @Autowired
-    private DatabaseInterface db = new DBDAO();
-
-    @Autowired
-    private IMail mailer = new MailService();
+    private DBDAO db;
+    private MailService mailer;
 
     @Value("${email.sender}")
     String emailSender;
@@ -94,5 +91,13 @@ public class RegistrationService implements IRegister {
         db.activateTutor(tutorID, activationCode);
         return "Get a specific Bar with id=" + activationCode +
                 " from a Foo with id=" + tutorID;
+    }
+
+    public void setDBDAO(DBDAO DBDAO) {
+        this.db = DBDAO;
+    }
+
+    public void setMailService(MailService mailService) {
+       this.mailer = mailService;
     }
 }
