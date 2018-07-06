@@ -25,17 +25,17 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: "https://csci5308group12devint.azurewebsites.net/tutor",
+            url: location.origin + "/tutor",
             data: JSON.stringify(tutorData),
             type: "POST",
             contentType: "application/json",
-            dataType: "text"
-        }).done(function (text) {
-            if (text === "registration success") {
+            dataType: "json"
+        }).done(function (data) {
+            if (data.result === "Success") {
                 alert("Registration succeed!");
                 window.location.replace("../index.html");
             } else {
-                alert("Something went wrong: " + text);
+                alert(data.details);
             }
 
         }).fail(function (xhr, status, errorThrown) {
