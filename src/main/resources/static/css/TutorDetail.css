@@ -1,8 +1,10 @@
+
 html, body {
     background: #f1f1f1;
     font-family: 'Merriweather', sans-serif;
     padding: 1em;
 }
+
 .wizard {
     margin: 10px auto;
     background: #f1f1f1;
@@ -172,7 +174,7 @@ span.round-tab:hover {
 .Bbtn{
     margin: 80px 0 0 0;
     font-size: 2.0rem;
-    padding: 0.5rem 1.5rem;
+    padding: 1rem 2rem;
     display: block;
     background-color: #4279b2;
     border: 1px solid transparent;
@@ -189,6 +191,49 @@ span.round-tab:hover {
     background-color: #ffffff;
     color: #4279b2;
     border-color: #4279b2;
+}
+.plans_container {
+    flex-direction: row;
+    display: flex;
+    width: 768px;
+    align-items: center;
+
+}
+
+.pricing_item {
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    padding: 40px 0;
+    margin: 0 14px;
+    border-radius: 10px;
+    background:white;
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);
+}
+.pricing_title,.pricing_details {
+    margin: 0 0 10px 0;
+    font-family:'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 1.5em;
+    color: #558FCA;
+}
+.pricing_button{
+    margin: 25px 0 0 0;
+    padding: 10px 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9em;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    background: #558FCA;
+    box-shadow: 0 2px 3px 0 #9AC6EA;
+    transition: background 0.3s ease-in-out;
+}
+.pricing_button:hover{
+    background: #3d699c;
 }
 h4{
     font-size: 15px;
@@ -220,3 +265,7 @@ textarea {
     border: 3px solid #ffffff;
     padding-right: 30px;
 }
+
+
+
+

@@ -5,6 +5,14 @@
     <title>Setting for Tutor</title>
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
     <link rel="stylesheet" href="../css/TutorDetail.css">
+    <script>
+        function Addshow(id) {
+            if (document.getElementById(id).style.display == 'block')
+                document.getElementById(id).style.display = 'none';
+            else
+                document.getElementById(id).style.display = 'block'
+        }
+    </script>
 </head>
 <body>
 
@@ -52,7 +60,7 @@
                 <form role="form">
                     <div class="tab-content">
                         <!--Step1-->
-                        <div class="tab-pane active" role="tabpanel" id="step1">
+                        <div class="tab-pane" role="tabpanel" id="step1">
                             <h3>Account Setting</h3><br>
                             <div class="infoforml left">
                               <form>
@@ -112,11 +120,14 @@
 
                                 </tr>
                             </table>
+                                <div>
+                                    <button class="btn btn-primary">Resend Confirmation Email</button>
+                                </div>
                         </div>
                             <!--Next Button-->
-                            <div class="infoformr">
+                            <div class="infoformr right">
                                 <ul class="list-inline pull-right">
-                                <li><button class="next-step Bbtn infoformr" type="button">Save and Continue</button></li>
+                                <li><button class="next-step Bbtn infoformr" type="button">Next</button></li>
                                 </ul>
                             </div>
 
@@ -154,15 +165,8 @@
                                         <div id="currentcourse"></div>
                                         <input class="btn" type="button" id="remove" name="remove" value="Remove">
                                         <br>
-                                        <script>
-                                            function show() {
-                                                if (document.getElementById('AddCourse').style.display == 'block')
-                                                    document.getElementById('AddCourse').style.display = 'none';
-                                                else
-                                                    document.getElementById('AddCourse').style.display = 'block'
-                                            }
-                                        </script>
-                                        <button class="btn" type="button" id="add" name="add" onclick="show();return false;">Add</button>
+
+                                        <button class="btn" type="button" id="add" name="add" onclick="Addshow('AddCourse');return false;">Add</button>
 
                                         <div id="AddCourse">
                                             <form id="courseAdd">
@@ -328,17 +332,68 @@
                                 </div>
                                 <ul class="list-inline pull-right">
                                     <li><button type="button" class="Bbtn prev-step">Previous</button></li>
-                                    <li><button type="button" class="Bbtn next-step">Save and continue</button></li>
-                                </ul>                           </ul>
+                                    <li><button type="button" class="Bbtn next-step">Next</button></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="tab-pane" role="tabpanel" id="step3">
-                            <h3>Step 3</h3>
-                            <p>This is step 3</p>
+                        <!--Step3-->
+                        <div class="tab-pane active" role="tabpanel" id="step3">
+                            <h3>Subscription</h3>
+                            <div class="infoforml">
+                                <h4>Current Subscription:</h4>
+                                <div id="currentSubscription" class="tablerow"></div>
+                                <button class="btn btn-danger">Cancel Current Subscription</button>
+                                <div id="renew" class="tablerow">
+                                    <h4>Select Your New Plan</h4>
+                                    <!--pricing-->
+                                    <div class="plans_container tablerow">
+                                        <table>
+                                            <tr>
+                                                <div class="plans_container">
+                                                    <div class="pricing_item">
+                                                        <h3 class="pricing_title">1 Month</h3>
+                                                        <span class="pricing_details">$19.99</span>
+                                                        <button class="pricing_button" href="#">Select Plan</button>
+                                                    </div>
+                                                </div>
+                                            </tr>
+                                            <tr>
+                                                <div class="plans_container">
+                                                    <div class="pricing_item">
+                                                        <h3 class="pricing_title">3 Month</h3>
+                                                        <span class="pricing_details">$49.99</span>
+                                                        <button class="pricing_button" href="#">Select Plan</button>
+                                                    </div>
+                                                </div>
+                                            </tr>
+                                            <tr>
+                                                <div class="plans_container">
+                                                    <div class="pricing_item">
+                                                        <h3 class="pricing_title">6 Month</h3>
+                                                        <span class="pricing_details">$89.99</span>
+                                                        <button class="pricing_button" href="#">Select Plan</button>
+                                                    </div>
+                                                </div>
+                                            </tr>
+                                            <tr>
+                                                <div class="plans_container">
+                                                    <div class="pricing_item">
+                                                        <h3 class="pricing_title">12 Month</h3>
+                                                        <span class="pricing_details">$159.00</span>
+                                                        <button class="pricing_button" href="#">Select Plan</button>
+                                                    </div>
+                                                </div>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <ul class="list-inline pull-right">
                                 <li><button type="button" class="Bbtn  prev-step">Previous</button></li>
-                                <li><button type="button" class="Bbtn  next-step">Skip</button></li>
-                                <li><button type="button" class="Bbtn  btn-info-full next-step">Save and continue</button></li>
+                                <li><button type="button" class="Bbtn  btn-info-full">Save and Exit</button></li>
                             </ul>
                         </div>
                         <div class="clearfix"></div>
