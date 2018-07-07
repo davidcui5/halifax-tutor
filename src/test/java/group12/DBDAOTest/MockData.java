@@ -4,7 +4,7 @@ import group12.Registration.Student;
 import group12.Registration.Tutor;
 
 public class MockData {
-    private static Student getStudentObject() {
+    public static Student getStudentObject() {
         Student student = new Student();
         student.setEmail("testemailStu@gmail.com");
         student.setFirstName("testName");
@@ -15,7 +15,7 @@ public class MockData {
         return student;
     }
 
-    private static Tutor getTutorObject() {
+    public static Tutor getTutorObject() {
         Tutor tutor = new Tutor();
         tutor.setEmail("testemailTut@gmail.com");
         tutor.setFirstName("testName");
