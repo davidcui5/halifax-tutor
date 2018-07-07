@@ -5,14 +5,7 @@
     <title>Setting for Tutor</title>
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
     <link rel="stylesheet" href="../css/TutorDetail.css">
-    <script>
-        function Addshow(id) {
-            if (document.getElementById(id).style.display == 'block')
-                document.getElementById(id).style.display = 'none';
-            else
-                document.getElementById(id).style.display = 'block'
-        }
-    </script>
+    <script src="../js/cloudinary.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -60,7 +53,7 @@
                 <form role="form">
                     <div class="tab-content">
                         <!--Step1-->
-                        <div class="tab-pane" role="tabpanel" id="step1">
+                        <div class="tab-pane active" role="tabpanel" id="step1">
                             <h3>Account Setting</h3><br>
                             <div class="infoforml left">
                               <form>
@@ -139,7 +132,7 @@
                                 <form>
                                     <div class="tablerow">
                                         <h4>Change Photo</h4>
-                                        <input class="btn" type="button" id="photo" name="photo" value="Upload">
+                                        <input class="btn" type="button" id="upload_widget_opener"  name="photo" value="Upload">
                                         <br>
                                         <input class="btn btn-primary" type="button" id="photoS" value="Confirm">
                                     </div>
@@ -337,7 +330,7 @@
                             </div>
                         </div>
                         <!--Step3-->
-                        <div class="tab-pane active" role="tabpanel" id="step3">
+                        <div class="tab-pane" role="tabpanel" id="step3">
                             <h3>Subscription</h3>
                             <div class="infoforml">
                                 <h4>Current Subscription:</h4>

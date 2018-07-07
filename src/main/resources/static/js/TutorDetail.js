@@ -27,7 +27,27 @@ $(document).ready(function () {
     });
 
 
+
+
+
 });
+$(document).ready(function(){
+    document.getElementById("upload_widget_opener").addEventListener("click", function() {
+        cloudinary.openUploadWidget({ cloud_name: 'yrzzzzzz', upload_preset: 'ktpg8ic7', folder: 'user_photos'},
+            function(error, result) { console.log(error, result) });
+    }, false);
+}) ;
+
+$(document).on('cloudinarywidgetfileuploadsuccess', function(e, data) {
+    console.log("Single file success", e, data);
+});
+
+function Addshow(id) {
+    if (document.getElementById(id).style.display == 'block')
+        document.getElementById(id).style.display = 'none';
+    else
+        document.getElementById(id).style.display = 'block'
+}
 
 function nextTab(elem) {
     $(elem).next().find('a[data-toggle="tab"]').click();
