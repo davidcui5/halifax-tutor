@@ -25,6 +25,8 @@ $(document).ready(function () {
         prevTab($active);
 
     });
+
+
 });
 
 function nextTab(elem) {

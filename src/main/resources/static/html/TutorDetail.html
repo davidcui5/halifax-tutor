@@ -51,12 +51,14 @@
                 <!--content-->
                 <form role="form">
                     <div class="tab-content">
+                        <!--Step1-->
                         <div class="tab-pane active" role="tabpanel" id="step1">
                             <h3>Account Setting</h3><br>
                             <div class="infoforml left">
                               <form>
                                 <div class="tablerow">
                                     <h4>Change Password</h4>
+                                    <br><br>
                                     <input type="password" id="pwd" placeholder="Password" name="pwd" >
                                     <br><br>
                                     <input type="password" id="Rpwd" placeholder="Repeat Password" name="Rpwd">
@@ -64,16 +66,17 @@
                                 </div>
                                 <div class="tablerow">
                                     <h4>Change Email</h4>
+                                    <br><br>
                                     <input type="email" id="email" placeholder="Email" name="email">
                                     <input class="btn btn-primary" type="button" id="emailS" value="Confirm" name="emailS">
                                 </div>
                                 <div class="tablerow">
                                     <h4>Change Phone</h4>
+                                    <br><br>
                                     <input type="number" id="phone" placeholder="Phone" name="phone">
                                     <input class="btn btn-primary" type="button" id="phoneS" value="Confirm" name="phoneS">
                                 </div>
-                            </form>
-
+                             </form>
                             </div>
                             <div class="infoformr right tablerow">
                             <h4>Change Credit Card Info</h4>
@@ -110,21 +113,224 @@
                                 </tr>
                             </table>
                         </div>
+                            <!--Next Button-->
                             <div class="infoformr">
                                 <ul class="list-inline pull-right">
                                 <li><button class="next-step Bbtn infoformr" type="button">Save and Continue</button></li>
-
-                            </ul>
+                                </ul>
                             </div>
 
                         </div>
+                        <!--Step2-->
                         <div class="tab-pane" role="tabpanel" id="step2">
-                            <h3>Step 2</h3>
-                            <p>This is step 2</p>
-                            <ul class="list-inline pull-right">
-                                <li><button type="button" class="Bbtn prev-step">Previous</button></li>
-                                <li><button type="button" class="Bbtn next-step">Save and continue</button></li>
-                            </ul>
+                            <h3>Background information</h3>
+                            <div class="infoforml left">
+                                <form>
+                                    <div class="tablerow">
+                                        <h4>Change Photo</h4>
+                                        <input class="btn" type="button" id="photo" name="photo" value="Upload">
+                                        <br>
+                                        <input class="btn btn-primary" type="button" id="photoS" value="Confirm">
+                                    </div>
+                                    <div class="tablerow">
+                                        <h4>Change Education</h4>
+                                        <br><br>
+                                        <textarea id="education" placeholder="Education" name="education"></textarea>
+                                        <input class="btn btn-primary" type="button" id="educationS" value="Confirm" name="educationS">
+                                    </div>
+                                    <div class="tablerow">
+                                        <h4>Change Experience</h4>
+                                        <br><br>
+                                        <textarea id="experience" placeholder="Experience" name="experience"></textarea>
+                                        <input class="btn btn-primary" type="button" id="experienceS" value="Confirm" name="experienceS">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="infoformr right">
+                                <!--Change course and price-->
+                                <div>
+                                    <div class="tablerow">
+                                        <h4>Change course and price</h4>
+                                        <div id="currentcourse"></div>
+                                        <input class="btn" type="button" id="remove" name="remove" value="Remove">
+                                        <br>
+                                        <script>
+                                            function show() {
+                                                if (document.getElementById('AddCourse').style.display == 'block')
+                                                    document.getElementById('AddCourse').style.display = 'none';
+                                                else
+                                                    document.getElementById('AddCourse').style.display = 'block'
+                                            }
+                                        </script>
+                                        <button class="btn" type="button" id="add" name="add" onclick="show();return false;">Add</button>
+
+                                        <div id="AddCourse">
+                                            <form id="courseAdd">
+                                                <table>
+                                                    <tr class="tablerow">
+                                                        <td class="tablecolumn">
+                                                            <label for="university">University:</label>
+                                                        </td>
+                                                        <td>
+                                                            <select name="university" id="university">
+                                                                <option value="Dalhousie University">Dalhousie University</option>
+                                                                <option value="Saint Mary University">Saint Mary University</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="tablecolumn">
+                                                            <label for="courseCode">Course Code:</label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" name="courseCode" id="courseCode" placeholder="Course Code">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="tablecolumn">
+                                                            <label for="price">Course Price</label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" name="price" id="price" placeholder="Course Price">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="tablecolumn">
+                                                            <input type="button" class="btn btn-primary" id="courseS" value="Add Course">
+                                                        </td>
+
+                                                    </tr>
+                                                </table>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Change availability-->
+                                <div>
+                                    <div class="tablerow">
+                                        <h4>Change Availability</h4>
+                                        <br>
+                                        <div id="availability">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <label>S</label>
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <label>M</label>
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <label>T</label>
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <label>W</label>
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <label>T</label>
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <label>F</label>
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <label>S</label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td  class="tablecolumn">
+                                                            <label>Morning:</label>
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="tablecolumn">
+                                                            <label>Noon:</label>
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="tablecolumn">
+                                                            <label>Night:</label>
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                        <td class="tablecolumn">
+                                                            <input type="checkbox" name="check">
+                                                        </td>
+                                                    </tr>
+
+                                                </table>
+                                        </div>
+
+                                        <div class="tablecolumn">
+                                            <input type="button" class="btn btn-primary" id="availabilityS" value="Confirm">
+                                        </div>
+
+                                    </tr>
+                                    </div>
+                                </div>
+                                <ul class="list-inline pull-right">
+                                    <li><button type="button" class="Bbtn prev-step">Previous</button></li>
+                                    <li><button type="button" class="Bbtn next-step">Save and continue</button></li>
+                                </ul>                           </ul>
+                            </div>
                         </div>
                         <div class="tab-pane" role="tabpanel" id="step3">
                             <h3>Step 3</h3>
