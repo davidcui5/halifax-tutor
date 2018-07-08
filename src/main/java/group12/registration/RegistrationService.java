@@ -1,7 +1,7 @@
 package group12.registration;
 
 import group12.DBDAO;
-import group12.email.MailService;
+import group12.email.MailerService;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.UUID;
@@ -9,7 +9,7 @@ import java.util.UUID;
 public class RegistrationService implements IRegister {
 
     private DBDAO db;
-    private MailService mailer;
+    private MailerService mailer;
 
     @Value("${email.sender}")
     String emailSender;
@@ -94,7 +94,7 @@ public class RegistrationService implements IRegister {
         this.db = DBDAO;
     }
 
-    public void setMailService(MailService mailService) {
+    public void setMailService(MailerService mailService) {
        this.mailer = mailService;
     }
 }
