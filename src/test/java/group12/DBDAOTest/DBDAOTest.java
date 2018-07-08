@@ -64,4 +64,9 @@ public class DBDAOTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void testIsEmailNew(){
+
+    }
+
 }

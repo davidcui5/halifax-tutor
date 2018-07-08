@@ -24,4 +24,47 @@ public class MockData {
         tutor.setPassword("pass123456T");
         return tutor;
     }
+
+    public static String getNewPhone() {
+        return "9022212300";
+    }
+
+    public static String getUsedPhone() {
+        return "9021234567T";
+    }
+
+    public static String getNewEmail() {
+        return "zaher88abd@gmail.com";
+    }
+
+    public static String getUsedEmail() {
+        return "testemailTut@gmail.com";
+    }
+
+    public static Student getUnRegStudent() {
+        Student student = new Student();
+        student.setEmail("testemailWrong@gmail.com");
+        student.setPassword("pass123456S");
+        return student;
+    }
+
+    public static Tutor getUnRegTutor() {
+        Tutor tutor = new Tutor();
+        tutor.setEmail("testemailWrong@gmail.com");
+        tutor.setPassword("pass123456T");
+        return tutor;
+    }
+
+    public static String getEmailRegistredStudent() {
+        return "testemailStu@gmail.com";
+    }
+
+    public static String getEmailRegistredTutor() {
+        return "testemailTut@gmail.com";
+    }
+
+    public static String getActivationCode() {
+        return "e9a577f4-827d-45ee-bde0-3ec0d49d3298";
+    }
 }
+
