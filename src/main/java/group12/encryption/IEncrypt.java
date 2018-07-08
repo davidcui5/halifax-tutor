@@ -1,4 +1,4 @@
-package group12.Registration;
+package group12.encryption;
 
 //Interface for encryptors
 //Allows different encryptors to implement this with different encryption algorithms

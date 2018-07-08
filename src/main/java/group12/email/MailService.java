@@ -1,4 +1,4 @@
-package group12.Email;
+package group12.email;
 
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;

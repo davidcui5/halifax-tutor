@@ -1,7 +1,6 @@
 package group12;
 
-import group12.Registration.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import group12.registration.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

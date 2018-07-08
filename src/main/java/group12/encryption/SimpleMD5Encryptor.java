@@ -1,4 +1,4 @@
-package group12.Registration;
+package group12.encryption;
 
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;

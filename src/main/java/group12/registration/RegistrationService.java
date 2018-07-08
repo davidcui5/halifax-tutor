@@ -1,10 +1,7 @@
-package group12.Registration;
+package group12.registration;
 
 import group12.DBDAO;
-import group12.DatabaseInterface;
-import group12.Email.IMail;
-import group12.Email.MailService;
-import org.springframework.beans.factory.annotation.Autowired;
+import group12.email.MailService;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.UUID;
@@ -20,13 +17,13 @@ public class RegistrationService implements IRegister {
     @Value("${server.url}")
     String serverURL;
 
-    public RegistrationResponse registerStudent(Student student) {
+    public RegistrationResponse registerStudent(StudentSignupForm student) {
 
         RegistrationResponse response = new RegistrationResponse();
         System.out.println(emailSender); //remove this later
         if (db.isEmailNew(student.getEmail())){
             response.setResult("Failure");
-            response.addDetail("Email already registered");
+            response.addDetail("email already registered");
         }
 
         if (db.isPhoneNumberNew(student.getPhoneNumber())){
@@ -49,13 +46,13 @@ public class RegistrationService implements IRegister {
         }
     }
 
-    public RegistrationResponse registerTutor(Tutor tutor) {
+    public RegistrationResponse registerTutor(TutorSignupForm tutor) {
 
         RegistrationResponse response = new RegistrationResponse();
 
         if (db.isEmailNew(tutor.getEmail())){
             response.setResult("Failure");
-            response.addDetail("Email already registered");
+            response.addDetail("email already registered");
         }
         if (db.isPhoneNumberNew(tutor.getPhoneNumber())){
             response.setResult("Failure");

@@ -27,7 +27,7 @@ $(document).ready(function () {
             dataType: "json"
         }).done(function (data) {
             if (data.result === "Success") {
-                alert("Registration succeed!");
+                alert("registration succeed!");
                 window.location.replace("../index.html");
             } else {
                 alert(data.details);

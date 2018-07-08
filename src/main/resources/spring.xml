@@ -12,7 +12,7 @@
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
 
-    <bean id="registrationService" class="group12.Registration.RegistrationService">
+    <bean id="registrationService" class="group12.registration.RegistrationService">
         <property name="DBDAO" ref="DBDAO"/>
         <property name="mailService" ref="mailService"/>
     </bean>
@@ -21,7 +21,7 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="mailService" class="group12.Email.MailService">
+    <bean id="mailService" class="group12.email.MailService">
         <property name="mailSender" ref="mailSender"/>
     </bean>
 

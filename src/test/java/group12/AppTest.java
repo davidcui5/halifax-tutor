@@ -1,9 +1,7 @@
 package group12;
 
-import group12.Registration.Student;
-import group12.Registration.Tutor;
-import org.junit.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import group12.registration.Student;
+import group12.registration.Tutor;
 
 import static junit.framework.TestCase.assertTrue;
 

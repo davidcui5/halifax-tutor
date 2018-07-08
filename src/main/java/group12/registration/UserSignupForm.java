@@ -1,6 +1,6 @@
-package group12.Registration;
+package group12.registration;
 
-public class User {
+public class UserSignupForm {
 
     private String email;
     private String password;

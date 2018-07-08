@@ -1,7 +1,7 @@
 package group12;
 
-import group12.Registration.Student;
-import group12.Registration.Tutor;
+import group12.registration.StudentSignupForm;
+import group12.registration.TutorSignupForm;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.ComponentScan;
@@ -106,7 +106,7 @@ public class DBDAO implements DatabaseInterface {
     @Override
     public boolean authorizeStudent(String email, String password) {
         String sql = "SELECT * FROM Student Where Email =? And Password = ?";
-        Student st = null;
+        StudentSignupForm st = null;
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -117,10 +117,10 @@ public class DBDAO implements DatabaseInterface {
             ps.setString(2, password);
             rs = ps.executeQuery();
             if (rs.next()) {
-                st = new Student();
+                st = new StudentSignupForm();
                 st.setFirstName(rs.getString("FirstName"));
                 st.setLastName(rs.getString("LastName"));
-                st.setEmail(rs.getString("Email"));
+                st.setEmail(rs.getString("email"));
                 System.out.println("Student Found::" + st);
             } else {
                 System.out.println("No Student found with id=" + email);
@@ -142,7 +142,7 @@ public class DBDAO implements DatabaseInterface {
     @Override
     public boolean authorizeTutor(String email, String password) {
         String sql = "SELECT * FROM Tutor Where Email =? And Password = ?";
-        Tutor tutor = null;
+        TutorSignupForm tutor = null;
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -153,10 +153,10 @@ public class DBDAO implements DatabaseInterface {
             ps.setString(2, password);
             rs = ps.executeQuery();
             if (rs.next()) {
-                tutor = new Tutor();
+                tutor = new TutorSignupForm();
                 tutor.setFirstName(rs.getString("FirstName"));
                 tutor.setLastName(rs.getString("LastName"));
-                tutor.setEmail(rs.getString("Email"));
+                tutor.setEmail(rs.getString("email"));
                 System.out.println("Tutor Found::" + tutor);
             } else {
                 System.out.println("No Tutor found with id=" + email);
@@ -176,7 +176,7 @@ public class DBDAO implements DatabaseInterface {
     }
 
     @Override
-    public boolean regStudent(Student student) {
+    public boolean regStudent(StudentSignupForm student) {
         String sql = "INSERT INTO Student (FirstName, LastName, Email, Password, AccountActivation, School,PhoneNumber) VALUES (?,?,?,?,?,?,?)";
         Connection con = null;
         PreparedStatement ps;
@@ -209,7 +209,7 @@ public class DBDAO implements DatabaseInterface {
     }
 
     @Override
-    public boolean regTutor(Tutor tutor) {
+    public boolean regTutor(TutorSignupForm tutor) {
         String sql = "INSERT INTO Tutor (FirstName, LastName, Email, Password, AccountActivation) VALUES (?, ?, ?, ?, ?)";
         Connection con = null;
         PreparedStatement ps;
