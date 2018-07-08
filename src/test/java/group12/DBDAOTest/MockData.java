@@ -66,5 +66,13 @@ public class MockData {
     public static String getActivationCode() {
         return "e9a577f4-827d-45ee-bde0-3ec0d49d3298";
     }
+
+    public static String getWrongActivationCode() {
+        return "e9a577f4-827d-45Ee-bde0-3ec0d49d3298";
+    }
+
+    public static String getOldActivationCode() {
+        return "713ec00e-e9ae-4833-bba2-75d8729f554e";
+    }
 }
 
