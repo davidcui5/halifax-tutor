@@ -3,9 +3,7 @@ package group12.DBDAOTest;
 import group12.DBConnection.DBDAO;
 import group12.Registration.Student;
 import group12.Registration.Tutor;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import static junit.framework.TestCase.assertFalse;
@@ -21,14 +19,14 @@ public class DBDAOFunctionsTest {
         dbda = context.getBean("DBDAO", DBDAO.class);
     }
 
-    @BeforeClass
+    @Before
     public void testRegStudentRightInfo() {
         Student student = MockData.getStudentObject();
         Boolean actual = dbda.regStudent(student);
         assertTrue(actual);
     }
 
-    @BeforeClass
+    @Before
     public void testRegTutorRightInfo() {
         Tutor tutor = MockData.getTutorObject();
         boolean actual = dbda.regTutor(tutor);
@@ -55,7 +53,7 @@ public class DBDAOFunctionsTest {
 
     @Test
     public void testIsPhoneNewWithUsedPhone() {
-        boolean actual = dbda.isEmailNew(MockData.getUsedPhone());
+        boolean actual = dbda.isPhoneNumberNew(MockData.getUsedPhone());
         assertFalse(actual);
     }
 
@@ -107,5 +105,19 @@ public class DBDAOFunctionsTest {
         assertTrue(actual);
     }
 
+    @After
+    public void testDeleteStudent() {
+        Student student = MockData.getStudentObject();
+        int id = dbda.getStudentId(student.getEmail());
+        boolean actual = dbda.delelteStudent(id);
+        assertTrue(actual);
+    }
 
+    @After
+    public void testDeleteTutor() {
+        Tutor tutor = MockData.getTutorObject();
+        int id = dbda.getTutorID(tutor.getEmail());
+        boolean actual = dbda.delelteTutor(id);
+        assertTrue(actual);
+    }
 }
