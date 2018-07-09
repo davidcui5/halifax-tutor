@@ -5,6 +5,7 @@ public class LoginResponse {
     private String result;
     private String detail;
     private String url;
+    private String token;
 
     public void setResult(String result) {
         this.result = result;
@@ -28,5 +29,13 @@ public class LoginResponse {
 
     public String getUrl() {
         return url;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+        return token;
     }
 }

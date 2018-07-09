@@ -22,6 +22,7 @@ $(document).ready(function () {
         }).done(function (data) {
             if (data.result === "Success") {
                 alert("Welcome Back!");
+                window.sessionStorage.accessToken = data.token;
                 window.location.replace(data.url);
             } else {
                 alert(data.detail);

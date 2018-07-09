@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
-    @Autowired
-    private IAuthenticatorDAO authenticator = new AuthenticatorDAO;
+    /*@Autowired
+    private IAuthenticator auth = new AuthenticationService();*/
 
     @GetMapping(path = "/login")
     @ResponseBody
     public LoginResponse login(@RequestBody LoginForm form){
-        authenticator.authenticate(form);
-
+        IAuthenticator auth = new AuthenticationService();
+        LoginResponse response = auth.authenticate(form);
+        return response;
     }
 
 }

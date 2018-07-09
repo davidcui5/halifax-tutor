@@ -1,6 +1,5 @@
 package group12;
 
-import group12.registration.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
