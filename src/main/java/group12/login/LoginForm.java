@@ -2,8 +2,17 @@ package group12.login;
 
 public class LoginForm {
 
+    private String type;
     private String email;
     private String password;
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
 
     public void setEmail(String email) {
         this.email = email;

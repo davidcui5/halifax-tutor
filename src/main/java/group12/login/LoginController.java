@@ -10,20 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     @Autowired
-    private DBDAO db = new DBDAO();
+    private IAuthenticatorDAO authenticator = new AuthenticatorDAO;
 
     @GetMapping(path = "/login")
     @ResponseBody
-    public
+    public LoginResponse login(@RequestBody LoginForm form){
+        authenticator.authenticate(form);
 
-    @GetMapping(path = "/user")
-    @ResponseBody
-    public String login(@RequestBody User user) {
-        if (db.authorizeStudent(user.getEmail(), user.getPassword()))
-            return "student";
-        if (db.authorizeTutor(user.getEmail(), user.getPassword()))
-            return "tutor";
-        return "not found";
     }
 
 }
