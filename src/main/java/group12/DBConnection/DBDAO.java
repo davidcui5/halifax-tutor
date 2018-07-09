@@ -160,168 +160,109 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public int getStudentId(String email) {
-        String sql = "SELECT * FROM Student Where Email =?";
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        String sql = "SELECT GetStudentId(?)";
         int result = 0;
         try {
-            con = dataSource.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1, email);
-            rs = ps.executeQuery();
-            rs.first();
-            result = rs.getInt("ID");
+            rs = getResult(sql, email);
+            rs.next();
+            result = rs.getInt(1);
+            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                rs.close();
-                ps.close();
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return result;
     }
 
     @Override
     public int getTutorID(String email) {
-        String sql = "SELECT * FROM Tutor Where Email =?";
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        String sql = "SELECT GetTutorId(?)";
         int result = 0;
         try {
-            con = dataSource.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1, email);
-            rs = ps.executeQuery();
-            rs.first();
-            result = rs.getInt("ID");
+            rs = getResult(sql, email);
+            rs.next();
+            result = rs.getInt(1);
+            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                rs.close();
-                ps.close();
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return result;
     }
 
     @Override
     public boolean saveActivationCode(String code) {
-        String sql = "INSERT into ActivationTable (AcivationCode, Date) VALUES (?,NOW())";
-        Connection con = null;
-        PreparedStatement ps;
+        String sql = "Select SaveActivationCode(?)";
+        boolean result = false;
         try {
-            con = dataSource.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1, code);
-            ps.executeUpdate();
-            ps.close();
+            rs = getResult(sql, code);
+            rs.next();
+            if (rs.getInt(1) == 1)
+                result = true;
+            closeConnections();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                    return true;
-                } catch (SQLException ex) {
-                    return false;
-                }
-            }
         }
-        return true;
+        return result;
     }
 
     @Override
     public boolean activateStudent(int id, String activateCode) {
-        String sql = "SELECT * From ActivationTable where AcivationCode like ?";
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        String sql = "SELECT ActivateStudent(?,?)";
         boolean result = false;
         try {
-            con = dataSource.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1, activateCode);
-            rs = ps.executeQuery();
-            rs.first();
-            Date date = rs.getDate("Date");
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
-            LocalDate pdate = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
-            LocalDate now = LocalDate.now();
-            Period diff = Period.between(pdate, now);
-            //Activate student
-            System.out.println(cal.get(Calendar.YEAR) + " " + cal.get(Calendar.MONTH) + " " + cal.get(Calendar.DAY_OF_MONTH));
-            System.out.println(diff.getDays() + " " + diff.getMonths() + " " + diff.getYears());
-            if (diff.getDays() <= 1 && diff.getYears() == 0 && diff.getMonths() == 1) {
-                sql = "update Student SET AccountActivation = 1 WHERE ID=?";
-                ps = con.prepareStatement(sql);
-                ps.setInt(1, id);
-                ps.executeUpdate();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                rs.close();
-                ps.close();
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            rs = getResult(sql, String.valueOf(id), activateCode);
+            rs.next();
+            if (rs.getInt(1) == 1)
+                result = true;
+            closeConnections();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
         }
         return result;
     }
 
     @Override
     public boolean activateTutor(int id, String activateCode) {
-        String sql = "SELECT * From ActivationTable where AcivationCode like ?";
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        String sql = "SELECT ActivateTutor(?,?)";
         boolean result = false;
         try {
-            con = dataSource.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1, activateCode);
-            rs = ps.executeQuery();
-            rs.first();
-            Date date = rs.getDate("Date");
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
-            LocalDate pdate = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
-            LocalDate now = LocalDate.now();
-            Period diff = Period.between(pdate, now);
-            //Activate student
-            System.out.println(cal.get(Calendar.YEAR) + " " + cal.get(Calendar.MONTH) + " " + cal.get(Calendar.DAY_OF_MONTH));
-            System.out.println(diff.getDays() + " " + diff.getMonths() + " " + diff.getYears());
-            if (diff.getDays() <= 1 && diff.getYears() == 0 && diff.getMonths() == 1) {
-                sql = "update Tutor SET AccountActivation = 1 WHERE ID=?";
-                ps = con.prepareStatement(sql);
-                ps.setInt(1, id);
-                ps.executeUpdate();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                rs.close();
-                ps.close();
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            rs = getResult(sql, String.valueOf(id), activateCode);
+            rs.next();
+            if (rs.getInt(1) == 1)
+                result = true;
+            closeConnections();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
         }
         return result;
     }
 
+    public boolean delelteStudent(int id) {
+        String sql = "SELECT DeleteStudent(?)";
+        boolean result = false;
+        try {
+            rs = getResult(sql, String.valueOf(id));
+            rs.next();
+            if (rs.getInt(1) == 1)
+                result = true;
+            closeConnections();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return result;
+    }
+
+    public boolean delelteTutor(int id) {
+        String sql = "SELECT DeleteTutor(?)";
+        boolean result = false;
+        try {
+            rs = getResult(sql, String.valueOf(id));
+            rs.next();
+            if (rs.getInt(1) == 1)
+                result = true;
+            closeConnections();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return result;
+    }
 }

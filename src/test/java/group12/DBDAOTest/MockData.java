@@ -34,7 +34,7 @@ public class MockData {
     }
 
     public static String getNewEmail() {
-        return "zaher88abd@gmail.com";
+        return "testTesttest@TestTest.com";
     }
 
     public static String getUsedEmail() {
@@ -68,7 +68,7 @@ public class MockData {
     }
 
     public static String getWrongActivationCode() {
-        return "e9a577f4-827d-45Ee-bde0-3ec0d49d3298";
+        return "e9a577f4-827d-47Ee-bde0-3ec0d49d3298";
     }
 
     public static String getOldActivationCode() {
