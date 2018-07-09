@@ -27,34 +27,24 @@ public class DBDAO implements DatabaseInterface {
 
     private DataSource dataSource;
 
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     @Override
     public boolean isEmailNew(String email) {
-        String sql = "SELECT IsNewEmail(?)";
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        boolean result = true;
+        String sql = "SELECT IsEmailNew(?)";
+        DBConnector connector = new DBConnector(dataSource);
+        ResultSet rs = connector.getResult(sql, email);
+        boolean result = false;
         try {
-            con = dataSource.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1, email);
-            rs = ps.executeQuery();
             result = rs.first();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                assert rs != null;
-                rs.close();
-                ps.close();
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return result;
     }
