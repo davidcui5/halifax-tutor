@@ -1,13 +1,11 @@
 package group12.DBDAOTest;
 
-import group12.DBDAO;
+import group12.DBConnection.DBDAO;
 import group12.Registration.Student;
 import group12.Registration.Tutor;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import javax.rmi.CORBA.StubDelegate;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;

@@ -1,10 +1,7 @@
 package group12.Registration;
 
-import group12.DBDAO;
-import group12.DatabaseInterface;
-import group12.Email.IMail;
+import group12.DBConnection.DBDAO;
 import group12.Email.MailService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.UUID;

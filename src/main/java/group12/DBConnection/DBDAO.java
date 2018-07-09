@@ -1,5 +1,6 @@
-package group12;
+package group12.DBConnection;
 
+import group12.DatabaseInterface;
 import group12.Registration.Student;
 import group12.Registration.Tutor;
 import org.springframework.stereotype.Component;
@@ -32,7 +33,7 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean isEmailNew(String email) {
-        String sql = "SELECT * FROM Student Where Email =?";
+        String sql = "SELECT IsNewEmail(?)";
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -43,17 +44,11 @@ public class DBDAO implements DatabaseInterface {
             ps.setString(1, email);
             rs = ps.executeQuery();
             result = rs.first();
-            if (!result) {
-                sql = "SELECT * FROM Tutor Where Email =?";
-                ps = con.prepareStatement(sql);
-                ps.setString(1, email);
-                rs = ps.executeQuery();
-                result = rs.first();
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
+                assert rs != null;
                 rs.close();
                 ps.close();
                 con.close();
