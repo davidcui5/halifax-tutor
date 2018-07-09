@@ -53,6 +53,12 @@ public class DBDAO implements DatabaseInterface {
         return null;
     }
 
+    public void closeConnections() throws SQLException {
+        con.close();
+        ps.close();
+        rs.close();
+    }
+
     @Override
     public boolean isEmailNew(String email) {
         String sql = "SELECT IsEmailNew(?)";
@@ -60,10 +66,8 @@ public class DBDAO implements DatabaseInterface {
         try {
             rs = getResult(sql, email);
             rs.next();
-            result=rs.getBoolean(1);
-            con.close();
-            ps.close();
-            rs.close();
+            result = rs.getBoolean(1);
+            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -71,35 +75,16 @@ public class DBDAO implements DatabaseInterface {
     }
 
     @Override
-    public boolean isPhoneNumberNew(String number) {
-        String sql = "SELECT * FROM Student Where PhoneNumber =?";
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+    public boolean isPhoneNumberNew(String phoneNumber) {
+        String sql = "SELECT IsPhoneNew(?)";
         boolean result = false;
         try {
-            con = dataSource.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1, number);
-            rs = ps.executeQuery();
-            result = rs.first();
-            if (!result) {
-                sql = "SELECT * FROM Tutor Where PhoneNumber =?";
-                ps = con.prepareStatement(sql);
-                ps.setString(1, number);
-                rs = ps.executeQuery();
-                result = rs.first();
-            }
+            rs = getResult(sql, phoneNumber);
+            rs.next();
+            result = rs.getBoolean(1);
+            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                rs.close();
-                ps.close();
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return result;
     }
@@ -111,137 +96,66 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean authorizeStudent(String email, String password) {
-        String sql = "SELECT * FROM Student Where Email =? And Password = ?";
-        Student st = null;
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        String sql = "SELECT AuthorizeStudent(?,?)";
+        boolean result = false;
         try {
-            con = dataSource.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1, email);
-            ps.setString(2, password);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                st = new Student();
-                st.setFirstName(rs.getString("FirstName"));
-                st.setLastName(rs.getString("LastName"));
-                st.setEmail(rs.getString("Email"));
-                System.out.println("Student Found::" + st);
-            } else {
-                System.out.println("No Student found with id=" + email);
-            }
+            rs = getResult(sql, email, password);
+            rs.next();
+            result = rs.getBoolean(1);
+            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                rs.close();
-                ps.close();
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
-        return st.getEmail().equals(email);
+        return result;
     }
 
     @Override
     public boolean authorizeTutor(String email, String password) {
-        String sql = "SELECT * FROM Tutor Where Email =? And Password = ?";
-        Tutor tutor = null;
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+        String sql = "SELECT AuthorizeTutor(?,?)";
+        boolean result = false;
         try {
-            con = dataSource.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1, email);
-            ps.setString(2, password);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                tutor = new Tutor();
-                tutor.setFirstName(rs.getString("FirstName"));
-                tutor.setLastName(rs.getString("LastName"));
-                tutor.setEmail(rs.getString("Email"));
-                System.out.println("Tutor Found::" + tutor);
-            } else {
-                System.out.println("No Tutor found with id=" + email);
-            }
+            rs = getResult(sql, email, password);
+            rs.next();
+            result = rs.getBoolean(1);
+            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                rs.close();
-                ps.close();
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
-        return tutor.getEmail().equals(email);
+        return result;
     }
 
     @Override
     public boolean regStudent(Student student) {
-        String sql = "INSERT INTO Student (FirstName, LastName, Email, Password, AccountActivation, School,PhoneNumber) VALUES (?,?,?,?,?,?,?)";
-        Connection con = null;
-        PreparedStatement ps;
+        String sql = "select RegStudent(?,?,?,?,?,?)";
+        boolean result = false;
         try {
-            con = dataSource.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1, student.getFirstName());
-            ps.setString(2, student.getLastName());
-            ps.setString(3, student.getEmail());
-            ps.setString(4, student.getPassword());
-            ps.setInt(5, 0);
-            ps.setString(6, student.getSchool());
-            ps.setString(7, student.getPhoneNumber());
-            //TODO send activation email
-            ps.executeUpdate();
-            ps.close();
+            rs = getResult(sql, student.getFirstName(), student.getLastName(), student.getEmail()
+                    , student.getPassword(), student.getSchool(), student.getPhoneNumber());
+            rs.next();
+            if (rs.getInt(1) == 1)
+                result = true;
+            closeConnections();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                    return true;
-                } catch (SQLException ex) {
-                    return false;
-                }
-            }
         }
-        return true;
+        return result;
     }
 
     @Override
     public boolean regTutor(Tutor tutor) {
-        String sql = "INSERT INTO Tutor (FirstName, LastName, Email, Password, AccountActivation) VALUES (?, ?, ?, ?, ?)";
-        Connection con = null;
-        PreparedStatement ps;
+        String sql = "select RegTutor(?,?,?,?,?)";
+        boolean result = false;
         try {
-            con = dataSource.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1, tutor.getFirstName());
-            ps.setString(2, tutor.getLastName());
-            ps.setString(3, tutor.getEmail());
-            ps.setString(4, tutor.getPassword());
-            ps.setInt(5, 0);
-            ps.executeUpdate();
-            ps.close();
+            rs = getResult(sql, tutor.getFirstName(), tutor.getLastName(), tutor.getEmail()
+                    , tutor.getPassword(), tutor.getPhoneNumber());
+            rs.next();
+            if (rs.getInt(1) == 1)
+                result = true;
+            closeConnections();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                    return true;
-                } catch (SQLException ex) {
-                    return false;
-                }
-            }
         }
-        return true;
+        return result;
     }
 
     @Override
