@@ -26,7 +26,6 @@ import java.util.Date;
 public class DBDAO implements DatabaseInterface {
 
     private DataSource dataSource;
-
     Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
@@ -35,14 +34,36 @@ public class DBDAO implements DatabaseInterface {
         this.dataSource = dataSource;
     }
 
+    public ResultSet getResult(String query, String... parameters) {
+        con = null;
+        ps = null;
+        rs = null;
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(query);
+            for (int i = 0; i < parameters.length; i++) {
+                ps.setString(i + 1, parameters[i]);
+            }
+            return ps.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+        return null;
+    }
+
     @Override
     public boolean isEmailNew(String email) {
         String sql = "SELECT IsEmailNew(?)";
-        DBConnector connector = new DBConnector(dataSource);
-        ResultSet rs = connector.getResult(sql, email);
         boolean result = false;
         try {
-            result = rs.first();
+            rs = getResult(sql, email);
+            rs.next();
+            result=rs.getBoolean(1);
+            con.close();
+            ps.close();
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -3,12 +3,12 @@ package group12.DBDAOTest;
 import group12.DBConnection.DBDAO;
 import group12.Registration.Student;
 import group12.Registration.Tutor;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 
 public class DBDAOTest {
     ClassPathXmlApplicationContext context;
@@ -64,16 +64,15 @@ public class DBDAOTest {
 
     @Test
     public void testIsEmailNewWithNewEmail() {
-        Boolean actual = dbda.isEmailNew(MockData.getNewEmail());
-        int expected = 1;
+        boolean actual = dbda.isEmailNew(MockData.getNewEmail());
+        boolean expected = true;
         assertEquals(expected, actual);
     }
 
     @Test
     public void testIsEmailNewWithUsedEmail() {
         boolean actual = dbda.isEmailNew(MockData.getUsedEmail());
-        int expected = 0;
-        assertEquals(expected, actual);
+        assertFalse(actual);
     }
 
     @Test
@@ -92,33 +91,33 @@ public class DBDAOTest {
 
     @Test
     public void testGetStudentId() {
-       // Student student = dbda.getStudentId(MockData.getStudentObject().getEmail());
-    //    assertEquals(MockData.getStudentObject().getFirstName(), student.getFirstName());
+        // Student student = dbda.getStudentId(MockData.getStudentObject().getEmail());
+        //    assertEquals(MockData.getStudentObject().getFirstName(), student.getFirstName());
     }
 
     @Test
     public void testGetTutorId() {
-     //   Tutor tutor = dbda.getStudentId(MockData.getTutorObject().getEmail());
-      ///  assertEquals(MockData.getTutorObject().getFirstName(), tutor.getFirstName());
+        //   Tutor tutor = dbda.getStudentId(MockData.getTutorObject().getEmail());
+        ///  assertEquals(MockData.getTutorObject().getFirstName(), tutor.getFirstName());
     }
 
     @Test
     public void testGetStudentIdWrongUser() {
-   //     Student student = dbda.getStudentId(MockData.getNewEmail());
-    //    assertEquals(MockData.getStudentObject().getFirstName(), student.getFirstName());
+        //     Student student = dbda.getStudentId(MockData.getNewEmail());
+        //    assertEquals(MockData.getStudentObject().getFirstName(), student.getFirstName());
     }
 
     @Test
     public void testGetTutorIdWrongUser() {
-   //     Tutor tutor = dbda.getStudentId(MockData.getNewPhone());
-     //   assertEquals(MockData.getTutorObject().getFirstName(), tutor.getFirstName());
+        //     Tutor tutor = dbda.getStudentId(MockData.getNewPhone());
+        //   assertEquals(MockData.getTutorObject().getFirstName(), tutor.getFirstName());
     }
 
     @Test
     public void testSaveActivationCode() {
-    //    int actual = dbda.saveActivationCode(MockData.getActivationCode());
-    //    int expected = 1;
-    //    assertEquals(actual, expected);
+        //    int actual = dbda.saveActivationCode(MockData.getActivationCode());
+        //    int expected = 1;
+        //    assertEquals(actual, expected);
     }
 
     @Test
@@ -174,4 +173,6 @@ public class DBDAOTest {
         boolean expected = true;
         assertEquals(actual, expected);
     }
+
+
 }
