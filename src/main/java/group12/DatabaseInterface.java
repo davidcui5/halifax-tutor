@@ -1,7 +1,7 @@
 package group12;
 
-import group12.Registration.Student;
-import group12.Registration.Tutor;
+import group12.registration.StudentSignupForm;
+import group12.registration.TutorSignupForm;
 
 public interface DatabaseInterface {
 
@@ -15,9 +15,9 @@ public interface DatabaseInterface {
 
     boolean authorizeTutor(String email, String password);
 
-    boolean regStudent(Student student);
+    boolean regStudent(StudentSignupForm student);
 
-    boolean regTutor(Tutor tutor);
+    boolean regTutor(TutorSignupForm tutor);
 
     int getStudentId(String email);
 

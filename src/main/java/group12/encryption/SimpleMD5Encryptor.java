@@ -1,4 +1,4 @@
-package group12.Registration;
+package group12.encryption;
 
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 //Simple encryptor uses Java's simple MD5 Message-Digest algorithm to encrypts without using salt
 //Maybe make a more advanced encryptor with better algorithm and salt if there are time at end, following S.O.L.I.D.
 // allows me to be agile and swap encryptors
-public class SimpleMD5Encryptor implements IEncrypt {
+public class SimpleMD5Encryptor implements IEncryptor {
 
     public String encrypt (String input){
         try {

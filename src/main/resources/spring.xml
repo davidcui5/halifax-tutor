@@ -12,17 +12,21 @@
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
 
-    <bean id="registrationService" class="group12.Registration.RegistrationService">
-        <property name="DBDAO" ref="DBDAO"/>
-        <property name="mailService" ref="mailService"/>
+    <bean id="registrationService" class="group12.registration.RegistrationService">
+        <property name="db" ref="DBDAO"/>
+        <property name="mailer" ref="mailService"/>
     </bean>
 
     <bean id="DBDAO" class="group12.DBDAO">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="mailService" class="group12.Email.MailService">
-        <property name="mailSender" ref="mailSender"/>
+    <bean id="authService" class="group12.login.AuthenticationService">
+        <property name="DAO" ref="mysqlAuthDAO"/>
+    </bean>
+
+    <bean id="mysqlAuthDAO" class="group12.login.MysqlAuthDAO">
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -30,6 +34,10 @@
         <property name="url" value="${spring.datasource.url}"/>
         <property name="username" value="${spring.datasource.username}"/>
         <property name="password" value="${spring.datasource.password}"/>
+    </bean>
+
+    <bean id="mailService" class="group12.email.MailerService">
+        <property name="mailSender" ref="mailSender"/>
     </bean>
 
     <!-- SET default mail properties -->
