@@ -9,7 +9,7 @@ public class MysqlAuthDAO implements IAuthDAO {
 
     @Override
     public String getStudentPassword(String email) {
-        return null;
+        return "Str";
     }
 
     @Override
@@ -29,7 +29,7 @@ public class MysqlAuthDAO implements IAuthDAO {
 
     @Override
     public String getTutorPassword(String email) {
-        return null;
+        return "Tut";
     }
 
     @Override
@@ -49,6 +49,6 @@ public class MysqlAuthDAO implements IAuthDAO {
 
     @Override
     public String getAdminPassword(String email) {
-        return null;
+        return "Admin";
     }
 }

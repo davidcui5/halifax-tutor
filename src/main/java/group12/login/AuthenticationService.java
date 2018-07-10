@@ -7,7 +7,11 @@ import group12.token_auth.JWTAccessToken;
 
 public class AuthenticationService implements IAuthenticator {
 
-    private IAuthDAO DAO = new MysqlAuthDAO();
+    private IAuthDAO DAO;
+
+    public AuthenticationService(){
+        DAO = new MysqlAuthDAO();
+    }
 
     @Override
     public LoginResponse authenticate(LoginForm form) {
@@ -28,7 +32,7 @@ public class AuthenticationService implements IAuthenticator {
             response = authenticateAdmin(email, password);
         }
 
-        if(response.getResult().equals("Success")){
+        if(response.getResult().equals("SUCCESS")){
             IAccessToken tokenMaker = new JWTAccessToken();
             String token = tokenMaker.generateToken(email);
             response.setToken(token);
@@ -45,7 +49,7 @@ public class AuthenticationService implements IAuthenticator {
             return response;
         }
         else if(DAO.getStudentPassword(email).equals(password)){
-            response.setResult("Success");
+            response.setResult("SUCCESS");
             if(DAO.isStudentNotActivated(email) || DAO.isStudentBanned(email)){
                 response.setUrl("html/student-setting-page.html");
             }
@@ -69,7 +73,7 @@ public class AuthenticationService implements IAuthenticator {
             return response;
         }
         else if(DAO.getTutorPassword(email).equals(password)){
-            response.setResult("Success");
+            response.setResult("SUCCESS");
             if(DAO.isTutorNotActivated(email) || DAO.isTutorBanned(email)){
                 response.setUrl("html/tutor-setting-page.html"); //change this to the right file name
             }
@@ -93,7 +97,7 @@ public class AuthenticationService implements IAuthenticator {
             return response;
         }
         else if(DAO.getAdminPassword(email).equals(password)){
-            response.setResult("Success");
+            response.setResult("SUCCESS");
             response.setUrl("html/search-tutor.html");
             return response;
         }

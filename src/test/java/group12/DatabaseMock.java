@@ -1,9 +1,8 @@
 package group12;
 
-import group12.registration.Student;
-import group12.registration.Tutor;
 import org.springframework.stereotype.Component;
 
+/*
 @Component
 public class DatabaseMock implements DatabaseInterface {
     public boolean isEmailNew(String email){
@@ -69,3 +68,4 @@ public class DatabaseMock implements DatabaseInterface {
     }
 
 }
+*/

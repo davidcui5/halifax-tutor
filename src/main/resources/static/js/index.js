@@ -4,7 +4,7 @@ $(document).ready(function () {
     $("form").submit(function (event) {
         event.preventDefault();
         let type = $("#type").val();
-        let email = $("#email option:selected").text()
+        let email = $("#email").val();
         let password = $("#password").val();
 
         var loginData = {
@@ -17,19 +17,18 @@ $(document).ready(function () {
             url: location.origin + "/login",
             data: JSON.stringify(loginData),
             contentType: "application/json",
-            type: "GET",
+            type: "POST",
             dataType: "json"
         }).done(function (data) {
-            if (data.result === "Success") {
+            if (data.result === "SUCCESS") {
                 alert("Welcome Back!");
-                window.sessionStorage.accessToken = data.token;
+                window.localStorage.setItem("token", data.token); //add access token to local storage
                 window.location.replace(data.url);
             } else {
                 alert(data.detail);
             }
         }).fail(function (xhr, status, errorThrown) {
-
+            //empty
         });
-
     });
 });

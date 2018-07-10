@@ -1,8 +1,5 @@
 package group12;
 
-import group12.registration.Student;
-import group12.registration.Tutor;
-
 import static junit.framework.TestCase.assertTrue;
 
 public class AppTest {
