@@ -9,17 +9,18 @@ public class AuthenticationService implements IAuthenticator {
 
     private IAuthDAO DAO;
 
-    public AuthenticationService(){
-        DAO = new MysqlAuthDAO();
+    public void setDAO(IAuthDAO DAO) {
+        this.DAO = DAO;
     }
 
     @Override
     public LoginResponse authenticate(LoginForm form) {
 
-        IEncryptor encryptor = new SimpleMD5Encryptor();
+        /*IEncryptor encryptor = new SimpleMD5Encryptor();*/
         String type = form.getType();
         String email = form.getEmail();
-        String password = encryptor.encrypt(form.getPassword());
+        /*String password = encryptor.encrypt(form.getPassword());*/
+        String password = form.getPassword();
         LoginResponse response;
 
         if(type.equals("student")){
@@ -43,23 +44,24 @@ public class AuthenticationService implements IAuthenticator {
 
     public LoginResponse authenticateStudent(String email, String password) {
         LoginResponse response = new LoginResponse();
-        if(DAO.isStudentEmailWrong(email)){
-            response.setResult("Failure");
+        UserDTO student = DAO.getStudentByEmail(email);
+        if(student == null){
+            response.setResult("FAILURE");
             response.setDetail("Wrong email");
             return response;
         }
-        else if(DAO.getStudentPassword(email).equals(password)){
+        else if(student.getPassword().equals(password)){
             response.setResult("SUCCESS");
-            if(DAO.isStudentNotActivated(email) || DAO.isStudentBanned(email)){
-                response.setUrl("html/student-setting-page.html");
+            if(student.getIsActivated()==true || student.getIsBanned()==false){
+                response.setUrl("html/search-tutor.html");
             }
             else{
-                response.setUrl("html/search-tutor.html");
+                response.setUrl("html/student-setting-page.html");
             }
             return response;
         }
         else{
-            response.setResult("Failure");
+            response.setResult("FAILURE");
             response.setDetail("Wrong password");
             return response;
         }
@@ -67,23 +69,24 @@ public class AuthenticationService implements IAuthenticator {
 
     public LoginResponse authenticateTutor(String email, String password) {
         LoginResponse response = new LoginResponse();
-        if(DAO.isTutorEmailWrong(email)){
-            response.setResult("Failure");
+        UserDTO tutor = DAO.getTutorByEmail(email);
+        if(tutor == null){
+            response.setResult("FAILURE");
             response.setDetail("Wrong email");
             return response;
         }
-        else if(DAO.getTutorPassword(email).equals(password)){
+        else if(tutor.getPassword().equals(password)){
             response.setResult("SUCCESS");
-            if(DAO.isTutorNotActivated(email) || DAO.isTutorBanned(email)){
-                response.setUrl("html/tutor-setting-page.html"); //change this to the right file name
+            if(tutor.getIsActivated()==true || tutor.getIsBanned()==false){
+                response.setUrl("html/search-tutor.html");
             }
             else{
-                response.setUrl("html/search-tutor.html");
+                response.setUrl("html/tutor-setting-page.html");
             }
             return response;
         }
         else{
-            response.setResult("Failure");
+            response.setResult("FAILURE");
             response.setDetail("Wrong password");
             return response;
         }
@@ -91,18 +94,19 @@ public class AuthenticationService implements IAuthenticator {
 
     public LoginResponse authenticateAdmin(String email, String password) {
         LoginResponse response = new LoginResponse();
-        if(DAO.isAdminEmailWrong(email)){
-            response.setResult("Failure");
+        UserDTO admin = DAO.getAdminByEmail(email);
+        if(admin == null){
+            response.setResult("FAILURE");
             response.setDetail("Wrong email");
             return response;
         }
-        else if(DAO.getAdminPassword(email).equals(password)){
+        else if(admin.getPassword().equals(password)){
             response.setResult("SUCCESS");
             response.setUrl("html/search-tutor.html");
             return response;
         }
         else{
-            response.setResult("Failure");
+            response.setResult("FAILURE");
             response.setDetail("Wrong password");
             return response;
         }

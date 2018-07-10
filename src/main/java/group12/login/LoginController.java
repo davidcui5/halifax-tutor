@@ -9,12 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
-    private IAuthenticator authService;
-
     @Autowired
-    public LoginController() {
-        authService = new AuthenticationService();
-    }
+    private IAuthenticator authService = new AuthenticationService();
 
     @PostMapping(path = "/login")
     @ResponseBody

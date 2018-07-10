@@ -1,15 +1,19 @@
 package group12.registration;
 
 import group12.DBDAO;
+import group12.DatabaseInterface;
+import group12.email.IMailer;
 import group12.email.MailerService;
+import group12.encryption.IEncryptor;
+import group12.encryption.SimpleMD5Encryptor;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.UUID;
 
 public class RegistrationService implements IRegister {
 
-    private DBDAO db;
-    private MailerService mailer;
+    private DatabaseInterface db;
+    private IMailer mailer;
 
     @Value("${email.sender}")
     String emailSender;
@@ -17,10 +21,20 @@ public class RegistrationService implements IRegister {
     @Value("${server.url}")
     String serverURL;
 
+
+    public void setDb(DatabaseInterface db) {
+        this.db = db;
+    }
+
+    public void setMailer(IMailer mailer) {
+        this.mailer = mailer;
+    }
+
     public RegistrationResponse registerStudent(StudentSignupForm student) {
+        IEncryptor encryptor = new SimpleMD5Encryptor();
+        student.setPassword(encryptor.encrypt(student.getPassword()));
 
         RegistrationResponse response = new RegistrationResponse();
-        System.out.println(emailSender); //remove this later
         if (db.isEmailNew(student.getEmail())){
             response.setResult("Failure");
             response.addDetail("email already registered");
@@ -36,17 +50,20 @@ public class RegistrationService implements IRegister {
         }
         else{
             db.regStudent(student);
-            int studentID = db.getStudentId(student.getEmail());
+            /*int studentID = db.getStudentId(student.getEmail());
             UUID uuid = UUID.randomUUID();
             db.saveActivationCode(uuid.toString());
             mailer.sendMail(emailSender, student.getEmail(), "Activation",
-                    "Activation " + serverURL + "/student/studentid/" + studentID + "/activation/" + uuid.toString() + "/");
+                    "Activation " + serverURL + "/student/studentid/" + studentID + "/activation/" + uuid.toString() + "/");*/
             response.setResult("Success");
             return response;
         }
     }
 
     public RegistrationResponse registerTutor(TutorSignupForm tutor) {
+
+        IEncryptor encryptor = new SimpleMD5Encryptor();
+        tutor.setPassword(encryptor.encrypt(tutor.getPassword()));
 
         RegistrationResponse response = new RegistrationResponse();
 
@@ -68,11 +85,11 @@ public class RegistrationService implements IRegister {
         }
         else{
             db.regTutor(tutor);
-            int tutorID = db.getTutorID(tutor.getEmail());
+            /*int tutorID = db.getTutorID(tutor.getEmail());
             UUID uuid = UUID.randomUUID();
             db.saveActivationCode(uuid.toString());
             mailer.sendMail(emailSender, tutor.getEmail(), "Activation",
-                    "Activation " + serverURL + "/tutor/tutorid/" + tutorID + "/activation/" + uuid.toString() + "/");
+                    "Activation " + serverURL + "/tutor/tutorid/" + tutorID + "/activation/" + uuid.toString() + "/");*/
             response.setResult("Success");
             return response;
         }
@@ -88,13 +105,5 @@ public class RegistrationService implements IRegister {
         db.activateTutor(tutorID, activationCode);
         return "Get a specific Bar with id=" + activationCode +
                 " from a Foo with id=" + tutorID;
-    }
-
-    public void setDBDAO(DBDAO DBDAO) {
-        this.db = DBDAO;
-    }
-
-    public void setMailService(MailerService mailService) {
-       this.mailer = mailService;
     }
 }
