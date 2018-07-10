@@ -2,10 +2,10 @@ package group12.login;
 
 public class LoginResponse {
 
-    private String result;
-    private String detail;
-    private String url;
-    private String token;
+    private String result; //SUCCESS or FAILURE
+    private String detail; //failure reason
+    private String url; //url to redirect to
+    private String token; //access token
 
     public void setResult(String result) {
         this.result = result;
