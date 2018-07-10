@@ -16,11 +16,10 @@ public class AuthenticationService implements IAuthenticator {
     @Override
     public LoginResponse authenticate(LoginForm form) {
 
-        /*IEncryptor encryptor = new SimpleMD5Encryptor();*/
+        IEncryptor encryptor = new SimpleMD5Encryptor();
         String type = form.getType();
         String email = form.getEmail();
-        /*String password = encryptor.encrypt(form.getPassword());*/
-        String password = form.getPassword();
+        String password = encryptor.encrypt(form.getPassword());
         LoginResponse response;
 
         if(type.equals("student")){

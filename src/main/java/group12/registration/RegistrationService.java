@@ -37,7 +37,7 @@ public class RegistrationService implements IRegister {
         RegistrationResponse response = new RegistrationResponse();
         if (db.isEmailNew(student.getEmail())){
             response.setResult("Failure");
-            response.addDetail("email already registered");
+            response.addDetail("Email already registered");
         }
 
         if (db.isPhoneNumberNew(student.getPhoneNumber())){
@@ -50,11 +50,11 @@ public class RegistrationService implements IRegister {
         }
         else{
             db.regStudent(student);
-            /*int studentID = db.getStudentId(student.getEmail());
+            int studentID = db.getStudentId(student.getEmail());
             UUID uuid = UUID.randomUUID();
             db.saveActivationCode(uuid.toString());
             mailer.sendMail(emailSender, student.getEmail(), "Activation",
-                    "Activation " + serverURL + "/student/studentid/" + studentID + "/activation/" + uuid.toString() + "/");*/
+                    "Activation " + serverURL + "/student/studentid/" + studentID + "/activation/" + uuid.toString() + "/");
             response.setResult("Success");
             return response;
         }
@@ -69,7 +69,7 @@ public class RegistrationService implements IRegister {
 
         if (db.isEmailNew(tutor.getEmail())){
             response.setResult("Failure");
-            response.addDetail("email already registered");
+            response.addDetail("Email already registered");
         }
         if (db.isPhoneNumberNew(tutor.getPhoneNumber())){
             response.setResult("Failure");
@@ -85,11 +85,11 @@ public class RegistrationService implements IRegister {
         }
         else{
             db.regTutor(tutor);
-            /*int tutorID = db.getTutorID(tutor.getEmail());
+            int tutorID = db.getTutorID(tutor.getEmail());
             UUID uuid = UUID.randomUUID();
             db.saveActivationCode(uuid.toString());
             mailer.sendMail(emailSender, tutor.getEmail(), "Activation",
-                    "Activation " + serverURL + "/tutor/tutorid/" + tutorID + "/activation/" + uuid.toString() + "/");*/
+                    "Activation " + serverURL + "/tutor/tutorid/" + tutorID + "/activation/" + uuid.toString() + "/");
             response.setResult("Success");
             return response;
         }
