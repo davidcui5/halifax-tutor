@@ -51,7 +51,7 @@ public class AuthenticationService implements IAuthenticator {
         }
         else if(student.getPassword().equals(password)){
             response.setResult("SUCCESS");
-            if(student.getIsActivated()==true || student.getIsBanned()==false){
+            if(student.getIsActivated()==true && student.getIsBanned()==false){
                 response.setUrl("html/search-tutor.html");
             }
             else{
@@ -76,7 +76,7 @@ public class AuthenticationService implements IAuthenticator {
         }
         else if(tutor.getPassword().equals(password)){
             response.setResult("SUCCESS");
-            if(tutor.getIsActivated()==true || tutor.getIsBanned()==false){
+            if(tutor.getIsActivated()==true && tutor.getIsBanned()==false){
                 response.setUrl("html/search-tutor.html");
             }
             else{
