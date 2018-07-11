@@ -21,12 +21,12 @@ public class RegistrationService implements IRegister {
 
         RegistrationResponse response = new RegistrationResponse();
         System.out.println(emailSender); //remove this later
-        if (db.isEmailNew(student.getEmail())){
+        if (!db.isEmailNew(student.getEmail())){
             response.setResult("Failure");
             response.addDetail("Email already registered");
         }
 
-        if (db.isPhoneNumberNew(student.getPhoneNumber())){
+        if (!db.isPhoneNumberNew(student.getPhoneNumber())){
             response.setResult("Failure");
             response.addDetail("Phone already registered");
         }
@@ -50,15 +50,15 @@ public class RegistrationService implements IRegister {
 
         RegistrationResponse response = new RegistrationResponse();
 
-        if (db.isEmailNew(tutor.getEmail())){
+        if (!db.isEmailNew(tutor.getEmail())){
             response.setResult("Failure");
             response.addDetail("Email already registered");
         }
-        if (db.isPhoneNumberNew(tutor.getPhoneNumber())){
+        if (!db.isPhoneNumberNew(tutor.getPhoneNumber())){
             response.setResult("Failure");
             response.addDetail("Phone already registered");
         }
-        if (db.isCreditCardNew(tutor.getCreditCardNumber())){
+        if (!db.isCreditCardNew(tutor.getCreditCardNumber())){
             response.setResult("Failure");
             response.addDetail("Card already registered");
         }
