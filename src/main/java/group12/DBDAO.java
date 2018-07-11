@@ -1,4 +1,4 @@
-package group12.DBConnection;
+package group12;
 
 import group12.App;
 import group12.DatabaseInterface;

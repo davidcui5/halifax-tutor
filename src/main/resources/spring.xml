@@ -17,7 +17,7 @@
         <property name="mailService" ref="mailService"/>
     </bean>
 
-    <bean id="DBDAO" class="group12.DBConnection.DBDAO">
+    <bean id="DBDAO" class="group12.DBDAO">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 

@@ -1,6 +1,6 @@
 package group12.DBDAOTest;
 
-import group12.DBConnection.DBDAO;
+import group12.DBDAO;
 import group12.Registration.Student;
 import group12.Registration.Tutor;
 import org.junit.*;
