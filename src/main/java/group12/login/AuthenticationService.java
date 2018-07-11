@@ -4,32 +4,49 @@ import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import group12.token_auth.IAccessToken;
 import group12.token_auth.JWTAccessToken;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AuthenticationService implements IAuthenticator {
 
-    private IAuthDAO DAO;
+    private IAuthDAO authDAO;
+    private static final Logger logger = LogManager.getLogger(AuthenticationService.class);
 
-    public void setDAO(IAuthDAO DAO) {
-        this.DAO = DAO;
+    public AuthenticationService(IAuthDAO authDAO){
+        this.authDAO = authDAO;
     }
 
     @Override
     public LoginResponse authenticate(LoginForm form) {
 
+        LoginResponse response = new LoginResponse();
+
+        if(form == null || form.getType() == null || form.getEmail() == null || form.getPassword() == null){
+            response.setResult("FAILURE");
+            response.setDetail("Invalid Form");
+            logger.info(response);
+            return response;
+        }
+
         IEncryptor encryptor = new SimpleMD5Encryptor();
         String type = form.getType();
         String email = form.getEmail();
         String password = encryptor.encrypt(form.getPassword());
-        LoginResponse response;
 
-        if(type.equals("student")){
-            response = authenticateStudent(email, password);
-        }
-        else if(type.equals("tutor")){
-            response = authenticateTutor(email, password);
-        }
-        else {
-            response = authenticateAdmin(email, password);
+        try{
+            if(type.equals("student")){
+                response = authenticateStudent(email, password);
+            }
+            else if(type.equals("tutor")){
+                response = authenticateTutor(email, password);
+            }
+            else {
+                response = authenticateAdmin(email, password);
+            }
+        }catch(Exception e){
+            logger.error("ERROR",e);
+            response.setResult("FAILURE");
+            response.setDetail("Server Error, Please Return Later or Contact Admin");
         }
 
         if(response.getResult().equals("SUCCESS")){
@@ -38,12 +55,13 @@ public class AuthenticationService implements IAuthenticator {
             response.setToken(token);
         }
 
+        logger.info(response);
         return response;
     }
 
     public LoginResponse authenticateStudent(String email, String password) {
         LoginResponse response = new LoginResponse();
-        UserDTO student = DAO.getStudentByEmail(email);
+        UserDTO student = authDAO.getStudentByEmail(email);
         if(student == null){
             response.setResult("FAILURE");
             response.setDetail("Wrong email");
@@ -68,7 +86,7 @@ public class AuthenticationService implements IAuthenticator {
 
     public LoginResponse authenticateTutor(String email, String password) {
         LoginResponse response = new LoginResponse();
-        UserDTO tutor = DAO.getTutorByEmail(email);
+        UserDTO tutor = authDAO.getTutorByEmail(email);
         if(tutor == null){
             response.setResult("FAILURE");
             response.setDetail("Wrong email");
@@ -93,7 +111,7 @@ public class AuthenticationService implements IAuthenticator {
 
     public LoginResponse authenticateAdmin(String email, String password) {
         LoginResponse response = new LoginResponse();
-        UserDTO admin = DAO.getAdminByEmail(email);
+        UserDTO admin = authDAO.getAdminByEmail(email);
         if(admin == null){
             response.setResult("FAILURE");
             response.setDetail("Wrong email");

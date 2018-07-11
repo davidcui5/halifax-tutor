@@ -1,9 +1,7 @@
 package group12.registration;
 
-import group12.DBDAO;
 import group12.DatabaseInterface;
 import group12.email.IMailer;
-import group12.email.MailerService;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import org.springframework.beans.factory.annotation.Value;

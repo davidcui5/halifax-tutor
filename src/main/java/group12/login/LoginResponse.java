@@ -7,6 +7,13 @@ public class LoginResponse {
     private String url; //url to redirect to
     private String token; //access token
 
+    public LoginResponse(){
+        result = "";
+        detail = "";
+        url = "";
+        token = "";
+    }
+
     public void setResult(String result) {
         this.result = result;
     }
@@ -37,5 +44,10 @@ public class LoginResponse {
 
     public String getToken() {
         return token;
+    }
+
+    @Override
+    public String toString() {
+        return "Login Result: " + result + " Detail: " + detail + " Url: " + url + " Token: " + token;
     }
 }
