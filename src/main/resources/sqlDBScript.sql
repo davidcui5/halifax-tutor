@@ -277,8 +277,8 @@ CREATE FUNCTION RegStudent(_FirstName   varchar(50),
     from Student
     into lastID;
 
-    INSERT INTO `Student` (`FirstName`, `LastName`, `Email`, `Password`, `AccountActivation`, `School`, `PhoneNumber`)
-    VALUES (_FirstName, _LastName, _Email, _Password, 0, _School, _PhoneNumber);
+    INSERT INTO `Student` (`FirstName`, `LastName`, `Email`, `Password`, `AccountActivation`, `School`, `PhoneNumber`,`Banned`)
+    VALUES (_FirstName, _LastName, _Email, _Password, 0, _School, _PhoneNumber,0);
 
     select count(id)
     from Student
@@ -329,9 +329,9 @@ CREATE FUNCTION RegTutor(_FirstName   varchar(25),
 
     INSERT INTO `CSCI5308_12_DEVINT`.`Tutor` (`FirstName`, `LastName`, `Email`, `Password`, `PhoneNumber`
       , `Bio`, `AccountActivation`, `PlanID`, `ExpiryDate`, `CreditCardHoldName`, `CreditCardNumber`
-      , `CreditCardExpiryDate`, `ScurityCode`)
+      , `CreditCardExpiryDate`, `ScurityCode`, `Banned`)
     VALUES (_FirstName, _LastName, _Email, _Password, _PhoneNumber, NULL, 0, NULL, NULL, NULL
-      , NULL, NULL, NULL);
+      , NULL, NULL, NULL,0);
 
     select count(*)
     from Tutor
@@ -376,25 +376,35 @@ CREATE function SaveActivationCode(_code varchar(50))
     select NOW()
     into _time;
 
-
-    select max(ID)
+    Select count(*)
     from ActivationTable
+    Where ActivationTable.AcivationCode like _code
     into lastID;
 
-    INSERT into ActivationTable (`AcivationCode`, `Date`) values (_code, _time);
+    if lastID > 0
+    then
+      update ActivationTable
+      set ActivationTable.Date = _time
+      where AcivationCode = _code;
+      set _result=1;
+    else
+      select max(ID)
+      from ActivationTable
+      into lastID;
 
-    select max(ID)
-    from ActivationTable
-    INTO newID;
+      INSERT into ActivationTable (`AcivationCode`, `Date`) values (_code, _time);
 
-    IF ((lastID + 1) like newID)
-    THEN
-      set _result = 1;
+      select max(ID)
+      from ActivationTable
+      INTO newID;
+
+      IF ((lastID + 1) like newID)
+      THEN
+        set _result = 1;
+      end if;
     end if;
     return _result;
   end;
-
-
 
 DROP function IF EXISTS ActivateTutor;
 CREATE function ActivateTutor(_id INT, _code varchar(50))

@@ -85,7 +85,7 @@ public class DBDAOFunctionsTest {
     public void activateTutor() {
         Tutor tutor = MockData.getTutorObject();
         int tutorId = dbda.getTutorID(tutor.getEmail());
-        boolean actual = dbda.activateStudent(tutorId, MockData.getActivationCode());
+        boolean actual = dbda.activateTutor(tutorId, MockData.getActivationCode());
         assertTrue(actual);
     }
 
@@ -93,7 +93,7 @@ public class DBDAOFunctionsTest {
     public void activateTutorWrongActivation() {
         Tutor tutor = MockData.getTutorObject();
         int tutorId = dbda.getTutorID(tutor.getEmail());
-        boolean actual = dbda.activateStudent(tutorId, MockData.getWrongActivationCode());
+        boolean actual = dbda.activateTutor(tutorId, MockData.getWrongActivationCode());
         assertFalse(actual);
     }
 
@@ -101,8 +101,8 @@ public class DBDAOFunctionsTest {
     public void activateTutorOldActivation() {
         Tutor tutor = MockData.getTutorObject();
         int tutorId = dbda.getTutorID(tutor.getEmail());
-        boolean actual = dbda.activateStudent(tutorId, MockData.getOldActivationCode());
-        assertTrue(actual);
+        boolean actual = dbda.activateTutor(tutorId, MockData.getOldActivationCode());
+        assertFalse(actual);
     }
 
     @After
