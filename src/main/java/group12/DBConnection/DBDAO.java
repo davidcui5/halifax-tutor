@@ -49,7 +49,6 @@ public class DBDAO implements DatabaseInterface {
             for (int i = 0; i < parameters.length; i++) {
                 ps.setString(i + 1, parameters[i]);
             }
-            logger.log(Level.DEBUG, "DB query:" + query);
             return ps.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
