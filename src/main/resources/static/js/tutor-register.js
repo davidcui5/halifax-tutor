@@ -13,6 +13,10 @@ $(document).ready(function () {
         let securityCode = $("#security-code").val();
         securityCode = parseInt(securityCode, 10);
 
+        if(!validateForm()){
+            return;
+        }
+
         var tutorData = {
             "email": email,
             "password": password,
