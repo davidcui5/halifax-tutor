@@ -24,7 +24,7 @@ public class AuthenticationService implements IAuthenticator {
         if(form == null || form.getType() == null || form.getEmail() == null || form.getPassword() == null){
             response.setResult("FAILURE");
             response.setDetail("Invalid Form");
-            logger.info(response);
+            logger.info(form + " " + response);
             return response;
         }
 
@@ -55,7 +55,7 @@ public class AuthenticationService implements IAuthenticator {
             response.setToken(token);
         }
 
-        logger.info(response);
+        logger.info(form + " " + response);
         return response;
     }
 

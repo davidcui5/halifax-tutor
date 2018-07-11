@@ -27,4 +27,8 @@ public class TutorSignupForm extends UserSignupForm {
         this.securityCode = securityCode;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "Card: " + creditCardNumber + "Expiry:" + expireDate + "SecCode: " + securityCode;
+    }
 }

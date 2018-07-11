@@ -34,7 +34,7 @@ public class LoginForm {
     @Override
     public String toString() {
         if(type != null && email != null && password != null){
-            return "Type: " + type + " Email: " + email + " Password " + password;
+            return "Login Type: " + type + " Email: " + email + " Password " + password;
         }
         else{
             return "Invalid Login Form: Contains NULL";

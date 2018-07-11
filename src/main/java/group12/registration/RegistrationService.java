@@ -4,6 +4,8 @@ import group12.DatabaseInterface;
 import group12.email.IMailer;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.UUID;
@@ -12,6 +14,7 @@ public class RegistrationService implements IRegister {
 
     private DatabaseInterface db;
     private IMailer mailer;
+    private static Logger logger = LogManager.getLogger(RegistrationService.class);
     @Value("${email.sender}")
     String emailSender;
 
@@ -32,7 +35,6 @@ public class RegistrationService implements IRegister {
         student.setPassword(encryptor.encrypt(student.getPassword()));
 
         RegistrationResponse response = new RegistrationResponse();
-        System.out.println(emailSender); //remove this later
         if (!db.isEmailNew(student.getEmail())){
             response.setResult("Failure");
             response.addDetail("Email already registered");
@@ -46,16 +48,30 @@ public class RegistrationService implements IRegister {
         if(response.getResult().equals("Failure")){
             return response;
         }
-        else{
+
+        try{
             db.regStudent(student);
+        } catch(Exception e){
+            logger.error(student,e);
+            response.setResult("Failure");
+            response.addDetail("Internal Server Error, Register Exception");
+            return response;
+        }
+
+        response.setResult("Success");
+
+        try{
             int studentID = db.getStudentId(student.getEmail());
             UUID uuid = UUID.randomUUID();
             db.saveActivationCode(uuid.toString());
             mailer.sendMail(emailSender, student.getEmail(), "Activation",
                     "Activation " + serverURL + "/student/studentid/" + studentID + "/activation/" + uuid.toString() + "/");
-            response.setResult("Success");
-            return response;
+        }catch(Exception e){
+            logger.error(student, e);
+            response.addDetail("Cannot Send Activation Email, Please Go To Setting Page to Resend");
         }
+
+        return response;
     }
 
     public RegistrationResponse registerTutor(TutorSignupForm tutor) {
@@ -81,26 +97,49 @@ public class RegistrationService implements IRegister {
         if(response.getResult().equals("Failure")){
             return response;
         }
-        else{
+        try {
             db.regTutor(tutor);
+        }catch(Exception e){
+            logger.error(tutor,e);
+            response.setResult("Failure");
+            response.addDetail("Internal Server Error, Register Exception");
+            return response;
+        }
+
+        response.setResult("Success");
+
+        try {
             int tutorID = db.getTutorID(tutor.getEmail());
             UUID uuid = UUID.randomUUID();
             db.saveActivationCode(uuid.toString());
             mailer.sendMail(emailSender, tutor.getEmail(), "Activation",
                     "Activation " + serverURL + "/tutor/tutorid/" + tutorID + "/activation/" + uuid.toString() + "/");
-            response.setResult("Success");
-            return response;
+        }catch(Exception e){
+            logger.error(tutor, e);
+            response.addDetail("Cannot Send Activation Email, Please Go To Setting Page to Resend");
         }
+
+        return response;
     }
 
     public String activateStudent(int studentID, String activationCode) {
-        db.activateStudent(studentID, activationCode);
+        try{
+            db.activateStudent(studentID, activationCode);
+        }catch(Exception e){
+            logger.error(studentID + " " + activationCode, e);
+            return "Activation Failed";
+        }
         return "Get a specific Bar with id=" + activationCode +
                 " from a Foo with id=" + studentID;
     }
 
     public String activateTutor(int tutorID, String activationCode) {
-        db.activateTutor(tutorID, activationCode);
+        try{
+            db.activateTutor(tutorID, activationCode);
+        }catch(Exception e){
+            logger.error(tutorID + " " + activationCode, e);
+            return "Activation Failed";
+        }
         return "Get a specific Bar with id=" + activationCode +
                 " from a Foo with id=" + tutorID;
     }

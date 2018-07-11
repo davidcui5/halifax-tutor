@@ -28,7 +28,6 @@ public class MysqlAuthDAO implements IAuthDAO {
         if(con != null){
             con.close();
         }
-        logger.info("Closed DB Connection");
     }
 
     @Override
@@ -40,7 +39,7 @@ public class MysqlAuthDAO implements IAuthDAO {
         UserDTO student = null;
         try {
             con = dataSource.getConnection();
-            logger.info("Created DB Connection");
+            logger.info("Created DB Connection for getStudentByEmail " + email);
             ps = con.prepareStatement(sql);
             ps.setString(1, email);
             rs = ps.executeQuery();
@@ -51,12 +50,13 @@ public class MysqlAuthDAO implements IAuthDAO {
                 student.setIsBanned(rs.getBoolean("Banned"));
             }
         } catch (SQLException e) {
-            logger.error("ERROR",e);
+            logger.error(email,e);
         } finally {
             try{
                 closeConnections(con, ps, rs);
+                logger.info("Closed DB Connection for getStudentByEmail " + email);
             }catch(Exception e){
-                logger.error("ERROR",e);
+                logger.error(email,e);
             }
         }
         return student;
@@ -71,7 +71,7 @@ public class MysqlAuthDAO implements IAuthDAO {
         UserDTO tutor = null;
         try {
             con = dataSource.getConnection();
-            logger.info("Created DB Connection");
+            logger.info("Created DB Connection for getTutorByEmail " + email);
             ps = con.prepareStatement(sql);
             ps.setString(1, email);
             rs = ps.executeQuery();
@@ -82,12 +82,13 @@ public class MysqlAuthDAO implements IAuthDAO {
                 tutor.setIsBanned( rs.getBoolean("Banned") );
             }
         } catch (SQLException e) {
-            logger.error("ERROR",e);
+            logger.error(email,e);
         } finally {
             try{
                 closeConnections(con, ps, rs);
+                logger.info("Closed DB Connection for getTutorByEmail " + email);
             }catch(Exception e){
-                logger.error("ERROR",e);
+                logger.error(email,e);
             }
         }
         return tutor;
@@ -102,7 +103,7 @@ public class MysqlAuthDAO implements IAuthDAO {
         UserDTO admin = null;
         try {
             con = dataSource.getConnection();
-            logger.info("Created DB Connection");
+            logger.info("Created DB Connection for getAdminByEmail " + email);
             ps = con.prepareStatement(sql);
             ps.setString(1, email);
             rs = ps.executeQuery();
@@ -111,12 +112,13 @@ public class MysqlAuthDAO implements IAuthDAO {
                 admin.setPassword( rs.getString("Password") );
             }
         } catch (SQLException e) {
-            logger.error("ERROR",e);
+            logger.error(email,e);
         } finally {
             try{
                 closeConnections(con, ps, rs);
+                logger.info("Closed DB Connection for getAdminByEmail " + email);
             }catch(Exception e){
-                logger.error("ERROR",e);
+                logger.error(email,e);
             }
         }
         return admin;
