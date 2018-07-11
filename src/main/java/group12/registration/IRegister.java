@@ -1,10 +1,10 @@
-package group12.Registration;
+package group12.registration;
 
 public interface IRegister {
 
-    RegistrationResponse registerStudent(Student student);
+    RegistrationResponse registerStudent(StudentSignupForm student);
 
-    RegistrationResponse registerTutor(Tutor tutor);
+    RegistrationResponse registerTutor(TutorSignupForm tutor);
 
     String activateStudent(int studentID, String activationCode);
 

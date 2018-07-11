@@ -186,3 +186,6 @@ modules.xml
 
 # DataBase propertiy
 database.properties
+
+# logs
+logs/

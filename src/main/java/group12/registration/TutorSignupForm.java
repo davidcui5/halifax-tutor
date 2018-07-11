@@ -1,6 +1,6 @@
-package group12.Registration;
+package group12.registration;
 
-public class Tutor extends User {
+public class TutorSignupForm extends UserSignupForm {
 
     private String creditCardNumber;
     private String expireDate;
@@ -27,4 +27,8 @@ public class Tutor extends User {
         this.securityCode = securityCode;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "Card: " + creditCardNumber + "Expiry:" + expireDate + "SecCode: " + securityCode;
+    }
 }
