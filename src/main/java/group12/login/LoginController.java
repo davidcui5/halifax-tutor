@@ -1,6 +1,8 @@
 package group12.login;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -9,14 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
-    @Autowired
-    private IAuthenticator authService = new AuthenticationService();
+    private IAuthenticator authService;
+    private static final Logger logger = LogManager.getLogger(LoginController.class);
+
+    public LoginController(IAuthenticator authService){
+        this.authService = authService;
+    }
 
     @PostMapping(path = "/login")
     @ResponseBody
     public LoginResponse login(@RequestBody LoginForm form){
-        LoginResponse response = authService.authenticate(form);
-        return response;
+        try{
+            LoginResponse response = authService.authenticate(form);
+            return response;
+        } catch(Exception e){
+            logger.log(Level.ERROR, e);
+            LoginResponse response = new LoginResponse();
+            response.setResult("FAILURE");
+            response.setDetail("Server Error, Please Return Later or Contact Admin");
+            return response;
+        }
     }
-
 }

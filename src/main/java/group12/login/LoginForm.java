@@ -29,4 +29,15 @@ public class LoginForm {
     public String getPassword() {
         return password;
     }
+
+    //this is to make logging easier
+    @Override
+    public String toString() {
+        if(type != null && email != null && password != null){
+            return "Type: " + type + "Email: " + email + "Password " + password;
+        }
+        else{
+            return "Invalid Login Form: Contains NULL";
+        }
+    }
 }

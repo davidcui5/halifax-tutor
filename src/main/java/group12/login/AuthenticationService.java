@@ -7,10 +7,10 @@ import group12.token_auth.JWTAccessToken;
 
 public class AuthenticationService implements IAuthenticator {
 
-    private IAuthDAO DAO;
+    private IAuthDAO authDAO;
 
-    public void setDAO(IAuthDAO DAO) {
-        this.DAO = DAO;
+    public AuthenticationService(IAuthDAO authDAO){
+        this.authDAO = authDAO;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class AuthenticationService implements IAuthenticator {
 
     public LoginResponse authenticateStudent(String email, String password) {
         LoginResponse response = new LoginResponse();
-        UserDTO student = DAO.getStudentByEmail(email);
+        UserDTO student = authDAO.getStudentByEmail(email);
         if(student == null){
             response.setResult("FAILURE");
             response.setDetail("Wrong email");
@@ -68,7 +68,7 @@ public class AuthenticationService implements IAuthenticator {
 
     public LoginResponse authenticateTutor(String email, String password) {
         LoginResponse response = new LoginResponse();
-        UserDTO tutor = DAO.getTutorByEmail(email);
+        UserDTO tutor = authDAO.getTutorByEmail(email);
         if(tutor == null){
             response.setResult("FAILURE");
             response.setDetail("Wrong email");
@@ -93,7 +93,7 @@ public class AuthenticationService implements IAuthenticator {
 
     public LoginResponse authenticateAdmin(String email, String password) {
         LoginResponse response = new LoginResponse();
-        UserDTO admin = DAO.getAdminByEmail(email);
+        UserDTO admin = authDAO.getAdminByEmail(email);
         if(admin == null){
             response.setResult("FAILURE");
             response.setDetail("Wrong email");

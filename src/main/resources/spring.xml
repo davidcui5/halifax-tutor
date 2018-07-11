@@ -12,23 +12,32 @@
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
 
+    <!--RegistrationController beans START-->
     <bean id="registrationService" class="group12.registration.RegistrationService">
         <property name="db" ref="DBDAO"/>
-        <property name="mailer" ref="mailService"/>
+        <property name="mailer" ref="mailer"/>
     </bean>
 
     <bean id="DBDAO" class="group12.DBDAO">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+    <!--RegistrationController beans ENDT-->
+
+    <!--LoginController beans START-->
+    <bean id="loginController" class="group12.login.LoginController">
+        <constructor-arg ref="authService"/>
+    </bean>
 
     <bean id="authService" class="group12.login.AuthenticationService">
-        <property name="DAO" ref="mysqlAuthDAO"/>
+        <constructor-arg ref="mysqlAuthDAO"/>
     </bean>
 
     <bean id="mysqlAuthDAO" class="group12.login.MysqlAuthDAO">
-        <property name="dataSource" ref="dataSource"/>
+        <constructor-arg ref="dataSource"/>
     </bean>
+    <!--LoginController beans END-->
 
+    <!--DataSource bean is shared-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
         <property name="url" value="${spring.datasource.url}"/>
@@ -36,7 +45,7 @@
         <property name="password" value="${spring.datasource.password}"/>
     </bean>
 
-    <bean id="mailService" class="group12.email.MailerService">
+    <bean id="mailer" class="group12.email.SpringMailer">
         <property name="mailSender" ref="mailSender"/>
     </bean>
 

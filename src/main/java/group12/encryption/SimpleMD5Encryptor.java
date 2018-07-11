@@ -1,12 +1,13 @@
 package group12.encryption;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 //Simple encryptor uses Java's simple MD5 Message-Digest algorithm to encrypts without using salt
-//Maybe make a more advanced encryptor with better algorithm and salt if there are time at end, following S.O.L.I.D.
-// allows me to be agile and swap encryptors
 public class SimpleMD5Encryptor implements IEncryptor {
 
     public String encrypt (String input){
@@ -23,6 +24,9 @@ public class SimpleMD5Encryptor implements IEncryptor {
             return output;
         }
         catch(NoSuchAlgorithmException e) {
+            //No such algorithm, return password without encrypting and log this
+            Logger logger = LogManager.getLogger(SimpleMD5Encryptor.class);
+            logger.log(Level.ERROR, e);
             return input;
         }
     }
