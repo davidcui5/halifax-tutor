@@ -48,6 +48,6 @@ public class LoginResponse {
 
     @Override
     public String toString() {
-        return "Login Result: " + result + "Detail: " + detail + "Url: " + url + "Token: " + token;
+        return "Login Result: " + result + " Detail: " + detail + " Url: " + url + " Token: " + token;
     }
 }

@@ -1,6 +1,5 @@
 package group12.login;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,106 +12,114 @@ import java.sql.SQLException;
 public class MysqlAuthDAO implements IAuthDAO {
 
     private DataSource dataSource;
-    private Logger logger;
-    Connection con = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+    private static final Logger logger = LogManager.getLogger(MysqlAuthDAO.class);
 
     public MysqlAuthDAO(DataSource dataSource){
         this.dataSource = dataSource;
-        logger = LogManager.getLogger(MysqlAuthDAO.class);
     }
 
-    public ResultSet getResult(String query, String... parameters) {
-        con = null;
-        ps = null;
-        rs = null;
-        try {
-            con = dataSource.getConnection();
-            logger.log(Level.INFO, "Created DB Connection");
-            ps = con.prepareStatement(query);
-            for (int i = 0; i < parameters.length; i++) {
-                ps.setString(i + 1, parameters[i]);
-            }
-            return ps.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public void closeConnections(Connection con, PreparedStatement ps, ResultSet rs) throws  SQLException{
+        if(rs != null){
+            rs.close();
         }
-        return null;
-    }
-
-    public void closeConnections() throws SQLException {
-        con.close();
-        ps.close();
-        rs.close();
-        logger.log(Level.INFO, "Closed DB Connection");
+        if(ps != null){
+            ps.close();
+        }
+        if(con != null){
+            con.close();
+        }
+        logger.info("Closed DB Connection");
     }
 
     @Override
     public UserDTO getStudentByEmail(String email) {
         String sql = "SELECT * FROM Student Where Email =?";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        UserDTO student = null;
         try {
-            rs = getResult(sql, email);
+            con = dataSource.getConnection();
+            logger.info("Created DB Connection");
+            ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
             if(rs.next()){
-                UserDTO student = new UserDTO();
-                student.setPassword( rs.getString("Password") );
-                student.setIsActivated( rs.getBoolean("AccountActivation") );
-                student.setIsBanned( rs.getBoolean("Banned") );
-                closeConnections();
-                return student;
-            }
-            else {
-                closeConnections();
-                return null;
+                student = new UserDTO();
+                student.setPassword(rs.getString("Password"));
+                student.setIsActivated(rs.getBoolean("AccountActivation"));
+                student.setIsBanned(rs.getBoolean("Banned"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("ERROR",e);
+        } finally {
+            try{
+                closeConnections(con, ps, rs);
+            }catch(Exception e){
+                logger.error("ERROR",e);
+            }
         }
-        return null;
+        return student;
     }
 
     @Override
     public UserDTO getTutorByEmail(String email) {
         String sql = "SELECT * FROM Tutor Where Email =?";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        UserDTO tutor = null;
         try {
-            rs = getResult(sql, email);
+            con = dataSource.getConnection();
+            logger.info("Created DB Connection");
+            ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
             if(rs.next()){
-                UserDTO tutor = new UserDTO();
+                tutor = new UserDTO();
                 tutor.setPassword( rs.getString("Password") );
                 tutor.setIsActivated( rs.getBoolean("AccountActivation") );
                 tutor.setIsBanned( rs.getBoolean("Banned") );
-                closeConnections();
-                return tutor;
-            }
-            else{
-                closeConnections();
-                return null;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("ERROR",e);
+        } finally {
+            try{
+                closeConnections(con, ps, rs);
+            }catch(Exception e){
+                logger.error("ERROR",e);
+            }
         }
-        return null;
+        return tutor;
     }
 
     @Override
     public UserDTO getAdminByEmail(String email) {
         String sql = "SELECT * FROM Admin Where Email =?";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        UserDTO admin = null;
         try {
-            rs = getResult(sql, email);
+            con = dataSource.getConnection();
+            logger.info("Created DB Connection");
+            ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
             if(rs.next()){
-                UserDTO admin = new UserDTO();
+                admin = new UserDTO();
                 admin.setPassword( rs.getString("Password") );
-                closeConnections();
-                return admin;
-            }
-            else{
-                closeConnections();
-                return null;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("ERROR",e);
+        } finally {
+            try{
+                closeConnections(con, ps, rs);
+            }catch(Exception e){
+                logger.error("ERROR",e);
+            }
         }
-        return null;
+        return admin;
     }
 
 }
