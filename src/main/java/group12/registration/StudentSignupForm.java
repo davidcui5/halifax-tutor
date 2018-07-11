@@ -11,4 +11,8 @@ public class StudentSignupForm extends UserSignupForm {
         this.school = school;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "School: " + school;
+    }
 }
