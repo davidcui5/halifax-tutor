@@ -4,6 +4,7 @@ var Doc;
 $(document).ready(function () {
     var token = localStorage.getItem("token");
     var objToken = {'token': token};
+
     if (token != null) {
         $.get({
             url: "https://csci5308group12devint.azurewebsites.net/check_account",

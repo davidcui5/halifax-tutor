@@ -26,10 +26,6 @@ $(document).ready(function () {
 
     });
 
-
-
-
-
 });
 $(document).ready(function(){
     document.getElementById("upload_widget_opener").addEventListener("click", function() {
@@ -55,3 +51,10 @@ function nextTab(elem) {
 function prevTab(elem) {
     $(elem).prev().find('a[data-toggle="tab"]').click();
 }
+
+$(document).ready(function() {
+    var token = localStorage.getItem("token");
+    var objToken = {'token': token};
+
+
+});
