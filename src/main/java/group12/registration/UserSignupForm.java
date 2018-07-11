@@ -43,4 +43,8 @@ public class UserSignupForm {
         this.lastName = lastName;
     }
 
+    @Override
+    public String toString() {
+        return "Email: " + email + "Password: " + password + "Phone" + phoneNumber + "FN: " + firstName + "LN: " + lastName;
+    }
 }

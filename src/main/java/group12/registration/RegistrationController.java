@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 public class RegistrationController {
 
     @Autowired
-    private IRegister registerService = new RegistrationService();
+    private IRegister registerService;
 
     @PostMapping(path = "/student")
     @ResponseBody

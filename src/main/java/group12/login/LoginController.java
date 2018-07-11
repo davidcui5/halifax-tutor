@@ -28,6 +28,7 @@ public class LoginController {
             LoginResponse response = new LoginResponse();
             response.setResult("FAILURE");
             response.setDetail("Server Error, Please Return Later or Contact Admin");
+            logger.info(form + " " + response);
             return response;
         }
     }
