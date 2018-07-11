@@ -1,11 +1,11 @@
 package group12.DBDAOTest;
 
-import group12.Registration.Student;
-import group12.Registration.Tutor;
+import group12.registration.StudentSignupForm;
+import group12.registration.TutorSignupForm;
 
 public class MockData {
-    public static Student getStudentObject() {
-        Student student = new Student();
+    public static StudentSignupForm getStudentObject() {
+        StudentSignupForm student = new StudentSignupForm();
         student.setEmail("testemailStu@gmail.com");
         student.setFirstName("testName");
         student.setLastName("testLName");
@@ -15,8 +15,8 @@ public class MockData {
         return student;
     }
 
-    public static Tutor getTutorObject() {
-        Tutor tutor = new Tutor();
+    public static TutorSignupForm getTutorObject() {
+        TutorSignupForm tutor = new TutorSignupForm();
         tutor.setEmail("testemailTut@gmail.com");
         tutor.setFirstName("testName");
         tutor.setLastName("testLName");
@@ -41,15 +41,15 @@ public class MockData {
         return "testemailTut@gmail.com";
     }
 
-    public static Student getUnRegStudent() {
-        Student student = new Student();
+    public static StudentSignupForm getUnRegStudent() {
+        StudentSignupForm student = new StudentSignupForm();
         student.setEmail("testemailWrong@gmail.com");
         student.setPassword("pass123456S");
         return student;
     }
 
-    public static Tutor getUnRegTutor() {
-        Tutor tutor = new Tutor();
+    public static TutorSignupForm getUnRegTutor() {
+        TutorSignupForm tutor = new TutorSignupForm();
         tutor.setEmail("testemailWrong@gmail.com");
         tutor.setPassword("pass123456T");
         return tutor;

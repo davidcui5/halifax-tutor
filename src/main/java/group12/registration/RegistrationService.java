@@ -1,9 +1,9 @@
-package group12.Registration;
+package group12.registration;
 
-import group12.DBDAO;
 import group12.DatabaseInterface;
-import group12.Email.IMail;
-import group12.Email.MailService;
+import group12.email.IMailer;
+import group12.encryption.IEncryptor;
+import group12.encryption.SimpleMD5Encryptor;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.UUID;
@@ -11,15 +11,25 @@ import java.util.UUID;
 public class RegistrationService implements IRegister {
 
     private DatabaseInterface db;
-    private IMail mailer;
-
+    private IMailer mailer;
     @Value("${email.sender}")
     String emailSender;
 
     @Value("${server.url}")
     String serverURL;
 
-    public RegistrationResponse registerStudent(Student student) {
+
+    public void setDb(DatabaseInterface db) {
+        this.db = db;
+    }
+
+    public void setMailer(IMailer mailer) {
+        this.mailer = mailer;
+    }
+
+    public RegistrationResponse registerStudent(StudentSignupForm student) {
+        IEncryptor encryptor = new SimpleMD5Encryptor();
+        student.setPassword(encryptor.encrypt(student.getPassword()));
 
         RegistrationResponse response = new RegistrationResponse();
         System.out.println(emailSender); //remove this later
@@ -48,7 +58,10 @@ public class RegistrationService implements IRegister {
         }
     }
 
-    public RegistrationResponse registerTutor(Tutor tutor) {
+    public RegistrationResponse registerTutor(TutorSignupForm tutor) {
+
+        IEncryptor encryptor = new SimpleMD5Encryptor();
+        tutor.setPassword(encryptor.encrypt(tutor.getPassword()));
 
         RegistrationResponse response = new RegistrationResponse();
 
@@ -90,13 +103,5 @@ public class RegistrationService implements IRegister {
         db.activateTutor(tutorID, activationCode);
         return "Get a specific Bar with id=" + activationCode +
                 " from a Foo with id=" + tutorID;
-    }
-
-    public void setDBDAO(DBDAO DBDAO) {
-        this.db = DBDAO;
-    }
-
-    public void setMailService(MailService mailService) {
-       this.mailer = mailService;
     }
 }

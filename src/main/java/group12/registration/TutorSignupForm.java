@@ -1,6 +1,6 @@
-package group12.Registration;
+package group12.registration;
 
-public class Tutor extends User {
+public class TutorSignupForm extends UserSignupForm {
 
     private String creditCardNumber;
     private String expireDate;

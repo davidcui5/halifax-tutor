@@ -1,8 +1,8 @@
 package group12.DBDAOTest;
 
 import group12.DBDAO;
-import group12.Registration.Student;
-import group12.Registration.Tutor;
+import group12.registration.StudentSignupForm;
+import group12.registration.TutorSignupForm;
 import org.junit.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -20,21 +20,21 @@ public class DBDAORegistration {
 
     @Test
     public void testRegStudentRightInfo() {
-        Student student = MockData.getStudentObject();
+        StudentSignupForm student = MockData.getStudentObject();
         boolean actual = dbda.regStudent(student);
         assertTrue(actual);
     }
 
     @Test
     public void testRegStudentReEmail() {
-        Student student = MockData.getStudentObject();
+        StudentSignupForm student = MockData.getStudentObject();
         boolean actual = dbda.regStudent(student);
         assertFalse(actual);
     }
 
     @Test
     public void testRegStudentRePhone() {
-        Student student = MockData.getStudentObject();
+        StudentSignupForm student = MockData.getStudentObject();
         student.setEmail("testemailStu2@gmail.com");
         boolean actual = dbda.regStudent(student);
         assertFalse(actual);
@@ -42,14 +42,14 @@ public class DBDAORegistration {
 
     @Test
     public void testRegTutorRightInfo() {
-        Tutor tutor = MockData.getTutorObject();
+        TutorSignupForm tutor = MockData.getTutorObject();
         boolean actual = dbda.regTutor(tutor);
         assertTrue(actual);
     }
 
     @Test
     public void testRegTutorReEmail() {
-        Tutor tutor = MockData.getTutorObject();
+        TutorSignupForm tutor = MockData.getTutorObject();
         tutor.setEmail("testemailTut2@gmail.com");
         boolean actual = dbda.regTutor(tutor);
         assertFalse(actual);
@@ -63,7 +63,7 @@ public class DBDAORegistration {
 
     @AfterClass
     public static void testDeleteStudent() {
-        Student student = MockData.getStudentObject();
+        StudentSignupForm student = MockData.getStudentObject();
         int id = dbda.getStudentId(student.getEmail());
         boolean actual = dbda.delelteStudent(id);
         assertTrue(actual);
@@ -71,7 +71,7 @@ public class DBDAORegistration {
 
     @AfterClass
     public static void testDeleteTutor() {
-        Tutor tutor = MockData.getTutorObject();
+        TutorSignupForm tutor = MockData.getTutorObject();
         int id = dbda.getTutorID(tutor.getEmail());
         boolean actual = dbda.delelteTutor(id);
         assertTrue(actual);

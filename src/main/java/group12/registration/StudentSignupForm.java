@@ -1,6 +1,6 @@
-package group12.Registration;
+package group12.registration;
 
-public class Student extends User {
+public class StudentSignupForm extends UserSignupForm {
 
     private String school;
 

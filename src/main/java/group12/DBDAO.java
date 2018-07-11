@@ -1,12 +1,10 @@
 package group12;
 
-import group12.App;
-import group12.DatabaseInterface;
-import group12.Registration.Student;
-import group12.Registration.Tutor;
-import org.apache.logging.log4j.Level;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import group12.registration.StudentSignupForm;
+import group12.registration.TutorSignupForm;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.ComponentScan;
@@ -60,8 +58,11 @@ public class DBDAO implements DatabaseInterface {
     }
 
     public void closeConnections() throws SQLException {
+        assert (con != null);
         con.close();
+        assert (ps != null);
         ps.close();
+        assert (rs != null);
         rs.close();
     }
 
@@ -73,10 +74,17 @@ public class DBDAO implements DatabaseInterface {
             rs = getResult(sql, email);
             rs.next();
             result = rs.getBoolean(1);
-            closeConnections();
+
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error(e.getMessage());
+        } finally {
+            try {
+                closeConnections();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                logger.error(e.getMessage());
+            }
         }
         return result;
     }
@@ -89,10 +97,16 @@ public class DBDAO implements DatabaseInterface {
             rs = getResult(sql, phoneNumber);
             rs.next();
             result = rs.getBoolean(1);
-            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error(e.getMessage());
+        } finally {
+            try {
+                closeConnections();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                logger.error(e.getMessage());
+            }
         }
         return result;
     }
@@ -105,10 +119,16 @@ public class DBDAO implements DatabaseInterface {
             rs = getResult(sql, creditCardNum);
             rs.next();
             result = rs.getBoolean(1);
-            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error(e.getMessage());
+        } finally {
+            try {
+                closeConnections();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                logger.error(e.getMessage());
+            }
         }
         return result;
     }
@@ -121,10 +141,16 @@ public class DBDAO implements DatabaseInterface {
             rs = getResult(sql, email, password);
             rs.next();
             result = rs.getBoolean(1);
-            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error(e.getMessage());
+        } finally {
+            try {
+                closeConnections();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                logger.error(e.getMessage());
+            }
         }
         return result;
     }
@@ -137,16 +163,22 @@ public class DBDAO implements DatabaseInterface {
             rs = getResult(sql, email, password);
             rs.next();
             result = rs.getBoolean(1);
-            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error(e.getMessage());
+        } finally {
+            try {
+                closeConnections();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                logger.error(e.getMessage());
+            }
         }
         return result;
     }
 
     @Override
-    public boolean regStudent(Student student) {
+    public boolean regStudent(StudentSignupForm student) {
         String sql = "select RegStudent(?,?,?,?,?,?)";
         boolean result = false;
         try {
@@ -155,16 +187,22 @@ public class DBDAO implements DatabaseInterface {
             rs.next();
             if (rs.getInt(1) == 1)
                 result = true;
-            closeConnections();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            logger.error(ex.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        } finally {
+            try {
+                closeConnections();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                logger.error(e.getMessage());
+            }
         }
         return result;
     }
 
     @Override
-    public boolean regTutor(Tutor tutor) {
+    public boolean regTutor(TutorSignupForm tutor) {
         String sql = "select RegTutor(?,?,?,?,?)";
         boolean result = false;
         try {
@@ -173,10 +211,16 @@ public class DBDAO implements DatabaseInterface {
             rs.next();
             if (rs.getInt(1) == 1)
                 result = true;
-            closeConnections();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            logger.error(ex.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        } finally {
+            try {
+                closeConnections();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                logger.error(e.getMessage());
+            }
         }
         return result;
     }
@@ -189,10 +233,16 @@ public class DBDAO implements DatabaseInterface {
             rs = getResult(sql, email);
             rs.next();
             result = rs.getInt(1);
-            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error(e.getMessage());
+        } finally {
+            try {
+                closeConnections();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                logger.error(e.getMessage());
+            }
         }
         return result;
     }
@@ -205,9 +255,16 @@ public class DBDAO implements DatabaseInterface {
             rs = getResult(sql, email);
             rs.next();
             result = rs.getInt(1);
-            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
+        } finally {
+            try {
+                closeConnections();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                logger.error(e.getMessage());
+            }
         }
         return result;
     }
@@ -221,10 +278,16 @@ public class DBDAO implements DatabaseInterface {
             rs.next();
             if (rs.getInt(1) == 1)
                 result = true;
-            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error(e.getMessage());
+        } finally {
+            try {
+                closeConnections();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                logger.error(e.getMessage());
+            }
         }
         return result;
     }
@@ -238,10 +301,16 @@ public class DBDAO implements DatabaseInterface {
             rs.next();
             if (rs.getInt(1) == 1)
                 result = true;
-            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error(e.getMessage());
+        } finally {
+            try {
+                closeConnections();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                logger.error(e.getMessage());
+            }
         }
         return result;
     }
@@ -255,10 +324,16 @@ public class DBDAO implements DatabaseInterface {
             rs.next();
             if (rs.getInt(1) == 1)
                 result = true;
-            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error(e.getMessage());
+        } finally {
+            try {
+                closeConnections();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                logger.error(e.getMessage());
+            }
         }
         return result;
     }
@@ -271,10 +346,16 @@ public class DBDAO implements DatabaseInterface {
             rs.next();
             if (rs.getInt(1) == 1)
                 result = true;
-            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error(e.getMessage());
+        } finally {
+            try {
+                closeConnections();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                logger.error(e.getMessage());
+            }
         }
         return result;
     }
@@ -287,10 +368,16 @@ public class DBDAO implements DatabaseInterface {
             rs.next();
             if (rs.getInt(1) == 1)
                 result = true;
-            closeConnections();
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error(e.getMessage());
+        } finally {
+            try {
+                closeConnections();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                logger.error(e.getMessage());
+            }
         }
         return result;
     }

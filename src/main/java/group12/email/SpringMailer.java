@@ -1,10 +1,10 @@
-package group12.Email;
+package group12.email;
 
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
-//concrete implementation of IMail with Spring's MailSender
-public class MailService implements IMail{
+//concrete implementation of IMailer with Spring's MailSender
+public class SpringMailer implements IMailer {
 
     private MailSender mailSender;
 
