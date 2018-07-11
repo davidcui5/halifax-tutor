@@ -19,6 +19,10 @@ $(document).ready(function () {
             "school": school
         };
 
+        if(!validateForm()){
+            return;
+        }
+
         $.ajax({
             url: location.origin + "/student",
             data: JSON.stringify(studentData),
