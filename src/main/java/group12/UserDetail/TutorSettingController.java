@@ -1,11 +1,10 @@
 package group12.UserDetail;
 
+import group12.token_auth.IAccessToken;
+import group12.token_auth.JWTAccessToken;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TutorSettingController {
@@ -13,19 +12,26 @@ public class TutorSettingController {
     private ITSetting service = new TSettingService();
     private static final Logger logger = LogManager.getLogger(TutorSettingController.class);
 
-    @PostMapping(path = "/setting")
+    @GetMapping(path = "/setting")
     @ResponseBody
-    public TSettingResponse tsetting(@RequestBody ChangeEmailForm form){
+    public String gettoken(@RequestBody String token){
         try{
-            TSettingResponse response = service.changeemail(form);
-            return response;
+            IAccessToken accessToken = new JWTAccessToken();
+            //user email,not the new email
+            String useremail = accessToken.decodeToken(token);
+
+            return useremail;
         } catch(Exception e){
             logger.error("ERROR",e);
-            TSettingResponse response = new TSettingResponse();
-            response.setResult("FAILURE");
-            response.setDetail("Server Error, Please Return Later or Contact Admin");
-            return response;
+            return null;
         }
+    }
+
+    @GetMapping(path = "/cemail")
+    @ResponseBody
+    public TSettingResponse changeEmail(@RequestBody ChangeEmailForm form){
+        TSettingResponse response = service.changeemail(form);
+        return response;
     }
 
 }

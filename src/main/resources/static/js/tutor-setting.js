@@ -52,9 +52,55 @@ function prevTab(elem) {
     $(elem).prev().find('a[data-toggle="tab"]').click();
 }
 
+
+//function logic
 $(document).ready(function() {
     var token = localStorage.getItem("token");
     var objToken = {'token': token};
 
+
+    //passing token
+    $.ajax({
+        url: location.origin + "/setting",
+        data: JSON.stringify(objToken),
+        contentType: "application/json",
+        type: "POST",
+        dataType: "json"
+    }).done(function (data) {
+        if (data.result === "Success") {
+            // alert("Email succeed!");
+            // window.location.replace("../index.html");
+        } else {
+            alert(data.details);
+        }
+    }).fail(function (xhr, status, errorThrown) {
+
+    });
+
+    $("#Cemail").submit(function (event) {
+        event.preventDefault();
+        let email = $("#email").val();
+
+        var ChangeEmailData = {
+            "email": email
+        };
+
+        $.ajax({
+            url: location.origin + "/cemail",
+            data: JSON.stringify(ChangeEmailData),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "json"
+        }).done(function (data) {
+            if (data.result === "Success") {
+                alert("Email change succeed!");
+            } else {
+                alert(data.details);
+            }
+        }).fail(function (xhr, status, errorThrown) {
+
+        });
+
+    });
 
 });
