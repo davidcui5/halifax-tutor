@@ -17,7 +17,7 @@ public class Tutor extends User {
     private int securityCode;
 
     public Tutor(){
-
+        super();
     }
 
     public Tutor(String email, String password){
