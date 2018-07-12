@@ -34,7 +34,20 @@ public class TSettingService implements ITSetting{
     }
 
     private TSettingResponse changeEmail(String newemail,String oldemail){
-        int uid = db.getTutorID(oldemail);
+        TSettingResponse response = new TSettingResponse();
+        //if the email is new
+        if (db.isEmailNew(oldemail)){
+            int uid = db.getTutorID(oldemail);
 
+            //TODO Update email
+
+
+            return response;
+
+        }else{
+            response.setResult("Failure");
+            response.setDetail("Email already registered");
+            return response;
+        }
     }
 }
