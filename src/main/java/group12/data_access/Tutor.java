@@ -16,6 +16,10 @@ public class Tutor extends User {
     private String creditCardExpiryDate;
     private int securityCode;
 
+    public Tutor(){
+
+    }
+
     public Tutor(String email, String password){
         super(email, password);
     }

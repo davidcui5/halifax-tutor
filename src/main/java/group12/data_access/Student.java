@@ -10,6 +10,10 @@ public class Student extends User {
     private String phoneNumber;
     private String school;
 
+    public Student(){
+        super();
+    }
+
     public Student(String email, String password){
         super(email, password);
     }
