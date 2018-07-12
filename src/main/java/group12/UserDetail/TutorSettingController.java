@@ -32,7 +32,6 @@ public class TutorSettingController {
     }
 
 
-
     @GetMapping(path = "/cemail")
     @ResponseBody
     public TSettingResponse changeEmail(@RequestBody ChangeEmailForm form){

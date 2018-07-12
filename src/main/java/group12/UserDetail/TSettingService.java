@@ -22,7 +22,7 @@ public class TSettingService implements ITSetting{
         String newemail = form.getEmail();
 
         try{
-            response = change(newemail,useremail);
+            response = changeEmail(newemail,useremail);
         }catch(Exception e){
             logger.error("ERROR",e);
             response.setResult("FAILURE");
@@ -33,7 +33,8 @@ public class TSettingService implements ITSetting{
         return response;
     }
 
-    private TSettingResponse change(String newemail,String oldemail){
-        db.getTutorID(oldemail);
+    private TSettingResponse changeEmail(String newemail,String oldemail){
+        int uid = db.getTutorID(oldemail);
+
     }
 }
