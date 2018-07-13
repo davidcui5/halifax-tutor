@@ -1,4 +1,4 @@
-package group12.UserDetail;
+package group12.UserSetting;
 
 import group12.token_auth.IAccessToken;
 import group12.token_auth.JWTAccessToken;
@@ -14,18 +14,13 @@ public class TutorSettingController {
 
     private String useremail;
 
-    public String getUseremail() {
-        return useremail;
-    }
-
+    //get token from frontend
     @GetMapping(path = "/setting")
     @ResponseBody
     public void setUseremail(@RequestBody String token) {
         try{
             IAccessToken accessToken = new JWTAccessToken();
-            //user email,not the new email
             useremail = accessToken.decodeToken(token);
-
         } catch(Exception e){
             logger.error("ERROR",e);
         }
@@ -34,10 +29,26 @@ public class TutorSettingController {
 
     @GetMapping(path = "/cemail")
     @ResponseBody
-    public TSettingResponse changeEmail(@RequestBody ChangeEmailForm form){
-        String email = getUseremail();
-        TSettingResponse response = service.changeemail(form,email);
+    public TSettingResponse ChangeEmail(@RequestBody ChangeEmailForm form){
+        String email = useremail;
+        TSettingResponse response = service.changeEmail(form,email);
         return response;
     }
 
+
+    @GetMapping(path = "/cpwd")
+    @ResponseBody
+    public TSettingResponse ChangePwd(@RequestBody ChangePwdForm form){
+        String email = useremail;
+        TSettingResponse response = service.changePwd(form,email);
+        return response;
+    }
+
+    @GetMapping(path = "/cphone")
+    @ResponseBody
+    public TSettingResponse ChangePhone(@RequestBody ChangePhoneForm form){
+        String email = useremail;
+        TSettingResponse response = service.changePhone(form,email);
+        return response;
+    }
 }

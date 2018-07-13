@@ -1,4 +1,4 @@
-package group12.UserDetail;
+package group12.UserSetting;
 
 public class ChangeEmailForm {
     private String email;

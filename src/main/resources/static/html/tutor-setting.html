@@ -56,7 +56,6 @@
                         <div class="tab-pane active" role="tabpanel" id="step1">
                             <h3>Account Setting</h3><br>
                             <div class="infoforml left">
-
                                 <form name="Cpassword" class="tablerow" onsubmit="return validatePwd()">
                                     <h4>Change Password</h4>
                                     <br><br>
@@ -71,12 +70,12 @@
                                     <input type="email" id="email" placeholder="Email" name="email" required>
                                     <input class="btn btn-primary" type="submit" id="emailS" value="Confirm" name="emailS">
                                 </form>
-                                <div class="tablerow">
+                                <form name="Cphone" class="tablerow" onsubmit="return validatePhone()">
                                     <h4>Change Phone</h4>
                                     <br><br>
                                     <input type="number" id="phone" placeholder="Phone" name="phone">
-                                    <input class="btn btn-primary" type="button" id="phoneS" value="Confirm" name="phoneS">
-                                </div>
+                                    <input class="btn btn-primary" type="submit" id="phoneS" value="Confirm" name="phoneS">
+                                </form>
                             </div>
                             <div class="infoformr right tablerow">
                             <h4>Change Credit Card Info</h4>

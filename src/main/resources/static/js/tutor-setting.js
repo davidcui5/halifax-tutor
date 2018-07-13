@@ -53,7 +53,7 @@ function prevTab(elem) {
 }
 
 
-//function logic
+
 $(document).ready(function() {
     var token = localStorage.getItem("token");
     var objToken = {'token': token};
@@ -102,5 +102,56 @@ $(document).ready(function() {
         });
 
     });
+    $("#Cpassword").submit(function (event) {
+        event.preventDefault();
+        let pwd = $("#pwd").val();
 
+        var ChangePwdData = {
+            "password": pwd
+        };
+
+        $.ajax({
+            url: location.origin +
+            "/cpwd",
+            data: JSON.stringify(ChangePwdData),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "json"
+        }).done(function (data) {
+            if (data.result === "Success") {
+                alert("Password change succeed!");
+            } else {
+                alert(data.details);
+            }
+        }).fail(function (xhr, status, errorThrown) {
+
+        });
+
+    });
+    $("#Cphone").submit(function (event) {
+        event.preventDefault();
+        let phone = $("#phone").val();
+
+        var ChangePhoneData = {
+            "phoneNumber": phone
+        };
+
+        $.ajax({
+            url: location.origin +
+            "/cphone",
+            data: JSON.stringify(ChangePhoneData),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "json"
+        }).done(function (data) {
+            if (data.result === "Success") {
+                alert("Phone number change succeed!");
+            } else {
+                alert(data.details);
+            }
+        }).fail(function (xhr, status, errorThrown) {
+
+        });
+
+    });
 });

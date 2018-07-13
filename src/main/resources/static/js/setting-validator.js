@@ -59,3 +59,21 @@ function validateEmail(){
         }
     }
 }
+function validatePhone(){
+    var inputs = document.forms["Cphone"].getElementsByTagName("input");
+    var validatePhone = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    var flag = true;
+    for (var i=0; i<inputs.length; i++) {
+        var element = document.getElementById(inputs[i].id);
+        var elementValue = document.getElementById(inputs[i].id).value;
+
+        // validate phone number
+        if(inputs[i].id == "phone") {
+            if(!validatePhone.test(elementValue) || elementValue.length != 10){
+                alert("Invalid Phone Number format");
+                element.focus();
+                return false;
+            }
+        }
+    }
+}

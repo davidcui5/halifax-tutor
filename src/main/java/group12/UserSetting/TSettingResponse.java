@@ -1,6 +1,4 @@
-package group12.UserDetail;
-
-import java.util.ArrayList;
+package group12.UserSetting;
 
 public class TSettingResponse {
 
