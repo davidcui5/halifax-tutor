@@ -4,23 +4,27 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import javax.sql.DataSource;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-public class GetStudentDatabaseOperationTest {
+public class GetStudentSQLOperationTest {
 
     static ClassPathXmlApplicationContext context;
-    static DatabaseOperationTemplate op;
+    static DataSource ds;
 
     @BeforeClass
     public static void configDBConnection() {
         context = new ClassPathXmlApplicationContext("spring.xml");
-        op = context.getBean("op", GetStudentDatabaseOperation.class);
+        ds = context.getBean("dataSource", org.springframework.jdbc.datasource.DriverManagerDataSource.class);
     }
 
     @Test
     public void testExecuteQuery(){
-        Student student = (Student) op.executeMysqlQuery("yq50649@dal.ca");
+        SQLOperationTemplate op = new GetStudentSQLOperation("yq50649@dal.ca");
+        op.setDataSource(ds);
+        Student student = (Student) op.executeMysqlQuery();
         System.out.println(student.getPassword());
         assertEquals("CE1C1CDC2FAC8E1167F22CD4BD88D324", student.getPassword());
         assertFalse(student.isActivated());

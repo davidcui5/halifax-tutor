@@ -2,27 +2,43 @@ package group12.data_access;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-public abstract class DatabaseOperationTemplate {
+public abstract class SQLOperationTemplate {
 
-    private static Logger logger = LogManager.getLogger(DatabaseOperationTemplate.class);
     private DataSource dataSource;
+    private ArrayList<Object> parameters;
+    private static Logger logger = LogManager.getLogger(SQLOperationTemplate.class);
 
-    //concrete class defines SQL, and ways to extract ResultSet
+    public SQLOperationTemplate(Object... parameters){
+        this.parameters = new ArrayList<Object>();
+        for(Object parameter : parameters){
+            this.parameters.add(parameter);
+        }
+    }
+
     abstract String makeSQL();
+    abstract PreparedStatement addParameters(PreparedStatement ps);
     abstract Object extractResultSet(ResultSet rs) throws SQLException;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
-    public Object executeMysqlQuery(String... parameters){
+    public ArrayList<Object> getParameters() {
+        return parameters;
+    }
+
+    public Object executeMysqlQuery(){
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -31,9 +47,7 @@ public abstract class DatabaseOperationTemplate {
         try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
-            for (int i = 0; i < parameters.length; i++) {
-                ps.setString(i + 1, parameters[i]);
-            }
+            ps = addParameters(ps);
             rs = ps.executeQuery();
             if(rs.next()){
                 result = extractResultSet(rs);

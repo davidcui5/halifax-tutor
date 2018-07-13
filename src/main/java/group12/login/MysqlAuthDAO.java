@@ -1,7 +1,13 @@
 package group12.login;
 
+import group12.data_access.GetStudentSQLOperation;
+import group12.data_access.SQLOperationTemplate;
+import group12.data_access.Student;
+import group12.data_access.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -32,34 +38,14 @@ public class MysqlAuthDAO implements IAuthDAO {
 
     @Override
     public UserDTO getStudentByEmail(String email) {
-        String sql = "SELECT * FROM Student Where Email =?";
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        UserDTO student = null;
-        try {
-            con = dataSource.getConnection();
-            logger.info("Created DB Connection for getStudentByEmail " + email);
-            ps = con.prepareStatement(sql);
-            ps.setString(1, email);
-            rs = ps.executeQuery();
-            if(rs.next()){
-                student = new UserDTO();
-                student.setPassword(rs.getString("Password"));
-                student.setIsActivated(rs.getBoolean("AccountActivation"));
-                student.setIsBanned(rs.getBoolean("Banned"));
-            }
-        } catch (SQLException e) {
-            logger.error(email,e);
-        } finally {
-            try{
-                closeConnections(con, ps, rs);
-                logger.info("Closed DB Connection for getStudentByEmail " + email);
-            }catch(Exception e){
-                logger.error(email,e);
-            }
-        }
-        return student;
+        SQLOperationTemplate op = new GetStudentSQLOperation(email);
+        op.setDataSource(dataSource);
+        Student student = (Student) op.executeMysqlQuery();
+        UserDTO user = new UserDTO();
+        user.setPassword(student.getPassword());
+        user.setIsActivated(student.isActivated());
+        user.setIsBanned(student.isBanned());
+        return user;
     }
 
     @Override
