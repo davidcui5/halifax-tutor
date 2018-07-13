@@ -1,12 +1,8 @@
 package group12.data_access;
 
+import group12.logging.ConnectionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.stereotype.Component;
-
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +11,6 @@ import java.util.ArrayList;
 
 public abstract class SQLOperationTemplate {
 
-    private DataSource dataSource;
     private ArrayList<Object> parameters;
     private static Logger logger = LogManager.getLogger(SQLOperationTemplate.class);
 
@@ -30,10 +25,6 @@ public abstract class SQLOperationTemplate {
     abstract PreparedStatement addParameters(PreparedStatement ps);
     abstract Object extractResultSet(ResultSet rs) throws SQLException;
 
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
     public ArrayList<Object> getParameters() {
         return parameters;
     }
@@ -45,7 +36,7 @@ public abstract class SQLOperationTemplate {
         String sql = makeSQL();
         Object result = null;
         try {
-            con = dataSource.getConnection();
+            con = ConnectionFactory.getDatabaseConnection();
             ps = con.prepareStatement(sql);
             ps = addParameters(ps);
             rs = ps.executeQuery();
