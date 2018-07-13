@@ -13,6 +13,10 @@ $(document).ready(function () {
         let securityCode = $("#security-code").val();
         securityCode = parseInt(securityCode, 10);
 
+        if(!validateForm()){
+            return;
+        }
+
         var tutorData = {
             "email": email,
             "password": password,
@@ -32,7 +36,7 @@ $(document).ready(function () {
             dataType: "json"
         }).done(function (data) {
             if (data.result === "Success") {
-                alert("Registration succeed!");
+                alert("registration succeed!");
                 window.location.replace("../index.html");
             } else {
                 alert(data.details);

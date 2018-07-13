@@ -1,4 +1,4 @@
-package group12.Registration;
+package group12.registration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.*;
 public class RegistrationController {
 
     @Autowired
-    private IRegister registerService = new RegistrationService();
+    private IRegister registerService;
 
     @PostMapping(path = "/student")
     @ResponseBody
-    public RegistrationResponse registerStudent(@RequestBody Student student){
+    public RegistrationResponse registerStudent(@RequestBody StudentSignupForm student){
         RegistrationResponse response = registerService.registerStudent(student);
         return response;
     }
 
     @PostMapping(path = "/tutor")
     @ResponseBody
-    public RegistrationResponse registerTutor(@RequestBody Tutor tutor){
+    public RegistrationResponse registerTutor(@RequestBody TutorSignupForm tutor){
         RegistrationResponse response = registerService.registerTutor(tutor);
         return response;
     }

@@ -107,7 +107,7 @@
             <version>2.1.1</version>
         </dependency>
 
-        <!-- Send Email-->
+        <!-- Send email-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>

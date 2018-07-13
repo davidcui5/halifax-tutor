@@ -1,6 +1,6 @@
-package group12.Registration;
+package group12.registration;
 
-public class User {
+public class UserSignupForm {
 
     private String email;
     private String password;
@@ -43,4 +43,8 @@ public class User {
         this.lastName = lastName;
     }
 
+    @Override
+    public String toString() {
+        return "Email: " + email + "Password: " + password + "Phone" + phoneNumber + "FN: " + firstName + "LN: " + lastName;
+    }
 }
