@@ -20,13 +20,9 @@ public class GetStudentSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) {
+    PreparedStatement addParameters(PreparedStatement ps) throws SQLException{
         String email = (String) getParameters().get(0);
-        try{
-            ps.setString(1,email);
-        }catch(SQLException e){
-            logger.error("SQL Error",e);
-        }
+        ps.setString(1,email);
         return ps;
     }
 

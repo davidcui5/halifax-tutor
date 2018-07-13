@@ -22,7 +22,7 @@ public abstract class SQLOperationTemplate {
     }
 
     abstract String makeSQL();
-    abstract PreparedStatement addParameters(PreparedStatement ps);
+    abstract PreparedStatement addParameters(PreparedStatement ps) throws SQLException;
     abstract Object extractResultSet(ResultSet rs) throws SQLException;
 
     public ArrayList<Object> getParameters() {
@@ -42,10 +42,6 @@ public abstract class SQLOperationTemplate {
             rs = ps.executeQuery();
             if(rs.next()){
                 result = extractResultSet(rs);
-                return result;
-            }
-            else{
-                return null;
             }
         } catch (SQLException e) {
             logger.error("SQL Error", e);
