@@ -73,27 +73,28 @@
                                 <form name="Cphone" class="tablerow" onsubmit="return validatePhone()">
                                     <h4>Change Phone</h4>
                                     <br><br>
-                                    <input type="number" id="phone" placeholder="Phone" name="phone">
+                                    <input type="number" id="phone" placeholder="Phone" name="phone" required>
                                     <input class="btn btn-primary" type="submit" id="phoneS" value="Confirm" name="phoneS">
                                 </form>
                             </div>
                             <div class="infoformr right tablerow">
                             <h4>Change Credit Card Info</h4>
-                            <table class="innertab">
+                            <form name="Ccard" onsubmit="validateCard()">
+                                <table class="innertab">
                                 <tr class="tablerow">
                                     <td class="tablecolumn">
                                         <label for="cardnum">Card Number</label>
                                     </td>
                                     <td>
-                                        <input type="number" id="cardnum" placeholder="Card Number" name="cardnum">
+                                        <input type="number" id="cardnum" placeholder="Card Number" name="cardnum" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="tablecolumn">
-                                        <label for="expire-date">Expiration Date</label>
+                                        <label for="expire_date">Expiration Date</label>
                                     </td>
                                     <td>
-                                        <input type="month" id="expire-date" name="expire_date">
+                                        <input type="month" id="expire_date" name="expire_date" required>
                                     </td>
                                 </tr>
                                 <tr>
@@ -101,16 +102,17 @@
                                         <label for="code">Secure Code</label>
                                     </td>
                                     <td>
-                                        <input type="number" id="code" name="code">
+                                        <input type="number" id="code" name="code" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="tablecolumn">
-                                        <input type="button" class="btn btn-primary" id="cardS" value="Confirm">
+                                        <input type="submit" class="btn btn-primary" id="cardS" value="Confirm">
                                     </td>
 
                                 </tr>
                             </table>
+                            </form>
                                 <div>
                                     <button class="btn btn-primary">Resend Confirmation Email</button>
                                 </div>

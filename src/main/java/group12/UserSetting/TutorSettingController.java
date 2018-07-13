@@ -51,4 +51,12 @@ public class TutorSettingController {
         TSettingResponse response = service.changePhone(form,email);
         return response;
     }
+
+    @GetMapping(path = "/ccard")
+    @ResponseBody
+    public TSettingResponse ChangeCard(@RequestBody ChangeCardForm form){
+        String email = useremail;
+        TSettingResponse response = service.changeCard(form,email);
+        return response;
+    }
 }

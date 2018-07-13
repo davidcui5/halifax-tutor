@@ -128,24 +128,26 @@ $(document).ready(function() {
         });
 
     });
-    $("#Cphone").submit(function (event) {
+    $("#Ccard").submit(function (event) {
         event.preventDefault();
-        let phone = $("#phone").val();
-
-        var ChangePhoneData = {
-            "phoneNumber": phone
+        let creditCardNumber = $("#cardnum").val();
+        let expireDate = $("#expire_date").val();
+        let securityCode = $("#phone").val();
+        var ChangeCardData = {
+            "creditCardNumber": creditCardNumber,
+            "expireDate":expireDate,
+            "securityCode" : securityCode
         };
 
         $.ajax({
-            url: location.origin +
-            "/cphone",
-            data: JSON.stringify(ChangePhoneData),
+            url: location.origin +"/ccard",
+            data: JSON.stringify(ChangeCardData),
             contentType: "application/json",
             type: "POST",
             dataType: "json"
         }).done(function (data) {
             if (data.result === "Success") {
-                alert("Phone number change succeed!");
+                alert("Card information change succeed!");
             } else {
                 alert(data.details);
             }

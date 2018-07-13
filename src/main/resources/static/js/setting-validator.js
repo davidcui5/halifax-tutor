@@ -77,3 +77,56 @@ function validatePhone(){
         }
     }
 }
+
+function validateCard(){
+    var inputs = document.forms["Ccard"].getElementsByTagName("input");
+    var flag = true;
+    for (var i=0; i<inputs.length; i++) {
+        var element = document.getElementById(inputs[i].id);
+        var elementValue = document.getElementById(inputs[i].id).value;
+
+
+        // validate credit card no
+        if(inputs[i].id == "cardnum") {
+            if (elementValue.length != 16){
+                alert("Invalid Credit Card Number format");
+                element.focus();
+                return false;
+            }
+        }
+
+        // validate credit card date
+        if(inputs[i].id == "expire_date") {
+            //https://stackoverflow.com/questions/1531093/how-do-i-get-the-current-date-in-javascript
+            var today = new Date();
+            var month = today.getMonth()+1;
+            var year = today.getFullYear();
+
+            var cardDate = new Date(elementValue);
+            var cardMonth = cardDate.getMonth()+1;
+            var cardYear = cardDate.getFullYear();
+
+            if (cardYear < year){
+                alert("This credit card is already expired");
+                element.focus();
+                return false;
+            }
+            else if (cardYear.equals(year)){
+                if(cardMonth < month){
+                    alert("This credit card is already expired");
+                    element.focus();
+                    return false;
+                }
+            }
+        }
+
+        // validate credit card security code
+        if(inputs[i].id == "code") {
+            if (!elementValue.length.equals(3)){
+                alert("Invalid Security Code Format");
+                element.focus();
+                return false;
+            }
+        }
+    }
+}
