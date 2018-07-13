@@ -56,7 +56,7 @@
                     <label for="price-one">One Month: </label>
                 </td>
                 <td>
-                    <input type="number" id="price-one" name="price-one" required>
+                    <input type="number" step="0.01" min="0" id="price-one" name="price-one" required>
                 </td>
             </tr>
             <tr>
@@ -64,7 +64,7 @@
                     <label for="price-two">Three Month: </label>
                 </td>
                 <td>
-                    <input type="number" id="price-two" name="price-two" required>
+                    <input type="number" step="0.01" min="0" id="price-two" name="price-two" required>
                 </td>
 
             </tr>
@@ -73,7 +73,7 @@
                     <label for="price-three">Six Month: </label>
                 </td>
                 <td>
-                    <input type="number" id="price-three" name="price-three" required>
+                    <input type="number" step="0.01" min="0" id="price-three" name="price-three" required>
                 </td>
             </tr>
             <tr>
@@ -81,11 +81,110 @@
                     <label for="price-four">Twelve Month: </label>
                 </td>
                 <td>
-                    <input type="number" id="price-four" name="price-four" required>
+                    <input type="number" step="0.01" min="0" id="price-four" name="price-four" required>
                 </td>
             </tr>
             <tr>
                 <button type="submit" id="change-price-button">Save Change</button>
+            </tr>
+        </table>
+    </form>
+
+    <h2>Search StudentID by Email</h2>
+    <form id="get-student-id">
+        <table>
+            <tr>
+                <td>
+                    <label for="student-email">Student Email </label>
+                </td>
+                <td>
+                    <input type="email" id="student-email" name="student-email" required>
+                </td>
+                <td>
+                    <button type="submit" id="get-student-id-button">Search</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <h2>Search TutorID by Email</h2>
+    <form id="get-tutor-id">
+        <table>
+            <tr>
+                <td>
+                    <label for="tutor-email">Tutor Email </label>
+                </td>
+                <td>
+                    <input type="email" id="tutor-email" name="tutor-email" required>
+                </td>
+                <td>
+                    <button type="submit" id="get-tutor-id-button">Search</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <h2>Ban and Unban</h2>
+    <form id="ban-student">
+        <table>
+            <tr>
+                <td>
+                    <label for="ban-student-id">Ban Student with ID </label>
+                </td>
+                <td>
+                    <input type="number" id="ban-student-id" name="student-id" required>
+                </td>
+                <td>
+                    <button type="submit" id="ban-student-button">Ban</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form id="unban-student">
+        <table>
+            <tr>
+                <td>
+                    <label for="unban-student-id">Unban Student with ID </label>
+                </td>
+                <td>
+                    <input type="number" id="unban-student-id" name="student-id" required>
+                </td>
+                <td>
+                    <button type="submit" id="unban-student-button">Ban</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form id="ban-tutor">
+        <table>
+            <tr>
+                <td>
+                    <label for="ban-tutor-id">Ban Tutor with ID </label>
+                </td>
+                <td>
+                    <input type="number" id="ban-tutor-id" name="tutor-id" required>
+                </td>
+                <td>
+                    <button type="submit" id="ban-tutor-button">Ban</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form id="unban-tutor">
+        <table>
+            <tr>
+                <td>
+                    <label for="unban-tutor-id">Unban Tutor with ID </label>
+                </td>
+                <td>
+                    <input type="number" id="unban-tutor-id" name="tutor-id" required>
+                </td>
+                <td>
+                    <button type="submit" id="unban-tutor-button">Ban</button>
+                </td>
             </tr>
         </table>
     </form>
