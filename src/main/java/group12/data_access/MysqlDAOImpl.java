@@ -3,17 +3,20 @@ package group12.data_access;
 public class MysqlDAOImpl implements IDataAccessObject{
     @Override
     public Student getStudentByEmail(String email) {
-        return null;
+        SQLOperationTemplate op = new GetStudentSQLOperation(email);
+        return (Student) op.executeMysqlQuery();
     }
 
     @Override
     public Tutor getTutorByEmail(String email) {
-        return null;
+        SQLOperationTemplate op = new GetTutorSQLOperation(email);
+        return (Tutor) op.executeMysqlQuery();
     }
 
     @Override
     public Admin getAdminByEmail(String email) {
-        return null;
+        SQLOperationTemplate op = new GetAdminSQLOperation(email);
+        return (Admin) op.executeMysqlQuery();
     }
 
     @Override
