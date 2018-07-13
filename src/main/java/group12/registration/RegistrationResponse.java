@@ -1,4 +1,4 @@
-package group12.Registration;
+package group12.registration;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ public class RegistrationResponse {
     private ArrayList<String> details;
 
     public RegistrationResponse(){
-        result = "ToBeDetermined";
+        result = "";
         details = new ArrayList<String>();
     }
 

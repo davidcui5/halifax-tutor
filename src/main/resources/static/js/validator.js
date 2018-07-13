@@ -18,7 +18,7 @@ function validateForm(){
             // validate email
             if(inputs[i].id == "email"){
                 if(!validateEmail.test(String(elementValue).toLowerCase())){
-                    alert("Invalid Email Address format");
+                    alert("Invalid email Address format");
                     element.focus();
                     flag = false;
                 }
