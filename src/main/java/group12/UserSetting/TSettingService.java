@@ -1,8 +1,8 @@
 package group12.UserSetting;
 
 import group12.DBDAO;
-import group12.Registration.IEncrypt;
-import group12.Registration.SimpleMD5Encryptor;
+import group12.encryption.IEncryptor;
+import group12.encryption.SimpleMD5Encryptor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -49,7 +49,7 @@ public class TSettingService implements ITSetting{
     @Override
     public TSettingResponse changePwd(ChangePwdForm form, String useremail) {
         TSettingResponse response = new TSettingResponse();
-        IEncrypt encrypt = new SimpleMD5Encryptor();
+        IEncryptor encrypt = new SimpleMD5Encryptor();
         String newpassword = form.getPassword();
 
         if (form == null || useremail==null){

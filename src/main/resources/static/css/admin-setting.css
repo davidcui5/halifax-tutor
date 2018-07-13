@@ -1,0 +1,47 @@
+
+html, body {
+    background: #f1f1f1;
+    font-family: 'Merriweather', sans-serif;
+    /*padding: 1em;*/
+}
+.tablerow{
+    padding: 10px 0 10px 0;
+}
+.tablecolumn{
+    padding: 10px;
+}
+.innertab{
+    margin: 20px;
+}
+
+.infoforml{
+    padding-left: 200px;
+}
+.infoformr{
+    padding-right: 200px;
+}
+
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.btn{
+    margin: 5px;
+}
+
+.navbar-header, a{
+    font-size: 15px;
+    color: #f1f1f1;
+}
+
+.nav a{
+    color: #f1f1f1;
+}
+a:hover{
+    color: #558FCA;
+}
+.navbar-header a:hover{
+    color: #f1f1f1;
+}
