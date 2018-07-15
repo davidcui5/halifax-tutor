@@ -1,10 +1,8 @@
 package group12.data_access;
 
-import group12.login.IAuthenticationStrategy;
-import group12.login.IAuthenticationStrategyFactoryMethod;
-import group12.login.LoginResponse;
+import group12.login.*;
 
-public abstract class User implements IAuthenticationStrategyFactoryMethod {
+public abstract class User implements IAuthenticationStrategyFactoryMethod, IRedirectionStrategyFactoryMethod {
 
     String email;
     String password;
@@ -23,6 +21,9 @@ public abstract class User implements IAuthenticationStrategyFactoryMethod {
     @Override
     public abstract IAuthenticationStrategy createAuthenticationStrategy();
 
+    @Override
+    public abstract IRedirectionStrategy createRedirectionStrategy();
+
     public String getEmail() {
         return email;
     }
@@ -39,8 +40,9 @@ public abstract class User implements IAuthenticationStrategyFactoryMethod {
         this.password = password;
     }
 
+    //return new copy to protect my LoginResponse from my mistakes
     public LoginResponse getLoginResponse() {
-        return loginResponse;
+        return new LoginResponse(loginResponse.getResult(),loginResponse.getMessage(),loginResponse.getUrl(),loginResponse.getToken());
     }
 
     public void setLoginResponse(LoginResponse loginResponse) {

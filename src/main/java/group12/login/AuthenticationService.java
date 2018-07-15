@@ -15,23 +15,4 @@ public class AuthenticationService implements IAuthenticator {
         IAuthenticationStrategy authStrategy = user.createAuthenticationStrategy();
         authStrategy.authenticate(user);
     }
-    /*if(student.getIsActivated()==true && student.getIsBanned()==false){
-        response.setUrl("html/search-tutor.html");
-    }
-    else{
-        response.setUrl("html/student-setting-page.html");
-    }
-    return response;
-
-    if(tutor.getIsActivated()==true && tutor.getIsBanned()==false){
-        response.setUrl("html/search-tutor.html");
-    }
-    else{
-        response.setUrl("html/tutor-setting-page.html");
-    }
-
-    response.setResult("SUCCESS");
-    response.setUrl("html/search-tutor.html");
-    return response;*/
-
 }

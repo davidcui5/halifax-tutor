@@ -14,6 +14,13 @@ public class LoginResponse {
         token = "";
     }
 
+    public LoginResponse(AuthenticationResult result, String message, String url, String token){
+        this.result = result;
+        this.message = message;
+        this.url = url;
+        this.token = token;
+    }
+
     public void setResult(AuthenticationResult result) {
         this.result = result;
     }

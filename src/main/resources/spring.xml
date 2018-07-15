@@ -26,15 +26,15 @@
     <!--LoginController beans START-->
     <bean id="loginController" class="group12.login.LoginController">
         <constructor-arg ref="authService"/>
+        <constructor-arg ref="redirectService"/>
     </bean>
 
     <bean id="authService" class="group12.login.AuthenticationService">
-        <constructor-arg ref="mysqlAuthDAO"/>
     </bean>
 
-    <bean id="mysqlAuthDAO" class="group12.login.MysqlAuthDAO">
-        <constructor-arg ref="dataSource"/>
+    <bean id="redirectService" class="group12.login.RedirectionService">
     </bean>
+
     <!--LoginController beans END-->
 
     <!--DataSource bean is shared-->

@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     private IAuthenticator authService;
+    private IRedirection redirectService;
 
-    public LoginController(IAuthenticator authService){
+    public LoginController(IAuthenticator authService, IRedirection redirectService){
         this.authService = authService;
+        this.redirectService = redirectService;
     }
-
     //processes login
     @PostMapping(path = "/login")
     public LoginResponse login(@RequestBody LoginForm form){
@@ -43,10 +44,11 @@ public class LoginController {
             IAccessToken tokenMaker = new JWTAccessToken();
             String token = tokenMaker.generateToken(email);
             response.setToken(token);
+            user.setLoginResponse(response);
         }
 
-        redirectionService.redirect(User user);
+        redirectService.redirect(user);
 
-        return response;
+        return user.getLoginResponse();
     }
 }
