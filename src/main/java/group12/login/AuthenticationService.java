@@ -1,5 +1,6 @@
 package group12.login;
 
+import group12.data_access.User;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import group12.token_auth.IAccessToken;
@@ -16,17 +17,14 @@ public class AuthenticationService implements IAuthenticator {
         this.authDAO = authDAO;
     }
 
+
+
+
+
     @Override
-    public LoginResponse authenticate(LoginForm form) {
+    public LoginResponse authenticate(User user) {
 
         LoginResponse response = new LoginResponse();
-
-        if(form == null || form.getType() == null || form.getEmail() == null || form.getPassword() == null){
-            response.setResult("FAILURE");
-            response.setDetail("Invalid Form");
-            logger.info(form + " " + response);
-            return response;
-        }
 
         IEncryptor encryptor = new SimpleMD5Encryptor();
         String type = form.getType();
