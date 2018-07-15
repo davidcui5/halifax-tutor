@@ -1,9 +1,8 @@
 package group12.login;
 
-
 import group12.data_access.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import group12.encryption.*;
+import group12.token_auth.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +24,8 @@ public class LoginController {
         User user;
         String type = form.getType();
         String email = form.getEmail();
-        String password = form.getPassword();
+        IEncryptor encryptor = new SimpleMD5Encryptor();
+        String password = encryptor.encrypt(form.getPassword());
         if(type.equals("student")){
             user = new Student(email, password);
         }
@@ -36,7 +36,17 @@ public class LoginController {
             user = new Admin(email, password);
         }
 
-        LoginResponse response;
+        authService.authenticate(user);
 
+        LoginResponse response = user.getLoginResponse();
+        if(response.getResult() == AuthenticationResult.SUCCESS){
+            IAccessToken tokenMaker = new JWTAccessToken();
+            String token = tokenMaker.generateToken(email);
+            response.setToken(token);
+        }
+
+        redirectionService.redirect(User user);
+
+        return response;
     }
 }
