@@ -1,7 +1,6 @@
 'use strict';
 function validateForm(){
         var inputs = document.forms["user_form"].getElementsByTagName("input");
-
         // https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
         var validateEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         // https://www.w3resource.com/javascript/form/phone-no-validation.php
