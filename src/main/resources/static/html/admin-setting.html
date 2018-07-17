@@ -29,18 +29,148 @@
     </div>
 </nav>
 <div class="container">
-    <h3>Account Setting</h3><br>
-    <div class="infoforml left">
+    <div class="col-sm-6">
         <!--Change password-->
-        <form name="Cpassword" class="tablerow" onsubmit="return validatePwd()">
+        <div class="tablerow">
+            <form name="Cpassword" onsubmit="return validatePwd()">
             <h4>Change Password</h4>
-            <br><br>
-            <input type="password" id="pwd" placeholder="Password" name="pwd" required>
-            <br><br>
-            <input type="password" id="Rpwd" placeholder="Repeat Password" name="Rpwd" required>
-            <input class="btn btn-primary" type="submit" id="passwordS" value="Confirm">
-        </form>
+            <br>
+            <table>
+                <tr>
+                    <td  class="tablerow">
+                        <input type="password" id="pwd" placeholder="Password" name="pwd" required>
+                    </td>
+                </tr>
+                <tr  class="tablecolumn">
+                    <td  class="tablerow">
+                        <input type="password" id="Rpwd" placeholder="Repeat Password" name="Rpwd" required>
+                    </td>
+                    <td>
+                        <input class="btn btn-primary" type="submit" id="passwordS" value="Confirm">
+                    </td>
+                </tr>
+            </table>
 
+        </form>
+        </div>
+        <!--Change plan-->
+        <div class="tablerow">
+            <form name="Ccard" onsubmit="validateCard()">
+            <h4>Change Subscribe Plan Price</h4>
+            <table class="innertab">
+                <tr>
+                    <td class="tablecolumn">
+                        <label for="1"> 1 Month: </label>
+                    </td>
+                    <td>
+                        <input type="number" id="1"  name="1" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecolumn">
+                        <label for="3"> 3 Month: </label>
+                    </td>
+                    <td>
+                        <input type="number" id="3" name="3" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecolumn">
+                        <label for="6"> 6 Month: </label>
+                    </td>
+                    <td>
+                        <input type="number" id="6" name="6" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tablecolumn">
+                        <label for="12">12 Month: </label>
+                    </td>
+                    <td>
+                        <input type="number" id="12" name="12" required>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" class="btn btn-primary" id="planS" value="Confirm">
+
+        </form>
+        </div>
+        <!--Ban and Unban-->
+        <div class="tablerow">
+            <h4>Ban and Unban User:</h4>
+
+            <form name="banUser">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="number" name="SbanID" id="SbanID" placeholder="User ID" required>
+                        </td>
+                        <td>
+                            <input type="submit" value=" BAN  " class="btn btn-danger">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <form name="unbanUser">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="number" name="SunbanID" id="SunbanID" placeholder="User ID"  required>
+                        </td>
+                        <td>
+                            <input type="submit" value="UNBAN" class="btn btn-success">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="tablerow">
+            <h4>Ban and Unban Tutor:</h4>
+
+            <form name="banUser">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="number" name="TbanID" id="TbanID" placeholder="Tutor ID" required>
+                        </td>
+                        <td>
+                            <input type="submit" value=" BAN  " class="btn btn-danger">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <form name="unbanUser">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="number" name="TunbanID" id="TunbanID" placeholder="Tutor ID"  required>
+                        </td>
+                        <td>
+                            <input type="submit" value="UNBAN" class="btn btn-success">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="tablerow">
+            <form name="banUser">
+                <h4>Search User ID by email:</h4>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="number" name="emailSearch" id="emailSearch" placeholder="User Email" required>
+                        </td>
+                        <td>
+                            <input type="submit" value="Search" class="btn btn-primary">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <div>
+            </div>
+        </div>
     </div>
 </div>
 

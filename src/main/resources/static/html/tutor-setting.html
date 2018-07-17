@@ -21,9 +21,9 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item"><a href="#" ><span class="glyphicon glyphicon-search"></span>Search</a></li>
-                <li class="nav-item"><a href="#">Setting</a></li>
-                <li class="nav-item"><a href="#">Sign out</a></li>
+                <li class="nav-item link-3"><a href="#" ><span class="glyphicon glyphicon-search"></span>Search</a></li>
+                <li class="nav-item link-3"><a href="#">Setting</a></li>
+                <li class="nav-item link-3"><a href="#">Sign out</a></li>
             </ul>
         </div>
     </div>
@@ -94,52 +94,46 @@
                                 </form>
                             </div>
                             <div class="col-sm-6">
-                            <h4>Change Credit Card Info</h4>
-                            <form name="Ccard" onsubmit="validateCard()">
-                                <table class="innertab">
-                                <tr class="tablerow">
-                                    <td class="tablecolumn">
-                                        <label for="cardnum">Card Number</label>
-                                    </td>
-                                    <td>
-                                        <input type="number" id="cardnum" placeholder="Card Number" name="cardnum" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="tablecolumn">
-                                        <label for="expire_date">Expiration Date</label>
-                                    </td>
-                                    <td>
-                                        <input type="month" id="expire_date" name="expire_date" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="tablecolumn">
-                                        <label for="code">Secure Code</label>
-                                    </td>
-                                    <td>
-                                        <input type="number" id="code" name="code" required>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="tablecolumn">
-                                        <input type="submit" class="btn btn-primary" id="cardS" value="Confirm">
-                                    </td>
-
-                                </tr>
-                            </table>
-                            </form>
-                                <div>
+                                <!--<h4>Change Credit Card Info</h4>-->
+                                <form name="Ccard" onsubmit="validateCard()">
+                                    <h4>Change Credit Card Info</h4>
+                                    <table class="innertab">
+                                    <tr class="tablerow">
+                                        <td class="tablecolumn">
+                                            <label for="cardnum">Card Number</label>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="cardnum" placeholder="Card Number" name="cardnum" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tablecolumn">
+                                            <label for="expire_date">Expiration Date</label>
+                                        </td>
+                                        <td>
+                                            <input type="month" id="expire_date" name="expire_date" required>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tablecolumn">
+                                            <label for="code">Secure Code</label>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="code" name="code" required>
+                                        </td>
+                                    </tr>
+                                </table>
+                                    <input type="submit" class="btn btn-primary" id="cardS" value="Confirm">
+                                </form>
+                                <div class="remail">
                                     <button class="btn btn-primary">Resend Confirmation Email</button>
                                 </div>
-                        </div>
-                            <!--Next Button-->
-                            <div class="infoformr right">
-                                <ul class="list-inline pull-right">
-                                <li><button class="next-step Bbtn infoformr" type="button">Next</button></li>
-                                </ul>
+                                <div class="infoformr ">
+                                    <ul class="list-inline pull-right">
+                                        <li><button class="next-step Bbtn infoformr" type="button">Next</button></li>
+                                    </ul>
+                                 </div>
                             </div>
-
                         </div>
                         <!--Step2-->
                         <div class="tab-pane" role="tabpanel" id="step2">

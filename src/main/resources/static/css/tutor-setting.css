@@ -2,7 +2,6 @@
 html, body {
     background: #f1f1f1;
     font-family: 'Merriweather', sans-serif;
-    padding: 1em;
 }
 
 .wizard {
@@ -117,7 +116,7 @@ span.round-tab:hover {
 
 .tab-pane h3 {
     margin-top: 0;
-    margin-left: 150px;
+    margin-left: 120px;
 }
 .pricing_item h3{
     margin-top: 0;
@@ -275,4 +274,18 @@ a:hover{
 }
 .navbar-header a:hover{
     color: #f1f1f1;
+}
+.remail{
+    position: relative;
+    margin: auto;
+    top: 20px;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+
+}
+
+footer{
+    background-color:#4279b2;
+    height: 80px;
 }
