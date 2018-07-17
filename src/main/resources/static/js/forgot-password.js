@@ -9,6 +9,10 @@ $(document).ready(function () {
             "email": email
         };
 
+        if(!validateForm()){
+            return;
+        }
+
 
         if (document.getElementById('student').checked){
             $.ajax({

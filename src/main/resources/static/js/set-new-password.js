@@ -12,6 +12,10 @@ $(document).ready(function () {
             "password": new_password
         };
 
+        if(!validateForm()){
+            return;
+        }
+
         if (usertype == "student"){
             $.ajax({
                 url: location.origin + "/setnewpasswordstudent",
