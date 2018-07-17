@@ -14,14 +14,13 @@ $(document).ready(function () {
 
         if (usertype == "student"){
             $.ajax({
-
-                url: "http://localhost:8080/setnewpasswordstudent",
+                url: location.origin + "/setnewpasswordstudent",
                 data: JSON.stringify(userData),
                 contentType: "application/json",
                 type: "POST",
-                dataType: "text"
-            }).done(function (text) {
-                if (text === "password update success") {
+                dataType: "json"
+            }).done(function (data) {
+                if (data.result == "Success") {
                     alert("Password Updated !");
                     window.location.replace("../index.html");
                 } else {
@@ -33,13 +32,13 @@ $(document).ready(function () {
         }
         else {
             $.ajax({
-                url: "http://localhost:8080/setnewpasswordtutor",
+                url: location.origin + "/setnewpasswordtutor",
                 data: JSON.stringify(userData),
                 contentType: "application/json",
                 type: "POST",
-                dataType: "text"
-            }).done(function (text) {
-                if (text === "password update success") {
+                dataType: "json"
+            }).done(function (data) {
+                if (data.result == "Success") {
                     alert("Password Updated !");
                     window.location.replace("../index.html");
                 } else {

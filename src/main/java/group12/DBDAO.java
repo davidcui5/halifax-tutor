@@ -410,7 +410,8 @@ public class DBDAO implements DatabaseInterface {
     }
 
     @Override
-    public boolean updateTutorPassword(String email, String new_password) {
+    public boolean updateTutorPassword
+            (String email, String new_password) {
         String sql = "UPDATE Tutor SET Password=? WHERE Email=?";
         Connection con = null;
         PreparedStatement ps;

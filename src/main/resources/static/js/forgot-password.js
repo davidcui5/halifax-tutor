@@ -13,13 +13,13 @@ $(document).ready(function () {
         if (document.getElementById('student').checked){
             $.ajax({
 
-                url: "http://localhost:8080/studentforgotpassword",
+                url: location.origin + "/studentforgotpassword",
                 data: JSON.stringify(studentData),
                 contentType: "application/json",
                 type: "POST",
-                dataType: "text"
-            }).done(function (text) {
-                if (text === "verification email sent") {
+                dataType: "json"
+            }).done(function (data) {
+                if (data.result == "Success") {
                     alert("Verification email has been sent!");
                 } else {
                     alert("Something went wrong: " + text);
@@ -30,13 +30,13 @@ $(document).ready(function () {
         }
         else{
             $.ajax({
-                url: "http://localhost:8080/tutorforgotpassword",
+                url: location.origin + "http://localhost:8080/tutorforgotpassword",
                 data: JSON.stringify(studentData),
                 contentType: "application/json",
                 type: "POST",
-                dataType: "text"
-            }).done(function (text) {
-                if (text === "verification email sent") {
+                dataType: "json"
+            }).done(function (data) {
+                if (data.result == "Success") {
                     alert("Verification email has been sent!");
                 } else {
                     alert("Something went wrong: " + text);

@@ -12,6 +12,15 @@
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
 
+    <!--ForgotPasswordController beans START-->
+    <bean id="forgotPasswordService" class="group12.ForgotPassword.ForgotPasswordService">
+        <property name="db" ref="DBDAO"/>
+        <property name="mailer" ref="mailer"/>
+    </bean>
+
+    <!--ForgotPasswordController beans ENDT-->
+
+
     <!--RegistrationController beans START-->
     <bean id="registrationService" class="group12.registration.RegistrationService">
         <property name="db" ref="DBDAO"/>
@@ -36,17 +45,6 @@
         <constructor-arg ref="dataSource"/>
     </bean>
     <!--LoginController beans END-->
-
-    <!--ForgotPassword beans START-->
-    <bean id="forgotPasswordService" class="group12.ForgotPassword.ForgotPasswordService">
-        <property name="db" ref="DBDAO"/>
-        <property name="mailer" ref="mailer"/>
-    </bean>
-
-    <bean id="DBDAO" class="group12.DBDAO">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-    <!--ForgotPassword beans ENDT-->
 
     <!--DataSource bean is shared-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">

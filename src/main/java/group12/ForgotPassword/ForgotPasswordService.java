@@ -43,7 +43,7 @@ public class ForgotPasswordService implements IForgotPassword {
             serverURL = "http://localhost:8080";
             mailer.sendMail(emailSender, student.getEmail(), "Verification",
                     "Verification " + serverURL + "/student/studentid/" + studentID + "/email/" + student.getEmail() + "/verification/" + uuid.toString() + "/");
-            response.setResult("Sucess");
+            response.setResult("Success");
 //        }
 //        else{
 //            response.setResult("Failure");
@@ -64,7 +64,7 @@ public class ForgotPasswordService implements IForgotPassword {
             serverURL = "http://localhost:8080";
             mailer.sendMail(emailSender, tutor.getEmail(), "Verification",
                     "Verification " + serverURL + "/tutor/tutorid/" + tutorID + "/email/" + tutor.getEmail() + "/verification/" + uuid.toString() + "/");
-            response.setResult("Sucess");
+            response.setResult("Success");
 //        }
 //        else{
 //            response.setResult("Failure");
@@ -104,7 +104,7 @@ public class ForgotPasswordService implements IForgotPassword {
 
 //        if (db.isEmailNew(email)) {
             if(db.updateStudentPassword(student.getEmail(), encryptor.encrypt(student.getPassword()))){
-                response.setResult("Sucess");
+                response.setResult("Success");
             }
             else{
                 response.setResult("Failure");
@@ -128,7 +128,7 @@ public class ForgotPasswordService implements IForgotPassword {
 
 //        if (db.isEmailNew(email)) {
             if(db.updateTutorPassword(tutor.getEmail(), encryptor.encrypt(tutor.getPassword()))){
-                response.setResult("Sucess");
+                response.setResult("Success");
             }
             else{
                 response.setResult("Failure");

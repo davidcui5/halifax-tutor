@@ -1,11 +1,12 @@
 package group12.ForgotPassword;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-@RestController
+@Controller
 public class ForgotPasswordController {
 
     @Autowired
@@ -25,14 +26,14 @@ public class ForgotPasswordController {
         return response;
     }
 
-    @RequestMapping(value = "/student/studentid/{studentid}/email/{email}/verification/{activationcode}/", method = GET)
+    @RequestMapping(value = "/student/studentid/{studentID}/email/{email}/verification/{activationCode}/", method = GET)
     public String verifyStudent(@PathVariable int studentID, @PathVariable String email,@PathVariable String activationCode) {
         System.out.println("Student ID : " + studentID + " Activation Code: " + activationCode);
         iForgotPassword.activateStudent( studentID, email, activationCode);
         return "redirect:/html/set-new-password.html?usertype=student&email=" + email;
     }
 
-    @RequestMapping(value = "/tutor/tutorid/{tutorid}/email/{email}/verification/{activationcode}/", method = GET)
+    @RequestMapping(value = "/tutor/tutorid/{tutorID}/email/{email}/verification/{activationCode}/", method = GET)
     public String verifyTutor(@PathVariable int tutorID,  @PathVariable String email, @PathVariable String activationCode) {
         System.out.println("Tutor ID : " + tutorID + " Activation Code: " + activationCode);
         iForgotPassword.activateTutor( tutorID,  email,  activationCode);
