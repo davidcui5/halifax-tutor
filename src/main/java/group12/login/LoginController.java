@@ -11,44 +11,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
-    private IAuthenticator authService;
-    private IRedirection redirectService;
-
-    public LoginController(IAuthenticator authService, IRedirection redirectService){
-        this.authService = authService;
-        this.redirectService = redirectService;
-    }
     //processes login
+    //context for authentication strategy pattern
     @PostMapping(path = "/login")
     public LoginResponse login(@RequestBody LoginForm form){
-        //turns frontend form into backend User object
-        User user;
+        User user = makeUser(form);
+        IAuthenticationStrategy authStrategy = user.createAuthenticationStrategy();
+        authStrategy.authenticate(user);
+        return user.getLoginResponse();
+    }
+
+    //helper method makes User from LoginForm
+    public User makeUser(LoginForm form){
         String type = form.getType();
         String email = form.getEmail();
         IEncryptor encryptor = new SimpleMD5Encryptor();
         String password = encryptor.encrypt(form.getPassword());
         if(type.equals("student")){
-            user = new Student(email, password);
+            return new Student(email, password);
         }
         else if(type.equals("tutor")){
-            user = new Tutor(email, password);
+            return new Tutor(email, password);
         }
         else {
-            user = new Admin(email, password);
+            return new Admin(email, password);
         }
-
-        authService.authenticate(user);
-
-        LoginResponse response = user.getLoginResponse();
-        if(response.getResult() == AuthenticationResult.SUCCESS){
-            IAccessToken tokenMaker = new JWTAccessToken();
-            String token = tokenMaker.generateToken(email);
-            response.setToken(token);
-            user.setLoginResponse(response);
-        }
-
-        redirectService.redirect(user);
-
-        return user.getLoginResponse();
     }
 }
