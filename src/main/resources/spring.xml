@@ -12,6 +12,15 @@
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
 
+    <!--ForgotPasswordController beans START-->
+    <bean id="forgotPasswordService" class="group12.ForgotPassword.ForgotPasswordService">
+        <property name="db" ref="DBDAO"/>
+        <property name="mailer" ref="mailer"/>
+    </bean>
+
+    <!--ForgotPasswordController beans ENDT-->
+
+
     <!--RegistrationController beans START-->
     <bean id="registrationService" class="group12.registration.RegistrationService">
         <property name="db" ref="DBDAO"/>
