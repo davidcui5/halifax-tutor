@@ -1,9 +1,7 @@
 package group12.data_access;
 
 import group12.login.IAuthenticationStrategy;
-import group12.login.IRedirectionStrategy;
 import group12.login.StudentAuthStrategy;
-import group12.login.StudentRedirectStrategy;
 
 public class Student extends User {
 
@@ -26,11 +24,6 @@ public class Student extends User {
     @Override
     public IAuthenticationStrategy createAuthenticationStrategy() {
         return new StudentAuthStrategy();
-    }
-
-    @Override
-    public IRedirectionStrategy createRedirectionStrategy() {
-        return new StudentRedirectStrategy();
     }
 
     public int getStudentID() {

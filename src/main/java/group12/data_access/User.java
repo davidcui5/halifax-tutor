@@ -2,7 +2,7 @@ package group12.data_access;
 
 import group12.login.*;
 
-public abstract class User implements IAuthenticationStrategyFactoryMethod, IRedirectionStrategyFactoryMethod {
+public abstract class User implements IAuthenticationStrategyFactoryMethod{
 
     String email;
     String password;
@@ -20,9 +20,6 @@ public abstract class User implements IAuthenticationStrategyFactoryMethod, IRed
 
     @Override
     public abstract IAuthenticationStrategy createAuthenticationStrategy();
-
-    @Override
-    public abstract IRedirectionStrategy createRedirectionStrategy();
 
     public String getEmail() {
         return email;

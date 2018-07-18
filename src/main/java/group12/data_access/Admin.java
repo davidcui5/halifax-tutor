@@ -1,9 +1,7 @@
 package group12.data_access;
 
 import group12.login.AdminAuthStrategy;
-import group12.login.AdminRedirectStrategy;
 import group12.login.IAuthenticationStrategy;
-import group12.login.IRedirectionStrategy;
 
 public class Admin extends User {
 
@@ -18,10 +16,5 @@ public class Admin extends User {
     @Override
     public IAuthenticationStrategy createAuthenticationStrategy() {
         return new AdminAuthStrategy();
-    }
-
-    @Override
-    public IRedirectionStrategy createRedirectionStrategy() {
-        return new AdminRedirectStrategy();
     }
 }

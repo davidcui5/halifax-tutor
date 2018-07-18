@@ -1,9 +1,7 @@
 package group12.data_access;
 
 import group12.login.IAuthenticationStrategy;
-import group12.login.IRedirectionStrategy;
 import group12.login.TutorAuthStrategy;
-import group12.login.TutorRedirectStrategy;
 
 public class Tutor extends User {
 
@@ -32,11 +30,6 @@ public class Tutor extends User {
     @Override
     public IAuthenticationStrategy createAuthenticationStrategy() {
         return new TutorAuthStrategy();
-    }
-
-    @Override
-    public IRedirectionStrategy createRedirectionStrategy() {
-        return new TutorRedirectStrategy();
     }
 
     public int getTutorID() {
