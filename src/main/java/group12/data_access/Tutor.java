@@ -1,5 +1,8 @@
 package group12.data_access;
 
+import group12.login.IAuthenticationStrategy;
+import group12.login.TutorAuthStrategy;
+
 public class Tutor extends User {
 
     private int tutorID;
@@ -22,6 +25,11 @@ public class Tutor extends User {
 
     public Tutor(String email, String password){
         super(email, password);
+    }
+
+    @Override
+    public IAuthenticationStrategy createAuthenticationStrategy() {
+        return new TutorAuthStrategy();
     }
 
     public int getTutorID() {
