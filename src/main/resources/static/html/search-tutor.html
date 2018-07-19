@@ -12,16 +12,30 @@
     <title>Search for tutors</title>
 </head>
 
-<!--Just a stub page-->
 <body>
 <div id="header">
     <h1>HalifaxTutor</h1>
-    <div>
-        <h2>Search For Tutors</h2>
-    </div>
 </div>
 
 <div id="main">
+    <label for="university-select">Select an university</label>
+    <select id="university-select">
+        <option value="dalhousie">Dalhousie University</option>
+        <option value="smu">Saint Mary University</option>
+    </select>
+
+    <label for="course-id">Enter the course:</label>
+    <input type="text" id="course-id" required placeholder="e.g., CSCI5308"/>
+
+    <label for="search-button"></label>
+    <input type="button" class="button" id="search-button" value="Search"/>
+
+    <a href="?">Search</a>
+    <a href="./student-setting.html">Settings</a>
+    <input type="button" class="button" id="sign-out-button" value="Sign out"/>
+
+    <hr>
+
 </div>
 
 <div id="footer">
