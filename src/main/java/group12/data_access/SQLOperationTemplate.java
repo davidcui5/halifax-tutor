@@ -24,6 +24,7 @@ public abstract class SQLOperationTemplate {
     abstract String makeSQL();
     abstract PreparedStatement addParameters(PreparedStatement ps) throws SQLException;
     abstract Object extractResultSet(ResultSet rs) throws SQLException;
+    abstract ResultSet execute(PreparedStatement ps) throws SQLException;
 
     public ArrayList<Object> getParameters() {
         return parameters;
@@ -39,7 +40,7 @@ public abstract class SQLOperationTemplate {
             con = ConnectionFactory.getDatabaseConnection();
             ps = con.prepareStatement(sql);
             ps = addParameters(ps);
-            rs = ps.executeQuery();
+            rs = execute(ps);
             if(rs.next()){
                 result = extractResultSet(rs);
             }
