@@ -429,3 +429,10 @@ CREATE FUNCTION UpdatePasswordTutor(_email varchar(25), _Password varchar(50))
     SET _result = 1;
     return _result;
   END;
+
+DROP PROCEDURE IF EXISTS GetCourses;
+CREATE PROCEDURE GetCourses()
+  BEGIN
+    SELECT *
+    FROM Course;
+  END;
