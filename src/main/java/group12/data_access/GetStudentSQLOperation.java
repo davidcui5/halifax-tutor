@@ -2,6 +2,7 @@ package group12.data_access;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +11,7 @@ public class GetStudentSQLOperation extends SQLOperationTemplate {
 
     private static Logger logger = LogManager.getLogger(GetStudentSQLOperation.class);
 
-    public GetStudentSQLOperation(Object... parameters){
+    public GetStudentSQLOperation(Object... parameters) {
         super(parameters);
     }
 
@@ -20,9 +21,9 @@ public class GetStudentSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) throws SQLException{
+    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         String email = (String) getParameters().get(0);
-        ps.setString(1,email);
+        ps.setString(1, email);
         return ps;
     }
 
@@ -39,6 +40,11 @@ public class GetStudentSQLOperation extends SQLOperationTemplate {
         student.setPhoneNumber(rs.getString("PhoneNumber"));
         student.setSchool(rs.getString("School"));
         return student;
+    }
+
+    @Override
+    ResultSet execute(PreparedStatement ps) throws SQLException {
+        return ps.executeQuery();
     }
 
 }
