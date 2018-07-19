@@ -116,24 +116,11 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean authorizeTutor(String email, String password) {
-        String sql = "SELECT AuthorizeTutor(?,?)";
-        boolean result = false;
-        try {
-            rs = getResult(sql, email, password);
-            rs.next();
-            result = rs.getBoolean(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-        } finally {
-            try {
-                closeConnections();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                logger.error(e.getMessage());
-            }
-        }
-        return result;
+        AuthorizeTutor authorizeTutor = new AuthorizeTutor(email, password);
+        Tutor tutor = (Tutor) authorizeTutor.executeMysqlQuery();
+        if (tutor.getEmail().equals(email) && tutor.getPassword().equals(password))
+            return true;
+        else return false;
     }
 
 

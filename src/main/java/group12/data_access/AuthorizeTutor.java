@@ -31,6 +31,7 @@ public class AuthorizeTutor extends SQLOperationTemplate {
 
     @Override
     ResultSet execute(PreparedStatement ps) throws SQLException {
-        return null;
+        ps.execute();
+        return ps.getResultSet();
     }
 }
