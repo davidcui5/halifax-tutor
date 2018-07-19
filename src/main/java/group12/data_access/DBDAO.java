@@ -69,25 +69,11 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean isEmailNew(String email) {
-        String sql = "SELECT IsEmailNew(?)";
-        boolean result = false;
-        try {
-            rs = getResult(sql, email);
-            rs.next();
-            result = rs.getBoolean(1);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-        } finally {
-            try {
-                closeConnections();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                logger.error(e.getMessage());
-            }
-        }
-        return result;
+        IsEmailNewSQLOperation isEmailNewSQLOperation = new IsEmailNewSQLOperation(email);
+        int numberOfEmails = (int) isEmailNewSQLOperation.executeMysqlQuery();
+        if (numberOfEmails > 0)
+            return false;
+        else return true;
     }
 
     @Override
