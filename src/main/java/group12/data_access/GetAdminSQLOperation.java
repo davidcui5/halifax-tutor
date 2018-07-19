@@ -28,6 +28,11 @@ public class GetAdminSQLOperation extends SQLOperationTemplate{
     }
 
     @Override
+    ResultSet execute(PreparedStatement ps) throws SQLException{
+        return ps.executeQuery();
+    }
+
+    @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
         Admin admin = new Admin();
         admin.setEmail(rs.getString("Email"));
