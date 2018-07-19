@@ -9,14 +9,14 @@ $(document).ready(function () {
     $("form").submit(function (event) {
         event.preventDefault();
         let school = $("#university-select").val();
-        let courseId = $("#course-id").val();
+        let courseName = $("#course-id").val();
         let data = {
             "school": school,
-            "courseId": courseId
+            "courseName": courseId
         };
         $.ajax({
             url: location.origin + "/search",
-            data: JSON.stringfy(data),
+            data: JSON.stringify(data),
             type: "POST",
             dataType: "json",
             contentType: "application/json"
