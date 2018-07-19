@@ -1,5 +1,8 @@
 package group12.data_access;
 
+import group12.login.IAuthenticationStrategy;
+import group12.login.StudentAuthStrategy;
+
 public class Student extends User {
 
     private int studentID;
@@ -16,6 +19,11 @@ public class Student extends User {
 
     public Student(String email, String password){
         super(email, password);
+    }
+
+    @Override
+    public IAuthenticationStrategy createAuthenticationStrategy() {
+        return new StudentAuthStrategy();
     }
 
     public int getStudentID() {
@@ -73,5 +81,4 @@ public class Student extends User {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
 }
