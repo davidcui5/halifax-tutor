@@ -87,24 +87,11 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean isCreditCardNew(String creditCardNum) {
-        String sql = "SELECT IsCreditCardNew(?)";
-        boolean result = false;
-        try {
-            rs = getResult(sql, creditCardNum);
-            rs.next();
-            result = rs.getBoolean(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-        } finally {
-            try {
-                closeConnections();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                logger.error(e.getMessage());
-            }
-        }
-        return result;
+        IsCreditCardNewSQLOperation isCreditCardNewSQLOperation = new IsCreditCardNewSQLOperation(creditCardNum);
+        int numberOfEmails = (int) isCreditCardNewSQLOperation.executeMysqlQuery();
+        if (numberOfEmails > 0)
+            return false;
+        else return true;
     }
 
     @Override
