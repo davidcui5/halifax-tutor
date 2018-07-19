@@ -95,6 +95,30 @@ public class DBDAO implements DatabaseInterface {
     }
 
     @Override
+    public boolean regStudent(StudentSignupForm student) {
+        String sql = "select RegStudent(?,?,?,?,?,?)";
+        boolean result = false;
+        try {
+            rs = getResult(sql, student.getFirstName(), student.getLastName(), student.getEmail()
+                    , student.getPassword(), student.getSchool(), student.getPhoneNumber());
+            rs.next();
+            if (rs.getInt(1) == 1)
+                result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        } finally {
+            try {
+                closeConnections();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                logger.error(e.getMessage());
+            }
+        }
+        return result;
+    }
+
+    @Override
     public boolean authorizeStudent(String email, String password) {
         String sql = "SELECT AuthorizeStudent(?,?)";
         boolean result = false;
@@ -138,29 +162,7 @@ public class DBDAO implements DatabaseInterface {
         return result;
     }
 
-    @Override
-    public boolean regStudent(StudentSignupForm student) {
-        String sql = "select RegStudent(?,?,?,?,?,?)";
-        boolean result = false;
-        try {
-            rs = getResult(sql, student.getFirstName(), student.getLastName(), student.getEmail()
-                    , student.getPassword(), student.getSchool(), student.getPhoneNumber());
-            rs.next();
-            if (rs.getInt(1) == 1)
-                result = true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-        } finally {
-            try {
-                closeConnections();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                logger.error(e.getMessage());
-            }
-        }
-        return result;
-    }
+
 
     @Override
     public boolean regTutor(TutorSignupForm tutor) {
