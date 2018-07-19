@@ -14,27 +14,26 @@
 
 <body>
 <div id="header">
-    <h1>HalifaxTutor</h1>
-</div>
-
-<div id="main">
-    <label for="university-select">Select an university</label>
-    <select id="university-select">
-        <option value="dalhousie">Dalhousie University</option>
-        <option value="smu">Saint Mary University</option>
-    </select>
-
-    <label for="course-id">Enter the course:</label>
-    <input type="text" id="course-id" required placeholder="e.g., CSCI5308"/>
-
-    <label for="search-button"></label>
-    <input type="button" class="button" id="search-button" value="Search"/>
-
+    <h>HalifaxTutor</h>
     <a href="?">Search</a>
     <a href="./student-setting.html">Settings</a>
     <input type="button" class="button" id="sign-out-button" value="Sign out"/>
-
     <hr>
+</div>
+
+<div id="main">
+
+    <form>
+        <label for="university-select">Select an university</label>
+        <select id="university-select">
+            <option value="dalhousie">Dalhousie University</option>
+            <option value="smu">Saint Mary University</option>
+        </select>
+
+        <label for="course-id">Enter the course:</label>
+        <input type="text" id="course-id" placeholder="e.g., CSCI5308" required>
+        <button type="submit">Search</button>
+    </form>
 
 </div>
 
@@ -51,5 +50,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
         integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
         crossorigin="anonymous"></script>
+<script src="../js/search-tutor.js"></script>
 </body>
 </html>
