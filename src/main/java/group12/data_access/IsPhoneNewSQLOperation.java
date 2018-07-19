@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class IsPhoneNewSQLOperation extends SQLOperationTemplate {
+    public IsPhoneNewSQLOperation(Object... parameters) {
+        super(parameters);
+    }
 
     @Override
     String makeSQL() {
