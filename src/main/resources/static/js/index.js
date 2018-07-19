@@ -20,12 +20,11 @@ $(document).ready(function () {
             type: "POST",
             dataType: "json"
         }).done(function (data) {
+            alert(data.result);
+            alert(data.message);
             if (data.result === "SUCCESS") {
-                alert("Welcome Back!");
                 window.localStorage.setItem("token", data.token); //add access token to local storage
                 window.location.replace(data.url);
-            } else {
-                alert(data.detail);
             }
         }).fail(function (xhr, status, errorThrown) {
             //empty

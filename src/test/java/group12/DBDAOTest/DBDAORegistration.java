@@ -1,3 +1,4 @@
+/*
 package group12.DBDAOTest;
 
 import group12.DBDAO;
@@ -77,3 +78,4 @@ public class DBDAORegistration {
         assertTrue(actual);
     }
 }
+*/

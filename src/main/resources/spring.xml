@@ -32,20 +32,6 @@
     </bean>
     <!--RegistrationController beans ENDT-->
 
-    <!--LoginController beans START-->
-    <bean id="loginController" class="group12.login.LoginController">
-        <constructor-arg ref="authService"/>
-    </bean>
-
-    <bean id="authService" class="group12.login.AuthenticationService">
-        <constructor-arg ref="mysqlAuthDAO"/>
-    </bean>
-
-    <bean id="mysqlAuthDAO" class="group12.login.MysqlAuthDAO">
-        <constructor-arg ref="dataSource"/>
-    </bean>
-    <!--LoginController beans END-->
-
     <!--DataSource bean is shared-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>

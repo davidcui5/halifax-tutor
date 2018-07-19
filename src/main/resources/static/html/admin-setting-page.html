@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HalifaxTutor</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="David Cui">
+    <meta name="Description" content="The admin's setting page of HalifaxTutor">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/admin-setting-page.css">
+</head>
+<body>
+<div id="header">
+    <h1>HalifaxTutor</h1>
+    <ul>
+        <li><a href="./search-tutor.html">Search</a></li>
+        <li><a href="./admin-setting-page.html">Setting</a></li>
+        <li>
+            <a id="sign-out" href="../index.html">SignOut</a>
+        </li>
+    </ul>
+</div>
+
+<div class="page-body">
+    <h2>Account Setting</h2>
+    <form id="change-password">
+        <table>
+            <tr>
+                <td>
+                    <label for="password">Change Password: </label>
+                </td>
+                <td>
+                    <input type="password" id="password" name="password" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="confirm-password">Confirm Password: </label>
+                </td>
+                <td>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </td>
+                <td>
+                    <button type="submit" id="change-password-button">Save Change</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <h2>Change Subscription Plan Prices</h2>
+    <form id="subscription-prices">
+        <table>
+            <tr>
+                <td>
+                    <label for="price-one">One Month: </label>
+                </td>
+                <td>
+                    <input type="number" step="0.01" min="0" id="price-one" name="price-one" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="price-two">Three Month: </label>
+                </td>
+                <td>
+                    <input type="number" step="0.01" min="0" id="price-two" name="price-two" required>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label for="price-three">Six Month: </label>
+                </td>
+                <td>
+                    <input type="number" step="0.01" min="0" id="price-three" name="price-three" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="price-four">Twelve Month: </label>
+                </td>
+                <td>
+                    <input type="number" step="0.01" min="0" id="price-four" name="price-four" required>
+                </td>
+            </tr>
+            <tr>
+                <button type="submit" id="change-price-button">Save Change</button>
+            </tr>
+        </table>
+    </form>
+
+    <h2>Search StudentID by Email</h2>
+    <form id="get-student-id">
+        <table>
+            <tr>
+                <td>
+                    <label for="student-email">Student Email </label>
+                </td>
+                <td>
+                    <input type="email" id="student-email" name="student-email" required>
+                </td>
+                <td>
+                    <button type="submit" id="get-student-id-button">Search</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <h2>Search TutorID by Email</h2>
+    <form id="get-tutor-id">
+        <table>
+            <tr>
+                <td>
+                    <label for="tutor-email">Tutor Email </label>
+                </td>
+                <td>
+                    <input type="email" id="tutor-email" name="tutor-email" required>
+                </td>
+                <td>
+                    <button type="submit" id="get-tutor-id-button">Search</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <h2>Ban and Unban</h2>
+    <form id="ban-student">
+        <table>
+            <tr>
+                <td>
+                    <label for="ban-student-id">Ban Student with ID </label>
+                </td>
+                <td>
+                    <input type="number" id="ban-student-id" name="student-id" required>
+                </td>
+                <td>
+                    <button type="submit" id="ban-student-button">Ban</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form id="unban-student">
+        <table>
+            <tr>
+                <td>
+                    <label for="unban-student-id">Unban Student with ID </label>
+                </td>
+                <td>
+                    <input type="number" id="unban-student-id" name="student-id" required>
+                </td>
+                <td>
+                    <button type="submit" id="unban-student-button">Ban</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form id="ban-tutor">
+        <table>
+            <tr>
+                <td>
+                    <label for="ban-tutor-id">Ban Tutor with ID </label>
+                </td>
+                <td>
+                    <input type="number" id="ban-tutor-id" name="tutor-id" required>
+                </td>
+                <td>
+                    <button type="submit" id="ban-tutor-button">Ban</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form id="unban-tutor">
+        <table>
+            <tr>
+                <td>
+                    <label for="unban-tutor-id">Unban Tutor with ID </label>
+                </td>
+                <td>
+                    <input type="number" id="unban-tutor-id" name="tutor-id" required>
+                </td>
+                <td>
+                    <button type="submit" id="unban-tutor-button">Ban</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+
+</div>
+
+<div id="footer">
+    <p>&copy; Zongming Liu, Zaher Abd Ulmoula, Rahu Vala, Youran Zhang, David Cui</p>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+<script src="../js/admin-setting.js"></script>
+
+</body>
+</html>
