@@ -3,6 +3,9 @@ package group12.data_access;
 import group12.login.IAuthenticationStrategy;
 import group12.login.TutorAuthStrategy;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Tutor extends User {
 
     private int tutorID;
@@ -19,11 +22,11 @@ public class Tutor extends User {
     private String creditCardExpiryDate;
     private int securityCode;
 
-    public Tutor(){
+    public Tutor() {
         super();
     }
 
-    public Tutor(String email, String password){
+    public Tutor(String email, String password) {
         super(email, password);
     }
 
@@ -134,5 +137,25 @@ public class Tutor extends User {
 
     public void setSecurityCode(int securityCode) {
         this.securityCode = securityCode;
+    }
+
+    public static Tutor tutorParser(ResultSet rs) throws SQLException {
+        Tutor tutor = new Tutor();
+        tutor.setEmail(rs.getString("Email"));
+        tutor.setPassword(rs.getString("Password"));
+        tutor.setTutorID(rs.getInt("ID"));
+        tutor.setFirstName(rs.getString("FirstName"));
+        tutor.setLastName(rs.getString("LastName"));
+        tutor.setActivated(rs.getBoolean("AccountActivation"));
+        tutor.setBanned(rs.getBoolean("Banned"));
+        tutor.setPhoneNumber(rs.getString("PhoneNumber"));
+        tutor.setBio(rs.getString("Bio"));
+        tutor.setPlanID(rs.getInt("PlanID"));
+        tutor.setExpiryDate(rs.getString("SubExpiryDate"));
+        tutor.setCreditCardHolder(rs.getString("CreditCardHoldName"));
+        tutor.setCreditCardNum(rs.getString("CreditCardNumber"));
+        tutor.setCreditCardExpiryDate(rs.getString("CreditCardExpiryDate"));
+        tutor.setSecurityCode(rs.getInt("SecurityCode"));
+        return tutor;
     }
 }
