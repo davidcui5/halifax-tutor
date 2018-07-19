@@ -1,7 +1,7 @@
 
 package group12.DBDAOTest;
 
-import group12.DBLayer.DBDAO;
+import group12.data_access.DBDAO;
 import group12.registration.StudentSignupForm;
 import group12.registration.TutorSignupForm;
 import org.junit.*;

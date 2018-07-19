@@ -1,7 +1,7 @@
-package group12.DBLayer;
+package group12.data_access;
 
 
-import group12.DBLayer.DatabaseInterface;
+import group12.data_access.DatabaseInterface;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import group12.registration.StudentSignupForm;
