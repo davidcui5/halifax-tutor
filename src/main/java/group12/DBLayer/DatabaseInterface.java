@@ -1,4 +1,4 @@
-package group12;
+package group12.DBLayer;
 
 import group12.registration.StudentSignupForm;
 import group12.registration.TutorSignupForm;
@@ -32,5 +32,4 @@ public interface DatabaseInterface {
     boolean updateStudentPassword(String email, String new_password);
 
     boolean updateTutorPassword(String email, String new_password);
-
 }
