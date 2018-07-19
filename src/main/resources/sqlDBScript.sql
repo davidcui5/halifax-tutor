@@ -106,20 +106,15 @@ create index Review_Tutor_ID_fk
 create index Tutor_SubscriptionPlan_ID_fk
   on Tutor (PlanID);
 
-create table TutorCourses
+CREATE TABLE TutorCourse
 (
-  TutorID  int   null,
-  CourseID int   not null
-    primary key,
-  Price    float null,
-  constraint TutorCourses_Tutor_ID_fk
-  foreign key (TutorID) references Tutor (ID),
-  constraint TutorCourses_Course_ID_fk
-  foreign key (CourseID) references Course (ID)
+    TutorId int,
+    CourseId int,
+    Price float,
+    CONSTRAINT TutorCourse_TutorId_CourseId_pk PRIMARY KEY (TutorId, CourseId),
+    CONSTRAINT TutorCourse_Tutor_ID_fk FOREIGN KEY (TutorId) REFERENCES Tutor (ID),
+    CONSTRAINT TutorCourse_Course_ID_fk FOREIGN KEY (CourseId) REFERENCES Course (ID)
 );
-
-create index TutorCourses_Tutor_ID_fk
-  on TutorCourses (TutorID);
 
 create table WeeklySchedule
 (
