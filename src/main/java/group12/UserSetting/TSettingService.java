@@ -1,6 +1,6 @@
 package group12.UserSetting;
 
-import group12.DBDAO;
+import group12.DBLayer.DBDAO;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import org.apache.logging.log4j.LogManager;

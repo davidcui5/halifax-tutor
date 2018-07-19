@@ -1,7 +1,7 @@
-/*
+
 package group12.DBDAOTest;
 
-import group12.DBDAO;
+import group12.DBLayer.DBDAO;
 import group12.registration.StudentSignupForm;
 import group12.registration.TutorSignupForm;
 import org.junit.*;
@@ -78,4 +78,3 @@ public class DBDAORegistration {
         assertTrue(actual);
     }
 }
-*/

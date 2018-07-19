@@ -1,6 +1,6 @@
 package group12.registration;
 
-import group12.DatabaseInterface;
+import group12.DBLayer.DatabaseInterface;
 import group12.email.IMailer;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
