@@ -96,26 +96,13 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean regStudent(StudentSignupForm student) {
-        String sql = "select RegStudent(?,?,?,?,?,?)";
-        boolean result = false;
-        try {
-            rs = getResult(sql, student.getFirstName(), student.getLastName(), student.getEmail()
-                    , student.getPassword(), student.getSchool(), student.getPhoneNumber());
-            rs.next();
-            if (rs.getInt(1) == 1)
-                result = true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-        } finally {
-            try {
-                closeConnections();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                logger.error(e.getMessage());
-            }
-        }
-        return result;
+        RegStudent regStudent = new RegStudent(student.getFirstName(), student.getLastName()
+                , student.getEmail(), student.getPassword(), student.getSchool(), student.getPhoneNumber());
+        int result = (int) regStudent.executeMysqlQuery();
+        if (result == 1)
+            return true;
+        else
+            return false;
     }
 
     @Override
@@ -161,7 +148,6 @@ public class DBDAO implements DatabaseInterface {
         }
         return result;
     }
-
 
 
     @Override
