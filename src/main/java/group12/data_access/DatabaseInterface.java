@@ -1,4 +1,4 @@
-package group12.DBLayer;
+package group12.data_access;
 
 import group12.registration.StudentSignupForm;
 import group12.registration.TutorSignupForm;
