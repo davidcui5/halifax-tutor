@@ -8,17 +8,23 @@ import java.security.Key;
 
 
 public class JWTAccessToken implements IAccessToken {
+    private static final JWTAccessToken INSTANCE = new JWTAccessToken();
+
     private Key key;
     private SignatureAlgorithm algorithm;
 
-    public JWTAccessToken() {
+    private JWTAccessToken() {
         this.key = MacProvider.generateKey();
         this.algorithm = SignatureAlgorithm.HS512;
     }
 
-    public JWTAccessToken(Key key, SignatureAlgorithm algorithm) {
+    private JWTAccessToken(Key key, SignatureAlgorithm algorithm) {
         this.key = key;
         this.algorithm = algorithm;
+    }
+
+    public static JWTAccessToken getInstance() {
+        return INSTANCE;
     }
 
     @Override
