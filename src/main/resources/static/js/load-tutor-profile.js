@@ -1,9 +1,9 @@
 'use strict';
 function loadProfile() {
-    let email = $("#email").text();
+    let id = $("#id").text();
 
     var userData = {
-        "email": email
+        "id": id
     };
 
     $.ajax({
