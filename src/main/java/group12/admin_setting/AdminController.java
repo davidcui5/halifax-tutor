@@ -13,11 +13,9 @@ public class AdminController {
 
     @PostMapping(path="/admin/setting/access")
     public String authorize(@RequestBody Map<String,String> body){
-        String token = body.get("token").toString();
-        System.out.println(token);
-        IAccessToken decoder = new JWTAccessToken();
+        String token = body.get("token");
+        IAccessToken decoder = JWTAccessToken.getInstance();
         String email = decoder.decodeToken(token);
-        System.out.println(email);
         /*if(admin table contain this email){
             return SUCCESS;
         }

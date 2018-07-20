@@ -11,10 +11,7 @@ $(document).ready(function () {
         type: "POST",
         dataType: "text"
     }).done(function (data) {
-        if (data === SUCCESS) {
-            //stay
-        }
-        else {
+        if (data === "FAILURE") {
             alert("You do not have access to this page.");
             window.location.replace("../index.html");
         }
