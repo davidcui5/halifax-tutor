@@ -8,6 +8,15 @@ public class TutorPublicInfo {
     private float rating;
     private float pricePerHour;
 
+    public TutorPublicInfo() {
+        this.photoURL = "";
+        this.firstName = "";
+        this.lastName = "";
+        this.education = "";
+        this.rating = 0.0f;
+        this.pricePerHour = 0.0f;
+    }
+
     public TutorPublicInfo(String photoURL, String firstName, String lastName, String education,
                            float rating, float pricePerHour) {
         this.photoURL = photoURL;
