@@ -11,21 +11,25 @@ public class DeleteStudentSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return null;
+        return "SELECT DeleteStudent(?)";
     }
 
     @Override
     PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
-        return null;
+        int id = (int) getParameters().get(0);
+        ps.setInt(1, id);
+        return ps;
     }
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        return null;
+        rs.next();
+        int result = rs.getInt(1);
+        return result;
     }
 
     @Override
     ResultSet execute(PreparedStatement ps) throws SQLException {
-        return null;
+        return ps.executeQuery();
     }
 }

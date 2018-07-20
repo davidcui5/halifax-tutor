@@ -180,25 +180,11 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean deleteStudent(int id) {
-        String sql = "SELECT DeleteStudent(?)";
-        boolean result = false;
-        try {
-            rs = getResult(sql, String.valueOf(id));
-            rs.next();
-            if (rs.getInt(1) == 1)
-                result = true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-        } finally {
-            try {
-                closeConnections();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                logger.error(e.getMessage());
-            }
-        }
-        return result;
+        DeleteStudentSQLOperation deleteStudentSQLOperation = new DeleteStudentSQLOperation(id);
+        int result = (int) deleteStudentSQLOperation.executeMysqlQuery();
+        if (result == 1)
+            return true;
+        else return false;
     }
 
     @Override
