@@ -96,7 +96,7 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean regStudent(StudentSignupForm student) {
-        RegStudent regStudent = new RegStudent(student.getFirstName(), student.getLastName()
+        RegStudentSQLOperation regStudent = new RegStudentSQLOperation(student.getFirstName(), student.getLastName()
                 , student.getEmail(), student.getPassword(), student.getSchool(), student.getPhoneNumber());
         int result = (int) regStudent.executeMysqlQuery();
         if (result == 1)
@@ -161,8 +161,8 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean activateStudent(int id, String activateCode) {
-        ActivateStudent activateStudents = new ActivateStudent(id);
-        int result = (int) activateStudents.executeMysqlQuery();
+        ActivateStudentSQLOperation activateStudentSQLOperation = new ActivateStudentSQLOperation(id);
+        int result = (int) activateStudentSQLOperation.executeMysqlQuery();
         if (result == 1)
             return true;
         else return false;

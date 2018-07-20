@@ -4,8 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ActivateStudent extends SQLOperationTemplate {
-    public ActivateStudent(Object... parameters) {
+public class ActivateStudentSQLOperation extends SQLOperationTemplate {
+    public ActivateStudentSQLOperation(Object... parameters) {
         super(parameters);
     }
 
