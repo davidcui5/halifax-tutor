@@ -31,7 +31,7 @@
     <div class="col-sm-6">
         <!--Change password-->
         <div class="tablerow">
-            <form name="Cpassword" onsubmit="return validatePwd()">
+            <form id="Cpassword" onsubmit="return validatePwd()">
             <h4>Change Password</h4>
             <br>
             <table>
@@ -49,44 +49,43 @@
                     </td>
                 </tr>
             </table>
-
-        </form>
+            </form>
         </div>
         <!--Change plan-->
         <div class="tablerow">
-            <form name="Ccard" onsubmit="validateCard()">
+            <form id="Cprice">
             <h4>Change Subscribe Plan Price</h4>
             <table class="innertab">
                 <tr>
                     <td class="tablecolumn">
-                        <label for="price-one"> 1 Month: </label>
+                        <label for="priceOne"> 1 Month: </label>
                     </td>
                     <td>
-                        <input type="number" step="0.01" min="0" id="price-one" name="price-one" required>
+                        <input type="number" step="0.01" min="0" id="priceOne" name="price-one" required>
                     </td>
                 </tr>
                 <tr>
                     <td class="tablecolumn">
-                        <label for="price-two"> 3 Month: </label>
+                        <label for="priceTwo"> 3 Month: </label>
                     </td>
                     <td>
-                        <input type="number" step="0.01" min="0" id="price-two" name="price-two" required>
+                        <input type="number" step="0.01" min="0" id="priceTwo" name="price-two" required>
                     </td>
                 </tr>
                 <tr>
                     <td class="tablecolumn">
-                        <label for="price-three"> 6 Month: </label>
+                        <label for="priceThree"> 6 Month: </label>
                     </td>
                     <td>
-                        <input type="number" step="0.01" min="0" id="price-three" name="price-three" required>
+                        <input type="number" step="0.01" min="0" id="priceThree" name="price-three" required>
                     </td>
                 </tr>
                 <tr>
                     <td class="tablecolumn">
-                        <label for="price-four">12 Month: </label>
+                        <label for="priceFour">12 Month: </label>
                     </td>
                     <td>
-                        <input type="number" step="0.01" min="0" id="price-four" name="price-four" required>
+                        <input type="number" step="0.01" min="0" id="priceFour" name="price-four" required>
                     </td>
                 </tr>
             </table>
@@ -98,7 +97,7 @@
         <div class="tablerow">
             <h4>Ban and Unban Student:</h4>
 
-            <form name="banUser">
+            <form id="banStudent">
                 <table>
                     <tr>
                         <td>
@@ -110,7 +109,7 @@
                     </tr>
                 </table>
             </form>
-            <form name="unbanUser">
+            <form id="unbanStudent">
                 <table>
                     <tr>
                         <td>
@@ -126,7 +125,7 @@
         <div class="tablerow">
             <h4>Ban and Unban Tutor:</h4>
 
-            <form name="banUser">
+            <form id="banTutor">
                 <table>
                     <tr>
                         <td>
@@ -138,7 +137,7 @@
                     </tr>
                 </table>
             </form>
-            <form name="unbanUser">
+            <form id="unbanTutor">
                 <table>
                     <tr>
                         <td>
@@ -155,12 +154,12 @@
     <div class="col-sm-6">
         <!--Search user-->
         <div class="tablerow">
-            <form name="findUser">
+            <form id="findStudent">
                 <h4>Search Student ID by email:</h4>
                 <table>
                     <tr>
                         <td>
-                            <input type="email" name="emailSearch" id="SEmailSearch" placeholder="Student Email" required>
+                            <input type="email" name="emailSearch" id="SEmail" placeholder="Student Email" required>
                         </td>
                         <td>
                             <input type="submit" value="Search" class="btn btn-primary">
@@ -172,12 +171,12 @@
             </div>
         </div>
         <div class="tablerow">
-            <form name="findUser">
+            <form id="findTutor">
                 <h4>Search Tutor ID by email:</h4>
                 <table>
                     <tr>
                         <td>
-                            <input type="email" name="emailSearch" id="TEmailSearch" placeholder="Tutor Email" required>
+                            <input type="email" name="emailSearch" id="TEmail" placeholder="Tutor Email" required>
                         </td>
                         <td>
                             <input type="submit" value="Search" class="btn btn-primary">
