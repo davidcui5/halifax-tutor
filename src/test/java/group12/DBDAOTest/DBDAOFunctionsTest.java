@@ -109,7 +109,7 @@ public class DBDAOFunctionsTest {
     public void testDeleteStudent() {
         StudentSignupForm student = MockData.getStudentObject();
         int id = dbda.getStudentId(student.getEmail());
-        boolean actual = dbda.delelteStudent(id);
+        boolean actual = dbda.deleteStudent(id);
         assertTrue(actual);
     }
 
@@ -117,7 +117,7 @@ public class DBDAOFunctionsTest {
     public void testDeleteTutor() {
         TutorSignupForm tutor = MockData.getTutorObject();
         int id = dbda.getTutorID(tutor.getEmail());
-        boolean actual = dbda.delelteTutor(id);
+        boolean actual = dbda.deleteTutor(id);
         assertTrue(actual);
     }
 }

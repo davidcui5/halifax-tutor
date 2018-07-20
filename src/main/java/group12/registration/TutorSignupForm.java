@@ -2,13 +2,23 @@ package group12.registration;
 
 public class TutorSignupForm extends UserSignupForm {
 
+    private String creditCardHoldName;
     private String creditCardNumber;
     private String expireDate;
-    private int securityCode;
+    private String securityCode;
+
+    public String getCreditCardHoldName() {
+        return creditCardHoldName;
+    }
+
+    public void setCreditCardHoldName(String creditCardHoldName) {
+        this.creditCardHoldName = creditCardHoldName;
+    }
 
     public String getCreditCardNumber() {
         return creditCardNumber;
     }
+
     public void setCreditCardNumber(String creditCardNumber) {
         this.creditCardNumber = creditCardNumber;
     }
@@ -16,14 +26,16 @@ public class TutorSignupForm extends UserSignupForm {
     public String getExpireDate() {
         return expireDate;
     }
+
     public void setExpireDate(String expireDate) {
         this.expireDate = expireDate;
     }
 
-    public int getSecurityCode() {
+    public String getSecurityCode() {
         return securityCode;
     }
-    public void setSecurityCode(int securityCode) {
+
+    public void setSecurityCode(String securityCode) {
         this.securityCode = securityCode;
     }
 

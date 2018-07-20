@@ -21,17 +21,19 @@ public class RegTutorSQLOperation extends SQLOperationTemplate {
         String email = (String) getParameters().get(2);
         String password = (String) getParameters().get(3);
         String phoneNumber = (String) getParameters().get(4);
-        String cardNumber = (String) getParameters().get(5);
-        String expertDate = (String) getParameters().get(6);
-        String securityCode = (String) getParameters().get(7);
+        String cardHolderName = (String) getParameters().get(5);
+        String cardNumber = (String) getParameters().get(6);
+        String expertDate = (String) getParameters().get(7);
+        String securityCode = (String) getParameters().get(8);
         ps.setString(1, firstName);
         ps.setString(2, lastName);
         ps.setString(3, email);
         ps.setString(4, password);
         ps.setString(5, phoneNumber);
-        ps.setString(6, cardNumber);
-        ps.setString(7, expertDate);
-        ps.setString(8, securityCode);
+        ps.setString(6, cardHolderName);
+        ps.setString(7, cardNumber);
+        ps.setString(8, expertDate);
+        ps.setString(9, securityCode);
         return ps;
     }
 

@@ -66,7 +66,7 @@ public class DBDAORegistration {
     public static void testDeleteStudent() {
         StudentSignupForm student = MockData.getStudentObject();
         int id = dbda.getStudentId(student.getEmail());
-        boolean actual = dbda.delelteStudent(id);
+        boolean actual = dbda.deleteStudent(id);
         assertTrue(actual);
     }
 
@@ -74,7 +74,7 @@ public class DBDAORegistration {
     public static void testDeleteTutor() {
         TutorSignupForm tutor = MockData.getTutorObject();
         int id = dbda.getTutorID(tutor.getEmail());
-        boolean actual = dbda.delelteTutor(id);
+        boolean actual = dbda.deleteStudent(id);
         assertTrue(actual);
     }
 }

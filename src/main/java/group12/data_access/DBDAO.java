@@ -126,9 +126,9 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean regTutor(TutorSignupForm tutor) {
-        RegTutorSQLOperation regTutorSQLOperation = new RegTutorSQLOperation(tutor.getFirstName(), tutor.getLastName(), tutor.getEmail()
-                , tutor.getPassword(), tutor.getPhoneNumber(), tutor.getCreditCardNumber()
-                , tutor.getExpireDate(), tutor.getSecurityCode());
+        RegTutorSQLOperation regTutorSQLOperation = new RegTutorSQLOperation(tutor.getFirstName(), tutor.getLastName()
+                , tutor.getEmail(), tutor.getPassword(), tutor.getPhoneNumber(), tutor.getCreditCardHoldName()
+                , tutor.getCreditCardNumber(), tutor.getExpireDate(), tutor.getSecurityCode());
         int result = (int) regTutorSQLOperation.executeMysqlQuery();
         if (result == 1)
             return true;
