@@ -151,25 +151,12 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean saveActivationCode(String code) {
-        String sql = "Select SaveActivationCode(?)";
-        boolean result = false;
-        try {
-            rs = getResult(sql, code);
-            rs.next();
-            if (rs.getInt(1) == 1)
-                result = true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-        } finally {
-            try {
-                closeConnections();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                logger.error(e.getMessage());
-            }
-        }
-        return result;
+        SaveActivationCode saveActivationCode = new SaveActivationCode(code);
+        int result = (int) saveActivationCode.executeMysqlQuery();
+        if (result == 1)
+            return true;
+        else
+            return false;
     }
 
     @Override
