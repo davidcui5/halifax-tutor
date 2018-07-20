@@ -161,25 +161,11 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean activateStudent(int id, String activateCode) {
-        String sql = "SELECT ActivateStudent(?,?)";
-        boolean result = false;
-        try {
-            rs = getResult(sql, String.valueOf(id), activateCode);
-            rs.next();
-            if (rs.getInt(1) == 1)
-                result = true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-        } finally {
-            try {
-                closeConnections();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                logger.error(e.getMessage());
-            }
-        }
-        return result;
+        ActivateStudent activateStudents = new ActivateStudent(id);
+        int result = (int) activateStudents.executeMysqlQuery();
+        if (result == 1)
+            return true;
+        else return false;
     }
 
     @Override
