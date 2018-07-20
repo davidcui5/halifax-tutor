@@ -25,11 +25,15 @@ public interface DatabaseInterface {
 
     boolean saveActivationCode(String code);
 
-    boolean activateStudent(int id,String activateCode);
+    boolean activateStudent(int id, String activateCode);
 
-    boolean activateTutor(int id,String activateCode);
+    boolean activateTutor(int id, String activateCode);
 
     boolean updateStudentPassword(String email, String new_password);
 
     boolean updateTutorPassword(String email, String new_password);
+
+    boolean deleteStudent(int id);
+
+    boolean deleteTutor(int id);
 }
