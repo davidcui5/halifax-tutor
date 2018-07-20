@@ -27,7 +27,7 @@ public class SearchResponse {
         return numOfResults;
     }
 
-    public boolean isSuccess() {
+    public boolean getSuccess() {
         return success;
     }
 }
