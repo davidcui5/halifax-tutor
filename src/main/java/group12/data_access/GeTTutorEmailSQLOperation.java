@@ -4,14 +4,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AuthorizeTutorSQLOperation extends SQLOperationTemplate {
-    public AuthorizeTutorSQLOperation(Object... parameters) {
+public class GeTTutorEmailSQLOperation extends SQLOperationTemplate {
+    public GeTTutorEmailSQLOperation(Object... parameters) {
         super(parameters);
     }
 
     @Override
     String makeSQL() {
-        return "CALL AuthorizeTutor(?,?)";
+        return "CALL GETTutorEmail(?,?)";
     }
 
     @Override

@@ -14,7 +14,7 @@ public class Tutor extends User {
     private boolean activated;
     private boolean banned;
     private String phoneNumber;
-    private String bio;
+    private String education;
     private int planID;
     private String expiryDate;
     private String creditCardHolder;
@@ -75,12 +75,12 @@ public class Tutor extends User {
         this.banned = banned;
     }
 
-    public String getBio() {
-        return bio;
+    public String getEducation() {
+        return education;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
+    public void setEducation(String education) {
+        this.education = education;
     }
 
     public String getPhoneNumber() {
@@ -149,7 +149,7 @@ public class Tutor extends User {
         tutor.setActivated(rs.getBoolean("AccountActivation"));
         tutor.setBanned(rs.getBoolean("Banned"));
         tutor.setPhoneNumber(rs.getString("PhoneNumber"));
-        tutor.setBio(rs.getString("Bio"));
+        tutor.setEducation(rs.getString("Bio"));
         tutor.setPlanID(rs.getInt("PlanID"));
         tutor.setExpiryDate(rs.getString("SubExpiryDate"));
         tutor.setCreditCardHolder(rs.getString("CreditCardHoldName"));

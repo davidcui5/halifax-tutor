@@ -11,13 +11,15 @@ public class ActivateStudentSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "SELECT ActivateStudent(?)";
+        return "SELECT SetStudentActivatedStatus(?,?)";
     }
 
     @Override
     PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         int id = (int) getParameters().get(0);
+        boolean activationStatus = (boolean) getParameters().get(1);
         ps.setInt(1, id);
+        ps.setBoolean(2, activationStatus);
         return ps;
     }
 

@@ -11,7 +11,7 @@ public class RegStudentSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "CALL RegStudent(?,?,?,?,?,?)";
+        return "SELECT RegStudent(?,?,?,?,?,?)";
     }
 
     @Override

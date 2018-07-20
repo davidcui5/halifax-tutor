@@ -1,7 +1,6 @@
 package group12.data_access;
 
 
-import group12.data_access.DatabaseInterface;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import group12.registration.StudentSignupForm;
@@ -22,7 +21,7 @@ import java.util.Arrays;
 @Component
 @ComponentScan
 @ImportResource("classpath:spring.xml")
-public class DBDAO implements DatabaseInterface {
+public class DBDAO implements IDataAccessObject {
 
     private DataSource dataSource;
     Connection con = null;
@@ -68,34 +67,28 @@ public class DBDAO implements DatabaseInterface {
     }
 
     @Override
-    public boolean isEmailNew(String email) {
+    public int countOfUserWithEmail(String email) {
         IsEmailNewSQLOperation isEmailNewSQLOperation = new IsEmailNewSQLOperation(email);
         int numberOfEmails = (int) isEmailNewSQLOperation.executeMysqlQuery();
-        if (numberOfEmails > 0)
-            return false;
-        else return true;
+        return numberOfEmails;
     }
 
     @Override
-    public boolean isPhoneNumberNew(String phoneNumber) {
+    public int countOfUserWithPhone(String phoneNumber) {
         IsPhoneNewSQLOperation isPhoneNewSQLOperation = new IsPhoneNewSQLOperation(phoneNumber);
-        int numberOfEmails = (int) isPhoneNewSQLOperation.executeMysqlQuery();
-        if (numberOfEmails > 0)
-            return false;
-        else return true;
+        int numberOfPhones = (int) isPhoneNewSQLOperation.executeMysqlQuery();
+        return numberOfPhones;
     }
 
     @Override
-    public boolean isCreditCardNew(String creditCardNum) {
+    public int countOfUserWithCreditCardNum(String creditCardNum) {
         IsCreditCardNewSQLOperation isCreditCardNewSQLOperation = new IsCreditCardNewSQLOperation(creditCardNum);
-        int numberOfEmails = (int) isCreditCardNewSQLOperation.executeMysqlQuery();
-        if (numberOfEmails > 0)
-            return false;
-        else return true;
+        int numberofCards = (int) isCreditCardNewSQLOperation.executeMysqlQuery();
+        return numberofCards;
     }
 
     @Override
-    public boolean regStudent(StudentSignupForm student) {
+    public boolean saveStudent(Student student) {
         RegStudentSQLOperation regStudent = new RegStudentSQLOperation(student.getFirstName(), student.getLastName()
                 , student.getEmail(), student.getPassword(), student.getSchool(), student.getPhoneNumber());
         int result = (int) regStudent.executeMysqlQuery();
@@ -106,29 +99,25 @@ public class DBDAO implements DatabaseInterface {
     }
 
     @Override
-    public boolean authorizeStudent(String email, String password) {
-        AuthorizeStudentSQLOperation authorizeStudent = new AuthorizeStudentSQLOperation(email, password);
-        Student student = (Student) authorizeStudent.executeMysqlQuery();
-        if (student.getEmail().equals(email) && student.getPassword().equals(password))
-            return true;
-        else return false;
+    public Student getStudentByEmail(String email) {
+        GetStudentByEmailSQLOperation getStudentByEmailSQLOperation = new GetStudentByEmailSQLOperation(email);
+        Student student = (Student) getStudentByEmailSQLOperation.executeMysqlQuery();
+        return student;
     }
 
     @Override
-    public boolean authorizeTutor(String email, String password) {
-        AuthorizeTutorSQLOperation authorizeTutorSQLOperation = new AuthorizeTutorSQLOperation(email, password);
+    public Tutor getTutorByEmail(String email) {
+        GeTTutorEmailSQLOperation authorizeTutorSQLOperation = new GeTTutorEmailSQLOperation(email);
         Tutor tutor = (Tutor) authorizeTutorSQLOperation.executeMysqlQuery();
-        if (tutor.getEmail().equals(email) && tutor.getPassword().equals(password))
-            return true;
-        else return false;
+        return tutor;
     }
 
 
     @Override
-    public boolean regTutor(TutorSignupForm tutor) {
+    public boolean saveTutor(Tutor tutor) {
         RegTutorSQLOperation regTutorSQLOperation = new RegTutorSQLOperation(tutor.getFirstName(), tutor.getLastName()
-                , tutor.getEmail(), tutor.getPassword(), tutor.getPhoneNumber(), tutor.getCreditCardHoldName()
-                , tutor.getCreditCardNumber(), tutor.getExpireDate(), tutor.getSecurityCode());
+                , tutor.getEmail(), tutor.getPassword(), tutor.getPhoneNumber(), tutor.getCreditCardHolder()
+                , tutor.getCreditCardNum(), tutor.getExpiryDate(), tutor.getSecurityCode());
         int result = (int) regTutorSQLOperation.executeMysqlQuery();
         if (result == 1)
             return true;
@@ -136,14 +125,14 @@ public class DBDAO implements DatabaseInterface {
     }
 
     @Override
-    public int getStudentId(String email) {
+    public int getStudentIDByEmail(String email) {
         GetStudentIdSQLOperation getStudentIdSQLOperation = new GetStudentIdSQLOperation(email);
         Student student = (Student) getStudentIdSQLOperation.executeMysqlQuery();
         return student.getStudentID();
     }
 
     @Override
-    public int getTutorID(String email) {
+    public int getTutorIDByEmail(String email) {
         GetTutorIdSQLOperation tutorIdSQLOperation = new GetTutorIdSQLOperation(email);
         Tutor tutor = (Tutor) tutorIdSQLOperation.executeMysqlQuery();
         return tutor.getTutorID();
@@ -160,7 +149,7 @@ public class DBDAO implements DatabaseInterface {
     }
 
     @Override
-    public boolean activateStudent(int id, String activateCode) {
+    public boolean setStudentActivatedStatus(int id, String activateCode) {
         ActivateStudentSQLOperation activateStudentSQLOperation = new ActivateStudentSQLOperation(id);
         int result = (int) activateStudentSQLOperation.executeMysqlQuery();
         if (result == 1)

@@ -11,7 +11,7 @@ public class RegTutorSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "CALL RegTutor(?,?,?,?,?)";
+        return "SELECT RegTutor(?,?,?,?,?,?,?,?,?)";
     }
 
     @Override
