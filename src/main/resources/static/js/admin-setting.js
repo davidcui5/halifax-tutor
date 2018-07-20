@@ -16,7 +16,7 @@ $(document).ready(function () {
             window.location.replace("../index.html");
         }
     }).fail(function (xhr, status, errorThrown) {
-        window.location.replace("../index.html"); //maybe error page is better.
+        /*window.location.replace("../index.html");*/ //maybe error page is better.
     });
 
     $("#Cpassword").submit(function (event) {

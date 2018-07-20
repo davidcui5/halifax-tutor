@@ -20,7 +20,7 @@ public class AdminController {
     }
 
     @PostMapping(path="/access")
-    public String authorize(@RequestBody Map<String,String> body){
+    public String authorizeAdmin(@RequestBody Map<String,String> body){
         String email = decoder.decodeToken(body.get("token"));
         /*if(admin table contain this email){
             return AUTHORIZED;
