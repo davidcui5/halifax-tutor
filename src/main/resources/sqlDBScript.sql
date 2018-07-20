@@ -431,3 +431,15 @@ CREATE PROCEDURE GetCourses()
     SELECT *
     FROM Course;
   END;
+
+CREATE FUNCTION SaveActivationCode(`_code` varchar(50))
+  returns INT
+  begin
+    DECLARE _result INT;
+    set _result = 0;
+
+    INSERT into ActivationTable (`AcivationCode`, `Date`) values (_code, NOW());
+
+    SET _result = 1;
+    return _result;
+  end;
