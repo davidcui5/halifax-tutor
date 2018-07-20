@@ -75,11 +75,11 @@ CREATE TABLE Admin
 
 CREATE TABLE SubscriptionPlan
 (
-    ID int PRIMARY KEY AUTO_INCREMENT,
+    ID int PRIMARY KEY,
     Name varchar(25),
-    Price int,
+    Price decimal(10,2),
     Description text,
-    Dayes int
+    Months int
 );
 
 CREATE TABLE TutorCourses

@@ -13,7 +13,7 @@ public class JWTAccessTokenTest {
 
     @Before
     public void testSetup() {
-        this.accessToken = new JWTAccessToken();
+        this.accessToken = JWTAccessToken.getInstance();
     }
 
     @Test
