@@ -107,7 +107,7 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean authorizeStudent(String email, String password) {
-        AuthorizeStudent authorizeStudent = new AuthorizeStudent(email, password);
+        AuthorizeStudentSQLOperation authorizeStudent = new AuthorizeStudentSQLOperation(email, password);
         Student student = (Student) authorizeStudent.executeMysqlQuery();
         if (student.getEmail().equals(email) && student.getPassword().equals(password))
             return true;
@@ -116,8 +116,8 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean authorizeTutor(String email, String password) {
-        AuthorizeTutor authorizeTutor = new AuthorizeTutor(email, password);
-        Tutor tutor = (Tutor) authorizeTutor.executeMysqlQuery();
+        AuthorizeTutorSQLOperation authorizeTutorSQLOperation = new AuthorizeTutorSQLOperation(email, password);
+        Tutor tutor = (Tutor) authorizeTutorSQLOperation.executeMysqlQuery();
         if (tutor.getEmail().equals(email) && tutor.getPassword().equals(password))
             return true;
         else return false;
@@ -126,10 +126,10 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean regTutor(TutorSignupForm tutor) {
-        RegTutor regTutor = new RegTutor(tutor.getFirstName(), tutor.getLastName(), tutor.getEmail()
+        RegTutorSQLOperation regTutorSQLOperation = new RegTutorSQLOperation(tutor.getFirstName(), tutor.getLastName(), tutor.getEmail()
                 , tutor.getPassword(), tutor.getPhoneNumber(), tutor.getCreditCardNumber()
                 , tutor.getExpireDate(), tutor.getSecurityCode());
-        int result = (int) regTutor.executeMysqlQuery();
+        int result = (int) regTutorSQLOperation.executeMysqlQuery();
         if (result == 1)
             return true;
         else return false;
@@ -137,22 +137,22 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public int getStudentId(String email) {
-        GetStudentId getStudentId = new GetStudentId(email);
-        Student student = (Student) getStudentId.executeMysqlQuery();
+        GetStudentIdSQLOperation getStudentIdSQLOperation = new GetStudentIdSQLOperation(email);
+        Student student = (Student) getStudentIdSQLOperation.executeMysqlQuery();
         return student.getStudentID();
     }
 
     @Override
     public int getTutorID(String email) {
-        GetTutorId tutorId = new GetTutorId(email);
-        Tutor tutor = (Tutor) tutorId.executeMysqlQuery();
+        GetTutorIdSQLOperation tutorIdSQLOperation = new GetTutorIdSQLOperation(email);
+        Tutor tutor = (Tutor) tutorIdSQLOperation.executeMysqlQuery();
         return tutor.getTutorID();
     }
 
     @Override
     public boolean saveActivationCode(String code) {
-        SaveActivationCode saveActivationCode = new SaveActivationCode(code);
-        int result = (int) saveActivationCode.executeMysqlQuery();
+        SaveActivationCodeSQLOperation saveActivationCodeSQLOperation = new SaveActivationCodeSQLOperation(code);
+        int result = (int) saveActivationCodeSQLOperation.executeMysqlQuery();
         if (result == 1)
             return true;
         else

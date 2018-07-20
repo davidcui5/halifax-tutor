@@ -4,14 +4,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GetStudentId extends SQLOperationTemplate {
-    public GetStudentId(Object... parameters) {
+public class GetTutorIdSQLOperation extends SQLOperationTemplate {
+    public GetTutorIdSQLOperation(Object... parameters) {
         super(parameters);
     }
 
     @Override
     String makeSQL() {
-        return "SELECT GetStudentId(?)";
+        return "SELECT GetTutorId(?)";
     }
 
     @Override
@@ -23,8 +23,8 @@ public class GetStudentId extends SQLOperationTemplate {
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        Student student = Student.studentParser(rs);
-        return student;
+        Tutor tutor = Tutor.tutorParser(rs);
+        return tutor;
     }
 
     @Override

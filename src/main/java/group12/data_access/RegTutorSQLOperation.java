@@ -4,14 +4,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RegStudent extends SQLOperationTemplate {
-    public RegStudent(Object... parameters) {
+public class RegTutorSQLOperation extends SQLOperationTemplate {
+    public RegTutorSQLOperation(Object... parameters) {
         super(parameters);
     }
 
     @Override
     String makeSQL() {
-        return "CALL RegStudent(?,?,?,?,?,?)";
+        return "CALL RegTutor(?,?,?,?,?)";
     }
 
     @Override
@@ -20,27 +20,31 @@ public class RegStudent extends SQLOperationTemplate {
         String lastName = (String) getParameters().get(1);
         String email = (String) getParameters().get(2);
         String password = (String) getParameters().get(3);
-        String school = (String) getParameters().get(4);
-        String phoneNumber = (String) getParameters().get(5);
+        String phoneNumber = (String) getParameters().get(4);
+        String cardNumber = (String) getParameters().get(5);
+        String expertDate = (String) getParameters().get(6);
+        String securityCode = (String) getParameters().get(7);
         ps.setString(1, firstName);
         ps.setString(2, lastName);
         ps.setString(3, email);
         ps.setString(4, password);
-        ps.setString(5, school);
-        ps.setString(6, phoneNumber);
+        ps.setString(5, phoneNumber);
+        ps.setString(6, cardNumber);
+        ps.setString(7, expertDate);
+        ps.setString(8, securityCode);
         return ps;
     }
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        int result;
         rs.next();
-        result = rs.getInt(1);
+        int result = rs.getInt(1);
         return result;
     }
 
     @Override
     ResultSet execute(PreparedStatement ps) throws SQLException {
-        return ps.executeQuery();
+        ps.execute();
+        return ps.getResultSet();
     }
 }

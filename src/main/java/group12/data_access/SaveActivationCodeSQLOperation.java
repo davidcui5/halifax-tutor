@@ -4,32 +4,32 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GetTutorId extends SQLOperationTemplate {
-    public GetTutorId(Object... parameters) {
+public class SaveActivationCodeSQLOperation extends SQLOperationTemplate {
+    public SaveActivationCodeSQLOperation(Object... parameters) {
         super(parameters);
     }
 
     @Override
     String makeSQL() {
-        return "SELECT GetTutorId(?)";
+        return "Select SaveActivationCode(?)";
     }
 
     @Override
     PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
-        String email = (String) getParameters().get(0);
-        ps.setString(1, email);
+        String activeCode = (String) getParameters().get(0);
+        ps.setString(1, activeCode);
         return ps;
     }
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        Tutor tutor = Tutor.tutorParser(rs);
-        return tutor;
+        rs.next();
+        int result = rs.getInt(1);
+        return result;
     }
 
     @Override
     ResultSet execute(PreparedStatement ps) throws SQLException {
-        ps.execute();
-        return ps.getResultSet();
+        return ps.executeQuery();
     }
 }

@@ -4,8 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AuthorizeStudent extends SQLOperationTemplate {
-    public AuthorizeStudent(Object... parameters) {
+public class AuthorizeStudentSQLOperation extends SQLOperationTemplate {
+    public AuthorizeStudentSQLOperation(Object... parameters) {
         super(parameters);
     }
 
