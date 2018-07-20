@@ -1,0 +1,16 @@
+
+/*https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_three_columns*/
+
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 30px;
+    height: 650px;
+}
+
+table {
+    text-align: left;
+    margin: 0 5%;
+}
+
+
