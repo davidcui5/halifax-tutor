@@ -34,7 +34,7 @@ $(document).ready(function () {
         }
         else{
             $.ajax({
-                url: location.origin + "http://localhost:8080/tutorforgotpassword",
+                url: location.origin + "/tutorforgotpassword",
                 data: JSON.stringify(studentData),
                 contentType: "application/json",
                 type: "POST",

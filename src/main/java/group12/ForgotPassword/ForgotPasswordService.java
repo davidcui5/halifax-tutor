@@ -36,19 +36,18 @@ public class ForgotPasswordService implements IForgotPassword {
 
         ForgotPasswordResponse response = new ForgotPasswordResponse();
 
-//        if (db.isEmailNew(email)) {
+        if (db.isEmailNew(student.getEmail())) {
             int studentID = db.getStudentId(student.getEmail());
             UUID uuid = UUID.randomUUID();
             db.saveActivationCode(uuid.toString());
-            serverURL = "http://localhost:8080";
             mailer.sendMail(emailSender, student.getEmail(), "Verification",
                     "Verification " + serverURL + "/student/studentid/" + studentID + "/email/" + student.getEmail() + "/verification/" + uuid.toString() + "/");
             response.setResult("Success");
-//        }
-//        else{
-//            response.setResult("Failure");
-////          response.addDetail("Tutor not Found");
-//        }
+        }
+        else{
+            response.setResult("Failure");
+            response.addDetail("Tutor not Found");
+        }
             return response;
         }
 
@@ -57,19 +56,18 @@ public class ForgotPasswordService implements IForgotPassword {
 
         ForgotPasswordResponse response = new ForgotPasswordResponse();
 
-//        if (db.isEmailNew(tutor.getEmail())) {
+        if (db.isEmailNew(tutor.getEmail())) {
             int tutorID = db.getTutorID(tutor.getEmail());
             UUID uuid = UUID.randomUUID();
             db.saveActivationCode(uuid.toString());
-            serverURL = "http://localhost:8080";
             mailer.sendMail(emailSender, tutor.getEmail(), "Verification",
                     "Verification " + serverURL + "/tutor/tutorid/" + tutorID + "/email/" + tutor.getEmail() + "/verification/" + uuid.toString() + "/");
             response.setResult("Success");
-//        }
-//        else{
-//            response.setResult("Failure");
-////          response.addDetail("Tutor not Found");
-//        }
+        }
+        else{
+            response.setResult("Failure");
+            response.addDetail("Tutor not Found");
+        }
 
         return response;
     }
@@ -102,7 +100,7 @@ public class ForgotPasswordService implements IForgotPassword {
 
         ForgotPasswordResponse response = new ForgotPasswordResponse();
 
-//        if (db.isEmailNew(email)) {
+        if (db.isEmailNew(student.getEmail())) {
             if(db.updateStudentPassword(student.getEmail(), encryptor.encrypt(student.getPassword()))){
                 response.setResult("Success");
             }
@@ -110,11 +108,11 @@ public class ForgotPasswordService implements IForgotPassword {
                 response.setResult("Failure");
                 response.addDetail("Internal Server Error");
             }
-//        }
-//        else{
-//            response.setResult("Failure");
-//            response.addDetail("Email already registered");
-//        }
+        }
+        else{
+            response.setResult("Failure");
+            response.addDetail("Email already registered");
+        }
 
 
         return response;
@@ -126,7 +124,7 @@ public class ForgotPasswordService implements IForgotPassword {
 
         ForgotPasswordResponse response = new ForgotPasswordResponse();
 
-//        if (db.isEmailNew(email)) {
+        if (db.isEmailNew(tutor.getEmail())) {
             if(db.updateTutorPassword(tutor.getEmail(), encryptor.encrypt(tutor.getPassword()))){
                 response.setResult("Success");
             }
@@ -134,11 +132,11 @@ public class ForgotPasswordService implements IForgotPassword {
                 response.setResult("Failure");
                 response.addDetail("Internal Server Error");
             }
-//        }
-//        else{
-//            response.setResult("Failure");
-//            response.addDetail("Email already registered");
-//        }
+        }
+        else{
+            response.setResult("Failure");
+            response.addDetail("Email already registered");
+        }
 
 
         return response;
