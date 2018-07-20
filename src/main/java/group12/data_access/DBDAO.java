@@ -156,7 +156,13 @@ public class DBDAO implements IDataAccessObject {
 
     @Override
     public boolean setStudentBannedStatus(int studentID, boolean status) {
-        return false;
+        SetStudentBannedStatusSQLOperation setStudentBannedStatus =
+                new SetStudentBannedStatusSQLOperation(studentID, status);
+        int result = (int) setStudentBannedStatus.executeMysqlQuery();
+        if (result == 1)
+            return true;
+        else
+            return false;
     }
 
     @Override
