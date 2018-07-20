@@ -144,24 +144,9 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public int getTutorID(String email) {
-        String sql = "SELECT GetTutorId(?)";
-        int result = 0;
-        try {
-            rs = getResult(sql, email);
-            rs.next();
-            result = rs.getInt(1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-        } finally {
-            try {
-                closeConnections();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                logger.error(e.getMessage());
-            }
-        }
-        return result;
+        GetTutorId tutorId = new GetTutorId(email);
+        Tutor tutor = (Tutor) tutorId.executeMysqlQuery();
+        return tutor.getTutorID();
     }
 
     @Override
