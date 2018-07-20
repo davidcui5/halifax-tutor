@@ -4,6 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
@@ -28,6 +31,12 @@ public class SearchResponseTest {
     }
 
     @Test
+    public void testGetResults() {
+        List<TutorPublicInfo> results = new ArrayList<>();
+        assertEquals(results, searchResponse.getResults());
+    }
+
+    @Test
     public void testSetSuccess() {
         boolean previous = searchResponse.getSuccess();
         boolean success = true;
@@ -43,6 +52,16 @@ public class SearchResponseTest {
         searchResponse.setNumOfResults(numOfResults);
         assertEquals(numOfResults, searchResponse.getNumOfResults());
         assertNotEquals(previous, searchResponse.getNumOfResults());
+    }
+
+    @Test
+    public void testSetResults() {
+        List<TutorPublicInfo> previous = searchResponse.getResults();
+        List<TutorPublicInfo> results = new ArrayList<>();
+        results.add(new TutorPublicInfo());
+        searchResponse.setResults(results);
+        assertNotEquals(previous, searchResponse.getResults());
+        assertEquals(results, searchResponse.getResults());
     }
 
     @After
