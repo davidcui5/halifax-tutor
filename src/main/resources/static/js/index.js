@@ -3,6 +3,11 @@
 $(document).ready(function () {
     $("form").submit(function (event) {
         event.preventDefault();
+
+        if(!validateForm()){
+            return;
+        }
+
         let type = $("#type").val();
         let email = $("#email").val();
         let password = $("#password").val();
