@@ -170,28 +170,16 @@ public class DBDAO implements DatabaseInterface {
 
     @Override
     public boolean activateTutor(int id, String activateCode) {
-        String sql = "SELECT ActivateTutor(?,?)";
-        boolean result = false;
-        try {
-            rs = getResult(sql, String.valueOf(id), activateCode);
-            rs.next();
-            if (rs.getInt(1) == 1)
-                result = true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.error(e.getMessage());
-        } finally {
-            try {
-                closeConnections();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                logger.error(e.getMessage());
-            }
-        }
-        return result;
+        ActivateTutorSQLOperation activateTutorSQLOperation = new ActivateTutorSQLOperation(id);
+        int result = (int) activateTutorSQLOperation.executeMysqlQuery();
+        if (result == 1)
+            return true;
+        else
+            return false;
     }
 
-    public boolean delelteStudent(int id) {
+    @Override
+    public boolean deleteStudent(int id) {
         String sql = "SELECT DeleteStudent(?)";
         boolean result = false;
         try {
@@ -213,7 +201,8 @@ public class DBDAO implements DatabaseInterface {
         return result;
     }
 
-    public boolean delelteTutor(int id) {
+    @Override
+    public boolean deleteTutor(int id) {
         String sql = "SELECT DeleteTutor(?)";
         boolean result = false;
         try {

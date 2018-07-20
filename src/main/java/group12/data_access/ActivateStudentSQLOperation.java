@@ -11,7 +11,7 @@ public class ActivateStudentSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "SELECT ActivateStudent(?,?)";
+        return "SELECT ActivateStudent(?)";
     }
 
     @Override
