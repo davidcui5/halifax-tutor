@@ -37,35 +37,6 @@ public class DBDAO implements IDataAccessObject {
         this.dataSource = dataSource;
     }
 
-    public ResultSet getResult(String query, String... parameters) {
-        con = null;
-        ps = null;
-        rs = null;
-        try {
-            con = dataSource.getConnection();
-            ps = con.prepareStatement(query);
-            for (int i = 0; i < parameters.length; i++) {
-                ps.setString(i + 1, parameters[i]);
-            }
-            return ps.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.error("Query:" + query + " Input:" + Arrays.toString(parameters) + " Error:" + e.getMessage());
-        } finally {
-
-        }
-        return null;
-    }
-
-    public void closeConnections() throws SQLException {
-        assert (con != null);
-        con.close();
-        assert (ps != null);
-        ps.close();
-        assert (rs != null);
-        rs.close();
-    }
-
     @Override
     public int countOfUserWithEmail(String email) {
         IsEmailNewSQLOperation isEmailNewSQLOperation = new IsEmailNewSQLOperation(email);
@@ -85,6 +56,11 @@ public class DBDAO implements IDataAccessObject {
         IsCreditCardNewSQLOperation isCreditCardNewSQLOperation = new IsCreditCardNewSQLOperation(creditCardNum);
         int numberofCards = (int) isCreditCardNewSQLOperation.executeMysqlQuery();
         return numberofCards;
+    }
+
+    @Override
+    public int countOfActivationCodeWithValue(String codeValue) {
+        return 0;
     }
 
     @Override
@@ -110,6 +86,11 @@ public class DBDAO implements IDataAccessObject {
         GeTTutorEmailSQLOperation authorizeTutorSQLOperation = new GeTTutorEmailSQLOperation(email);
         Tutor tutor = (Tutor) authorizeTutorSQLOperation.executeMysqlQuery();
         return tutor;
+    }
+
+    @Override
+    public Admin getAdminByEmail(String email) {
+        return null;
     }
 
 
@@ -149,22 +130,48 @@ public class DBDAO implements IDataAccessObject {
     }
 
     @Override
-    public boolean setStudentActivatedStatus(int id, String activateCode) {
-        ActivateStudentSQLOperation activateStudentSQLOperation = new ActivateStudentSQLOperation(id);
-        int result = (int) activateStudentSQLOperation.executeMysqlQuery();
+    public boolean setStudentActivatedStatus(int id, boolean activateCode) {
+        SetStudentActivatedStatusSQLOperation setStudentActivatedStatusSQLOperation =
+                new SetStudentActivatedStatusSQLOperation(id);
+        int result = (int) setStudentActivatedStatusSQLOperation.executeMysqlQuery();
         if (result == 1)
             return true;
         else return false;
     }
 
     @Override
-    public boolean activateTutor(int id, String activateCode) {
-        ActivateTutorSQLOperation activateTutorSQLOperation = new ActivateTutorSQLOperation(id);
-        int result = (int) activateTutorSQLOperation.executeMysqlQuery();
+    public boolean setTutorActivatedStatus(int id, boolean activateCode) {
+        SetTutorActivatedStatusSQLOperation setTutorActivatedStatusSQLOperation = new SetTutorActivatedStatusSQLOperation(id);
+        int result = (int) setTutorActivatedStatusSQLOperation.executeMysqlQuery();
         if (result == 1)
             return true;
         else
             return false;
+    }
+
+    @Override
+    public boolean setActivatedStatusByEmail(String email, boolean status) {
+        return false;
+    }
+
+    @Override
+    public boolean setStudentBannedStatus(int studentID, boolean status) {
+        return false;
+    }
+
+    @Override
+    public boolean setTutorBannedStatus(int tutorID, boolean status) {
+        return false;
+    }
+
+    @Override
+    public boolean setBannedStatusByEmail(String email, boolean status) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteActivationCodeByValue(String codeValue) {
+        return false;
     }
 
     @Override
@@ -195,8 +202,7 @@ public class DBDAO implements IDataAccessObject {
     }
 
     @Override
-    public boolean updateTutorPassword
-            (String email, String newPassword) {
+    public boolean updateTutorPassword(String email, String newPassword) {
         UpdateTutorPasswordSQLOperation updateTutorPasswordSQLOperation =
                 new UpdateTutorPasswordSQLOperation(email, newPassword);
         int result = (int) updateTutorPasswordSQLOperation.executeMysqlQuery();

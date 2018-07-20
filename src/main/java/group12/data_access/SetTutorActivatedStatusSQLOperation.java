@@ -4,14 +4,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ActivateStudentSQLOperation extends SQLOperationTemplate {
-    public ActivateStudentSQLOperation(Object... parameters) {
+public class SetTutorActivatedStatusSQLOperation extends SQLOperationTemplate {
+    public SetTutorActivatedStatusSQLOperation(Object... parameters) {
         super(parameters);
     }
 
     @Override
     String makeSQL() {
-        return "SELECT SetStudentActivatedStatus(?,?)";
+        return "SELECT SetTutorActivatedStatus(?,?)";
     }
 
     @Override

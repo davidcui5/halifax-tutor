@@ -98,4 +98,24 @@ public class MysqlDAOImpl implements IDataAccessObject{
     public boolean deleteActivationCodeByValue(String codeValue) {
         return false;
     }
+
+    @Override
+    public boolean deleteStudent(int studentID) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteTutor(int tutorID) {
+        return false;
+    }
+
+    @Override
+    public boolean updateStudentPassword(String studentEmail, String newPassword) {
+        return false;
+    }
+
+    @Override
+    public boolean updateTutorPassword(String tutorEmail, String newPassword) {
+        return false;
+    }
 }

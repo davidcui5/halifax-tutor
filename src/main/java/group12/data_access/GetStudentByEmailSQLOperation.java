@@ -11,7 +11,7 @@ public class GetStudentByEmailSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "CALL GetStudentByEmail(?)";
+        return "CALL GETStudentEmail(?)";
     }
 
     @Override
