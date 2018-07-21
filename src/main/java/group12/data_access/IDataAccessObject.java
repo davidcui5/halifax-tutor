@@ -10,7 +10,7 @@ public interface IDataAccessObject {
 
     Admin getAdminByEmail(String email);
 
-    ActivationCode cheActivationCode(String code);
+    ActivationCode checkActivationCode(String code);
 
     Course getCourseByName(String nameCourse);
 

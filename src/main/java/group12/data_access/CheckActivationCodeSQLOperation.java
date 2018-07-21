@@ -23,7 +23,8 @@ public class CheckActivationCodeSQLOperation extends SQLOperationTemplate {
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        ActivationCode activationCode = ActivationCode.activationCodeParser(rs);
+        ActivationCodeParser activationCodeParser=new ActivationCodeParser();
+        ActivationCode activationCode = activationCodeParser.parse(rs);
         return activationCode;
     }
 

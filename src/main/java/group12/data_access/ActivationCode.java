@@ -23,11 +23,4 @@ public class ActivationCode {
     public void setDate(Date date) {
         this.date = date;
     }
-
-    public static ActivationCode activationCodeParser(ResultSet rs) throws SQLException {
-        ActivationCode activationCode = new ActivationCode();
-        activationCode.setActivationCode(rs.getString("AcivationCode"));
-        activationCode.setDate(rs.getDate("Date"));
-        return activationCode;
-    }
 }

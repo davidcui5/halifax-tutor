@@ -237,7 +237,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
     }
 
     @Override
-    public ActivationCode cheActivationCode(String code) {
+    public ActivationCode checkActivationCode(String code) {
         CheckActivationCodeSQLOperation activationCodeSQLOperation = new CheckActivationCodeSQLOperation(code);
         ActivationCode activationCode = (ActivationCode) activationCodeSQLOperation.executeMysqlQuery();
         return activationCode;

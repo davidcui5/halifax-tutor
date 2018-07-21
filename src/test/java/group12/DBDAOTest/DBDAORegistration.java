@@ -1,12 +1,13 @@
 
 package group12.DBDAOTest;
 
-import group12.data_access.MysqlDAOImpl;
-import group12.data_access.IDataAccessObject;
-import group12.data_access.Student;
-import group12.data_access.Tutor;
+import group12.data_access.*;
 import org.junit.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import javax.xml.crypto.Data;
+import java.lang.reflect.AccessibleObject;
+import java.time.LocalDateTime;
 
 import static junit.framework.TestCase.*;
 
@@ -23,6 +24,10 @@ public class DBDAORegistration {
     @Test
     public void testRegStudentRightInfo() {
         Student student = MockData.getStudentObject();
+        int number = dbda.countOfUserWithEmail(student.getEmail());
+        assertEquals(0, number);
+        number = dbda.countOfUserWithPhone(student.getPhoneNumber());
+        assertEquals(0, number);
         boolean actual = dbda.saveStudent(student);
         assertTrue(actual);
     }
@@ -30,14 +35,21 @@ public class DBDAORegistration {
     @Test
     public void testRegTutorRightInfo() {
         Tutor tutor = MockData.getTutorObject();
+        int number = dbda.countOfUserWithCreditCardNum(tutor.getCreditCardNum());
+        assertEquals(0, number);
         boolean actual = dbda.saveTutor(tutor);
         assertTrue(actual);
     }
 
     @Test
-    public void testSaveActivationCode() {
+    public void testActivationCode() {
         boolean actual = dbda.saveActivationCode(MockData.getActivationCode());
         assertTrue(actual);
+        ActivationCode activationCode = dbda.checkActivationCode(MockData.getActivationCode());
+        assertEquals(LocalDateTime.now(), activationCode.getDate());
+        actual = dbda.deleteActivationCodeByValue(MockData.getActivationCode());
+        assertTrue(actual);
+
     }
 
     @AfterClass
