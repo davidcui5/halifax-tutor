@@ -65,6 +65,11 @@ public class MysqlDAOImpl implements IDataAccessObject{
     }
 
     @Override
+    public boolean saveCourse(Course course) {
+        return false;
+    }
+
+    @Override
     public boolean saveStudent(Student student) {
         return false;
     }
@@ -126,6 +131,11 @@ public class MysqlDAOImpl implements IDataAccessObject{
 
     @Override
     public boolean updateTutorPassword(String tutorEmail, String newPassword) {
+        return false;
+    }
+
+    @Override
+    public boolean setCourseToTutor(int tutorId, int courseId, float price) {
         return false;
     }
 }

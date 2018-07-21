@@ -211,6 +211,16 @@ public class DBDAO implements IDataAccessObject {
     }
 
     @Override
+    public boolean setCourseToTutor(int tutorId, int courseId, float price) {
+        SetCourseToTutorSQLOperation setCourseToTutorSQLOperation = new SetCourseToTutorSQLOperation(tutorId, courseId, price);
+        int result = (int) setCourseToTutorSQLOperation.executeMysqlQuery();
+        if (result == 1)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
     public ActivationCode cheActivationCode(String code) {
         CheckActivationCodeSQLOperation activationCodeSQLOperation = new CheckActivationCodeSQLOperation(code);
         ActivationCode activationCode = (ActivationCode) activationCodeSQLOperation.executeMysqlQuery();
