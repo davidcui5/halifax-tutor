@@ -19,6 +19,11 @@ $(document).ready(function () {
         //window.location.replace("../index.html");
     });
 
+    $("#logout").onclick(function (event) {
+        event.preventDefault();
+        localStorage.removeItem("token");
+    });
+
     $("#Cpassword").submit(function (event) {
         event.preventDefault();
         let password = $("#pwd").val();
