@@ -1,6 +1,6 @@
 package group12.DBDAOTest;
 
-import group12.data_access.DBDAO;
+import group12.data_access.MysqlDAOImpl;
 import group12.data_access.Student;
 import group12.data_access.Tutor;
 import org.junit.*;
@@ -11,12 +11,12 @@ import static junit.framework.TestCase.assertTrue;
 
 public class DBDAOFunctionsTest {
     static ClassPathXmlApplicationContext context;
-    static DBDAO dbda;
+    static MysqlDAOImpl dbda;
 
     @BeforeClass
     public static void confingDBConnection() {
         context = new ClassPathXmlApplicationContext("spring.xml");
-        dbda = context.getBean("DBDAO", DBDAO.class);
+        dbda = context.getBean("DBDAO", MysqlDAOImpl.class);
     }
 
     @Before

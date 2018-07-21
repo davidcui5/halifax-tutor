@@ -27,7 +27,7 @@
         <property name="mailer" ref="mailer"/>
     </bean>
 
-    <bean id="DBDAO" class="group12.data_access.DBDAO">
+    <bean id="DBDAO" class="group12.data_access.MysqlDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
     <!--RegistrationController beans ENDT-->

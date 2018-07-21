@@ -1,7 +1,7 @@
 
 package group12.DBDAOTest;
 
-import group12.data_access.DBDAO;
+import group12.data_access.MysqlDAOImpl;
 import group12.data_access.IDataAccessObject;
 import group12.data_access.Student;
 import group12.data_access.Tutor;
@@ -17,7 +17,7 @@ public class DBDAORegistration {
     @BeforeClass
     public static void confingDBConnection() {
         context = new ClassPathXmlApplicationContext("spring.xml");
-        dbda = context.getBean("DBDAO", DBDAO.class);
+        dbda = context.getBean("DBDAO", MysqlDAOImpl.class);
     }
 
     @Test

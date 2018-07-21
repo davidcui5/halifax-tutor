@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 @Component
 @ComponentScan
 @ImportResource("classpath:spring.xml")
-public class DBDAO implements IDataAccessObject {
+public class MysqlDAOImpl implements IDataAccessObject {
 
     PreparedStatement ps = null;
     ResultSet rs = null;

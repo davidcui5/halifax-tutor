@@ -1,6 +1,6 @@
 package group12.UserSetting;
 
-import group12.data_access.DBDAO;
+import group12.data_access.MysqlDAOImpl;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import org.apache.logging.log4j.LogManager;
@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 public class TSettingService implements ITSetting{
 
     private static final Logger logger = LogManager.getLogger(TSettingService.class);
-    private DBDAO db;
+    private MysqlDAOImpl db;
 
     @Override
     public TSettingResponse changeEmail(ChangeEmailForm form, String oldemail) {
