@@ -223,4 +223,14 @@ public class DBDAO implements IDataAccessObject {
         Course course = (Course) getCourseByNameSQLOperation.executeMysqlQuery();
         return course;
     }
+
+    @Override
+    public boolean saveCourse(Course course) {
+        SaveCourseSQLOperation saveCourseSQLOperation = new SaveCourseSQLOperation(course);
+        int result = (int) saveCourseSQLOperation.executeMysqlQuery();
+        if (result == 1)
+            return true;
+        else
+            return false;
+    }
 }

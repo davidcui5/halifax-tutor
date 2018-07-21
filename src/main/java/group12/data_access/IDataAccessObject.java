@@ -26,6 +26,8 @@ public interface IDataAccessObject {
 
     boolean saveActivationCode(String code);
 
+    boolean saveCourse(Course course);
+
     boolean saveStudent(Student student);
 
     boolean saveTutor(Tutor tutor);
