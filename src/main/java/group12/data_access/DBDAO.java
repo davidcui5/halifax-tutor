@@ -128,7 +128,7 @@ public class DBDAO implements IDataAccessObject {
     @Override
     public boolean setStudentActivatedStatus(int id, boolean activateCode) {
         SetStudentActivatedStatusSQLOperation setStudentActivatedStatusSQLOperation =
-                new SetStudentActivatedStatusSQLOperation(id);
+                new SetStudentActivatedStatusSQLOperation(id, activateCode);
         int result = (int) setStudentActivatedStatusSQLOperation.executeMysqlQuery();
         if (result == 1)
             return true;
@@ -137,7 +137,8 @@ public class DBDAO implements IDataAccessObject {
 
     @Override
     public boolean setTutorActivatedStatus(int id, boolean activateCode) {
-        SetTutorActivatedStatusSQLOperation setTutorActivatedStatusSQLOperation = new SetTutorActivatedStatusSQLOperation(id);
+        SetTutorActivatedStatusSQLOperation setTutorActivatedStatusSQLOperation =
+                new SetTutorActivatedStatusSQLOperation(id, activateCode);
         int result = (int) setTutorActivatedStatusSQLOperation.executeMysqlQuery();
         if (result == 1)
             return true;
