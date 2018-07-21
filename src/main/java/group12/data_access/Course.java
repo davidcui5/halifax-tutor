@@ -31,12 +31,4 @@ public class Course {
     public void setId(int id) {
         this.id = id;
     }
-
-    public static Course courseParser(ResultSet rs) throws SQLException {
-        Course course = new Course();
-        course.setId(rs.getInt("ID"));
-        course.setName(rs.getString("Name"));
-        course.setSchool(rs.getString("School"));
-        return course;
-    }
 }
