@@ -1,0 +1,42 @@
+package group12.data_access;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class Course {
+    private int id;
+    private String name;
+    private String school;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public static Course courseParser(ResultSet rs) throws SQLException {
+        Course course = new Course();
+        course.setId(rs.getInt("ID"));
+        course.setName(rs.getString("Name"));
+        course.setSchool(rs.getString("School"));
+        return course;
+    }
+}

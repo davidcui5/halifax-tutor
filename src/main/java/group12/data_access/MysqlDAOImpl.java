@@ -20,6 +20,16 @@ public class MysqlDAOImpl implements IDataAccessObject{
     }
 
     @Override
+    public ActivationCode cheActivationCode(String code) {
+        return null;
+    }
+
+    @Override
+    public Course getCourseByName(String nameCourse) {
+        return null;
+    }
+
+    @Override
     public int getStudentIDByEmail(String email) {
         return 0;
     }

@@ -10,6 +10,8 @@ public interface IDataAccessObject {
 
     ActivationCode cheActivationCode(String code);
 
+    Course getCourseByName(String nameCourse);
+
     int getStudentIDByEmail(String email);
 
     int getTutorIDByEmail(String email);

@@ -1,15 +1,11 @@
 package group12.data_access;
 
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -19,19 +15,8 @@ import java.sql.ResultSet;
 @ImportResource("classpath:spring.xml")
 public class DBDAO implements IDataAccessObject {
 
-    private DataSource dataSource;
-    Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-    Logger logger;
-
-    public DBDAO() {
-        logger = LogManager.getLogger("Logger DB");
-    }
-
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
 
     @Override
     public int countOfUserWithEmail(String email) {
@@ -230,5 +215,12 @@ public class DBDAO implements IDataAccessObject {
         CheckActivationCodeSQLOperation activationCodeSQLOperation = new CheckActivationCodeSQLOperation(code);
         ActivationCode activationCode = (ActivationCode) activationCodeSQLOperation.executeMysqlQuery();
         return activationCode;
+    }
+
+    @Override
+    public Course getCourseByName(String nameCourse) {
+        GetCourseByNameSQLOperation getCourseByNameSQLOperation = new GetCourseByNameSQLOperation(nameCourse);
+        Course course = (Course) getCourseByNameSQLOperation.executeMysqlQuery();
+        return course;
     }
 }
