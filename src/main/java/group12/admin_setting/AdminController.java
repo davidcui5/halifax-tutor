@@ -237,4 +237,22 @@ public class AdminController {
             return null;
         }
     }
+
+    @PostMapping(path="/review/delete")
+    public String deleteReview(@RequestBody Map<String,String> body){
+        boolean isAuthorized = authorizeAdmin(body.get("token"));
+        if(isAuthorized){
+            int id = Integer.parseInt(body.get("reviewID"));
+            logger.log(Level.INFO,id);
+            if(dao.deleteReviewByID(id)){
+                return SUCCESS;
+            }
+            else{
+                return FAILURE;
+            }
+        }
+        else{
+            return UNAUTHORIZED;
+        }
+    }
 }

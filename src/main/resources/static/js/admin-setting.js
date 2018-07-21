@@ -16,7 +16,7 @@ $(document).ready(function () {
             window.location.replace("../index.html");
         }
     }).fail(function (xhr, status, errorThrown) {
-        window.location.replace("../index.html");
+        //window.location.replace("../index.html");
     });
 
     $("#Cpassword").submit(function (event) {
@@ -226,6 +226,28 @@ $(document).ready(function () {
                 result += "</table>";
                 $("#tutorReviews").html(result);
             }
+        }).fail(function (xhr, status, errorThrown) {
+            //empty
+        });
+    });
+
+    $("#deleteReview").submit(function (event) {
+        event.preventDefault();
+        let reviewID = $("#ReviewID").val();
+
+        var data = {
+            'token': token,
+            'reviewID': reviewID
+        };
+
+        $.ajax({
+            url: location.origin + "/admin/setting/review/delete",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "text"
+        }).done(function (data) {
+            alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
         });

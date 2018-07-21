@@ -46,4 +46,10 @@ public class AdminSettingDAO implements IAdminSettingDAO {
         SQLOperationTemplate op = new GetReviewsByStudentIDSQLOp(tutorID);
         return (List<ReviewDTO>)op.executeMysqlQuery();
     }
+
+    @Override
+    public boolean deleteReviewByID(int id) {
+        SQLOperationTemplate op = new DeleteReviewByIDSQLOperation(id);
+        return (Boolean)op.executeMysqlQuery();
+    }
 }

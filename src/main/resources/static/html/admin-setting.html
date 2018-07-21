@@ -101,7 +101,7 @@
                 <table>
                     <tr>
                         <td>
-                            <input type="number" name="SbanID" id="SbanID" placeholder="Student ID" required>
+                            <input type="number" step="1" min="1" name="SbanID" id="SbanID" placeholder="Student ID" required>
                         </td>
                         <td>
                             <input type="submit" value=" BAN  " class="btn btn-danger">
@@ -113,7 +113,7 @@
                 <table>
                     <tr>
                         <td>
-                            <input type="number" name="SunbanID" id="SunbanID" placeholder="Student ID"  required>
+                            <input type="number" step="1" min="1" name="SunbanID" id="SunbanID" placeholder="Student ID"  required>
                         </td>
                         <td>
                             <input type="submit" value="UNBAN" class="btn btn-success">
@@ -129,7 +129,7 @@
                 <table>
                     <tr>
                         <td>
-                            <input type="number" name="TbanID" id="TbanID" placeholder="Tutor ID" required>
+                            <input type="number" step="1" min="1" name="TbanID" id="TbanID" placeholder="Tutor ID" required>
                         </td>
                         <td>
                             <input type="submit" value=" BAN  " class="btn btn-danger">
@@ -141,7 +141,7 @@
                 <table>
                     <tr>
                         <td>
-                            <input type="number" name="TunbanID" id="TunbanID" placeholder="Tutor ID"  required>
+                            <input type="number" step="1" min="1" name="TunbanID" id="TunbanID" placeholder="Tutor ID"  required>
                         </td>
                         <td>
                             <input type="submit" value="UNBAN" class="btn btn-success">
@@ -186,6 +186,21 @@
             </form>
             <h4>Results</h4><br>
             <span id="tutorReviews">?</span>
+        </div>
+        <div class="tablerow">
+            <form id="deleteReview">
+                <h4>Delete Review by Review ID:</h4>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="number" step="1" min="1" name="reviewID" id="ReviewID" placeholder="Review ID" required>
+                        </td>
+                        <td>
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </td>
+                    </tr>
+                </table>
+            </form>
         </div>
     </div>
 </div>
