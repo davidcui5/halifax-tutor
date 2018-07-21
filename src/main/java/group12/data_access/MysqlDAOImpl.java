@@ -1,11 +1,15 @@
 package group12.data_access;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
@@ -16,8 +20,19 @@ import java.util.List;
 @ImportResource("classpath:spring.xml")
 public class MysqlDAOImpl implements IDataAccessObject {
 
+    private DataSource dataSource;
+    Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
+    Logger logger;
+
+    public MysqlDAOImpl() {
+        logger = LogManager.getLogger("Logger DB");
+    }
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Override
     public int countOfUserWithEmail(String email) {
@@ -238,8 +253,8 @@ public class MysqlDAOImpl implements IDataAccessObject {
     @Override
     public List<Course> getAllCourses() {
         GetAllCourseSQLOperation getAllCourseSQLOperation = new GetAllCourseSQLOperation();
-
-        return null;
+        List<Course> courseList = (List<Course>) getAllCourseSQLOperation.executeMysqlQuery();
+        return courseList;
     }
 
     @Override
