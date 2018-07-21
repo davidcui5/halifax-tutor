@@ -1,10 +1,13 @@
 package group12.DBDAOTest;
 
+import group12.data_access.Course;
 import group12.data_access.MysqlDAOImpl;
 import group12.data_access.Student;
 import group12.data_access.Tutor;
 import org.junit.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
@@ -71,6 +74,12 @@ public class DBDAOFunctionsTest {
         int tutorId = dbda.getTutorIDByEmail(tutor.getEmail());
         boolean actual = dbda.setTutorActivatedStatus(tutorId, true);
         assertTrue(actual);
+    }
+
+    @Test
+    public void getAllCourses() {
+        List<Course> courses = dbda.getAllCourses();
+        assertTrue(courses.size() > 0);
     }
 
     @After

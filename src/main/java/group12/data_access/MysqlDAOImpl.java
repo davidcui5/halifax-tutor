@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 @Transactional
 @Component
@@ -232,6 +233,13 @@ public class MysqlDAOImpl implements IDataAccessObject {
         GetCourseByNameSQLOperation getCourseByNameSQLOperation = new GetCourseByNameSQLOperation(nameCourse);
         Course course = (Course) getCourseByNameSQLOperation.executeMysqlQuery();
         return course;
+    }
+
+    @Override
+    public List<Course> getAllCourses() {
+        GetAllCourseSQLOperation getAllCourseSQLOperation = new GetAllCourseSQLOperation();
+
+        return null;
     }
 
     @Override

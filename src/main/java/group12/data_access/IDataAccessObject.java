@@ -1,5 +1,7 @@
 package group12.data_access;
 
+import java.util.List;
+
 public interface IDataAccessObject {
 
     Student getStudentByEmail(String email);
@@ -11,6 +13,8 @@ public interface IDataAccessObject {
     ActivationCode cheActivationCode(String code);
 
     Course getCourseByName(String nameCourse);
+
+    List<Course> getAllCourses();
 
     int getStudentIDByEmail(String email);
 
