@@ -23,14 +23,15 @@ public class GetTutorIdSQLOperation extends SQLOperationTemplate {
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        Tutor tutor = Tutor.tutorParser(rs);
+        TutorParser tutorParser = new TutorParser();
+        Tutor tutor = tutorParser.parse(rs);
         return tutor;
     }
 
     @Override
     ResultSet execute(PreparedStatement ps) throws SQLException {
         ps.execute();
-        ResultSet set=ps.getResultSet();
+        ResultSet set = ps.getResultSet();
         return set;
     }
 }

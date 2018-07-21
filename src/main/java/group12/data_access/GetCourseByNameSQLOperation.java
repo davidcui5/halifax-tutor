@@ -23,7 +23,8 @@ public class GetCourseByNameSQLOperation extends SQLOperationTemplate {
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        Course course = Course.courseParser(rs);
+        CourseParser courseParser=new CourseParser();
+        Course course = courseParser.parse(rs);
         return course;
     }
 

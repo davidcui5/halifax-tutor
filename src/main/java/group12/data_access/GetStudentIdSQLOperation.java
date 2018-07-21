@@ -23,7 +23,8 @@ public class GetStudentIdSQLOperation extends SQLOperationTemplate {
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        Student student = Student.studentParser(rs);
+        StudentParser studentParser = new StudentParser();
+        Student student = studentParser.parse(rs);
         return student;
     }
 

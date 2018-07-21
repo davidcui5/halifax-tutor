@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class StudentParser {
-    public static Student studentParser(ResultSet rs) throws SQLException {
+    public Student parse(ResultSet rs) throws SQLException {
         Student student = new Student();
         student.setEmail(rs.getString("Email"));
         student.setPassword(rs.getString("Password"));

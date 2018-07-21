@@ -25,7 +25,8 @@ public class GeTTutorEmailSQLOperation extends SQLOperationTemplate {
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        Tutor tutor = Tutor.tutorParser(rs);
+        TutorParser tutorParser = new TutorParser();
+        Tutor tutor = tutorParser.parse(rs);
         return tutor;
     }
 
