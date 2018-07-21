@@ -3,19 +3,15 @@ package group12.data_access;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import group12.registration.StudentSignupForm;
-import group12.registration.TutorSignupForm;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Arrays;
 
 @Transactional
 @Component
@@ -167,7 +163,13 @@ public class DBDAO implements IDataAccessObject {
 
     @Override
     public boolean setTutorBannedStatus(int tutorID, boolean status) {
-        return false;
+        SetTutorBannedStatusSQLOperation setStudentBannedStatus =
+                new SetTutorBannedStatusSQLOperation(tutorID, status);
+        int result = (int) setStudentBannedStatus.executeMysqlQuery();
+        if (result == 1)
+            return true;
+        else
+            return false;
     }
 
     @Override
@@ -177,7 +179,12 @@ public class DBDAO implements IDataAccessObject {
 
     @Override
     public boolean deleteActivationCodeByValue(String codeValue) {
-        return false;
+        DeleteActivationCodeByValueSQLOperation deleteActivationCodeByValueSQLOperation =
+                new DeleteActivationCodeByValueSQLOperation(codeValue);
+        int result = (int) deleteActivationCodeByValueSQLOperation.executeMysqlQuery();
+        if (result == 1)
+            return true;
+        else return false;
     }
 
     @Override

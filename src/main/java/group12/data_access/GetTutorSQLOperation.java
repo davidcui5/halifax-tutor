@@ -44,7 +44,7 @@ public class GetTutorSQLOperation extends SQLOperationTemplate {
         tutor.setCreditCardHolder(rs.getString("CreditCardHoldName"));
         tutor.setCreditCardNum(rs.getString("CreditCardNumber"));
         tutor.setCreditCardExpiryDate(rs.getString("CreditCardExpiryDate"));
-        tutor.setSecurityCode(rs.getInt("SecurityCode"));
+        tutor.setSecurityCode(rs.getString("SecurityCode"));
         return tutor;
     }
 

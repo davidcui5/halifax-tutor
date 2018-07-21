@@ -20,7 +20,7 @@ public class Tutor extends User {
     private String creditCardHolder;
     private String creditCardNum;
     private String creditCardExpiryDate;
-    private int securityCode;
+    private String securityCode;
 
     public Tutor() {
         super();
@@ -131,11 +131,11 @@ public class Tutor extends User {
         this.creditCardExpiryDate = creditCardExpiryDate;
     }
 
-    public int getSecurityCode() {
+    public String getSecurityCode() {
         return securityCode;
     }
 
-    public void setSecurityCode(int securityCode) {
+    public void setSecurityCode(String securityCode) {
         this.securityCode = securityCode;
     }
 
@@ -155,7 +155,7 @@ public class Tutor extends User {
         tutor.setCreditCardHolder(rs.getString("CreditCardHoldName"));
         tutor.setCreditCardNum(rs.getString("CreditCardNumber"));
         tutor.setCreditCardExpiryDate(rs.getString("CreditCardExpiryDate"));
-        tutor.setSecurityCode(rs.getInt("SecurityCode"));
+        tutor.setSecurityCode(rs.getString("SecurityCode"));
         return tutor;
     }
 }

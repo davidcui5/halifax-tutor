@@ -24,7 +24,7 @@ public class TSettingService implements ITSetting{
 
         try{
             //if the email is new
-            if (db.isEmailNew(newemail)){
+            if (db.countOfUserWithEmail(newemail)<=0){
 
                 //TODO DB Update email
 

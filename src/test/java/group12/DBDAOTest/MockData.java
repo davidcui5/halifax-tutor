@@ -1,11 +1,13 @@
 package group12.DBDAOTest;
 
+import group12.data_access.Student;
+import group12.data_access.Tutor;
 import group12.registration.StudentSignupForm;
 import group12.registration.TutorSignupForm;
 
 public class MockData {
-    public static StudentSignupForm getStudentObject() {
-        StudentSignupForm student = new StudentSignupForm();
+    public static Student getStudentObject() {
+        Student student = new Student();
         student.setEmail("testemailStu@gmail.com");
         student.setFirstName("testName");
         student.setLastName("testLName");
@@ -15,16 +17,16 @@ public class MockData {
         return student;
     }
 
-    public static TutorSignupForm getTutorObject() {
-        TutorSignupForm tutor = new TutorSignupForm();
+    public static Tutor getTutorObject() {
+        Tutor tutor = new Tutor();
         tutor.setEmail("testemailTut@gmail.com");
         tutor.setFirstName("testName");
         tutor.setLastName("testLName");
         tutor.setPhoneNumber("9021234567T");
         tutor.setPassword("pass123456T");
-        tutor.setCreditCardHoldName(tutor.getFirstName());
-        tutor.setCreditCardNumber("1234567891234567");
-        tutor.setExpireDate("12-12");
+        tutor.setCreditCardHolder(tutor.getFirstName());
+        tutor.setCreditCardNum("1234567891234567");
+        tutor.setExpiryDate("12-12");
         tutor.setSecurityCode("123");
         return tutor;
     }
