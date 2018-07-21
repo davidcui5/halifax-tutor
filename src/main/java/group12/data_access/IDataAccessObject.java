@@ -8,6 +8,8 @@ public interface IDataAccessObject {
 
     Admin getAdminByEmail(String email);
 
+    ActivationCode cheActivationCode(String code);
+
     int getStudentIDByEmail(String email);
 
     int getTutorIDByEmail(String email);
@@ -45,5 +47,8 @@ public interface IDataAccessObject {
     boolean deleteTutor(int tutorID);
 
     boolean updateStudentPassword(String studentEmail, String newPassword);
+
     boolean updateTutorPassword(String tutorEmail, String newPassword);
+
+
 }

@@ -225,5 +225,10 @@ public class DBDAO implements IDataAccessObject {
         else return false;
     }
 
-
+    @Override
+    public ActivationCode cheActivationCode(String code) {
+        CheckActivationCodeSQLOperation activationCodeSQLOperation = new CheckActivationCodeSQLOperation(code);
+        ActivationCode activationCode = (ActivationCode) activationCodeSQLOperation.executeMysqlQuery();
+        return activationCode;
+    }
 }
