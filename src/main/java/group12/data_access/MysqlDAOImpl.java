@@ -79,22 +79,12 @@ public class MysqlDAOImpl implements IDataAccessObject{
     }
 
     @Override
-    public boolean setActivatedStatusByEmail(String email, boolean status) {
-        return false;
-    }
-
-    @Override
     public boolean setStudentBannedStatus(int studentID, boolean status) {
         return false;
     }
 
     @Override
     public boolean setTutorBannedStatus(int tutorID, boolean status) {
-        return false;
-    }
-
-    @Override
-    public boolean setBannedStatusByEmail(String email, boolean status) {
         return false;
     }
 

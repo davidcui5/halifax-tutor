@@ -16,7 +16,7 @@ $(document).ready(function () {
             window.location.replace("../index.html");
         }
     }).fail(function (xhr, status, errorThrown) {
-        /*window.location.replace("../index.html");*/ //maybe error page is better.
+        window.location.replace("../index.html");
     });
 
     $("#Cpassword").submit(function (event) {
@@ -35,7 +35,7 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-
+            alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
         });
@@ -58,13 +58,13 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: location.origin + "/",
+            url: location.origin + "/admin/setting/price",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-
+            alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
         });
@@ -80,13 +80,13 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: location.origin + "/",
+            url: location.origin + "/admin/setting/ban/student",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-
+            alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
         });
@@ -102,13 +102,13 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: location.origin + "/",
+            url: location.origin + "/admin/setting/unban/student",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-
+            alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
         });
@@ -125,13 +125,13 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: location.origin + "/",
+            url: location.origin + "/admin/setting/ban/tutor",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-
+            alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
         });
@@ -147,13 +147,13 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: location.origin + "/",
+            url: location.origin + "/admin/setting/unban/tutor",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-
+            alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
         });
@@ -169,13 +169,27 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: location.origin + "/",
+            url: location.origin + "/admin/setting/find/student",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
-            dataType: "text"
+            dataType: "json"
         }).done(function (data) {
+            if(data.studentID < 0){
+                $("#studentReviews").html("<p>Student Email Not Found</p>");
+            }
+            else{
+                var result =    "<table><tr><td>ID: </td><td>" + data.studentID + "</td></tr>" +
+                    "<tr><td>Email: </td><td>" + data.studentEmail + "</td></tr>" +
+                    "<tr><td>ReviewID</td><td>Review</td></tr>";
 
+                for (var i = 0; i < data.reviews.length; i++) {
+                    result += "<tr><td>" + data.reviews[i].reviewID + "</td>" +
+                        "<td>" + data.reviews[i].reviewText + "</td></tr>";
+                }
+                result += "</table>";
+                $("#studentReviews").html(result);
+            }
         }).fail(function (xhr, status, errorThrown) {
             //empty
         });
@@ -191,13 +205,27 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: location.origin + "/",
+            url: location.origin + "/admin/setting/find/tutor",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
-            dataType: "text"
+            dataType: "json"
         }).done(function (data) {
+            if(data.tutorID==-1){
+                $("#tutorReviews").html("<tr><td>Tutor Email Not Found</td></tr>");
+            }
+            else{
+                var result =    "<table><tr><td>ID: </td><td>" + data.tutorID + "</td></tr>" +
+                    "<tr><td>Email: </td><td>" + data.tutorEmail + "</td></tr>" +
+                    "<tr><td>ReviewID</td><td>Review</td></tr>";
 
+                for (var i = 0; i < data.reviews.length; i++) {
+                    result += "<tr><td>" + data.reviews[i].reviewID + "</td>" +
+                        "<td>" + data.reviews[i].reviewText + "</td></tr>";
+                }
+                result += "</table>";
+                $("#tutorReviews").html(result);
+            }
         }).fail(function (xhr, status, errorThrown) {
             //empty
         });

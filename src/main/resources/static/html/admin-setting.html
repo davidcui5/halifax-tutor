@@ -31,7 +31,7 @@
     <div class="col-sm-6">
         <!--Change password-->
         <div class="tablerow">
-            <form id="Cpassword" onsubmit="return validatePwd()">
+            <form id="Cpassword">
             <h4>Change Password</h4>
             <br>
             <table>
@@ -155,7 +155,7 @@
         <!--Search user-->
         <div class="tablerow">
             <form id="findStudent">
-                <h4>Search Student ID by email:</h4>
+                <h4>Search Student ID and Provided Reviews by email:</h4>
                 <table>
                     <tr>
                         <td>
@@ -167,12 +167,12 @@
                     </tr>
                 </table>
             </form>
-            <div>
-            </div>
+            <h4>Results</h4><br>
+            <span id="studentReviews">?</span>
         </div>
         <div class="tablerow">
             <form id="findTutor">
-                <h4>Search Tutor ID by email:</h4>
+                <h4>Search Tutor ID and Received Reviews by email:</h4>
                 <table>
                     <tr>
                         <td>
@@ -184,8 +184,8 @@
                     </tr>
                 </table>
             </form>
-            <div>
-            </div>
+            <h4>Results</h4><br>
+            <span id="tutorReviews">?</span>
         </div>
     </div>
 </div>
