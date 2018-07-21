@@ -4,14 +4,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class IsPhoneNewSQLOperation extends SQLOperationTemplate {
-    public IsPhoneNewSQLOperation(Object... parameters) {
+public class NumberOfPhoneSQLOperation extends SQLOperationTemplate {
+    public NumberOfPhoneSQLOperation(Object... parameters) {
         super(parameters);
     }
 
     @Override
     String makeSQL() {
-        return "SELECT IsPhoneNew(?)";
+        return "SELECT NumberOfPhone(?)";
     }
 
     @Override

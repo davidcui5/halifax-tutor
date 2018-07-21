@@ -20,22 +20,22 @@ public class DBDAO implements IDataAccessObject {
 
     @Override
     public int countOfUserWithEmail(String email) {
-        IsEmailNewSQLOperation isEmailNewSQLOperation = new IsEmailNewSQLOperation(email);
-        int numberOfEmails = (int) isEmailNewSQLOperation.executeMysqlQuery();
+        NumberOfEmailSQLOperation numberOfEmailSQLOperation = new NumberOfEmailSQLOperation(email);
+        int numberOfEmails = (int) numberOfEmailSQLOperation.executeMysqlQuery();
         return numberOfEmails;
     }
 
     @Override
     public int countOfUserWithPhone(String phoneNumber) {
-        IsPhoneNewSQLOperation isPhoneNewSQLOperation = new IsPhoneNewSQLOperation(phoneNumber);
-        int numberOfPhones = (int) isPhoneNewSQLOperation.executeMysqlQuery();
+        NumberOfPhoneSQLOperation numberOfPhoneSQLOperation = new NumberOfPhoneSQLOperation(phoneNumber);
+        int numberOfPhones = (int) numberOfPhoneSQLOperation.executeMysqlQuery();
         return numberOfPhones;
     }
 
     @Override
     public int countOfUserWithCreditCardNum(String creditCardNum) {
-        IsCreditCardNewSQLOperation isCreditCardNewSQLOperation = new IsCreditCardNewSQLOperation(creditCardNum);
-        int numberofCards = (int) isCreditCardNewSQLOperation.executeMysqlQuery();
+        NumberOfCreditCardSQLOperation numberOfCreditCardSQLOperation = new NumberOfCreditCardSQLOperation(creditCardNum);
+        int numberofCards = (int) numberOfCreditCardSQLOperation.executeMysqlQuery();
         return numberofCards;
     }
 
@@ -46,7 +46,7 @@ public class DBDAO implements IDataAccessObject {
 
     @Override
     public boolean saveStudent(Student student) {
-        RegStudentSQLOperation regStudent = new RegStudentSQLOperation(student.getFirstName(), student.getLastName()
+        SaveStudentSQLOperation regStudent = new SaveStudentSQLOperation(student.getFirstName(), student.getLastName()
                 , student.getEmail(), student.getPassword(), student.getSchool(), student.getPhoneNumber());
         int result = (int) regStudent.executeMysqlQuery();
         if (result == 1)
@@ -77,10 +77,10 @@ public class DBDAO implements IDataAccessObject {
 
     @Override
     public boolean saveTutor(Tutor tutor) {
-        RegTutorSQLOperation regTutorSQLOperation = new RegTutorSQLOperation(tutor.getFirstName(), tutor.getLastName()
+        SaveTutorSQLOperation saveTutorSQLOperation = new SaveTutorSQLOperation(tutor.getFirstName(), tutor.getLastName()
                 , tutor.getEmail(), tutor.getPassword(), tutor.getPhoneNumber(), tutor.getCreditCardHolder()
                 , tutor.getCreditCardNum(), tutor.getExpiryDate(), tutor.getSecurityCode());
-        int result = (int) regTutorSQLOperation.executeMysqlQuery();
+        int result = (int) saveTutorSQLOperation.executeMysqlQuery();
         if (result == 1)
             return true;
         else return false;

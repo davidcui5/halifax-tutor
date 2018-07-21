@@ -4,14 +4,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class IsCreditCardNewSQLOperation extends SQLOperationTemplate {
-    public IsCreditCardNewSQLOperation(Object... parameters) {
+public class NumberOfCreditCardSQLOperation extends SQLOperationTemplate {
+    public NumberOfCreditCardSQLOperation(Object... parameters) {
         super(parameters);
     }
 
     @Override
     String makeSQL() {
-        return "SELECT IsCreditCardNew(?)";
+        return "SELECT NumberOfCreditCard(?)";
     }
 
     @Override

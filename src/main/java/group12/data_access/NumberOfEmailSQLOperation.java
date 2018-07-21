@@ -7,17 +7,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class IsEmailNewSQLOperation extends SQLOperationTemplate {
+public class NumberOfEmailSQLOperation extends SQLOperationTemplate {
 
-    public IsEmailNewSQLOperation(Object... parameters) {
+    public NumberOfEmailSQLOperation(Object... parameters) {
         super(parameters);
     }
 
-    private static Logger logger = LogManager.getLogger(IsEmailNewSQLOperation.class);
+    private static Logger logger = LogManager.getLogger(NumberOfEmailSQLOperation.class);
 
     @Override
     String makeSQL() {
-        return "SELECT IsEmailNew(?)";
+        return "SELECT NumberOfEmail(?)";
     }
 
     @Override
