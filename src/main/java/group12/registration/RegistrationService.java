@@ -1,6 +1,5 @@
 package group12.registration;
 
-import group12.data_access.DatabaseInterface;
 import group12.data_access.IDataAccessObject;
 import group12.data_access.Student;
 import group12.data_access.Tutor;

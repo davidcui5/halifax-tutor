@@ -1,6 +1,5 @@
 package group12.ForgotPassword;
 
-import group12.data_access.DatabaseInterface;
 import group12.data_access.IDataAccessObject;
 import group12.email.IMailer;
 import group12.encryption.IEncryptor;
