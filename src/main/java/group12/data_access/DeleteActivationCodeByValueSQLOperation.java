@@ -23,7 +23,6 @@ public class DeleteActivationCodeByValueSQLOperation extends SQLOperationTemplat
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        rs.next();
         return rs.getInt(1);
     }
 

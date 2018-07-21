@@ -24,7 +24,6 @@ public class IsCreditCardNewSQLOperation extends SQLOperationTemplate {
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
         int numberOfCards;
-        rs.next();
         numberOfCards = rs.getInt(1);
         return numberOfCards;
     }

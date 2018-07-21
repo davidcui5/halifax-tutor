@@ -30,7 +30,6 @@ public class IsEmailNewSQLOperation extends SQLOperationTemplate {
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
         int numberOfEmails;
-        rs.next();
         numberOfEmails = rs.getInt(1);
         return numberOfEmails;
     }

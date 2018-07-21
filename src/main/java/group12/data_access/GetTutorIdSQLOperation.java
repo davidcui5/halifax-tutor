@@ -11,7 +11,7 @@ public class GetTutorIdSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "SELECT GetTutorId(?)";
+        return "CALL GetTutorId(?)";
     }
 
     @Override
@@ -30,6 +30,7 @@ public class GetTutorIdSQLOperation extends SQLOperationTemplate {
     @Override
     ResultSet execute(PreparedStatement ps) throws SQLException {
         ps.execute();
-        return ps.getResultSet();
+        ResultSet set=ps.getResultSet();
+        return set;
     }
 }

@@ -2,6 +2,7 @@
 package group12.DBDAOTest;
 
 import group12.data_access.DBDAO;
+import group12.data_access.IDataAccessObject;
 import group12.data_access.Student;
 import group12.data_access.Tutor;
 import org.junit.*;
@@ -11,7 +12,7 @@ import static junit.framework.TestCase.*;
 
 public class DBDAORegistration {
     static ClassPathXmlApplicationContext context;
-    static DBDAO dbda;
+    static IDataAccessObject dbda;
 
     @BeforeClass
     public static void confingDBConnection() {
@@ -27,33 +28,10 @@ public class DBDAORegistration {
     }
 
     @Test
-    public void testRegStudentReEmail() {
-        Student student = MockData.getStudentObject();
-        boolean actual = dbda.saveStudent(student);
-        assertFalse(actual);
-    }
-
-    @Test
-    public void testRegStudentRePhone() {
-        Student student = MockData.getStudentObject();
-        student.setEmail("testemailStu2@gmail.com");
-        boolean actual = dbda.saveStudent(student);
-        assertFalse(actual);
-    }
-
-    @Test
     public void testRegTutorRightInfo() {
         Tutor tutor = MockData.getTutorObject();
         boolean actual = dbda.saveTutor(tutor);
         assertTrue(actual);
-    }
-
-    @Test
-    public void testRegTutorReEmail() {
-        Tutor tutor = MockData.getTutorObject();
-        tutor.setEmail("testemailTut2@gmail.com");
-        boolean actual = dbda.saveTutor(tutor);
-        assertFalse(actual);
     }
 
     @Test

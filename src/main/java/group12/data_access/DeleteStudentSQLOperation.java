@@ -23,7 +23,6 @@ public class DeleteStudentSQLOperation extends SQLOperationTemplate {
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        rs.next();
         int result = rs.getInt(1);
         return result;
     }

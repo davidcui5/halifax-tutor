@@ -25,7 +25,6 @@ public class SetStudentBannedStatusSQLOperation extends SQLOperationTemplate {
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        rs.next();
         return rs.getInt(1);
     }
 

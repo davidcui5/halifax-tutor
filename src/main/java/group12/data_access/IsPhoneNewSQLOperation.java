@@ -24,7 +24,6 @@ public class IsPhoneNewSQLOperation extends SQLOperationTemplate {
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
         int numberOfPhones;
-        rs.next();
         numberOfPhones = rs.getInt(1);
         return numberOfPhones;
     }

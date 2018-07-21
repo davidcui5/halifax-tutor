@@ -11,7 +11,7 @@ public class GetStudentIdSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "SELECT GetStudentId(?)";
+        return "CALL GetStudentId(?)";
     }
 
     @Override
