@@ -55,7 +55,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
         return numberofCards;
     }
 
-    @Override
+       @Override
     public int countOfActivationCodeWithValue(String codeValue) {
         return 0;
     }
@@ -69,6 +69,20 @@ public class MysqlDAOImpl implements IDataAccessObject {
             return true;
         else
             return false;
+    }
+
+    @Override
+    public Student getStudentByEmail(String email) {
+        GetStudentByEmailSQLOperation getStudentByEmailSQLOperation = new GetStudentByEmailSQLOperation(email);
+        Student student = (Student) getStudentByEmailSQLOperation.executeMysqlQuery();
+        return student;
+    }
+
+    @Override
+    public Tutor getTutorByEmail(String email) {
+        GeTTutorEmailSQLOperation authorizeTutorSQLOperation = new GeTTutorEmailSQLOperation(email);
+        Tutor tutor = (Tutor) authorizeTutorSQLOperation.executeMysqlQuery();
+        return tutor;
     }
 
     @Override
@@ -148,11 +162,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
     }
 
     @Override
-    public boolean setActivatedStatusByEmail(String email, boolean status) {
-        return false;
-    }
-
-    @Override
     public boolean setStudentBannedStatus(int studentID, boolean status) {
         SetStudentBannedStatusSQLOperation setStudentBannedStatus =
                 new SetStudentBannedStatusSQLOperation(studentID, status);
@@ -172,11 +181,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
             return true;
         else
             return false;
-    }
-
-    @Override
-    public boolean setBannedStatusByEmail(String email, boolean status) {
-        return false;
     }
 
     @Override

@@ -41,12 +41,12 @@ public interface IDataAccessObject {
     boolean setTutorActivatedStatus(int tutorID, boolean status);
 
     boolean setActivatedStatusByEmail(String email, boolean status);
-
     boolean setStudentBannedStatus(int studentID, boolean status);
 
     boolean setTutorBannedStatus(int tutorID, boolean status);
 
     boolean setBannedStatusByEmail(String email, boolean status);
+
 
     boolean deleteActivationCodeByValue(String codeValue);
 

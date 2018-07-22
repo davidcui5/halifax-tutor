@@ -29,7 +29,7 @@ public class AdminAuthStrategy implements IAuthenticationStrategy {
 
     //helper for making token
     private String makeToken(String email){
-        IAccessToken tokenMaker = new JWTAccessToken();
+        IAccessToken tokenMaker = JWTAccessToken.getInstance();
         return tokenMaker.generateToken(email);
     }
 

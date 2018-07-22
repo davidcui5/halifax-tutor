@@ -29,7 +29,7 @@ public class TutorAuthStrategy implements IAuthenticationStrategy{
     }
 
     private String makeToken(String email){
-        IAccessToken tokenMaker = new JWTAccessToken();
+        IAccessToken tokenMaker = JWTAccessToken.getInstance();
         return tokenMaker.generateToken(email);
     }
 

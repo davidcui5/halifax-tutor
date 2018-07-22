@@ -51,12 +51,18 @@ create table Student
 
 create table SubscriptionPlan
 (
+  
   ID          int auto_increment
     primary key,
   Name        varchar(25) null,
   Price       int         null,
   Description text        null,
   Dayes       int         null
+    ID int PRIMARY KEY,
+    Name varchar(25),
+    Price decimal(10,2),
+    Description text,
+    Months int
 );
 
 create table Tutor
