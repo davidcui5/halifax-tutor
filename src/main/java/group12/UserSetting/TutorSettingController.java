@@ -3,8 +3,11 @@ package group12.UserSetting;
 import group12.admin_setting.IAdminSettingDAO;
 import group12.data_access.GetPlanSQLOperation;
 import group12.data_access.Subscribe_Plan;
+import group12.encryption.IEncryptor;
+import group12.encryption.SimpleMD5Encryptor;
 import group12.token_auth.IAccessToken;
 import group12.token_auth.JWTAccessToken;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
@@ -18,44 +21,40 @@ import java.util.Map;
 @RestController
 @RequestMapping(path="/tutor/setting")
 public class TutorSettingController {
-
-//    private ITSetting service = new TSettingService();
+    private static final String SUCCESS = "SUCCESS";
+    private static final String FAILURE = "FAILURE";
     private static final Logger logger = LogManager.getLogger(TutorSettingController.class);
-//    private String useremail;
     IAccessToken accessToken;
     ITutorSettingDAO tutorSettingDAO;
 
     public TutorSettingController(){
         accessToken = JWTAccessToken.getInstance();
-        tutorSettingDAO = new ITutorSettingDAO() {
-        }
+        tutorSettingDAO = new TutorSettingDAO();
     }
 
-    public TutorSettingController(IAccessToken accessToken){
+    public TutorSettingController(IAccessToken accessToken, ITutorSettingDAO tutorSettingDAO){
         this.accessToken = accessToken;
+        this.tutorSettingDAO = tutorSettingDAO;
     }
 
 
-    @PostMapping(path="/access")
-    public String authorizeTutor(@RequestBody Map<String,String> body){
-        boolean isAuthorized = authorizeAdmin(body.get("token"));
-        if(isAuthorized){
-            return AUTHORIZED;
+    @PostMapping(path="/password")
+    public String changePassword(@RequestBody Map<String,String> body){
+        String email = accessToken.decodeToken(body.get("token"));
+        logger.log(Level.INFO,email);
+        logger.log(Level.INFO,body.get("password"));
+        IEncryptor encryptor = new SimpleMD5Encryptor();
+        String password = encryptor.encrypt(body.get("password"));
+        logger.log(Level.INFO,password);
+        if(tutorSettingDAO.setTutorPassword(email,password)){
+            return SUCCESS;
         }
         else{
-            return UNAUTHORIZED;
+            return FAILURE;
         }
     }
-    private boolean authorizeAdmin(String token){
-        String email = accessToken.decodeToken(token);
-        int count = dao.countAdminByEmail(email);
-        if(count == 1){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+
+
     //get token from frontend
     @GetMapping(path = "/setting")
     @ResponseBody

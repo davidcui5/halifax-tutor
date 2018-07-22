@@ -1,9 +1,13 @@
 package group12.UserSetting;
 
+import group12.data_access.CountTutorByEmailSQLOp;
+import group12.data_access.SQLOperationTemplate;
+
 public class TutorSettingDAO implements ITutorSettingDAO{
     @Override
     public int countTutorByEmail(String email) {
-        return 0;
+        SQLOperationTemplate op = new CountTutorByEmailSQLOp(email);
+        return (int)op.executeMysqlQuery();
     }
 
     @Override

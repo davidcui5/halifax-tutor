@@ -58,24 +58,35 @@ $(document).ready(function() {
     var token = localStorage.getItem("token");
     var objToken = {'token': token};
 
+    $("#Cpassword").submit(function (event) {
+        event.preventDefault();
 
-
-    //passing token
-    $.ajax({
-        url: location.origin + "tutor/setting/access",
-        data: JSON.stringify(objToken),
-        contentType: "application/json",
-        type: "POST",
-        dataType: "text"
-    }).done(function (data) {
-        if (data.result === "Success") {
-        } else {
-            alert(data.details);
+        if($("#pwd").val() != $("#Rpwd").val()){
+            alert("The two password fields didn't match.")
+            return;
         }
-    }).fail(function (xhr, status, errorThrown) {
 
+        let password = $("#pwd").val();
+        var ChangePwdData = {
+            'token': token,
+            "password": password
+        };
+
+        $.ajax({
+            url: location.origin + "/tutor/setting/password",
+            data: JSON.stringify(ChangePwdData),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "text"
+        }).done(function (data) {
+            if (data.result === "Success") {
+                alert("Password change succeed!");
+            } else {
+                alert(data.details);
+            }
+        }).fail(function (xhr, status, errorThrown) {
+        });
     });
-
 
     $("#Cemail").submit(function (event) {
         event.preventDefault();
@@ -102,32 +113,7 @@ $(document).ready(function() {
         });
 
     });
-    $("#Cpassword").submit(function (event) {
-        event.preventDefault();
-        let pwd = $("#pwd").val();
 
-        var ChangePwdData = {
-            "password": pwd
-        };
-
-        $.ajax({
-            url: location.origin +
-            "/cpwd",
-            data: JSON.stringify(ChangePwdData),
-            contentType: "application/json",
-            type: "POST",
-            dataType: "json"
-        }).done(function (data) {
-            if (data.result === "Success") {
-                alert("Password change succeed!");
-            } else {
-                alert(data.details);
-            }
-        }).fail(function (xhr, status, errorThrown) {
-
-        });
-
-    });
     $("#Ccard").submit(function (event) {
         event.preventDefault();
         let creditCardNumber = $("#cardnum").val();
