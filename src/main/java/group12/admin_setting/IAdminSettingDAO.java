@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface IAdminSettingDAO {
 
+    int countAdminByEmail(String email);
+
     boolean setAdminPassword(String email, String password);
 
     boolean setSubPlanPrice(int planID, float price);

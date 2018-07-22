@@ -2,7 +2,6 @@ package group12.UserSetting;
 
 
 public interface ITutorSettingDAO {
-    int countTutorByEmail(String email);
     boolean setTutorPassword(String email, String password);
     boolean setTutorEmail(String email);
     boolean setTutorPhone(String email, String phone);
