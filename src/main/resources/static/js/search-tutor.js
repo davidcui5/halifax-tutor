@@ -63,14 +63,39 @@ function generateTutorProfile(tutorProfile) {
 }
 
 $(document).ready(function () {
-    var success;
-    var numOfResults;
-    var results;
+    let success;
+    let numOfResults;
+    let results;
+    let identity;
     let token = localStorage.getItem("token");
     if (token === null) {
         console.log("You are not logged in. Please log in to search for tutors.");
         //window.location.assign("../index.html");
+    } else {
+        let identityData = {"token": token};
+        $.ajax({
+            url: location.origin + "search/identity",
+            data: JSON.stringify(identityData),
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json"
+        }).done(function (data) {
+            identity = data["type"];
+            if (identity === "student") {
+                $("#settings").attr("href", "./student-setting.html");
+            } else if (identity === "tutor") {
+                $("#settings").attr("href", "./tutor-setting.html");
+            } else {
+                $("#settings").attr("href", "./admin-setting.html");
+            }
+        }).fail(function (xhr, status, errorThrown) {
+            alert("Sorry, there was a problem!");
+            console.log("Error: " + errorThrown);
+            console.log("Status: " + status);
+            console.dir(xhr);
+        });
     }
+
     $("form").submit(function (event) {
         event.preventDefault();
         $("#search-results-filters").show();
