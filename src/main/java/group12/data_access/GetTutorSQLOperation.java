@@ -38,9 +38,9 @@ public class GetTutorSQLOperation extends SQLOperationTemplate {
         tutor.setActivated(rs.getBoolean("AccountActivation"));
         tutor.setBanned(rs.getBoolean("Banned"));
         tutor.setPhoneNumber(rs.getString("PhoneNumber"));
-        tutor.setEducation(rs.getString("Bio"));
+        tutor.setEducation(rs.getString("Education"));
         tutor.setPlanID(rs.getInt("PlanID"));
-        tutor.setExpiryDate(rs.getString("SubExpiryDate"));
+        tutor.setExpiryDate(rs.getString("ExpiryDate"));
         tutor.setCreditCardHolder(rs.getString("CreditCardHoldName"));
         tutor.setCreditCardNum(rs.getString("CreditCardNumber"));
         tutor.setCreditCardExpiryDate(rs.getString("CreditCardExpiryDate"));
