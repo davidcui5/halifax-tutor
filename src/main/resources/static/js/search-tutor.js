@@ -119,4 +119,10 @@ $(document).ready(function () {
         console.log(results);
         processResults(success, numOfResults, results);
     });
+
+    $("#sign-out-button").click(function () {
+        localStorage.removeItem('token');
+        alert("You have successfully logged out! Now redirecting to log in page.");
+        window.location.assign("../index.html");
+    });
 });
