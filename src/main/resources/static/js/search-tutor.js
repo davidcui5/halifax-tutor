@@ -4,6 +4,7 @@ function processResults(success, numOfResults, results) {
     if (!success) {
         alert("Oops! Something went wrong in our server. Please try again");
     } else {
+        $("#search-results").html("");
         let text = "The number of results found is: " + numOfResults;
         $("#numOfResultsText").html(text);
         results.forEach(function (tutorProfile) {
@@ -11,7 +12,7 @@ function processResults(success, numOfResults, results) {
             $("#search-results").append(tutorProfileDiv);
         });
 
-        $("#search-results-filters").show();
+        // $("#search-results-filters").show();
     }
 }
 
@@ -59,8 +60,7 @@ $(document).ready(function () {
     }
     $("form").submit(function (event) {
         event.preventDefault();
-        $("#search-results-filters").hide();
-        $("#search-results").html("");
+        $("#search-results-filters").show();
         let school = $("#university-select").val();
         let courseName = $("#course-id").val();
         let searchData = {
@@ -88,11 +88,11 @@ $(document).ready(function () {
     });
 
     $("#sort-button").click(function () {
-        $("#search-results").html("");
+        // $("#search-results").html("");
         let sortBy = $("filter-select").val();
         let order = $("filter-order").val();
-        if (order === asc) {
-            if (sortBy === rating) {
+        if (order === "asc") {
+            if (sortBy === "rating") {
                 results.sort(function (a, b) {
                     return a.rating - b.rating;
                 });
@@ -102,7 +102,7 @@ $(document).ready(function () {
                 });
             }
         } else {
-            if (sortBy === rating) {
+            if (sortBy === "rating") {
                 results.sort(function (a, b) {
                     return b.rating - a.rating;
                 });
