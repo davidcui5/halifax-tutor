@@ -93,7 +93,7 @@ public class StudentController {
             IEncryptor encryptor = new SimpleMD5Encryptor();
             String newEmail = encryptor.encrypt(body.get("email"));
             logger.log(Level.INFO, newEmail);
-            if (dbao.updateStudentPassword(email, newEmail)) {
+            if (dbao.updateStudentEmail(email, newEmail)) {
                 return SUCCESS;
             } else {
                 return FAILURE;

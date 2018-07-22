@@ -55,7 +55,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
         return numberofCards;
     }
 
-       @Override
+    @Override
     public int countOfActivationCodeWithValue(String codeValue) {
         return 0;
     }
@@ -269,4 +269,13 @@ public class MysqlDAOImpl implements IDataAccessObject {
             return true;
         else
             return false;
-    }}
+    }
+
+    @Override
+    public boolean updateStudentEmail(String oldMail, String newMail) {
+        UpdateStudentEmailSQLOperation updateStudentEmailSQLOperation =
+                new UpdateStudentEmailSQLOperation(oldMail, newMail);
+
+        return false;
+    }
+}
