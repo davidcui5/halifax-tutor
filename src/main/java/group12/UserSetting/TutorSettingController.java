@@ -130,6 +130,18 @@ public class TutorSettingController {
         }
     }
 
+    @PostMapping(path="/tutor/setting/availability", consumes = "application/json", produces = "text/plain")
+    public String changeAvailability(@RequestBody Map<String,String> body){
+        String email = accessToken.decodeToken(body.get("token"));
+        logger.log(Level.INFO,email);
+        String A1 = body.get("A1");
+        if(tutorSettingDAO.setExperience(email,)){
+            return SUCCESS;
+        }
+        else{
+            return FAILURE;
+        }
+    }
 
     @PostMapping(path = "/tutor/setting/plan")
     public Map<String,Object> SendPlan() {
