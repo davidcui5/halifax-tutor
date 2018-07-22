@@ -1,5 +1,6 @@
 package group12.data_access;
 
+import group12.exceptions.SearchQuerySQLException;
 import group12.logging.ConnectionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -49,8 +50,7 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
         return new TutorPublicInfo(photoURL, firstName, lastName, education, rating, price);
     }
 
-    @Override
-    public ArrayList<TutorPublicInfo> executeMysqlQuery() {
+    public ArrayList<TutorPublicInfo> executeSearchQuery() throws SearchQuerySQLException {
         ArrayList<TutorPublicInfo> results = new ArrayList<>();
         Connection con = null;
         PreparedStatement ps = null;
@@ -67,6 +67,7 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
             }
         } catch (SQLException e) {
             logger.error("SQL Error", e);
+            throw new SearchQuerySQLException("The search query is unsuccessful.");
         } finally {
             try {
                 if (rs != null) {
