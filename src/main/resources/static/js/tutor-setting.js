@@ -204,7 +204,7 @@ $(document).ready(function() {
 
     $("#Cexperience").submit(function (event) {
         event.preventDefault();
-        let education = $("#education").val();
+        let experience = $("#experience").val();
 
         var ChangeExpData = {
             'token': token,

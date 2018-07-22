@@ -59,9 +59,7 @@ public class TutorSettingController {
         String email = accessToken.decodeToken(body.get("token"));
         logger.log(Level.INFO,email);
         logger.log(Level.INFO,body.get("email"));
-        IEncryptor encryptor = new SimpleMD5Encryptor();
-        String newemail = encryptor.encrypt(body.get("email"));
-        logger.log(Level.INFO,newemail);
+        String newemail =body.get("email");
         if (tutorSettingDAO.setTutorEmail(email,newemail)){
             return SUCCESS;
         }else {
@@ -78,18 +76,26 @@ public class TutorSettingController {
         logger.log(Level.INFO,body.get("expireDate"));
         logger.log(Level.INFO,body.get("securityCode"));
 
-        IEncryptor encryptor = new SimpleMD5Encryptor();
-        String cardname = encryptor.encrypt(body.get("cardname"));
-        String creditCardNumber = encryptor.encrypt(body.get("creditCardNumber"));
-        String expireDate = encryptor.encrypt(body.get("expireDate"));
-        int securityCode = Integer.parseInt(encryptor.encrypt(body.get("securityCode")));
-
-        logger.log(Level.INFO,cardname);
-        logger.log(Level.INFO,creditCardNumber);
-        logger.log(Level.INFO,expireDate);
-        logger.log(Level.INFO,securityCode);
+        String cardname = body.get("cardname");
+        String creditCardNumber =body.get("creditCardNumber");
+        String expireDate =body.get("expireDate");
+        int securityCode = Integer.parseInt(body.get("securityCode"));
 
         if (tutorSettingDAO.setTutorCard(email,cardname,creditCardNumber,expireDate,securityCode)){
+            return SUCCESS;
+        }else {
+            return FAILURE;
+        }
+    }
+
+    @PostMapping(path = "/phone")
+    public  String changePhone(@RequestBody Map<String,String> body){
+        String email = accessToken.decodeToken(body.get("token"));
+        logger.log(Level.INFO,email);
+        logger.log(Level.INFO,body.get("phone"));
+        String phone = body.get("phone");
+
+        if (tutorSettingDAO.setTutorPhone(email,phone)){
             return SUCCESS;
         }else {
             return FAILURE;
@@ -101,10 +107,7 @@ public class TutorSettingController {
         String email = accessToken.decodeToken(body.get("token"));
         logger.log(Level.INFO,email);
         logger.log(Level.INFO,body.get("education"));
-
-        IEncryptor encryptor = new SimpleMD5Encryptor();
-        String education = encryptor.encrypt(body.get("education"));
-        logger.log(Level.INFO,education);
+        String education =body.get("education");
         if(tutorSettingDAO.setEducation(email,education)){
             return SUCCESS;
         }
@@ -113,16 +116,13 @@ public class TutorSettingController {
         }
     }
 
-    @PostMapping(path="/experiecce")
+    @PostMapping(path="/experience")
     public String changeExperience(@RequestBody Map<String,String> body){
         String email = accessToken.decodeToken(body.get("token"));
         logger.log(Level.INFO,email);
-        logger.log(Level.INFO,body.get("experiecce"));
-
-        IEncryptor encryptor = new SimpleMD5Encryptor();
-        String experiecce = encryptor.encrypt(body.get("experiecce"));
-        logger.log(Level.INFO,experiecce);
-        if(tutorSettingDAO.setEducation(email,experiecce)){
+        logger.log(Level.INFO,body.get("experience"));
+        String experience = body.get("experience");
+        if(tutorSettingDAO.setExperience(email,experience)){
             return SUCCESS;
         }
         else{
