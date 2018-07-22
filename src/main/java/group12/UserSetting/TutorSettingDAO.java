@@ -32,7 +32,7 @@ public class TutorSettingDAO implements ITutorSettingDAO{
     }
 
     @Override
-    public boolean setEdu(String email, String education) {
+    public boolean setEducation(String email, String education) {
         return false;
     }
 

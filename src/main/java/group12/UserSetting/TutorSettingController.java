@@ -95,4 +95,23 @@ public class TutorSettingController {
             return FAILURE;
         }
     }
+
+
+    @PostMapping(path="/education")
+    public String changeEducation(@RequestBody Map<String,String> body){
+        String email = accessToken.decodeToken(body.get("token"));
+        logger.log(Level.INFO,email);
+        logger.log(Level.INFO,body.get("education"));
+
+        IEncryptor encryptor = new SimpleMD5Encryptor();
+        String education = encryptor.encrypt(body.get("education"));
+        logger.log(Level.INFO,education);
+        if(tutorSettingDAO.setEducation(email,education)){
+            return SUCCESS;
+        }
+        else{
+            return FAILURE;
+        }
+    }
+
 }
