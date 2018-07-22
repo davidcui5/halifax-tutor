@@ -96,7 +96,6 @@ public class TutorSettingController {
         }
     }
 
-
     @PostMapping(path="/education")
     public String changeEducation(@RequestBody Map<String,String> body){
         String email = accessToken.decodeToken(body.get("token"));

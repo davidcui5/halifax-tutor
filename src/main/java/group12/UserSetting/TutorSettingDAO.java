@@ -1,10 +1,7 @@
 package group12.UserSetting;
 
 
-import group12.data_access.SQLOperationTemplate;
-import group12.data_access.UpdateTutorCardSQLOperation;
-import group12.data_access.UpdateTutorEmailSQLOperation;
-import group12.data_access.UpdateTutorPasswordSQLOperation;
+import group12.data_access.*;
 
 public class TutorSettingDAO implements ITutorSettingDAO{
 
@@ -22,7 +19,8 @@ public class TutorSettingDAO implements ITutorSettingDAO{
 
     @Override
     public boolean setTutorPhone(String email, String phone) {
-        return false;
+        SQLOperationTemplate opeation = new UpdateTutorPhoneSQLOperation(email,phone);
+        return (Boolean) opeation.executeMysqlQuery();
     }
 
     @Override
