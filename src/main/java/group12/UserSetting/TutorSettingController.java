@@ -69,4 +69,30 @@ public class TutorSettingController {
         }
     }
 
+    @PostMapping(path = "/card")
+    public  String changeCardinfo(@RequestBody Map<String,String> body){
+        String email = accessToken.decodeToken(body.get("token"));
+        logger.log(Level.INFO,email);
+        logger.log(Level.INFO,body.get("cardname"));
+        logger.log(Level.INFO,body.get("creditCardNumber"));
+        logger.log(Level.INFO,body.get("expireDate"));
+        logger.log(Level.INFO,body.get("securityCode"));
+
+        IEncryptor encryptor = new SimpleMD5Encryptor();
+        String cardname = encryptor.encrypt(body.get("cardname"));
+        String creditCardNumber = encryptor.encrypt(body.get("creditCardNumber"));
+        String expireDate = encryptor.encrypt(body.get("expireDate"));
+        int securityCode = Integer.parseInt(encryptor.encrypt(body.get("securityCode")));
+
+        logger.log(Level.INFO,cardname);
+        logger.log(Level.INFO,creditCardNumber);
+        logger.log(Level.INFO,expireDate);
+        logger.log(Level.INFO,securityCode);
+
+        if (tutorSettingDAO.setTutorCard(email,cardname,creditCardNumber,expireDate,securityCode)){
+            return SUCCESS;
+        }else {
+            return FAILURE;
+        }
+    }
 }

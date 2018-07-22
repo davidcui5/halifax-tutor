@@ -121,18 +121,20 @@ $(document).ready(function() {
         let creditCardNumber = $("#cardnum").val();
         let expireDate = $("#expire_date").val();
         let securityCode = $("#phone").val();
+        let cardname = $("#cardname").val();
         var ChangeCardData = {
+            "cardname": cardname,
             "creditCardNumber": creditCardNumber,
             "expireDate":expireDate,
             "securityCode" : securityCode
         };
 
         $.ajax({
-            url: location.origin +"/ccard",
+            url: location.origin +"/card",
             data: JSON.stringify(ChangeCardData),
             contentType: "application/json",
             type: "POST",
-            dataType: "json"
+            dataType: "text"
         }).done(function (data) {
             if (data.result === "Success") {
                 alert("Card information change succeed!");
