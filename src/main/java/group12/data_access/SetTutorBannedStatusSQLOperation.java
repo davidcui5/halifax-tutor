@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SetTutorBannedStatusSQLOperation extends SQLOperationTemplate {
-    public SetTutorBannedStatusSQLOperation(Object... parameters) {
-        super(parameters);
+    public SetTutorBannedStatusSQLOperation(int id, boolean status) {
+        super(id, status);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class SetTutorBannedStatusSQLOperation extends SQLOperationTemplate {
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        return rs.getInt(1);
+        return rs.getBoolean(1);
     }
 
     @Override

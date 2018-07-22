@@ -43,7 +43,7 @@ public class AdminSettingDAO implements IAdminSettingDAO {
 
     @Override
     public List<ReviewDTO> getReviewsMadeOnTutors(int tutorID) {
-        SQLOperationTemplate op = new GetReviewsByStudentIDSQLOp(tutorID);
+        SQLOperationTemplate op = new GetReviewsByTutorIDSQLOp(tutorID);
         return (List<ReviewDTO>)op.executeMysqlQuery();
     }
 
