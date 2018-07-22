@@ -1,6 +1,6 @@
 package group12.ForgotPassword;
 
-import group12.DatabaseInterface;
+import group12.data_access.IDataAccessObject;
 import group12.email.IMailer;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class ForgotPasswordService implements IForgotPassword {
 
-    private DatabaseInterface db;
+    private IDataAccessObject db;
     private IMailer mailer;
     private static Logger logger = LogManager.getLogger(RegistrationService.class);
     @Value("${email.sender}")
@@ -22,7 +22,7 @@ public class ForgotPasswordService implements IForgotPassword {
     @Value("${server.url}")
     String serverURL;
 
-    public void setDb(DatabaseInterface db) {
+    public void setDb(IDataAccessObject db) {
         this.db = db;
     }
 
@@ -37,20 +37,20 @@ public class ForgotPasswordService implements IForgotPassword {
         ForgotPasswordResponse response = new ForgotPasswordResponse();
 
 //        if (db.isEmailNew(email)) {
-            int studentID = db.getStudentId(student.getEmail());
-            UUID uuid = UUID.randomUUID();
-            db.saveActivationCode(uuid.toString());
-            serverURL = "http://localhost:8080";
-            mailer.sendMail(emailSender, student.getEmail(), "Verification",
-                    "Verification " + serverURL + "/student/studentid/" + studentID + "/email/" + student.getEmail() + "/verification/" + uuid.toString() + "/");
-            response.setResult("Success");
+        int studentID = db.getStudentIDByEmail(student.getEmail());
+        UUID uuid = UUID.randomUUID();
+        db.saveActivationCode(uuid.toString());
+        serverURL = "http://localhost:8080";
+        mailer.sendMail(emailSender, student.getEmail(), "Verification",
+                "Verification " + serverURL + "/student/studentid/" + studentID + "/email/" + student.getEmail() + "/verification/" + uuid.toString() + "/");
+        response.setResult("Success");
 //        }
 //        else{
 //            response.setResult("Failure");
 ////          response.addDetail("Tutor not Found");
 //        }
-            return response;
-        }
+        return response;
+    }
 
     @Override
     public ForgotPasswordResponse verifyTutor(ForgotPasswordForm tutor) {
@@ -58,13 +58,13 @@ public class ForgotPasswordService implements IForgotPassword {
         ForgotPasswordResponse response = new ForgotPasswordResponse();
 
 //        if (db.isEmailNew(tutor.getEmail())) {
-            int tutorID = db.getTutorID(tutor.getEmail());
-            UUID uuid = UUID.randomUUID();
-            db.saveActivationCode(uuid.toString());
-            serverURL = "http://localhost:8080";
-            mailer.sendMail(emailSender, tutor.getEmail(), "Verification",
-                    "Verification " + serverURL + "/tutor/tutorid/" + tutorID + "/email/" + tutor.getEmail() + "/verification/" + uuid.toString() + "/");
-            response.setResult("Success");
+        int tutorID = db.getTutorIDByEmail(tutor.getEmail());
+        UUID uuid = UUID.randomUUID();
+        db.saveActivationCode(uuid.toString());
+        serverURL = "http://localhost:8080";
+        mailer.sendMail(emailSender, tutor.getEmail(), "Verification",
+                "Verification " + serverURL + "/tutor/tutorid/" + tutorID + "/email/" + tutor.getEmail() + "/verification/" + uuid.toString() + "/");
+        response.setResult("Success");
 //        }
 //        else{
 //            response.setResult("Failure");
@@ -75,9 +75,9 @@ public class ForgotPasswordService implements IForgotPassword {
     }
 
     public String activateStudent(int studentID, String email, String activationCode) {
-        try{
-            db.activateStudent(studentID, activationCode);
-        }catch(Exception e){
+        try {
+            db.setStudentActivatedStatus(studentID, true);
+        } catch (Exception e) {
             logger.error(studentID + " " + activationCode, e);
             return "Activation Failed";
         }
@@ -85,9 +85,9 @@ public class ForgotPasswordService implements IForgotPassword {
     }
 
     public String activateTutor(int tutorID, String email, String activationCode) {
-        try{
-            db.activateTutor(tutorID, activationCode);
-        }catch(Exception e){
+        try {
+            db.setTutorActivatedStatus(tutorID, true);
+        } catch (Exception e) {
             logger.error(tutorID + " " + activationCode, e);
             return "Activation Failed";
         }
@@ -103,13 +103,12 @@ public class ForgotPasswordService implements IForgotPassword {
         ForgotPasswordResponse response = new ForgotPasswordResponse();
 
 //        if (db.isEmailNew(email)) {
-            if(db.updateStudentPassword(student.getEmail(), encryptor.encrypt(student.getPassword()))){
-                response.setResult("Success");
-            }
-            else{
-                response.setResult("Failure");
-                response.addDetail("Internal Server Error");
-            }
+        if (db.updateStudentPassword(student.getEmail(), encryptor.encrypt(student.getPassword()))) {
+            response.setResult("Success");
+        } else {
+            response.setResult("Failure");
+            response.addDetail("Internal Server Error");
+        }
 //        }
 //        else{
 //            response.setResult("Failure");
@@ -127,13 +126,12 @@ public class ForgotPasswordService implements IForgotPassword {
         ForgotPasswordResponse response = new ForgotPasswordResponse();
 
 //        if (db.isEmailNew(email)) {
-            if(db.updateTutorPassword(tutor.getEmail(), encryptor.encrypt(tutor.getPassword()))){
-                response.setResult("Success");
-            }
-            else{
-                response.setResult("Failure");
-                response.addDetail("Internal Server Error");
-            }
+        if (db.updateTutorPassword(tutor.getEmail(), encryptor.encrypt(tutor.getPassword()))) {
+            response.setResult("Success");
+        } else {
+            response.setResult("Failure");
+            response.addDetail("Internal Server Error");
+        }
 //        }
 //        else{
 //            response.setResult("Failure");

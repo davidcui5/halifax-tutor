@@ -17,7 +17,7 @@ public class GetAdminSQLOperation extends SQLOperationTemplate{
 
     @Override
     String makeSQL() {
-        return "SELECT * FROM Admin Where Email =?";
+        return "SELECT GetAdmin(?)";
     }
 
     @Override
@@ -25,6 +25,11 @@ public class GetAdminSQLOperation extends SQLOperationTemplate{
         String email = (String) getParameters().get(0);
         ps.setString(1,email);
         return ps;
+    }
+
+    @Override
+    ResultSet execute(PreparedStatement ps) throws SQLException{
+        return ps.executeQuery();
     }
 
     @Override
