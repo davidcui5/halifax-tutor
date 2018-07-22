@@ -8,12 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 public class GetPlanSQLOperation extends SQLOperationTemplate{
     private static Logger logger = LogManager.getLogger(GetPlanSQLOperation.class);
 
-    public GetPlanSQLOperation(Object... parameters) {
-        super(parameters);
+//    private int ID;
+    public GetPlanSQLOperation(int ID) {
+//        this.ID = ID;
     }
+
 
     @Override
     String makeSQL() {
