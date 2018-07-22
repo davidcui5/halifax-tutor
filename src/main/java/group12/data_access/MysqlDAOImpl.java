@@ -21,12 +21,16 @@ public class MysqlDAOImpl implements IDataAccessObject{
 
     @Override
     public int getStudentIDByEmail(String email) {
-        return 0;
+        SQLOperationTemplate op = new GetStudentSQLOperation(email);
+        Student s = (Student) op.executeMysqlQuery();
+        return s.getStudentID();
     }
 
     @Override
     public int getTutorIDByEmail(String email) {
-        return 0;
+        SQLOperationTemplate op = new GetTutorSQLOperation(email);
+        Tutor t = (Tutor) op.executeMysqlQuery();
+        return t.getTutorID();
     }
 
     @Override
@@ -75,22 +79,12 @@ public class MysqlDAOImpl implements IDataAccessObject{
     }
 
     @Override
-    public boolean setActivatedStatusByEmail(String email, boolean status) {
-        return false;
-    }
-
-    @Override
     public boolean setStudentBannedStatus(int studentID, boolean status) {
         return false;
     }
 
     @Override
     public boolean setTutorBannedStatus(int tutorID, boolean status) {
-        return false;
-    }
-
-    @Override
-    public boolean setBannedStatusByEmail(String email, boolean status) {
         return false;
     }
 

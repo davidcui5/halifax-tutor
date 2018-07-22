@@ -21,7 +21,7 @@ public class TutorSettingController {
     @ResponseBody
     public void setUseremail(@RequestBody String token) {
         try{
-            IAccessToken accessToken = new JWTAccessToken();
+            IAccessToken accessToken = JWTAccessToken.getInstance();
             useremail = accessToken.decodeToken(token);
         } catch(Exception e){
             logger.error("ERROR",e);

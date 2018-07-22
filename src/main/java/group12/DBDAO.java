@@ -381,4 +381,61 @@ public class DBDAO implements DatabaseInterface {
         }
         return result;
     }
+
+    @Override
+    public boolean updateStudentPassword(String email, String new_password) {
+        String sql = "UPDATE Student SET Password=? WHERE Email=?";
+        Connection con = null;
+        PreparedStatement ps;
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, new_password);
+            ps.setString(2, email);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    return true;
+                } catch (SQLException ex) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateTutorPassword
+            (String email, String new_password) {
+        String sql = "UPDATE Tutor SET Password=? WHERE Email=?";
+        Connection con = null;
+        PreparedStatement ps;
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, new_password);
+            ps.setString(2, email);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    return true;
+                } catch (SQLException ex) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
 }

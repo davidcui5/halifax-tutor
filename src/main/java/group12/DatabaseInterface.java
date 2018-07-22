@@ -29,4 +29,8 @@ public interface DatabaseInterface {
 
     boolean activateTutor(int id,String activateCode);
 
+    boolean updateStudentPassword(String email, String new_password);
+
+    boolean updateTutorPassword(String email, String new_password);
+
 }
