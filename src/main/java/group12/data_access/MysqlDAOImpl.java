@@ -56,13 +56,8 @@ public class MysqlDAOImpl implements IDataAccessObject {
 
     @Override
     public boolean saveStudent(Student student) {
-        SQLOperationTemplate op = new SaveStudentSQLOperation(student.getFirstName(), student.getLastName()
-                , student.getEmail(), student.getPassword(), student.getSchool(), student.getPhoneNumber());
-        int result = (int) op.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else
-            return false;
+        SQLOperationTemplate op = new SaveStudentSQLOperation(student);
+        return (Boolean) op.executeMysqlQuery();
     }
 
     @Override
@@ -88,13 +83,8 @@ public class MysqlDAOImpl implements IDataAccessObject {
 
     @Override
     public boolean saveTutor(Tutor tutor) {
-        SQLOperationTemplate op = new SaveTutorSQLOperation(tutor.getFirstName(), tutor.getLastName()
-                , tutor.getEmail(), tutor.getPassword(), tutor.getPhoneNumber(), tutor.getCreditCardHolder()
-                , tutor.getCreditCardNum(), tutor.getExpiryDate(), tutor.getSecurityCode());
-        int result = (int) op.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else return false;
+        SQLOperationTemplate op = new SaveTutorSQLOperation(tutor);
+        return (Boolean) op.executeMysqlQuery();
     }
 
     @Override

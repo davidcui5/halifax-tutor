@@ -23,8 +23,11 @@
 
     <!--RegistrationController beans START-->
     <bean id="registrationService" class="group12.registration.RegistrationService">
-        <property name="db" ref="DBDAO"/>
+        <property name="dao" ref="DBDAO"/>
         <property name="mailer" ref="mailer"/>
+    </bean>
+
+    <bean id="encryptor" class="group12.encryption.SimpleMD5Encryptor">
     </bean>
 
     <bean id="DBDAO" class="group12.data_access.MysqlDAOImpl">
