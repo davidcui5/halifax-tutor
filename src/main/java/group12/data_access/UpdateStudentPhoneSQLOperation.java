@@ -4,22 +4,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UpdateStudentEmailSQLOperation extends SQLOperationTemplate {
-    public UpdateStudentEmailSQLOperation(Object... parameters) {
+public class UpdateStudentPhoneSQLOperation extends SQLOperationTemplate {
+    public UpdateStudentPhoneSQLOperation(Object... parameters) {
         super(parameters);
     }
 
     @Override
     String makeSQL() {
-        return "SELECT UpdateStudentEmail(?,?)";
+        return "SELECT UpdateStudentPhone(?,?)";
     }
 
     @Override
     PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
-        String oldEmail = (String) getParameters().get(0);
-        String newEmail = (String) getParameters().get(1);
-        ps.setString(1, oldEmail);
-        ps.setString(2, newEmail);
+        String email = (String) getParameters().get(0);
+        String phone = (String) getParameters().get(1);
+        ps.setString(1, email);
+        ps.setString(2, phone);
         return ps;
     }
 

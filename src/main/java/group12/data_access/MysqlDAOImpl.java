@@ -281,4 +281,12 @@ public class MysqlDAOImpl implements IDataAccessObject {
         else
             return false;
     }
+
+    @Override
+    public boolean updateStudentPhone(String email, String newPhone) {
+        UpdateStudentPhoneSQLOperation updateStudentPhoneSQLOperation =
+                new UpdateStudentPhoneSQLOperation(email, newPhone);
+        int result = (int) updateStudentPhoneSQLOperation.executeMysqlQuery();
+        return false;
+    }
 }

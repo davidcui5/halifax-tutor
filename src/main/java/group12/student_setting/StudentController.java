@@ -1,8 +1,5 @@
 package group12.student_setting;
 
-import group12.admin_setting.AdminController;
-import group12.admin_setting.AdminSettingDAO;
-import group12.admin_setting.IAdminSettingDAO;
 import group12.data_access.IDataAccessObject;
 import group12.data_access.MysqlDAOImpl;
 import group12.encryption.IEncryptor;
@@ -94,6 +91,26 @@ public class StudentController {
             String newEmail = encryptor.encrypt(body.get("email"));
             logger.log(Level.INFO, newEmail);
             if (dbao.updateStudentEmail(email, newEmail)) {
+                return SUCCESS;
+            } else {
+                return FAILURE;
+            }
+        } else {
+            return UNAUTHORIZED;
+        }
+    }
+
+    @PostMapping(path = "/phone")
+    public String changePhone(@RequestBody Map<String, String> body) {
+        boolean isAuthorized = authorizeAdmin(body.get("token"));
+        if (isAuthorized) {
+            String email = decoder.decodeToken(body.get("token"));
+            logger.log(Level.INFO, email);
+            logger.log(Level.INFO, body.get("phone"));
+            IEncryptor encryptor = new SimpleMD5Encryptor();
+            String phone = encryptor.encrypt(body.get("phone"));
+            logger.log(Level.INFO, phone);
+            if (dbao.updateStudentPhone(email, phone)) {
                 return SUCCESS;
             } else {
                 return FAILURE;

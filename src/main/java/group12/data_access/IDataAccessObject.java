@@ -62,4 +62,6 @@ public interface IDataAccessObject {
     int numberOfCourse(String courseName);
 
     boolean updateStudentEmail(String oldMail, String newMail);
+
+    boolean updateStudentPhone(String email, String newPhone);
 }
