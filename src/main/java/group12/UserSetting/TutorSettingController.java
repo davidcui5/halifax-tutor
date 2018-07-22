@@ -1,6 +1,5 @@
 package group12.UserSetting;
 
-import group12.admin_setting.IAdminSettingDAO;
 import group12.data_access.GetPlanSQLOperation;
 import group12.data_access.Subscribe_Plan;
 import group12.encryption.IEncryptor;
@@ -20,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 @RestController
-@RequestMapping(path="/tutor/setting")
 public class TutorSettingController {
     private static final String SUCCESS = "SUCCESS";
     private static final String FAILURE = "FAILURE";
@@ -39,7 +37,7 @@ public class TutorSettingController {
     }
 
 
-    @PostMapping(path="/password")
+    @PostMapping(path="/tutor/setting/password", consumes = "application/json", produces = "text/plain")
     public String changePassword(@RequestBody Map<String,String> body){
         String email = accessToken.decodeToken(body.get("token"));
         logger.log(Level.INFO,email);
@@ -55,7 +53,7 @@ public class TutorSettingController {
         }
     }
 
-    @PostMapping(path = "/email")
+    @PostMapping(path = "/tutor/setting/email", consumes = "application/json", produces = "text/plain")
     public  String changeEmail(@RequestBody Map<String,String> body){
         String email = accessToken.decodeToken(body.get("token"));
         logger.log(Level.INFO,email);
@@ -68,7 +66,7 @@ public class TutorSettingController {
         }
     }
 
-    @PostMapping(path = "/card")
+    @PostMapping(path = "/tutor/setting/card", consumes = "application/json", produces = "text/plain")
     public  String changeCardinfo(@RequestBody Map<String,String> body){
         String email = accessToken.decodeToken(body.get("token"));
         logger.log(Level.INFO,email);
@@ -89,7 +87,7 @@ public class TutorSettingController {
         }
     }
 
-    @PostMapping(path = "/phone")
+    @PostMapping(path = "/tutor/setting/phone", consumes = "application/json", produces = "text/plain")
     public  String changePhone(@RequestBody Map<String,String> body){
         String email = accessToken.decodeToken(body.get("token"));
         logger.log(Level.INFO,email);
@@ -103,7 +101,7 @@ public class TutorSettingController {
         }
     }
 
-    @PostMapping(path="/education")
+    @PostMapping(path="/tutor/setting/education", consumes = "application/json", produces = "text/plain")
     public String changeEducation(@RequestBody Map<String,String> body){
         String email = accessToken.decodeToken(body.get("token"));
         logger.log(Level.INFO,email);
@@ -117,7 +115,7 @@ public class TutorSettingController {
         }
     }
 
-    @PostMapping(path="/experience")
+    @PostMapping(path="/tutor/setting/experience", consumes = "application/json", produces = "text/plain")
     public String changeExperience(@RequestBody Map<String,String> body){
         String email = accessToken.decodeToken(body.get("token"));
         logger.log(Level.INFO,email);
@@ -132,7 +130,7 @@ public class TutorSettingController {
     }
 
 
-    @PostMapping(path = "/plan1")
+    @PostMapping(path = "/tutor/setting//plan1")
     @ResponseBody
     public ArrayList<Subscribe_Plan> SendPlan(@RequestBody ArrayList<Subscribe_Plan> plans) {
         ArrayList<Subscribe_Plan> planArrayList = new ArrayList<Subscribe_Plan>();
