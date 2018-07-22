@@ -4,14 +4,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GetCourseByNameSQLOperation extends SQLOperationTemplate {
-    public GetCourseByNameSQLOperation(Object... parameters) {
+public class NumberOFCourseSQLOperation extends SQLOperationTemplate {
+
+    public NumberOFCourseSQLOperation(Object... parameters) {
         super(parameters);
     }
 
     @Override
     String makeSQL() {
-        return "CALL GetCourseByName(?)";
+        return "SELECT NumberOfCourse(?)";
     }
 
     @Override
@@ -23,14 +24,11 @@ public class GetCourseByNameSQLOperation extends SQLOperationTemplate {
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        CourseParserWithoutPrice courseParser=new CourseParserWithoutPrice();
-        Course course = courseParser.parse(rs);
-        return course;
+        return rs.getInt(1);
     }
 
     @Override
     ResultSet execute(PreparedStatement ps) throws SQLException {
-        ps.execute();
-        return ps.getResultSet();
+        return ps.executeQuery();
     }
 }

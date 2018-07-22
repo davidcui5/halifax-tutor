@@ -9,6 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
@@ -74,6 +75,22 @@ public class DBDAOFunctionsTest {
         int tutorId = dbda.getTutorIDByEmail(tutor.getEmail());
         boolean actual = dbda.setTutorActivatedStatus(tutorId, true);
         assertTrue(actual);
+    }
+
+    @Test
+    public void testCourseAndSetTOTutor() {
+        Tutor tutor = MockData.getTutorObject();
+        int tutorId = dbda.getTutorIDByEmail(tutor.getEmail());
+        if (dbda.numberOfCourse(MockData.getCourseObject().getName()) == 0) {
+            boolean actual = dbda.saveCourse(MockData.getCourseObject());
+            assertTrue(actual);
+        }
+        Course course = dbda.getCourseByName(MockData.getCourseObject().getName());
+        assertEquals(course.getName(), MockData.getCourseObject().getName());
+        boolean actual = dbda.setCourseToTutor(tutorId, course.getId(), 5);
+        assertTrue(actual);
+        List<Course> courses = dbda.getCoursesOFTutor(tutorId);
+        assertEquals(1,courses.size());
     }
 
     @Test

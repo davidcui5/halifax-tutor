@@ -1,5 +1,6 @@
 package group12.DBDAOTest;
 
+import group12.data_access.Course;
 import group12.data_access.Student;
 import group12.data_access.Tutor;
 import group12.registration.StudentSignupForm;
@@ -79,6 +80,13 @@ public class MockData {
 
     public static String getOldActivationCode() {
         return "713ec00e-e9ae-4833-bba2-75d8729f554e";
+    }
+
+    public static Course getCourseObject(){
+        Course course=new Course();
+        course.setName("CSI101");
+        course.setSchool("DAl");
+        return course;
     }
 }
 

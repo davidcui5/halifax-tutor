@@ -237,6 +237,20 @@ public class MysqlDAOImpl implements IDataAccessObject {
     }
 
     @Override
+    public List<Course> getCoursesOFTutor(int tutorId) {
+        GetCoursesOFTutorSQLOperation getCoursesOFTutorSQLOperation = new GetCoursesOFTutorSQLOperation(tutorId);
+        List<Course> courses = (List<Course>) getCoursesOFTutorSQLOperation.executeMysqlQuery();
+        return courses;
+    }
+
+    @Override
+    public int numberOfCourse(String courseName) {
+        NumberOFCourseSQLOperation numberOFCourseSQLOperation = new NumberOFCourseSQLOperation(courseName);
+        int result = (int) numberOFCourseSQLOperation.executeMysqlQuery();
+        return result;
+    }
+
+    @Override
     public ActivationCode checkActivationCode(String code) {
         CheckActivationCodeSQLOperation activationCodeSQLOperation = new CheckActivationCodeSQLOperation(code);
         ActivationCode activationCode = (ActivationCode) activationCodeSQLOperation.executeMysqlQuery();
@@ -259,7 +273,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
 
     @Override
     public boolean saveCourse(Course course) {
-        SaveCourseSQLOperation saveCourseSQLOperation = new SaveCourseSQLOperation(course);
+        SaveCourseSQLOperation saveCourseSQLOperation = new SaveCourseSQLOperation(course.getName(), course.getSchool());
         int result = (int) saveCourseSQLOperation.executeMysqlQuery();
         if (result == 1)
             return true;

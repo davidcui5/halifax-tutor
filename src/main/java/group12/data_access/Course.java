@@ -7,6 +7,7 @@ public class Course {
     private int id;
     private String name;
     private String school;
+    private float price;
 
     public String getName() {
         return name;
@@ -30,5 +31,13 @@ public class Course {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 }

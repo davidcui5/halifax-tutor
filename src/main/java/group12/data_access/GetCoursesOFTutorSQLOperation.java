@@ -6,25 +6,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetAllCourseSQLOperation extends SQLOperationTemplate {
-    public GetAllCourseSQLOperation(Object... parameters) {
+public class GetCoursesOFTutorSQLOperation extends SQLOperationTemplate {
+    public GetCoursesOFTutorSQLOperation(Object... parameters) {
         super(parameters);
     }
 
     @Override
     String makeSQL() {
-        return "Call GetAllCourses()";
+        return "CALL GetCoursesOFTutor(?)";
     }
 
     @Override
     PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
+        int tutorId = (int) getParameters().get(0);
+        ps.setInt(1, tutorId);
         return ps;
     }
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
         List<Course> courses = new ArrayList<>();
-        CourseParserWithoutPrice courseParser = new CourseParserWithoutPrice();
+        CourseParserWithPrice courseParser = new CourseParserWithPrice();
         courses.add(courseParser.parse(rs));
         while (rs.next()) {
             courses.add(courseParser.parse(rs));
