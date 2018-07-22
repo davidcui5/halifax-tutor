@@ -86,20 +86,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
     }
 
     @Override
-    public Student getStudentByEmail(String email) {
-        GetStudentByEmailSQLOperation getStudentByEmailSQLOperation = new GetStudentByEmailSQLOperation(email);
-        Student student = (Student) getStudentByEmailSQLOperation.executeMysqlQuery();
-        return student;
-    }
-
-    @Override
-    public Tutor getTutorByEmail(String email) {
-        GeTTutorEmailSQLOperation authorizeTutorSQLOperation = new GeTTutorEmailSQLOperation(email);
-        Tutor tutor = (Tutor) authorizeTutorSQLOperation.executeMysqlQuery();
-        return tutor;
-    }
-
-    @Override
     public Admin getAdminByEmail(String email) {
         return null;
     }
@@ -283,5 +269,4 @@ public class MysqlDAOImpl implements IDataAccessObject {
             return true;
         else
             return false;
-    }
-}
+    }}
