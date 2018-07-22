@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @RestController
@@ -130,4 +131,28 @@ public class TutorSettingController {
         }
     }
 
+
+
+
+
+
+    @PostMapping(path = "/plan1")
+    @ResponseBody
+    public ArrayList<Subscribe_Plan> SendPlan(@RequestBody ArrayList<Subscribe_Plan> plans) {
+        ArrayList<Subscribe_Plan> planArrayList = new ArrayList<Subscribe_Plan>();
+
+        GetPlanSQLOperation getPlanSQLOperation1 = new GetPlanSQLOperation(1);
+        planArrayList.add((Subscribe_Plan) getPlanSQLOperation1.executeMysqlQuery());
+
+        GetPlanSQLOperation getPlanSQLOperation2 = new GetPlanSQLOperation(2);
+        planArrayList.add((Subscribe_Plan) getPlanSQLOperation2.executeMysqlQuery());
+
+        GetPlanSQLOperation getPlanSQLOperation3 = new GetPlanSQLOperation(3);
+        planArrayList.add((Subscribe_Plan) getPlanSQLOperation3.executeMysqlQuery());
+
+        GetPlanSQLOperation getPlanSQLOperation4 = new GetPlanSQLOperation(4);
+        planArrayList.add((Subscribe_Plan) getPlanSQLOperation4.executeMysqlQuery());
+
+        return planArrayList;
+    }
 }
