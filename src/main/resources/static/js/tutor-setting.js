@@ -59,23 +59,23 @@ $(document).ready(function() {
     var objToken = {'token': token};
 
 
+
     //passing token
     $.ajax({
-        url: location.origin + "/setting",
+        url: location.origin + "tutor/setting/access",
         data: JSON.stringify(objToken),
         contentType: "application/json",
         type: "POST",
-        dataType: "json"
+        dataType: "text"
     }).done(function (data) {
         if (data.result === "Success") {
-            // alert("Email succeed!");
-            // window.location.replace("../index.html");
         } else {
             alert(data.details);
         }
     }).fail(function (xhr, status, errorThrown) {
 
     });
+
 
     $("#Cemail").submit(function (event) {
         event.preventDefault();
@@ -157,3 +157,4 @@ $(document).ready(function() {
 
     });
 });
+
