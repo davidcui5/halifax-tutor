@@ -15,6 +15,7 @@ function processResults(success, numOfResults, results) {
 }
 
 function generateTutorProfile(tutorProfile) {
+    let tutorPublicId = tutorProfile["id"];
     let photoURL = tutorProfile["photoURL"];
     let firstName = tutorProfile["firstName"];
     let lastName = tutorProfile["lastName"];
@@ -48,6 +49,15 @@ function generateTutorProfile(tutorProfile) {
     let pricePerHourElement = document.createElement("p");
     pricePerHourElement.innerHTML = "Price per hour: " + pricePerHour;
     element.appendChild(pricePerHourElement);
+
+    let viewProfileElement = document.createElement("button");
+    viewProfileElement.innerHTML = "View thie tutor's profile";
+
+    viewProfileElement.addEventListener("click", function () {
+        localStorage.setItem('tutor-public-id', tutorPublicId);
+        console.log(tutorPublicId);
+    });
+    element.appendChild(viewProfileElement);
 
     return element;
 }
