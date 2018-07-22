@@ -25,7 +25,7 @@ public class MockData {
         tutor.setPhoneNumber("9021234567T");
         tutor.setPassword("pass123456T");
         tutor.setCreditCardHolder(tutor.getFirstName());
-        tutor.setCreditCardNum("1234567891234567");
+        tutor.setCreditCardNum("123456789T234567");
         tutor.setExpiryDate("12-12");
         tutor.setSecurityCode("123");
         return tutor;

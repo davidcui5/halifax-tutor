@@ -11,7 +11,7 @@ public class CheckActivationCodeSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "SELECT CheckActivationCode(?)";
+        return "CALL CheckActivationCode(?)";
     }
 
     @Override

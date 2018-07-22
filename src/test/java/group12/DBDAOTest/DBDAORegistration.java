@@ -5,9 +5,8 @@ import group12.data_access.*;
 import org.junit.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import javax.xml.crypto.Data;
-import java.lang.reflect.AccessibleObject;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static junit.framework.TestCase.*;
 
@@ -46,7 +45,9 @@ public class DBDAORegistration {
         boolean actual = dbda.saveActivationCode(MockData.getActivationCode());
         assertTrue(actual);
         ActivationCode activationCode = dbda.checkActivationCode(MockData.getActivationCode());
-        assertEquals(LocalDateTime.now(), activationCode.getDate());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String strDate = dtf.format(LocalDateTime.now());
+        assertEquals(strDate, activationCode.getDate().toString());
         actual = dbda.deleteActivationCodeByValue(MockData.getActivationCode());
         assertTrue(actual);
 
