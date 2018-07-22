@@ -123,6 +123,7 @@ $(document).ready(function() {
         let securityCode = $("#phone").val();
         let cardname = $("#cardname").val();
         var ChangeCardData = {
+            'token': token,
             "cardname": cardname,
             "creditCardNumber": creditCardNumber,
             "expireDate":expireDate,
@@ -138,6 +139,33 @@ $(document).ready(function() {
         }).done(function (data) {
             if (data.result === "Success") {
                 alert("Card information change succeed!");
+            } else {
+                alert(data.details);
+            }
+        }).fail(function (xhr, status, errorThrown) {
+
+        });
+
+    });
+
+    $("#Cphone").submit(function (event) {
+        event.preventDefault();
+        let phone = $("#phone").val();
+
+        var ChangePhoneData = {
+            'token': token,
+            "phone" : phone
+        };
+
+        $.ajax({
+            url: location.origin +"/phone",
+            data: JSON.stringify(ChangePhoneData),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "text"
+        }).done(function (data) {
+            if (data.result === "Success") {
+                alert("Phone Number change succeed!");
             } else {
                 alert(data.details);
             }
