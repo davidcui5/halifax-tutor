@@ -233,8 +233,6 @@ $(document).ready(function() {
 
     });
 
-
-
     $("#Cavailability").submit(function (event) {
         let A1 = $("#A1").is(":checked");
         let A2 = $("#A2").is(":checked");
@@ -303,13 +301,12 @@ $(document).ready(function() {
     //get subscription info
     $.ajax({
         url: location.origin +"/tutor/setting/plan",
-        data: JSON.stringify(ChangeExpData),
-        contentType: "application/json",
+        // contentType: "application/json",
         type: "GET",
         dataType: "json"
     }).done(function (data) {
         if (data.result === "Success") {
-            // alert("Experience change succeed!");
+            //TODO POST TO HTML
         } else {
             alert(data.details);
         }
