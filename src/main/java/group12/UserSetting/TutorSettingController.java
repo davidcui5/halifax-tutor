@@ -67,8 +67,6 @@ public class TutorSettingController {
         }else {
             return FAILURE;
         }
-
-
     }
 
 }
