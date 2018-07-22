@@ -174,5 +174,32 @@ $(document).ready(function() {
         });
 
     });
+
+    $("#Cedu").submit(function (event) {
+        event.preventDefault();
+        let education = $("#education").val();
+
+        var ChangeEduData = {
+            'token': token,
+            "education" : education
+        };
+
+        $.ajax({
+            url: location.origin +"/education",
+            data: JSON.stringify(ChangeEduData),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "text"
+        }).done(function (data) {
+            if (data.result === "Success") {
+                alert("Education change succeed!");
+            } else {
+                alert(data.details);
+            }
+        }).fail(function (xhr, status, errorThrown) {
+
+        });
+
+    });
 });
 
