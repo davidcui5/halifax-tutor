@@ -25,4 +25,9 @@ public class CountAdminByEmailSQLOp extends SQLOperationTemplate {
     Object extractResultSet(ResultSet rs) throws SQLException {
         return rs.getInt(1);
     }
+
+    @Override
+    ResultSet execute(PreparedStatement ps) throws SQLException {
+        return ps.executeQuery();
+    }
 }

@@ -27,4 +27,9 @@ public class UpdateSubPriceSQLOperation extends SQLOperationTemplate {
     Object extractResultSet(ResultSet rs) throws SQLException {
         return rs.getBoolean(1);
     }
+
+    @Override
+    ResultSet execute(PreparedStatement ps) throws SQLException {
+        return ps.executeQuery();
+    }
 }
