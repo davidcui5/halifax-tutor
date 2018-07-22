@@ -13,7 +13,7 @@ public class TutorPublicInfoTest {
 
     @Before
     public void testSetup() {
-        tutorPublicInfo = new TutorPublicInfo("", "", "", "",
+        tutorPublicInfo = new TutorPublicInfo(0, "", "", "", "",
                 0.0f, 0.0f);
     }
 
