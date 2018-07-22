@@ -20,7 +20,7 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "SELECT Tutor.PhotoUrl, Tutor.FirstName, Tutor.LastName, Tutor.Education, " +
+        return "SELECT Tutor.ID, Tutor.PhotoUrl, Tutor.FirstName, Tutor.LastName, Tutor.Education, " +
                 " Tutor.Rating, TutorCourse.Price " +
                 "FROM TutorCourse " +
                 "JOIN Tutor on TutorCourse.TutorId = Tutor.ID " +
@@ -41,13 +41,14 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
+        int id = rs.getInt("ID");
         String photoURL = rs.getString("PhotoURL");
         String firstName = rs.getString("FirstName");
         String lastName = rs.getString("LastName");
         String education = rs.getString("Education");
         float rating = rs.getFloat("Rating");
         float price = rs.getFloat("Price");
-        return new TutorPublicInfo(photoURL, firstName, lastName, education, rating, price);
+        return new TutorPublicInfo(id, photoURL, firstName, lastName, education, rating, price);
     }
 
     public ArrayList<TutorPublicInfo> executeSearchQuery() throws SearchQuerySQLException {
