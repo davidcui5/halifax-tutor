@@ -23,9 +23,12 @@ public class TutorSettingController {
     private static final Logger logger = LogManager.getLogger(TutorSettingController.class);
 //    private String useremail;
     IAccessToken accessToken;
+    ITutorSettingDAO tutorSettingDAO;
 
     public TutorSettingController(){
         accessToken = JWTAccessToken.getInstance();
+        tutorSettingDAO = new ITutorSettingDAO() {
+        }
     }
 
     public TutorSettingController(IAccessToken accessToken){
