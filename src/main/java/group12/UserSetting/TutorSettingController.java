@@ -54,5 +54,21 @@ public class TutorSettingController {
         }
     }
 
+    @PostMapping(path = "/email")
+    public  String changeEmail(@RequestBody Map<String,String> body){
+        String email = accessToken.decodeToken(body.get("token"));
+        logger.log(Level.INFO,email);
+        logger.log(Level.INFO,body.get("email"));
+        IEncryptor encryptor = new SimpleMD5Encryptor();
+        String newemail = encryptor.encrypt(body.get("email"));
+        logger.log(Level.INFO,newemail);
+        if (tutorSettingDAO.setTutorEmail(email,newemail)){
+            return SUCCESS;
+        }else {
+            return FAILURE;
+        }
+
+
+    }
 
 }

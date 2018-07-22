@@ -13,7 +13,7 @@ public class TutorSettingDAO implements ITutorSettingDAO{
     }
 
     @Override
-    public boolean setTutorEmail(String email) {
+    public boolean setTutorEmail(String email,String newemail) {
         return false;
     }
 
