@@ -1,6 +1,7 @@
 package group12.data_access;
 
 public class TutorPublicInfo {
+    private int id;
     private String photoURL;
     private String firstName;
     private String lastName;
@@ -9,6 +10,7 @@ public class TutorPublicInfo {
     private float pricePerHour;
 
     public TutorPublicInfo() {
+        this.id = 0;
         this.photoURL = "";
         this.firstName = "";
         this.lastName = "";
@@ -17,14 +19,19 @@ public class TutorPublicInfo {
         this.pricePerHour = 0.0f;
     }
 
-    public TutorPublicInfo(String photoURL, String firstName, String lastName, String education,
+    public TutorPublicInfo(int id, String photoURL, String firstName, String lastName, String education,
                            float rating, float pricePerHour) {
+        this.id = id;
         this.photoURL = photoURL;
         this.firstName = firstName;
         this.lastName = lastName;
         this.education = education;
         this.rating = rating;
         this.pricePerHour = pricePerHour;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setPhotoURL(String photoURL) {
@@ -49,6 +56,10 @@ public class TutorPublicInfo {
 
     public void setPricePerHour(float pricePerHour) {
         this.pricePerHour = pricePerHour;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getPhotoURL() {
@@ -77,7 +88,7 @@ public class TutorPublicInfo {
 
     @Override
     public String toString() {
-        return "photoURL: " + photoURL + " firstName: " + firstName + " lastName: " + lastName
+        return "id: " + id + " photoURL: " + photoURL + " firstName: " + firstName + " lastName: " + lastName
                 + " education: " + education + " rating: " + rating + " pricePerHour" + pricePerHour;
     }
 }
