@@ -4,11 +4,6 @@ import group12.data_access.CountTutorByEmailSQLOp;
 import group12.data_access.SQLOperationTemplate;
 
 public class TutorSettingDAO implements ITutorSettingDAO{
-    @Override
-    public int countTutorByEmail(String email) {
-        SQLOperationTemplate op = new CountTutorByEmailSQLOp(email);
-        return (int)op.executeMysqlQuery();
-    }
 
     @Override
     public boolean setTutorPassword(String email, String password) {
