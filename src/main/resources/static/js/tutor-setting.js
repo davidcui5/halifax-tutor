@@ -85,6 +85,7 @@ $(document).ready(function() {
                 alert(data.details);
             }
         }).fail(function (xhr, status, errorThrown) {
+
         });
     });
 
@@ -93,15 +94,16 @@ $(document).ready(function() {
         let email = $("#email").val();
 
         var ChangeEmailData = {
+            'token': token,
             "email": email
         };
 
         $.ajax({
-            url: location.origin + "/cemail",
+            url: location.origin + "/email",
             data: JSON.stringify(ChangeEmailData),
             contentType: "application/json",
             type: "POST",
-            dataType: "json"
+            dataType: "text"
         }).done(function (data) {
             if (data.result === "Success") {
                 alert("Email change succeed!");
