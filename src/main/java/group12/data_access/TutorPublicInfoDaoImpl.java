@@ -1,4 +1,4 @@
-package group12.search;
+package group12.data_access;
 
 import java.util.List;
 

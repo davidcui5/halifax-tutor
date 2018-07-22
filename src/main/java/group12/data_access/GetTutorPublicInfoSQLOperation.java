@@ -1,7 +1,6 @@
 package group12.data_access;
 
 import group12.logging.ConnectionFactory;
-import group12.search.TutorPublicInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,4 +1,4 @@
-package group12.search;
+package group12.data_access;
 
 public class TutorPublicInfo {
     private String photoURL;
