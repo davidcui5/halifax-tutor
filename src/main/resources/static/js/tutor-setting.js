@@ -201,5 +201,34 @@ $(document).ready(function() {
         });
 
     });
+
+    $("#Cexperience").submit(function (event) {
+        event.preventDefault();
+        let education = $("#education").val();
+
+        var ChangeExpData = {
+            'token': token,
+            "experience" : experience
+        };
+
+        $.ajax({
+            url: location.origin +"/experience",
+            data: JSON.stringify(ChangeExpData),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "text"
+        }).done(function (data) {
+            if (data.result === "Success") {
+                alert("Experience change succeed!");
+            } else {
+                alert(data.details);
+            }
+        }).fail(function (xhr, status, errorThrown) {
+
+        });
+
+    });
+
+
 });
 
