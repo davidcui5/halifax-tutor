@@ -19,15 +19,20 @@ $(document).ready(function () {
         //window.location.replace("../index.html");
     });
 
-    $("#logout").onclick(function (event) {
+    $("#logout").click(function (event) {
         event.preventDefault();
         localStorage.removeItem("token");
     });
 
     $("#Cpassword").submit(function (event) {
         event.preventDefault();
-        let password = $("#pwd").val();
 
+        if($("#pwd").val() != $("#Rpwd").val()){
+            alert("The two password fields didn't match.")
+            return;
+        }
+
+        let password = $("#pwd").val();
         var data = {
             'token': token,
             "password": password
