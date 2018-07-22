@@ -8,7 +8,7 @@ import group12.exceptions.SearchQuerySQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchService {
+class SearchService {
     static SearchResponse getSearchResponse(SearchRequest searchRequest) {
         String school = searchRequest.getSchool();
         String courseName = searchRequest.getCourseName();
