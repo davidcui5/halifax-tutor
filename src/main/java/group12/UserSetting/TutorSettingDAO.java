@@ -2,6 +2,7 @@ package group12.UserSetting;
 
 
 import group12.data_access.SQLOperationTemplate;
+import group12.data_access.UpdateTutorCardSQLOperation;
 import group12.data_access.UpdateTutorEmailSQLOperation;
 import group12.data_access.UpdateTutorPasswordSQLOperation;
 
@@ -26,7 +27,8 @@ public class TutorSettingDAO implements ITutorSettingDAO{
 
     @Override
     public boolean setTutorCard(String email, String creditCardHolder, String creditCardNum, String creditCardExpiryDate, int securityCode) {
-        return false;
+        SQLOperationTemplate operation = new UpdateTutorCardSQLOperation(email,creditCardHolder,creditCardNum,creditCardExpiryDate,securityCode);
+        return (Boolean)operation.executeMysqlQuery();
     }
 
     @Override
