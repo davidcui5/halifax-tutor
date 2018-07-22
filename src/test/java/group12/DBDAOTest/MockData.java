@@ -3,8 +3,8 @@ package group12.DBDAOTest;
 import group12.data_access.Course;
 import group12.data_access.Student;
 import group12.data_access.Tutor;
-import group12.registration.StudentSignupForm;
-import group12.registration.TutorSignupForm;
+/*import group12.registration.StudentSignupForm;
+import group12.registration.TutorSignupForm;*/
 
 public class MockData {
     public static Student getStudentObject() {
@@ -48,7 +48,7 @@ public class MockData {
         return "testemailTut@gmail.com";
     }
 
-    public static StudentSignupForm getUnRegStudent() {
+    /*public static StudentSignupForm getUnRegStudent() {
         StudentSignupForm student = new StudentSignupForm();
         student.setEmail("testemailWrong@gmail.com");
         student.setPassword("pass123456S");
@@ -60,7 +60,7 @@ public class MockData {
         tutor.setEmail("testemailWrong@gmail.com");
         tutor.setPassword("pass123456T");
         return tutor;
-    }
+    }*/
 
     public static String getEmailRegistredStudent() {
         return "testemailStu@gmail.com";

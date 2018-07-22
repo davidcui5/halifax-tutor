@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SaveStudentSQLOperation extends SQLOperationTemplate {
-    public SaveStudentSQLOperation(Object... parameters) {
-        super(parameters);
+    public SaveStudentSQLOperation(Student student) {
+        super(student);
     }
 
     @Override
@@ -16,26 +16,19 @@ public class SaveStudentSQLOperation extends SQLOperationTemplate {
 
     @Override
     PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
-        String firstName = (String) getParameters().get(0);
-        String lastName = (String) getParameters().get(1);
-        String email = (String) getParameters().get(2);
-        String password = (String) getParameters().get(3);
-        String school = (String) getParameters().get(4);
-        String phoneNumber = (String) getParameters().get(5);
-        ps.setString(1, firstName);
-        ps.setString(2, lastName);
-        ps.setString(3, email);
-        ps.setString(4, password);
-        ps.setString(5, school);
-        ps.setString(6, phoneNumber);
+        Student s = (Student) getParameters().get(0);
+        ps.setString(1, s.getFirstName());
+        ps.setString(2, s.getLastName());
+        ps.setString(3, s.getEmail());
+        ps.setString(4, s.getPassword());
+        ps.setString(5, s.getSchool());
+        ps.setString(6, s.getPhoneNumber());
         return ps;
     }
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        int result;
-        result = rs.getInt(1);
-        return result;
+        return rs.getBoolean(1);
     }
 
     @Override
