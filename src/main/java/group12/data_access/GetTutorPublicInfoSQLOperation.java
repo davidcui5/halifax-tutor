@@ -13,6 +13,10 @@ import java.util.ArrayList;
 public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
     private static Logger logger = LogManager.getLogger(GetTutorPublicInfoSQLOperation.class);
 
+    public GetTutorPublicInfoSQLOperation(Object... parameters) {
+        super(parameters);
+    }
+
     @Override
     String makeSQL() {
         return "SELECT Tutor.PhotoUrl, Tutor.FirstName, Tutor.LastName, Tutor.Education, " +
