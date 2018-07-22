@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -130,23 +131,41 @@ public class TutorSettingController {
     }
 
 
-    @PostMapping(path = "/tutor/setting//plan1")
-    @ResponseBody
-    public ArrayList<Subscribe_Plan> SendPlan(@RequestBody ArrayList<Subscribe_Plan> plans) {
-        ArrayList<Subscribe_Plan> planArrayList = new ArrayList<Subscribe_Plan>();
-
+    @PostMapping(path = "/tutor/setting/plan")
+    public Map<String,Object> SendPlan() {
+        Map<String, Object> map = new HashMap<String, Object>();
         GetPlanSQLOperation getPlanSQLOperation1 = new GetPlanSQLOperation(1);
-        planArrayList.add((Subscribe_Plan) getPlanSQLOperation1.executeMysqlQuery());
-
+        Subscribe_Plan plan1 = (Subscribe_Plan) getPlanSQLOperation1.executeMysqlQuery();
         GetPlanSQLOperation getPlanSQLOperation2 = new GetPlanSQLOperation(2);
-        planArrayList.add((Subscribe_Plan) getPlanSQLOperation2.executeMysqlQuery());
-
+        Subscribe_Plan plan2 = (Subscribe_Plan) getPlanSQLOperation2.executeMysqlQuery();
         GetPlanSQLOperation getPlanSQLOperation3 = new GetPlanSQLOperation(3);
-        planArrayList.add((Subscribe_Plan) getPlanSQLOperation3.executeMysqlQuery());
-
+        Subscribe_Plan plan3 = (Subscribe_Plan) getPlanSQLOperation3.executeMysqlQuery();
         GetPlanSQLOperation getPlanSQLOperation4 = new GetPlanSQLOperation(4);
-        planArrayList.add((Subscribe_Plan) getPlanSQLOperation4.executeMysqlQuery());
+        Subscribe_Plan plan4 = (Subscribe_Plan) getPlanSQLOperation4.executeMysqlQuery();
 
-        return planArrayList;
+        map.put("plan1", plan1);
+        map.put("plan2", plan2);
+        map.put("plan3", plan3);
+        map.put("plan4", plan4);
+
+        return map;
     }
+// @PostMapping(path = "/tutor/setting/plan1")
+//    public ArrayList<Subscribe_Plan> SendPlan(@RequestBody ArrayList<Subscribe_Plan> plans) {
+//        ArrayList<Subscribe_Plan> planArrayList = new ArrayList<Subscribe_Plan>();
+//
+//        GetPlanSQLOperation getPlanSQLOperation1 = new GetPlanSQLOperation(1);
+//        planArrayList.add((Subscribe_Plan) getPlanSQLOperation1.executeMysqlQuery());
+//
+//        GetPlanSQLOperation getPlanSQLOperation2 = new GetPlanSQLOperation(2);
+//        planArrayList.add((Subscribe_Plan) getPlanSQLOperation2.executeMysqlQuery());
+//
+//        GetPlanSQLOperation getPlanSQLOperation3 = new GetPlanSQLOperation(3);
+//        planArrayList.add((Subscribe_Plan) getPlanSQLOperation3.executeMysqlQuery());
+//
+//        GetPlanSQLOperation getPlanSQLOperation4 = new GetPlanSQLOperation(4);
+//        planArrayList.add((Subscribe_Plan) getPlanSQLOperation4.executeMysqlQuery());
+//
+//        return planArrayList;
+//    }
 }
