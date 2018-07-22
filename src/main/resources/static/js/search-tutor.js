@@ -11,8 +11,6 @@ function processResults(success, numOfResults, results) {
             let tutorProfileDiv = generateTutorProfile(tutorProfile);
             $("#search-results").append(tutorProfileDiv);
         });
-
-        // $("#search-results-filters").show();
     }
 }
 
@@ -26,27 +24,32 @@ function generateTutorProfile(tutorProfile) {
 
     let element = document.createElement("div");
     let photoURLElement = document.createElement("img");
+    if (photoURL === null) {
+        photoURL = "../images/profile-placeholder.png"
+    }
     photoURLElement.setAttribute('src', photoURL);
-    photoURLElement.setAttribute('height', 10);
-    photoURLElement.setAttribute('width', 10);
+    photoURLElement.setAttribute('height', 30);
+    photoURLElement.setAttribute('width', 30);
     element.appendChild(photoURLElement);
 
     let nameElement = document.createElement("p");
     let name = firstName + " " + lastName;
-    nameElement.innerHTML = name;
+    nameElement.innerHTML = "Name: " + name;
     element.appendChild(nameElement);
 
     let educationElement = document.createElement("p");
-    educationElement.innerHTML = education;
+    educationElement.innerHTML = "Education: " + education;
     element.appendChild(educationElement);
 
     let ratingElement = document.createElement("p");
-    ratingElement.innerHTML = rating;
+    ratingElement.innerHTML = "Rating: " + rating;
     element.appendChild(ratingElement);
 
     let pricePerHourElement = document.createElement("p");
-    pricePerHourElement.innerHTML = pricePerHour;
+    pricePerHourElement.innerHTML = "Price per hour: " + pricePerHour;
     element.appendChild(pricePerHourElement);
+
+    return element;
 }
 
 $(document).ready(function () {
@@ -88,9 +91,10 @@ $(document).ready(function () {
     });
 
     $("#sort-button").click(function () {
-        // $("#search-results").html("");
-        let sortBy = $("filter-select").val();
-        let order = $("filter-order").val();
+        let sortBy = $("#filter-select").val();
+        let order = $("#filter-order").val();
+        console.log(sortBy);
+        console.log(order);
         if (order === "asc") {
             if (sortBy === "rating") {
                 results.sort(function (a, b) {
@@ -112,6 +116,7 @@ $(document).ready(function () {
                 });
             }
         }
+        console.log(results);
         processResults(success, numOfResults, results);
     });
 });
