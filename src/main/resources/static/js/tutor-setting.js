@@ -103,7 +103,7 @@ $(document).ready(function() {
         };
 
         $.ajax({
-            url: location.origin + "/email",
+            url: location.origin + "/tutor/setting/email",
             data: JSON.stringify(ChangeEmailData),
             contentType: "application/json",
             type: "POST",
@@ -135,7 +135,7 @@ $(document).ready(function() {
         };
 
         $.ajax({
-            url: location.origin +"/card",
+            url: location.origin +"/tutor/setting/card",
             data: JSON.stringify(ChangeCardData),
             contentType: "application/json",
             type: "POST",
@@ -162,7 +162,7 @@ $(document).ready(function() {
         };
 
         $.ajax({
-            url: location.origin +"/phone",
+            url: location.origin +"/tutor/setting/phone",
             data: JSON.stringify(ChangePhoneData),
             contentType: "application/json",
             type: "POST",
@@ -189,7 +189,7 @@ $(document).ready(function() {
         };
 
         $.ajax({
-            url: location.origin +"/education",
+            url: location.origin +"/tutor/setting/education",
             data: JSON.stringify(ChangeEduData),
             contentType: "application/json",
             type: "POST",
@@ -216,7 +216,7 @@ $(document).ready(function() {
         };
 
         $.ajax({
-            url: location.origin +"/experience",
+            url: location.origin +"/tutor/setting/experience",
             data: JSON.stringify(ChangeExpData),
             contentType: "application/json",
             type: "POST",
@@ -230,6 +230,23 @@ $(document).ready(function() {
         }).fail(function (xhr, status, errorThrown) {
 
         });
+
+    });
+
+    //get subscription info
+    $.ajax({
+        url: location.origin +"/tutor/setting/plan",
+        data: JSON.stringify(ChangeExpData),
+        contentType: "application/json",
+        type: "GET",
+        dataType: "json"
+    }).done(function (data) {
+        if (data.result === "Success") {
+            // alert("Experience change succeed!");
+        } else {
+            alert(data.details);
+        }
+    }).fail(function (xhr, status, errorThrown) {
 
     });
 
