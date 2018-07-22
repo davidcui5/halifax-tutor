@@ -233,6 +233,73 @@ $(document).ready(function() {
 
     });
 
+
+
+    $("#Cavailability").submit(function (event) {
+        let A1 = $("#A1").is(":checked");
+        let A2 = $("#A2").is(":checked");
+        let A3 = $("#A3").is(":checked");
+        let A4 = $("#A4").is(":checked");
+        let A5 = $("#A5").is(":checked");
+        let A6 = $("#A6").is(":checked");
+        let A7 = $("#A7").is(":checked");
+        let B1 = $("#B1").is(":checked");
+        let B2 = $("#B2").is(":checked");
+        let B3 = $("#B3").is(":checked");
+        let B4 = $("#B4").is(":checked");
+        let B5 = $("#B5").is(":checked");
+        let B6 = $("#B6").is(":checked");
+        let B7 = $("#B7").is(":checked");
+        let C1 = $("#C1").is(":checked");
+        let C2 = $("#C2").is(":checked");
+        let C3 = $("#C3").is(":checked");
+        let C4 = $("#C4").is(":checked");
+        let C5 = $("#C5").is(":checked");
+        let C6 = $("#C6").is(":checked");
+        let C7 = $("#C7").is(":checked");
+
+        var ChangeAvaData = {
+            'token': token,
+            "A1" : A1,
+            "A2" : A2,
+            "A3" : A3,
+            "A4" : A4,
+            "A5" : A5,
+            "A6" : A6,
+            "A7" : A7,
+            "B1" : B1,
+            "B2" : B2,
+            "B3" : B3,
+            "B4" : B4,
+            "B5" : B5,
+            "B6" : B6,
+            "B7" : B7,
+            "C1" : C1,
+            "C2" : C2,
+            "C3" : C3,
+            "C4" : C4,
+            "C5" : C5,
+            "C6" : C6,
+            "C7" : C7
+        };
+
+        $.ajax({
+            url: location.origin +"/tutor/setting/availability",
+            data: JSON.stringify(ChangeExpData),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "text"
+        }).done(function (data) {
+            if (data.result === "Success") {
+                alert("Availability change succeed!");
+            } else {
+                alert(data.details);
+            }
+        }).fail(function (xhr, status, errorThrown) {
+
+        });
+    });
+
     //get subscription info
     $.ajax({
         url: location.origin +"/tutor/setting/plan",
