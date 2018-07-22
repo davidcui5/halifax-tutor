@@ -31,7 +31,8 @@ public class TutorSettingDAO implements ITutorSettingDAO{
 
     @Override
     public boolean setEducation(String email, String education) {
-        return false;
+        SQLOperationTemplate operation = new UpdateTutorEducationSQLOperation(email,education);
+        return (Boolean)operation.executeMysqlQuery();
     }
 
     @Override
