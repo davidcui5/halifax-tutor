@@ -80,6 +80,11 @@ $(document).ready(function () {
             contentType: "application/json",
             dataType: "json"
         }).done(function (data) {
+            success = data["success"];
+            if (!success) {
+                alert("Something wrong with your identity.");
+                window.location.assign("../index.html");
+            }
             identity = data["type"];
             if (identity === "student") {
                 $("#settings").attr("href", "./student-setting.html");

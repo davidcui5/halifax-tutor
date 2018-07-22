@@ -12,4 +12,10 @@ public class SearchController {
     public SearchResponse getSearchResults(@RequestBody SearchRequest searchRequest) {
         return SearchService.getSearchResponse(searchRequest);
     }
+
+    @RequestMapping(value = "/identity", method = RequestMethod.GET, headers = "content-type=application/json")
+    @ResponseBody
+    public IdentityResponse getIdentityResult(@RequestBody IdentityRequest identityRequest) {
+        return SearchService.getSearchIdentity(identityRequest);
+    }
 }

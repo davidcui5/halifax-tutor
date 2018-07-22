@@ -1,9 +1,8 @@
 package group12.search;
 
-import group12.data_access.TutorPublicInfo;
-import group12.data_access.TutorPublicInfoDAO;
-import group12.data_access.TutorPublicInfoDaoImpl;
+import group12.data_access.*;
 import group12.exceptions.SearchQuerySQLException;
+import group12.token_auth.JWTAccessToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,5 +34,25 @@ class SearchService {
         }
 
         return searchResponse;
+    }
+
+    static IdentityResponse getSearchIdentity(IdentityRequest identityRequest) {
+        String token = identityRequest.getToken();
+        IdentityResponse identityResponse = new IdentityResponse();
+        String email = JWTAccessToken.getInstance().decodeToken(token);
+        if (email == null) {
+            identityResponse.setSuccess(false);
+        } else {
+            IDataAccessObject dataAccessObject = new MysqlDAOImpl();
+            if (dataAccessObject.getStudentByEmail(email) != null) {
+                identityResponse.setType("student");
+            } else if (dataAccessObject.getTutorByEmail(email) != null) {
+                identityResponse.setType("tutor");
+            } else {
+                identityResponse.setType("admin");
+            }
+            identityResponse.setSuccess(true);
+        }
+        return identityResponse;
     }
 }
