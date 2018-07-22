@@ -275,7 +275,10 @@ public class MysqlDAOImpl implements IDataAccessObject {
     public boolean updateStudentEmail(String oldMail, String newMail) {
         UpdateStudentEmailSQLOperation updateStudentEmailSQLOperation =
                 new UpdateStudentEmailSQLOperation(oldMail, newMail);
-
-        return false;
+        int result = (int) updateStudentEmailSQLOperation.executeMysqlQuery();
+        if (result == 1)
+            return true;
+        else
+            return false;
     }
 }
