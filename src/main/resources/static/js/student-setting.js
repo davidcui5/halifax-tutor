@@ -5,7 +5,7 @@ $(document).ready(function () {
     var objToken = {'token': token};
 
     $.ajax({
-        url: location.origin + "/admin/setting/access",
+        url: location.origin + "/student/setting/access",
         data: JSON.stringify(objToken),
         contentType: "application/json",
         type: "POST",
@@ -39,7 +39,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: location.origin + "/admin/setting/password",
+            url: location.origin + "/student/setting/password",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
