@@ -1,7 +1,5 @@
 package group12.UserSetting;
 
-import group12.data_access.CountTutorByEmailSQLOp;
-import group12.data_access.SQLOperationTemplate;
 
 public class TutorSettingDAO implements ITutorSettingDAO{
 
