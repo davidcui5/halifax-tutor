@@ -61,7 +61,29 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: location.origin + "/student/setting/password",
+            url: location.origin + "/student/setting/email",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "text"
+        }).done(function (data) {
+            alert(data);
+        }).fail(function (xhr, status, errorThrown) {
+            //empty
+        });
+    });
+
+    $("#Cphone").submit(function (event) {
+        event.preventDefault();
+
+        let email = $("#phone").val();
+        var data = {
+            'token': token,
+            "email": email
+        };
+
+        $.ajax({
+            url: location.origin + "/student/setting/phone",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
