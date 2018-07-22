@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 /*
 @Component
-public class DatabaseMock implements DatabaseInterface {
+public class DatabaseMock  {
     public boolean isEmailNew(String email){
         if(email.equals("zongming.liu@dal.ca"))
             return false;

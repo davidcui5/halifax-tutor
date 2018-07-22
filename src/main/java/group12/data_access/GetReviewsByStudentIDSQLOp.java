@@ -35,4 +35,9 @@ public class GetReviewsByStudentIDSQLOp extends SQLOperationTemplate {
         } while(rs.next());
         return reviews;
     }
+
+    @Override
+    ResultSet execute(PreparedStatement ps) throws SQLException {
+        return ps.executeQuery();
+    }
 }

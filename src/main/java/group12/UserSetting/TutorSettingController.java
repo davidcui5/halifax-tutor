@@ -132,10 +132,6 @@ public class TutorSettingController {
     }
 
 
-
-
-
-
     @PostMapping(path = "/plan1")
     @ResponseBody
     public ArrayList<Subscribe_Plan> SendPlan(@RequestBody ArrayList<Subscribe_Plan> plans) {

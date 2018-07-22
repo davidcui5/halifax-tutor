@@ -1,81 +1,71 @@
-/*
+
 package group12.DBDAOTest;
 
-import group12.DBDAO;
-import group12.registration.StudentSignupForm;
-import group12.registration.TutorSignupForm;
+import group12.data_access.*;
 import org.junit.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static junit.framework.TestCase.*;
 
 public class DBDAORegistration {
     static ClassPathXmlApplicationContext context;
-    static DBDAO dbda;
+    static IDataAccessObject dbda;
 
     @BeforeClass
     public static void confingDBConnection() {
         context = new ClassPathXmlApplicationContext("spring.xml");
-        dbda = context.getBean("DBDAO", DBDAO.class);
+        dbda = context.getBean("DBDAO", MysqlDAOImpl.class);
     }
 
     @Test
     public void testRegStudentRightInfo() {
-        StudentSignupForm student = MockData.getStudentObject();
-        boolean actual = dbda.regStudent(student);
+        Student student = MockData.getStudentObject();
+        int number = dbda.countOfUserWithEmail(student.getEmail());
+        assertEquals(0, number);
+        number = dbda.countOfUserWithPhone(student.getPhoneNumber());
+        assertEquals(0, number);
+        boolean actual = dbda.saveStudent(student);
         assertTrue(actual);
-    }
-
-    @Test
-    public void testRegStudentReEmail() {
-        StudentSignupForm student = MockData.getStudentObject();
-        boolean actual = dbda.regStudent(student);
-        assertFalse(actual);
-    }
-
-    @Test
-    public void testRegStudentRePhone() {
-        StudentSignupForm student = MockData.getStudentObject();
-        student.setEmail("testemailStu2@gmail.com");
-        boolean actual = dbda.regStudent(student);
-        assertFalse(actual);
     }
 
     @Test
     public void testRegTutorRightInfo() {
-        TutorSignupForm tutor = MockData.getTutorObject();
-        boolean actual = dbda.regTutor(tutor);
+        Tutor tutor = MockData.getTutorObject();
+        int number = dbda.countOfUserWithCreditCardNum(tutor.getCreditCardNum());
+        assertEquals(0, number);
+        boolean actual = dbda.saveTutor(tutor);
         assertTrue(actual);
     }
 
     @Test
-    public void testRegTutorReEmail() {
-        TutorSignupForm tutor = MockData.getTutorObject();
-        tutor.setEmail("testemailTut2@gmail.com");
-        boolean actual = dbda.regTutor(tutor);
-        assertFalse(actual);
-    }
-
-    @Test
-    public void testSaveActivationCode() {
+    public void testActivationCode() {
         boolean actual = dbda.saveActivationCode(MockData.getActivationCode());
         assertTrue(actual);
+        ActivationCode activationCode = dbda.checkActivationCode(MockData.getActivationCode());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String strDate = dtf.format(LocalDateTime.now());
+        assertEquals(strDate, activationCode.getDate().toString());
+        actual = dbda.deleteActivationCodeByValue(MockData.getActivationCode());
+        assertTrue(actual);
+
     }
 
     @AfterClass
     public static void testDeleteStudent() {
-        StudentSignupForm student = MockData.getStudentObject();
-        int id = dbda.getStudentId(student.getEmail());
-        boolean actual = dbda.delelteStudent(id);
+        Student student = MockData.getStudentObject();
+        int id = dbda.getStudentIDByEmail(student.getEmail());
+        boolean actual = dbda.deleteStudent(id);
         assertTrue(actual);
     }
 
     @AfterClass
     public static void testDeleteTutor() {
-        TutorSignupForm tutor = MockData.getTutorObject();
-        int id = dbda.getTutorID(tutor.getEmail());
-        boolean actual = dbda.delelteTutor(id);
+        Tutor tutor = MockData.getTutorObject();
+        int id = dbda.getTutorIDByEmail(tutor.getEmail());
+        boolean actual = dbda.deleteStudent(id);
         assertTrue(actual);
     }
 }
-*/

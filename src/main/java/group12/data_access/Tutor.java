@@ -3,6 +3,9 @@ package group12.data_access;
 import group12.login.IAuthenticationStrategy;
 import group12.login.TutorAuthStrategy;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Tutor extends User {
 
     private int tutorID;
@@ -11,19 +14,20 @@ public class Tutor extends User {
     private boolean activated;
     private boolean banned;
     private String phoneNumber;
-    private String bio;
+    private String education;
     private int planID;
     private String expiryDate;
     private String creditCardHolder;
     private String creditCardNum;
     private String creditCardExpiryDate;
-    private int securityCode;
+    private String securityCode;
+    private String bio;
 
-    public Tutor(){
+    public Tutor() {
         super();
     }
 
-    public Tutor(String email, String password){
+    public Tutor(String email, String password) {
         super(email, password);
     }
 
@@ -72,12 +76,12 @@ public class Tutor extends User {
         this.banned = banned;
     }
 
-    public String getBio() {
-        return bio;
+    public String getEducation() {
+        return education;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
+    public void setEducation(String education) {
+        this.education = education;
     }
 
     public String getPhoneNumber() {
@@ -128,11 +132,19 @@ public class Tutor extends User {
         this.creditCardExpiryDate = creditCardExpiryDate;
     }
 
-    public int getSecurityCode() {
+    public String getSecurityCode() {
         return securityCode;
     }
 
-    public void setSecurityCode(int securityCode) {
+    public void setSecurityCode(String securityCode) {
         this.securityCode = securityCode;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 }

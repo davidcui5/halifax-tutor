@@ -30,11 +30,11 @@ $(document).ready(function () {
             type: "POST",
             dataType: "json"
         }).done(function (data) {
-            if (data.result === "Success") {
-                alert("registration succeed!");
-                window.location.replace("../index.html");
+            if (data.result === "SUCCESS") {
+                alert("Registration Success! Check mailbox for Activation Email");
+                window.location.replace(data.detail);
             } else {
-                alert(data.details);
+                alert(data.detail);
             }
         }).fail(function (xhr, status, errorThrown) {
 

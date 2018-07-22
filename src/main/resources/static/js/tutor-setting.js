@@ -58,6 +58,10 @@ $(document).ready(function() {
     var token = localStorage.getItem("token");
     var objToken = {'token': token};
 
+    $("#logout").click(function () {
+        localStorage.removeItem("token");
+    });
+
     $("#Cpassword").submit(function (event) {
         event.preventDefault();
 

@@ -39,8 +39,8 @@
 
     <Loggers>
         <Root level="info">
-            <!--<AppenderRef ref="databaseAppender"/>-->
-            <AppenderRef ref="Console"/>
+            <AppenderRef ref="databaseAppender"/>
+            <!--<AppenderRef ref="Console"/>-->
         </Root>
     </Loggers>
 

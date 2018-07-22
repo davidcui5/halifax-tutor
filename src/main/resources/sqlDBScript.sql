@@ -1,80 +1,63 @@
-CREATE TABLE ActivationTable
+-- we don't know how to generate schema CSCI5308_12_TEST (class Schema) :(
+create table ActivationTable
 (
-    ID int PRIMARY KEY AUTO_INCREMENT,
-    ActivationCode varchar(50),
-    Date date
-);
-CREATE TABLE Tutor
-(
-    ID int PRIMARY KEY AUTO_INCREMENT,
-    FirstName varchar(25),
-    LastName varchar(25),
-    Email varchar(50),
-    Password varchar(25),
-    PhoneNumber varchar(25),
-    Bio text,
-    AccountActivation int DEFAULT 1 COMMENT 'The value could be 0 is not active or 1 is active',
-    PlanID int,
-    ExpiryDate date,
-    CreditCardHoldName varchar(25),
-    CreditCardNumber varchar(16),
-    CreditCardExpiryDate varchar(7),
-    ScurityCode varchar(3)
+  ID            int auto_increment
+    primary key,
+  AcivationCode varchar(50) null,
+  Date          date        null
 );
 
-CREATE TABLE Student
+create table Admin
 (
-    ID int PRIMARY KEY AUTO_INCREMENT,
-    FirstName varchar(25),
-    LastName varchar(25),
-    Email varchar(25),
-    Password varchar(25),
-    AccountActivation int DEFAULT 1 COMMENT 'The value is even 0 for not activated account or 1 for activated account',
-    School varchar(50)
+  Email    varchar(50) not null,
+  Password varchar(40) not null,
+  constraint Email_UNIQUE
+  unique (Email)
 );
 
-CREATE TABLE Course
+create table Course
 (
-    ID int PRIMARY KEY AUTO_INCREMENT,
-    Name varchar(25),
-    School varchar(25)
+  ID     int auto_increment
+    primary key,
+  Name   varchar(25) null,
+  School varchar(25) null
 );
 
-CREATE TABLE WeeklySchedule
+create table Log
 (
-    ScheduleID int PRIMARY KEY AUTO_INCREMENT,
-    TutorID int,
-    Su1 int DEFAULT 0,
-    Su2 int DEFAULT 0,
-    Su3 int DEFAULT 0,
-    Mo1 int DEFAULT 0,
-    Mo2 int DEFAULT 0,
-    Mo3 int DEFAULT 0,
-    Tu1 int DEFAULT 0,
-    Tu2 int DEFAULT 0,
-    Tu3 int DEFAULT 0,
-    We1 int DEFAULT 0,
-    We2 int DEFAULT 0,
-    We3 int DEFAULT 0,
-    Th1 int DEFAULT 0,
-    Th2 int DEFAULT 0,
-    Th3 int DEFAULT 0,
-    Fr1 int DEFAULT 0,
-    Fr2 int DEFAULT 0,
-    Fr3 int DEFAULT 0,
-    Sa1 int DEFAULT 0,
-    Sa2 int DEFAULT 0,
-    Sa3 int DEFAULT 0
+  LogID          int auto_increment
+    primary key,
+  LogDateAndTime varchar(255) null,
+  LogLevel       varchar(5)   null,
+  LogLogger      text         null,
+  LogMsg         text         null,
+  LogException   text         null
 );
 
-CREATE TABLE Admin
+create table Student
 (
-    Email varchar(50) PRIMARY KEY,
-    Password varchar(25)
+  ID                int auto_increment
+    primary key,
+  FirstName         varchar(25)         not null,
+  LastName          varchar(25)         not null,
+  Email             varchar(25)         not null,
+  Password          varchar(40)         not null,
+  AccountActivation tinyint default '0' not null
+  comment 'The value is even 0 for not activated account or 1 for activated account',
+  School            varchar(50)         not null,
+  PhoneNumber       varchar(15)         not null,
+  Banned            tinyint default '0' not null
 );
 
-CREATE TABLE SubscriptionPlan
+create table SubscriptionPlan
 (
+  
+  ID          int auto_increment
+    primary key,
+  Name        varchar(25) null,
+  Price       int         null,
+  Description text        null,
+  Dayes       int         null
     ID int PRIMARY KEY,
     Name varchar(25),
     Price decimal(10,2),
@@ -82,271 +65,191 @@ CREATE TABLE SubscriptionPlan
     Months int
 );
 
-CREATE TABLE TutorCourses
+create table Tutor
 (
-    TutorID int,
-    CourseID int PRIMARY KEY,
-    Price float
+  ID                   int auto_increment
+    primary key,
+  FirstName            varchar(25)         not null,
+  LastName             varchar(25)         not null,
+  Email                varchar(50)         not null,
+  Password             varchar(40)         not null,
+  PhoneNumber          varchar(25)         not null,
+  Education            text                null,
+  AccountActivation    tinyint default '0' not null
+  comment 'The value could be 0 is not active or 1 is active',
+  PlanID               int                 null,
+  ExpiryDate           date                null,
+  CreditCardHoldName   varchar(25)         null,
+  CreditCardNumber     varchar(16)         null,
+  CreditCardExpiryDate varchar(7)          null,
+  SecurityCode         varchar(3)          null,
+  Banned               tinyint default '0' not null,
+  constraint Tutor_SubscriptionPlan_ID_fk
+  foreign key (PlanID) references SubscriptionPlan (ID)
 );
 
-CREATE TABLE Review
+create table Review
 (
-    ID int PRIMARY KEY,
-    StudentID int,
-    Text text,
-    Date date,
-    Rate int
+  ID        int  not null
+    primary key,
+  StudentID int  null,
+  Text      text null,
+  Date      date null,
+  Rate      int  null,
+  TutorID   int  null,
+  constraint Review_Student_ID_fk
+  foreign key (StudentID) references Student (ID),
+  constraint Review_Tutor_ID_fk
+  foreign key (TutorID) references Tutor (ID)
 );
 
-ALTER TABLE TutorCourses
-ADD CONSTRAINT TutorCourses_Course_ID_fk
-FOREIGN KEY (CourseID) REFERENCES Course (ID);
-ALTER TABLE TutorCourses
-ADD CONSTRAINT TutorCourses_Tutor_ID_fk
-FOREIGN KEY (TutorID) REFERENCES Tutor (ID);
+create index Review_Student_ID_fk
+  on Review (StudentID);
 
+create index Review_Tutor_ID_fk
+  on Review (TutorID);
 
-ALTER TABLE Review
-ADD CONSTRAINT Review_Student_ID_fk
-FOREIGN KEY (StudentID) REFERENCES Student (ID);
+create index Tutor_SubscriptionPlan_ID_fk
+  on Tutor (PlanID);
 
-ALTER TABLE Tutor
-ADD CONSTRAINT Review_SubscriptionPlan_ID_fk
-FOREIGN KEY (PlanID) REFERENCES Tutor (ID);
+CREATE TABLE TutorCourse
+(
+    TutorId int,
+    CourseId int,
+    Price float,
+    CONSTRAINT TutorCourse_TutorId_CourseId_pk PRIMARY KEY (TutorId, CourseId),
+    CONSTRAINT TutorCourse_Tutor_ID_fk FOREIGN KEY (TutorId) REFERENCES Tutor (ID),
+    CONSTRAINT TutorCourse_Course_ID_fk FOREIGN KEY (CourseId) REFERENCES Course (ID)
+);
 
-DROP FUNCTION IF EXISTS IsPhoneNew;
-CREATE function IsPhoneNew(_phone varchar(15))
-  returns boolean
+create table WeeklySchedule
+(
+  ScheduleID int auto_increment
+    primary key,
+  TutorID    int             null,
+  Su1        int default '0' null,
+  Su2        int default '0' null,
+  Su3        int default '0' null,
+  Mo1        int default '0' null,
+  Mo2        int default '0' null,
+  Mo3        int default '0' null,
+  Tu1        int default '0' null,
+  Tu2        int default '0' null,
+  Tu3        int default '0' null,
+  We1        int default '0' null,
+  We2        int default '0' null,
+  We3        int default '0' null,
+  Th1        int default '0' null,
+  Th2        int default '0' null,
+  Th3        int default '0' null,
+  Fr1        int default '0' null,
+  Fr2        int default '0' null,
+  Fr3        int default '0' null,
+  Sa1        int default '0' null,
+  Sa2        int default '0' null,
+  Sa3        int default '0' null
+);
+
+DROP FUNCTION IF EXISTS ActivateStudent;
+create function ActivateStudent(_id int)
+  returns tinyint(1)
   begin
-    DECLARE counter INT;
-    DECLARE isNew BOOL;
-    set isNew = FALSE;
+    DECLARE _result TINYINT;
+    set _result = 0;
 
-    SELECT count(Student.PhoneNumber)
-    from Student
-    where Student.PhoneNumber like _phone
-    into counter;
+    UPDATE Student
+    SET Student.AccountActivation = 1
+    where Student.ID = _id;
 
-    IF counter > 0
-    then
-      set isNew = false;
-      return isNew;
-    else
-      SELECT count(Tutor.PhoneNumber)
-      from Tutor
-      where Tutor.PhoneNumber like _phone
-      into counter;
-      IF counter > 0
-      THEN
-        set isNew = false;
-      else
-        set isNew = true;
-      end if;
-    end if;
-    return isNew;
+    set _result = 1;
+    return _result;
   end;
 
-
-
-DROP FUNCTION IF EXISTS IsEmailNew;
-CREATE function IsEmailNew(_email varchar(50))
-  returns boolean
+DROP FUNCTION IF EXISTS ActivateTutor;
+create function ActivateTutor(_id int)
+  returns tinyint(1)
   begin
-    DECLARE counter INT;
-    DECLARE isNew BOOL;
-    SELECT count(*)
-    from Student
-    where Student.Email like _email
-    into counter;
+    DECLARE _result tinyint;
+    SET _result = 0;
+    UPDATE Tutor
+    SET Tutor.AccountActivation = 1
+    where Tutor.ID = _id;
 
-    IF counter > 0
-    then
-      set isNew = false;
-    else
-      SELECT count(*)
-      from Tutor
-      where Tutor.Email like _email
-      into counter;
-      IF counter > 0
-      THEN
-        set isNew = false;
-      else
-        set isNew = true;
-      end if;
-    end if;
-    return isNew;
+    set _result = 1;
+
+    return _result;
   end;
 
-DROP FUNCTION IF EXISTS IsCreditCardNew;
-CREATE function IsCreditCardNew(_cnumber varchar(50))
-  returns boolean
+DROP PROCEDURE IF EXISTS CheckActivationCode;
+CREATE PROCEDURE CheckActivationCode(IN _code varchar(50))
   begin
-    DECLARE counter INT;
-    DECLARE isNew BOOL;
-    SELECT count(email)
+    SELECT *
+    FROM ActivationTable
+    WHERE ActivationTable.AcivationCode LIKE _code;
+  end;
+
+DROP PROCEDURE IF EXISTS AuthorizeStudent;
+CREATE PROCEDURE AuthorizeStudent(IN _email varchar(50), IN _password varchar(50))
+  begin
+    SELECT *
+    from Student
+    WHERE Student.Email LIKE _email AND Student.Password LIKE _password;
+  end;
+
+DROP PROCEDURE IF EXISTS AuthorizeTutor;
+CREATE PROCEDURE AuthorizeTutor(IN _email varchar(50), IN _password varchar(50))
+  begin
+    SELECT *
     from Tutor
-    where Tutor.CreditCardNumber like _cnumber
-    into counter;
-
-    IF counter > 0
-    then
-      set isNew = false;
-    else
-      set isNew = true;
-    end if;
-    return isNew;
+    WHERE Tutor.Email LIKE _email AND Tutor.Password LIKE _password;
   end;
 
-
-DROP FUNCTION IF EXISTS AuthorizeStudent;
-CREATE FUNCTION AuthorizeStudent(_email varchar(50), _password varchar(50))
-  returns boolean
+DROP PROCEDURE IF EXISTS GETTutorEmail;
+CREATE PROCEDURE GETTutorEmail(IN _email varchar(50))
   begin
-    DECLARE counter INT;
-    DECLARE isExist BOOL;
-
-    SELECT count(*)
-    from Student
-    WHERE Student.Email LIKE _email AND Student.Password LIKE _password
-    into counter;
-
-    IF counter > 0
-    THEN
-      set isExist = true;
-    else
-      set isExist = false;
-    end if;
-    return isExist;
-  end;
-
-DROP FUNCTION IF EXISTS AuthorizeTutor;
-CREATE FUNCTION AuthorizeTutor(_email varchar(50), _password varchar(50))
-  returns boolean
-  begin
-    DECLARE counter INT;
-    DECLARE isExist BOOL;
-
-    SELECT count(*)
+    SELECT *
     from Tutor
-    WHERE Tutor.Email LIKE _email AND Tutor.Password LIKE _password
-    into counter;
-
-    IF counter > 0
-    THEN
-      set isExist = true;
-    else
-      set isExist = false;
-    end if;
-    return isExist;
+    WHERE Tutor.Email LIKE _email;
   end;
 
-DROP FUNCTION IF EXISTS RegStudent;
-CREATE FUNCTION RegStudent(_FirstName   varchar(50),
-                           _LastName    varchar(50),
-                           _Email       varchar(50),
-                           _Password    varchar(50),
-                           _School      varchar(50),
-                           _PhoneNumber varchar(50))
-  returns INT
+DROP PROCEDURE IF EXISTS GETStudentEmail;
+CREATE PROCEDURE GETStudentEmail(IN _email varchar(50))
   begin
-    DECLARE checker BOOLEAN;
-    DECLARE result INT;
-    DECLARE lastID INT;
-    DECLARE newID INT;
-
-    SET result = 4;
-
-    #   Check the email
-    select IsEmailNew(_Email)
-    into checker;
-
-    IF checker like 0
-    THEN
-      return 2;
-    end if;
-
-    select IsPhoneNew(_PhoneNumber)
-    into checker;
-
-    IF checker like 0
-    THEN
-      return 3;
-    end if;
-
-    select count(id)
+    SELECT *
     from Student
-    into lastID;
-
-    INSERT INTO `Student` (`FirstName`, `LastName`, `Email`, `Password`, `AccountActivation`, `School`, `PhoneNumber`,`Banned`)
-    VALUES (_FirstName, _LastName, _Email, _Password, 0, _School, _PhoneNumber,0);
-
-    select count(id)
-    from Student
-    INTO newID;
-
-    IF ((lastID + 1) like newID)
-    THEN
-      set result = 1;
-    end if;
-
-    return result;
+    WHERE Student.Email LIKE _email;
   end;
 
-DROP FUNCTION IF EXISTS RegTutor;
-CREATE FUNCTION RegTutor(_FirstName   varchar(25),
-                         _LastName    varchar(25),
-                         _Email       varchar(50),
-                         _Password    varchar(25),
-                         _PhoneNumber varchar(25))
-  returns INT
+DROP FUNCTION IF EXISTS DeleteStudent;
+CREATE FUNCTION DeleteStudent(id int)
+  returns tinyint(1)
   begin
-    DECLARE checker BOOLEAN;
-    DECLARE result INT;
-    DECLARE lastID INT;
-    DECLARE newID INT;
+    DECLARE _result INT;
+    set _result = 0;
 
-    SET result = 4;
+    DELETE from Student
+    where Student.ID like id;
 
-    select IsEmailNew(_Email)
-    into checker;
+    SET _result = 1;
+    return _result;
+  end;
 
-    IF checker like 0
-    THEN
-      return 2;
-    end if;
+DROP FUNCTION IF EXISTS DeleteTutor;
+CREATE FUNCTION DeleteTutor(id int)
+  returns tinyint(1)
+  begin
+    DECLARE _result INT;
+    set _result = 0;
 
-    select IsPhoneNew(_PhoneNumber)
-    into checker;
+    DELETE from Tutor
+    where Tutor.ID like id;
 
-    IF checker like 0
-    THEN
-      return 3;
-    end if;
-
-    select count(*)
-    from Tutor
-    into lastID;
-
-    INSERT INTO `CSCI5308_12_DEVINT`.`Tutor` (`FirstName`, `LastName`, `Email`, `Password`, `PhoneNumber`
-      , `Bio`, `AccountActivation`, `PlanID`, `ExpiryDate`, `CreditCardHoldName`, `CreditCardNumber`
-      , `CreditCardExpiryDate`, `ScurityCode`, `Banned`)
-    VALUES (_FirstName, _LastName, _Email, _Password, _PhoneNumber, NULL, 0, NULL, NULL, NULL
-      , NULL, NULL, NULL,0);
-
-    select count(*)
-    from Tutor
-    INTO newID;
-
-    IF ((lastID + 1) like newID)
-    THEN
-      set result = 1;
-    end if;
-
-    return result;
+    SET _result = 1;
+    return _result;
   end;
 
 DROP PROCEDURE IF EXISTS GetStudentId;
-CREATE PROCEDURE GetStudentId(_Email varchar(50))
+create procedure GetStudentId(IN _Email varchar(50))
   begin
     select *
     from Student
@@ -354,245 +257,195 @@ CREATE PROCEDURE GetStudentId(_Email varchar(50))
   end;
 
 DROP PROCEDURE IF EXISTS GetTutorID;
-CREATE PROCEDURE GetTutorID(_Email varchar(50))
+create procedure GetTutorID(IN _Email varchar(50))
   begin
     select *
     from Tutor
     where Tutor.Email like _Email;
   end;
 
-DROP function IF EXISTS SaveActivationCode;
-CREATE function SaveActivationCode(_code varchar(50))
-  RETURNS INT
-
+DROP FUNCTION IF EXISTS IsCreditCardNew;
+CREATE FUNCTION IsCreditCardNew(_cnumber varchar(50))
+  returns INT
   begin
-    DECLARE _result INT;
-    DECLARE _time DATE;
-    DECLARE lastID INT;
-    DECLARE newID INT;
+    DECLARE counter INT;
+    SET counter = 0;
 
-    set _result = 4;
+    SELECT count(email)
+    from Tutor
+    where Tutor.CreditCardNumber like _cnumber
+    into counter;
 
-    select NOW()
-    into _time;
-
-    Select count(*)
-    from ActivationTable
-    Where ActivationTable.AcivationCode like _code
-    into lastID;
-
-    if lastID > 0
-    then
-      update ActivationTable
-      set ActivationTable.Date = _time
-      where AcivationCode = _code;
-      set _result=1;
-    else
-      select max(ID)
-      from ActivationTable
-      into lastID;
-
-      INSERT into ActivationTable (`AcivationCode`, `Date`) values (_code, _time);
-
-      select max(ID)
-      from ActivationTable
-      INTO newID;
-
-      IF ((lastID + 1) like newID)
-      THEN
-        set _result = 1;
-      end if;
-    end if;
-    return _result;
+    return counter;
   end;
 
-DROP function IF EXISTS ActivateTutor;
-CREATE function ActivateTutor(_id INT, _code varchar(50))
+DROP FUNCTION IF EXISTS IsEmailNew;
+CREATE FUNCTION IsEmailNew(_email varchar(50))
   RETURNS INT
-
   begin
-    DECLARE _result INT;
-    DECLARE _counter INT;
-    DECLARE _diff INT;
+    DECLARE counterS INT;
+    DECLARE counterT INT;
 
-    set _result = 4;
+    SET counterS = 0;
+    SET counterT = 0;
 
     SELECT count(*)
-    from ActivationTable
-    where ActivationTable.AcivationCode like _code
-    into _counter;
-
-    if _counter > 0
-    then
-
-      select datediff(date(now()), (SELECT ActivationTable.Date
-                                    from ActivationTable
-                                    where AcivationCode like _code))
-      into _diff;
-
-      if _diff > 3
-      then
-        set _result = 2;
-      else
-        UPDATE Tutor
-        SET Tutor.AccountActivation = 1
-        where Tutor.ID = _id;
-        set _result = 1;
-      end if;
-    end if;
-    return _result;
-  end;
-  RETURNS INT
-
-  begin
-    DECLARE _result INT;
-    DECLARE _counter INT;
-
-    set _result = 4;
+    from Student
+    where Student.Email like _email
+    into counterS;
 
     SELECT count(*)
-    from ActivationTable
-    where ActivationTable.AcivationCode like _code
-    into _counter;
-
-    if _counter > 0
-    then
-      UPDATE Tutor
-      SET Tutor.AccountActivation = 1
-      where Tutor.ID = _id;
-
-      SET _result = 1;
-    else
-      set _result = 3;
-    end if;
-    return _result;
-  end;
-DROP FUNCTION IF EXISTS GetStudentId;
-CREATE function GetStudentId(_email varchar(50))
-  returns INT
-  begin
-    DECLARE id INT;
-
-    SELECT Student.ID
-    from Student
-    where Student.Email like _email
-    into id;
-
-    return id;
-  end;
-
-DROP FUNCTION IF EXISTS GetStudentId;
-CREATE function GetStudentId(_email varchar(50))
-  returns INT
-  begin
-    DECLARE id INT;
-
-    SELECT Student.ID
-    from Student
-    where Student.Email like _email
-    into id;
-
-    return id;
-  end;
-
-DROP FUNCTION IF EXISTS GetTutorId;
-CREATE function GetTutorId(_email varchar(50))
-
-  returns INT
-  begin
-    DECLARE id INT;
-
-    SELECT Tutor.ID
     from Tutor
     where Tutor.Email like _email
-    into id;
+    into counterT;
 
-    return id;
+    SET counterS = counterS + counterT;
+
+    return counterS;
   end;
 
-DROP FUNCTION IF EXISTS DeleteStudent;
-CREATE function DeleteStudent(id int)
-  returns boolean
-  begin
-    DECLARE countB INT;
-    DECLARE countA INT;
-
-    select count(*)
-    from Student
-    into countB;
-
-    DELETE from Student
-    where Student.ID like id;
-
-    select count(*)
-    from Student
-    into countA;
-
-    if countB > countA
-    then
-      return true;
-    else
-      return false;
-    end if;
-  end;
-
-DROP FUNCTION IF EXISTS DeleteTutor;
-CREATE function DeleteTutor(id int)
-  returns boolean
-  begin
-    DECLARE countB INT;
-    DECLARE countA INT;
-
-    select count(*)
-    from Tutor
-    into countB;
-
-    DELETE from Tutor
-    where Tutor.ID like id;
-
-    select count(*)
-    from Tutor
-    into countA;
-
-    if countB > countA
-    then
-      return true;
-    else
-      return false;
-    end if;
-  end;
-DROP function IF EXISTS ActivateStudent;
-CREATE function ActivateStudent(_id INT, _code varchar(50))
+DROP FUNCTION IF EXISTS IsPhoneNew;
+CREATE FUNCTION IsPhoneNew(_phone varchar(15))
   RETURNS INT
-
   begin
-    DECLARE _result INT;
-    DECLARE _counter INT;
-    DECLARE _diff INT;
-
-    set _result = 4;
+    DECLARE counterS INT;
+    DECLARE counterT INT;
 
     SELECT count(*)
-    from ActivationTable
-    where ActivationTable.AcivationCode like _code
-    into _counter;
+    from Student
+    where Student.PhoneNumber like _phone
+    into counterS;
 
-    if _counter > 0
-    then
-      select datediff(date(now()), (SELECT ActivationTable.Date
-                                    from ActivationTable
-                                    where AcivationCode like _code))
-      into _diff;
 
-      if _diff > 3
-      then
-        set _result = 2;
-      else
-        UPDATE Student
-        SET Student.AccountActivation = 1
-        where Student.ID = _id;
-        set _result = 1;
-      end if;
-    end if;
+    SELECT count(Tutor.PhoneNumber)
+    from Tutor
+    where Tutor.PhoneNumber like _phone
+    into counterT;
+
+    SET counterS = counterS + counterT;
+    return counterS;
+  end;
+
+DROP FUNCTION IF EXISTS RegStudent;
+CREATE FUNCTION RegStudent(_FirstName varchar(50), _LastName varchar(50), _Email varchar(50),
+                           _Password  varchar(50), _School varchar(50), _PhoneNumber varchar(50))
+  RETURNS INT
+  begin
+    DECLARE result INT;
+
+    SET result = 0;
+
+    INSERT INTO Student (`FirstName`, `LastName`, `Email`, `Password`, `AccountActivation`,
+                         `School`, `PhoneNumber`, `Banned`)
+    VALUES (_FirstName, _LastName, _Email, _Password, 0, _School, _PhoneNumber, 0);
+
+    SET result = 1;
+    return result;
+  end;
+
+DROP FUNCTION IF EXISTS RegTutor;
+CREATE FUNCTION RegTutor(_FirstName varchar(25), _LastName varchar(25), _Email varchar(50),
+                         _Password  varchar(40), _PhoneNumber varchar(25))
+  RETURNS INT
+  begin
+    DECLARE result INT;
+    SET result = 0;
+
+    INSERT INTO `Tutor` (`FirstName`, `LastName`, `Email`, `Password`, `PhoneNumber`
+      , `Education`, `AccountActivation`, `PlanID`, `ExpiryDate`, `CreditCardHoldName`, `CreditCardNumber`
+      , `CreditCardExpiryDate`, `SecurityCode`, `Banned`)
+    VALUES (_FirstName, _LastName, _Email, _Password, _PhoneNumber, NULL, 0, NULL, NULL, NULL
+      , NULL, NULL, NULL, 0);
+
+    SET result = 1;
+    return result;
+  end;
+
+DROP PROCEDURE IF EXISTS GetAdmin;
+CREATE PROCEDURE GetAdmin(_Email varchar(50))
+  BEGIN
+    SELECT *
+    FROM Admin
+    WHERE Admin.Email LIKE _Email;
+  END;
+
+DROP FUNCTION IF EXISTS RegCourse;
+CREATE FUNCTION RegCourse(_NameCourse varchar(25), _School varchar(25))
+  RETURNS INT
+  BEGIN
+    DECLARE _result INT;
+    SET _result = 0;
+    INSERT INTO Course (`Name`, `School`) VALUES (_NameCourse, _School);
+    SET _result = 1;
+    RETURN _result;
+  END;
+
+DROP PROCEDURE IF EXISTS GetCourse;
+CREATE PROCEDURE GetCourse(_NameCourse varchar(25))
+  BEGIN
+    SELECT *
+    FROM Course
+    WHERE Course.School LIKE _NameCourse;
+  END;
+
+DROP FUNCTION IF EXISTS SetTutorCourse;
+CREATE FUNCTION SetTutorCourse(_NameCourse varchar(25), _TutorId INT, _Price float)
+  RETURNS TINYINT
+  BEGIN
+    DECLARE _result TINYINT;
+    SET _result = 0;
+    INSERT INTO TutorCourses (`TutorID`, `CourseID`, `Price`)
+    VALUES (_NameCourse, _TutorId, _Price);
+    SET _result = 1;
+    return _result;
+  END;
+
+
+DROP FUNCTION IF EXISTS UpdatePasswordStudent;
+CREATE FUNCTION UpdatePasswordStudent(_email varchar(25), _Password varchar(50))
+  RETURNS TINYINT
+  BEGIN
+    DECLARE _result TINYINT;
+    SET _result = 0;
+
+    UPDATE Student
+    SET Student.Password = _Password
+    where Student.Email = _email;
+
+    SET _result = 1;
+    return _result;
+  END;
+
+DROP FUNCTION IF EXISTS UpdatePasswordTutor;
+CREATE FUNCTION UpdatePasswordTutor(_email varchar(25), _Password varchar(50))
+  RETURNS TINYINT
+  BEGIN
+    DECLARE _result TINYINT;
+    SET _result = 0;
+
+    UPDATE Tutor
+    SET Tutor.Password = _Password
+    where Tutor.Email = _email;
+
+    SET _result = 1;
+    return _result;
+  END;
+
+DROP PROCEDURE IF EXISTS GetCourses;
+CREATE PROCEDURE GetCourses()
+  BEGIN
+    SELECT *
+    FROM Course;
+  END;
+
+CREATE FUNCTION SaveActivationCode(`_code` varchar(50))
+  returns INT
+  begin
+    DECLARE _result INT;
+    set _result = 0;
+
+    INSERT into ActivationTable (`AcivationCode`, `Date`) values (_code, NOW());
+
+    SET _result = 1;
     return _result;
   end;
