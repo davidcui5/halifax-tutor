@@ -63,24 +63,42 @@ public class StudentController {
         }
     }
 
-    @PostMapping(path="/password")
-    public String changePassword(@RequestBody Map<String,String> body){
+    @PostMapping(path = "/password")
+    public String changePassword(@RequestBody Map<String, String> body) {
         boolean isAuthorized = authorizeAdmin(body.get("token"));
-        if(isAuthorized){
+        if (isAuthorized) {
             String email = decoder.decodeToken(body.get("token"));
-            logger.log(Level.INFO,email);
-            logger.log(Level.INFO,body.get("password"));
+            logger.log(Level.INFO, email);
+            logger.log(Level.INFO, body.get("password"));
             IEncryptor encryptor = new SimpleMD5Encryptor();
             String password = encryptor.encrypt(body.get("password"));
-            logger.log(Level.INFO,password);
-            if(dbao.updateStudentPassword(email,password)){
+            logger.log(Level.INFO, password);
+            if (dbao.updateStudentPassword(email, password)) {
                 return SUCCESS;
-            }
-            else{
+            } else {
                 return FAILURE;
             }
+        } else {
+            return UNAUTHORIZED;
         }
-        else{
+    }
+
+    @PostMapping(path = "/email")
+    public String changeEmail(@RequestBody Map<String, String> body) {
+        boolean isAuthorized = authorizeAdmin(body.get("token"));
+        if (isAuthorized) {
+            String email = decoder.decodeToken(body.get("token"));
+            logger.log(Level.INFO, email);
+            logger.log(Level.INFO, body.get("email"));
+            IEncryptor encryptor = new SimpleMD5Encryptor();
+            String newEmail = encryptor.encrypt(body.get("email"));
+            logger.log(Level.INFO, newEmail);
+            if (dbao.updateStudentPassword(email, newEmail)) {
+                return SUCCESS;
+            } else {
+                return FAILURE;
+            }
+        } else {
             return UNAUTHORIZED;
         }
     }
