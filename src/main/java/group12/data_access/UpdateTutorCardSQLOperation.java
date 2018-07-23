@@ -37,5 +37,8 @@ public class UpdateTutorCardSQLOperation extends SQLOperationTemplate {
         return rs.getBoolean(1);
     }
 
-
+    @Override
+    ResultSet execute(PreparedStatement ps) throws SQLException {
+        return ps.executeQuery();
+    }
 }
