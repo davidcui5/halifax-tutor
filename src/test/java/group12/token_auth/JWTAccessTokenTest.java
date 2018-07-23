@@ -18,7 +18,7 @@ public class JWTAccessTokenTest {
 
     @Test
     public void testTokenWithTrueEmail() {
-        String userEmail = "zongming.liu@dal.ca";
+        String userEmail = "newstu5@dal.ca";
         String token = this.accessToken.generateToken(userEmail);
 
         assertEquals(userEmail, this.accessToken.decodeToken(token));
