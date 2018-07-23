@@ -76,10 +76,10 @@ $(document).ready(function () {
     $("#Cphone").submit(function (event) {
         event.preventDefault();
 
-        let email = $("#phone").val();
+        let phone = $("#phone").val();
         var data = {
             'token': token,
-            "email": email
+            "phone": phone
         };
 
         $.ajax({

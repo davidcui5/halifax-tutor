@@ -26,18 +26,15 @@ public class StudentController {
     private static Logger logger = LogManager.getLogger(StudentController.class);
 
     IAccessToken decoder;
-    IStudentSettingDAO dao;
     IDataAccessObject dbao;
 
     public StudentController() {
         decoder = JWTAccessToken.getInstance();
-        dao = new StudentSettingDAO();
         dbao = new MysqlDAOImpl();
     }
 
-    public StudentController(IAccessToken decoder, IStudentSettingDAO dao) {
+    public StudentController(IAccessToken decoder) {
         this.decoder = decoder;
-        this.dao = dao;
     }
 
     private boolean authorizeAdmin(String token) {
@@ -87,8 +84,7 @@ public class StudentController {
             String email = decoder.decodeToken(body.get("token"));
             logger.log(Level.INFO, email);
             logger.log(Level.INFO, body.get("email"));
-            IEncryptor encryptor = new SimpleMD5Encryptor();
-            String newEmail = encryptor.encrypt(body.get("email"));
+            String newEmail = body.get("email");
             logger.log(Level.INFO, newEmail);
             if (dbao.updateStudentEmail(email, newEmail)) {
                 return SUCCESS;
@@ -107,8 +103,7 @@ public class StudentController {
             String email = decoder.decodeToken(body.get("token"));
             logger.log(Level.INFO, email);
             logger.log(Level.INFO, body.get("phone"));
-            IEncryptor encryptor = new SimpleMD5Encryptor();
-            String phone = encryptor.encrypt(body.get("phone"));
+            String phone = body.get("phone");
             logger.log(Level.INFO, phone);
             if (dbao.updateStudentPhone(email, phone)) {
                 return SUCCESS;
