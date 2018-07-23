@@ -1,15 +1,15 @@
 package group12.student_setting;
 
 public interface IStudentSetting {
-    String authorizeStudent(String token);
+    String authorizeStudent(String token) throws Exception;
 
-    String resendActivateCode(String token);
+    String resendActivateCode(String token) throws Exception;
 
-    String checkActivationStatus(String token);
+    String checkActivationStatus(String token) throws Exception;
 
-    String changePhone(String token, String phone);
+    String changePhone(String token, String phone) throws Exception;
 
-    String changeEmail(String token, String email);
+    String changeEmail(String token, String email) throws Exception;
 
-    String changePassword(String token, String password);
+    String changePassword(String token, String password) throws Exception;
 }

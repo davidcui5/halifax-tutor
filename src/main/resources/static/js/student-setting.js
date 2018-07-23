@@ -17,6 +17,9 @@ $(document).ready(function () {
             alert("You do not have access to this page.");
             window.location.replace("../index.html");
         }
+        else if (data === "Error") {
+            window.location.replace("../error.html");
+        }
     }).fail(function (xhr, status, errorThrown) {
         //window.location.replace("../index.html");
     });
@@ -31,6 +34,9 @@ $(document).ready(function () {
         if (data === "NOT_ACTIVE") {
             $(".remail").show();
             $(".alert").show();
+        }
+        else if (data === "Error") {
+            window.location.replace("../error.html");
         }
         else {
             $(".remail").hide();
@@ -55,6 +61,7 @@ $(document).ready(function () {
             return;
         }
 
+
         let password = $("#pwd").val();
         var data = {
             'token': token,
@@ -68,9 +75,13 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            alert(data);
-            $("#pwd").val('');
-            $("#Rpwd").val('');
+            if (data === "Error") {
+                window.location.replace("../error.html");
+            } else {
+                alert(data);
+                $("#pwd").val('');
+                $("#Rpwd").val('');
+            }
         }).fail(function (xhr, status, errorThrown) {
             // alert()
         });
@@ -92,8 +103,12 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            alert(data);
-            $("#email").val('');
+            if (data === "Error") {
+                window.location.replace("../error.html");
+            } else {
+                alert(data);
+                $("#email").val('');
+            }
         }).fail(function (xhr, status, errorThrown) {
             //empty
         });
@@ -115,8 +130,12 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            alert(data);
-            $("#phone").val('');
+            if (data === "Error") {
+                window.location.replace("../error.html");
+            } else {
+                alert(data);
+                $("#phone").val('');
+            }
         }).fail(function (xhr, status, errorThrown) {
             //empty
         });
@@ -136,7 +155,11 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            alert(data);
+            if (data === "Error") {
+                window.location.replace("../error.html");
+            } else {
+                alert(data);
+            }
         }).fail(function (xhr, status, errorThrown) {
             //empty
         });
