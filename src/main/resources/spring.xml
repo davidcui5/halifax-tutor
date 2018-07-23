@@ -23,6 +23,7 @@
     <!--ForgotPasswordController beans START-->
     <bean id="tutorProfileService" class="group12.tutor_profile.TutorProfileService">
         <property name="db" ref="DBDAO"/>
+        <property name="mailer" ref="mailer"/>
     </bean>
 
     <!--ForgotPasswordController beans ENDT-->

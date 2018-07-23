@@ -6,8 +6,8 @@ function sendMessage(){
 
     id = 437; // remove
 
-
     let message = $("#message-text").val();
+    let email = $("#same-email").text();
 
     //https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
     let emailToken = localStorage.getItem("token");
@@ -15,7 +15,8 @@ function sendMessage(){
     var messageData = {
         "id": id,
         "message": message,
-        "emailToken": emailToken
+        "emailToken": emailToken,
+        "email":email
     };
     $.ajax({
         url: location.origin + "/sendtutormessage",
@@ -42,11 +43,13 @@ function submitFeedback(){
 
     let rating = $("#rating").val();
     let feedback = $("#feedback-text").val();
+    let email = $("#same-email").text();
 
     var feedbackData = {
         "id": id,
         "rating": rating,
-        "feedback": feedback
+        "feedback": feedback,
+        "email":email
     };
     $.ajax({
         url: location.origin + "/sendtutorfeedback",

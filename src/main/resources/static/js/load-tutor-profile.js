@@ -16,12 +16,13 @@ function loadProfile() {
         dataType: "json"
     }).done(function (data) {
         if (data.result == "Success") {
-            alert("Profile information successfullly loaded !");
             document.getElementById("tutor-name").innerHTML = data.firstName + " " + data.lastName;
             document.getElementById("phone").innerHTML = data.phoneNumber;
             document.getElementById("email").innerHTML = data.email;
+            document.getElementById("same-email").innerHTML = data.email;
             document.getElementById("education").innerHTML = data.education;
             document.getElementById("tutor-rating").innerHTML = data.rating;
+
             var courseInfo =  data.courseList;
             var courseList = document.getElementById("tutor-courses");
             for (var i=0;i<courseInfo.length;i++){

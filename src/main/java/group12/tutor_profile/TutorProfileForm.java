@@ -13,6 +13,7 @@ public class TutorProfileForm {
     private String email;
     private String education;
     private String rating;
+    private String feedback;
     private ArrayList<String[]> courseList  ;
     private int[] tutorSchedule = new int[21];
 
@@ -109,6 +110,14 @@ public class TutorProfileForm {
 
     public void setEmailToken(String emailToken) {
         this.emailToken = emailToken;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
     }
 }
 
