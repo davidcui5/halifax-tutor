@@ -179,7 +179,6 @@ $(document).ready(function() {
 
     });
 
-
     $("#Cedu").submit(function (event) {
         event.preventDefault();
         let education = $("#education").val();
@@ -393,6 +392,27 @@ $(document).ready(function() {
         });
     });
 
+    $("#resend".click(function (event) {
+        var ResendEmail = {
+            'token':token
+        };
+
+        $.ajax({
+            url: location.origin +"/tutor/setting/resend",
+            data: JSON.stringify(ChangePlan),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "text"
+        }).done(function (data) {
+            if (data.result === "Success") {
+                alert("Confiem Email resend  succeed!");
+            } else {
+                alert(data.details);
+            }
+        }).fail(function (xhr, status, errorThrown) {
+
+        });
+    }));
     //get subscription info
     $.ajax({
         url: location.origin +"/tutor/setting/postplan",
