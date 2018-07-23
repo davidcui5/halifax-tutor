@@ -19,8 +19,7 @@ $(document).ready(function () {
         //window.location.replace("../index.html");
     });
 
-    $("#logout").click(function (event) {
-        event.preventDefault();
+    $("#logout").click(function () {
         localStorage.removeItem("token");
     });
 

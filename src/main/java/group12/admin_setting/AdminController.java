@@ -10,14 +10,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(path="/admin/setting")
 public class AdminController {
 
     private static final String AUTHORIZED = "AUTHORIZED";
@@ -39,7 +37,7 @@ public class AdminController {
         this.dao = dao;
     }
 
-    @PostMapping(path="/access")
+    @PostMapping(path="admin/setting/access", consumes = "application/json", produces = "text/plain")
     public String authorizeAdmin(@RequestBody Map<String,String> body){
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
@@ -61,7 +59,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping(path="/password")
+    @PostMapping(path="admin/setting/password", consumes = "application/json", produces = "text/plain")
     public String changePassword(@RequestBody Map<String,String> body){
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
@@ -83,7 +81,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping(path="/price")
+    @PostMapping(path="admin/setting/price", consumes = "application/json", produces = "text/plain")
     public String changePrice(@RequestBody Map<String,String> body){
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
@@ -115,7 +113,7 @@ public class AdminController {
 
     }
 
-    @PostMapping(path="/ban/student")
+    @PostMapping(path="admin/setting/ban/student", consumes = "application/json", produces = "text/plain")
     public String banStudent(@RequestBody Map<String,String> body){
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
@@ -133,7 +131,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping(path="/unban/student")
+    @PostMapping(path="admin/setting/unban/student", consumes = "application/json", produces = "text/plain")
     public String unbanStudent(@RequestBody Map<String,String> body){
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
@@ -152,7 +150,7 @@ public class AdminController {
 
     }
 
-    @PostMapping(path="/ban/tutor")
+    @PostMapping(path="admin/setting/ban/tutor", consumes = "application/json", produces = "text/plain")
     public String banTutor(@RequestBody Map<String,String> body){
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
@@ -170,7 +168,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping(path="/unban/tutor")
+    @PostMapping(path="admin/setting/unban/tutor", consumes = "application/json", produces = "text/plain")
     public String unbanTutor(@RequestBody Map<String,String> body){
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
@@ -188,7 +186,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping(path="/find/student")
+    @PostMapping(path="admin/setting/find/student", consumes = "application/json", produces = "application/json")
     public StudentReviews findStudentReviews(@RequestBody Map<String,String> body){
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
@@ -214,7 +212,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping(path="/find/tutor")
+    @PostMapping(path="admin/setting/find/tutor", consumes = "application/json", produces = "application/json")
     public TutorReviews findTutorReviews(@RequestBody Map<String,String> body){
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
@@ -238,7 +236,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping(path="/review/delete")
+    @PostMapping(path="admin/setting/review/delete", consumes = "application/json", produces = "text/plain")
     public String deleteReview(@RequestBody Map<String,String> body){
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){

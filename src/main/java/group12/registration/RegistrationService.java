@@ -4,8 +4,6 @@ import group12.data_access.IDataAccessObject;
 import group12.data_access.Student;
 import group12.data_access.Tutor;
 import group12.email.IMailer;
-import group12.encryption.IEncryptor;
-import group12.encryption.SimpleMD5Encryptor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,18 +12,22 @@ import java.util.UUID;
 
 public class RegistrationService implements IRegister {
 
-    private IDataAccessObject db;
+    private IDataAccessObject dao;
     private IMailer mailer;
+    private static final String FAILURE = "FAILURE";
+    private static final String SUCCESS = "SUCCESS";
+    private static final String CODE_EXPIRED = "Code Expired";
+    private static final String LOGIN_PAGE_URL = "../index.html";
     private static Logger logger = LogManager.getLogger(RegistrationService.class);
+
     @Value("${email.sender}")
     String emailSender;
 
     @Value("${server.url}")
     String serverURL;
 
-
-    public void setDb(IDataAccessObject db) {
-        this.db = db;
+    public void setDao(IDataAccessObject dao) {
+        this.dao = dao;
     }
 
     public void setMailer(IMailer mailer) {
@@ -33,118 +35,98 @@ public class RegistrationService implements IRegister {
     }
 
     public RegistrationResponse registerStudent(Student student) {
-        IEncryptor encryptor = new SimpleMD5Encryptor();
-        student.setPassword(encryptor.encrypt(student.getPassword()));
-
-        RegistrationResponse response = new RegistrationResponse();
-        if (db.countOfUserWithEmail(student.getEmail()) >= 1) {
-            response.setResult("Failure");
-            response.addDetail("Email already registered");
+        if (dao.countOfUserWithEmail(student.getEmail()) > 0) {
+            return new RegistrationResponse(FAILURE,"Email already registered");
         }
-
-        if (db.countOfUserWithPhone(student.getPhoneNumber()) >= 1) {
-            response.setResult("Failure");
-            response.addDetail("Phone already registered");
+        if (dao.countOfUserWithPhone(student.getPhoneNumber()) > 0) {
+            return new RegistrationResponse(FAILURE,"Phone already registered");
         }
-
-        if (response.getResult().equals("Failure")) {
-            return response;
-        }
-
+        boolean isSuccess = false;
         try {
-            db.saveStudent(student);
+            isSuccess = dao.saveStudent(student);
         } catch (Exception e) {
-            logger.error(student, e);
-            response.setResult("Failure");
-            response.addDetail("Internal Server Error, Register Exception");
-            return response;
+            logger.error("Error", e);
         }
+        if(isSuccess){
+            sendStudentActivationEmail(student.getEmail());
+            return new RegistrationResponse(SUCCESS, LOGIN_PAGE_URL);
+        }
+        else{
+            return new RegistrationResponse(FAILURE,"Server Down");
+        }
+    }
 
-        response.setResult("Success");
-
+    private void sendStudentActivationEmail(String email){
         try {
-            int studentID = db.getStudentIDByEmail(student.getEmail());
+            int studentID = dao.getStudentIDByEmail(email);
             UUID uuid = UUID.randomUUID();
-            db.saveActivationCode(uuid.toString());
-            mailer.sendMail(emailSender, student.getEmail(), "Activation",
+            dao.saveActivationCode(uuid.toString());
+            mailer.sendMail(emailSender, email, "Activation",
                     "Activation " + serverURL + "/student/studentid/" + studentID + "/activation/" + uuid.toString() + "/");
         } catch (Exception e) {
-            logger.error(student, e);
-            response.addDetail("Cannot Send Activation Email, Please Go To Setting Page to Resend");
+            logger.error("Error", e);
         }
-
-        return response;
     }
 
     public RegistrationResponse registerTutor(Tutor tutor) {
 
-        IEncryptor encryptor = new SimpleMD5Encryptor();
-        tutor.setPassword(encryptor.encrypt(tutor.getPassword()));
-
-        RegistrationResponse response = new RegistrationResponse();
-
-        if (db.countOfUserWithEmail(tutor.getEmail()) >= 1) {
-            response.setResult("Failure");
-            response.addDetail("Email already registered");
+        if (dao.countOfUserWithEmail(tutor.getEmail()) > 0) {
+            return new RegistrationResponse(FAILURE,"Email already registered");
         }
-        if (db.countOfUserWithPhone(tutor.getPhoneNumber()) >= 1) {
-            response.setResult("Failure");
-            response.addDetail("Phone already registered");
+        if (dao.countOfUserWithPhone(tutor.getPhoneNumber()) > 0) {
+            return new RegistrationResponse(FAILURE,"Phone already registered");
         }
-        if (db.countOfUserWithCreditCardNum(tutor.getCreditCardNum()) >= 1) {
-            response.setResult("Failure");
-            response.addDetail("Card already registered");
+        if (dao.countOfUserWithCreditCardNum(tutor.getCreditCardNum()) > 0){
+            return new RegistrationResponse(FAILURE,"Card already registered");
         }
-
-        if (response.getResult().equals("Failure")) {
-            return response;
-        }
+        boolean isSuccess = false;
         try {
-            db.saveTutor(tutor);
+            isSuccess = dao.saveTutor(tutor);
         } catch (Exception e) {
-            logger.error(tutor, e);
-            response.setResult("Failure");
-            response.addDetail("Internal Server Error, Register Exception");
-            return response;
+            logger.error("Error", e);
         }
+        if(isSuccess){
+            sendTutorActivationEmail(tutor.getEmail());
+            return new RegistrationResponse(SUCCESS, LOGIN_PAGE_URL);
+        }
+        else{
+            return new RegistrationResponse(FAILURE,"Server Down");
+        }
+    }
 
-        response.setResult("Success");
-
+    private void sendTutorActivationEmail(String email){
         try {
-            int tutorID = db.getTutorIDByEmail(tutor.getEmail());
+            int tutorID = dao.getTutorIDByEmail(email);
             UUID uuid = UUID.randomUUID();
-            db.saveActivationCode(uuid.toString());
-            mailer.sendMail(emailSender, tutor.getEmail(), "Activation",
+            dao.saveActivationCode(uuid.toString());
+            mailer.sendMail(emailSender, email, "Activation",
                     "Activation " + serverURL + "/tutor/tutorid/" + tutorID + "/activation/" + uuid.toString() + "/");
         } catch (Exception e) {
-            logger.error(tutor, e);
-            response.addDetail("Cannot Send Activation Email, Please Go To Setting Page to Resend");
+            logger.error("Error", e);
         }
-
-        return response;
     }
 
     public String activateStudent(int studentID, String activationCode) {
         try {
-            //todo check activation code
-            db.setStudentActivatedStatus(studentID, true);
+            if(dao.checkActivationCode(activationCode) == null){
+                return CODE_EXPIRED;
+            }
+            dao.setStudentActivatedStatus(studentID, true);
         } catch (Exception e) {
             logger.error(studentID + " " + activationCode, e);
-            return "Activation Failed";
         }
-        return "Get a specific Bar with id=" + activationCode +
-                " from a Foo with id=" + studentID;
+        return LOGIN_PAGE_URL;
     }
 
     public String activateTutor(int tutorID, String activationCode) {
         try {
-            //todo check activation code
-            db.setTutorActivatedStatus(tutorID, true);
+            if(dao.checkActivationCode(activationCode) == null){
+                return CODE_EXPIRED;
+            }
+            dao.setTutorActivatedStatus(tutorID, true);
         } catch (Exception e) {
             logger.error(tutorID + " " + activationCode, e);
-            return "Activation Failed";
         }
-        return "Get a specific Bar with id=" + activationCode +
-                " from a Foo with id=" + tutorID;
+        return LOGIN_PAGE_URL;
     }
 }

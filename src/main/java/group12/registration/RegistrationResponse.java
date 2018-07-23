@@ -1,23 +1,21 @@
 package group12.registration;
 
-import java.util.ArrayList;
-
 public class RegistrationResponse {
 
     private String result;
-    private ArrayList<String> details;
+    private String detail;
 
-    public RegistrationResponse(){
-        result = "";
-        details = new ArrayList<String>();
+    public RegistrationResponse(String result, String detail){
+        this.result = result;
+        this.detail = detail;
     }
 
-    public void addDetail(String detail) {
-        details.add(detail);
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
-    public ArrayList<String> getDetails() {
-        return details;
+    public String getDetail() {
+        return detail;
     }
 
     public void setResult(String result) {

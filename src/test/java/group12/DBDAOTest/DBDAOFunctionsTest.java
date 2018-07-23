@@ -49,11 +49,11 @@ public class DBDAOFunctionsTest {
         assertFalse(actual < 0);
     }
 
-    @Test
+    /*@Test
     public void testIsPhoneNewWithNewPhone() {
         int actual = dbda.countOfUserWithPhone(MockData.getNewPhone());
         assertTrue(actual == 0);
-    }
+    }*/
 
     @Test
     public void testIsPhoneNewWithUsedPhone() {

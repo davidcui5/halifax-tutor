@@ -4,8 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GeTTutorEmailSQLOperation extends SQLOperationTemplate {
-    public GeTTutorEmailSQLOperation(Object... parameters) {
+public class GetTutorEmailSQLOperation extends SQLOperationTemplate {
+    public GetTutorEmailSQLOperation(Object... parameters) {
         super(parameters);
     }
 
@@ -17,9 +17,9 @@ public class GeTTutorEmailSQLOperation extends SQLOperationTemplate {
     @Override
     PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         String email = (String) getParameters().get(0);
-        String password = (String) getParameters().get(1);
+//        String password = (String) getParameters().get(1);
         ps.setString(1, email);
-        ps.setString(2, password);
+//        ps.setString(2, password);
         return ps;
     }
 

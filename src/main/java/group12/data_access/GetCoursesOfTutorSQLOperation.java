@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetCoursesOFTutorSQLOperation extends SQLOperationTemplate {
-    public GetCoursesOFTutorSQLOperation(Object... parameters) {
+public class GetCoursesOfTutorSQLOperation extends SQLOperationTemplate {
+    public GetCoursesOfTutorSQLOperation(Object... parameters) {
         super(parameters);
     }
 

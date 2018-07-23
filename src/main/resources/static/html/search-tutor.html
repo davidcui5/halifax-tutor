@@ -16,7 +16,7 @@
 <div id="header">
     <h>HalifaxTutor</h>
     <a href="?">Search</a>
-    <a href="./student-setting.html">Settings</a>
+    <a href="#" id="settings">Settings</a>
     <input type="button" class="button" id="sign-out-button" value="Sign out"/>
     <hr>
 </div>
@@ -26,7 +26,7 @@
     <form>
         <label for="university-select">Select an university</label>
         <select id="university-select">
-            <option value="dalhousie">Dalhousie University</option>
+            <option value="dal">Dalhousie University</option>
             <option value="smu">Saint Mary University</option>
         </select>
 
@@ -35,15 +35,38 @@
         <button type="submit">Search</button>
     </form>
 
+    <hr>
+
+    <div id="search-results-filters" style="display: none">
+        <p id="numOfResultsText"></p>
+        <label for="filter-select">Sort by: </label>
+        <select id="filter-select">
+            <option value="rating">Rating</option>
+            <option value="price">Price Per Hour</option>
+        </select>
+
+        <label for="filter-order">Order: </label>
+        <select id="filter-order">
+            <option value="desc">Descending</option>
+            <option value="asc">Ascending</option>
+        </select>
+
+        <button type="button" id="sort-button">Sort</button>
+        
+        <hr>
+
+    </div>
+
+    <div id="search-results">
+    </div>
+
 </div>
 
 <div id="footer">
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
