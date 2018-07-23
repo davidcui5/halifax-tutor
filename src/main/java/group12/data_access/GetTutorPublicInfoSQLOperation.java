@@ -51,6 +51,11 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
         return new TutorPublicInfo(id, photoURL, firstName, lastName, education, rating, price);
     }
 
+    @Override
+    ResultSet execute(PreparedStatement ps) throws SQLException {
+        return null;
+    }
+
     public ArrayList<TutorPublicInfo> executeSearchQuery() throws SearchQuerySQLException {
         ArrayList<TutorPublicInfo> results = new ArrayList<>();
         Connection con = null;
