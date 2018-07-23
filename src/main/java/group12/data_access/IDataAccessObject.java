@@ -55,9 +55,15 @@ public interface IDataAccessObject {
 
     boolean updateTutorPassword(String tutorEmail, String newPassword);
 
-    boolean setCourseToTutor(int tutorId,int courseId,float price);
+    boolean setCourseToTutor(int tutorId, int courseId, float price);
 
     List<Course> getCoursesOFTutor(int tutorId);
 
     int numberOfCourse(String courseName);
+
+    boolean updateStudentEmail(String oldMail, String newMail);
+
+    boolean updateStudentPhone(String email, String newPhone);
+
+    int getStudentActivationStatus(String email);
 }

@@ -7,7 +7,7 @@ import group12.token_auth.JWTAccessToken;
 
 public class StudentAuthStrategy implements IAuthenticationStrategy {
     private static final String SEARCH_PAGE_URL = "html/search-tutor.html";
-    private static final String STUDENT_SETTING_PAGE_URL = "html/student-setting-page.html";
+    private static final String STUDENT_SETTING_PAGE_URL = "html/student-setting.html";
 
     @Override
     public void authenticate(User student) {

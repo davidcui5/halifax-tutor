@@ -5,7 +5,7 @@ function validatePwd(){
     for (var i=0; i<inputs.length; i++) {
         var element = document.getElementById(inputs[i].id);
         var elementValue = document.getElementById(inputs[i].id).value;
-        alert("Passwords must contain atleast one number");
+        // alert("Passwords must contain atleast one number");
 
         // validate password
         if(inputs[i].id == "pwd"){
