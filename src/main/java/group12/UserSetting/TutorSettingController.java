@@ -181,19 +181,33 @@ public class TutorSettingController {
             return FAILURE;
         }
     }
-    @PostMapping(path="/tutor/setting/resend", consumes = "application/json", produces = "text/plain")
-    public String resendEmail(@RequestBody Map<String,String> body){
+
+    @PostMapping(path="/tutor/setting/cancel", consumes = "application/json", produces = "text/plain")
+    public String cancelPlan(@RequestBody Map<String,String> body){
         String email = accessToken.decodeToken(body.get("token"));
         logger.log(Level.INFO,email);
-        IMailer mailer = new SpringMailer();
-        mailer.sendMail();
+
+        if(tutorSettingDAO.CancelPlan(email)){
+            return SUCCESS;
+        }
+        else{
+            return FAILURE;
+        }
+    }
+
+//    @PostMapping(path="/tutor/setting/resend", consumes = "application/json", produces = "text/plain")
+//    public String resendEmail(@RequestBody Map<String,String> body){
+//        String email = accessToken.decodeToken(body.get("token"));
+//        logger.log(Level.INFO,email);
+//        IMailer mailer = new SpringMailer();
+//        mailer.sendMail();
 //        if(tutorSettingDAO.setPlan(email,planNo)){
 //            return SUCCESS;
 //        }
 //        else{
 //            return FAILURE;
 //        }
-    }
+//    }
     @PostMapping(path = "/tutor/setting/postplan")
     public Map<String,Object> SendPlan() {
         Map<String, Object> map = new HashMap<String, Object>();
