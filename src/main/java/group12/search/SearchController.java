@@ -10,6 +10,12 @@ public class SearchController {
     @RequestMapping(method = RequestMethod.POST, headers = "content-type=application/json")
     @ResponseBody
     public SearchResponse getSearchResults(@RequestBody SearchRequest searchRequest) {
-        return new SearchResponse();
+        return SearchService.getSearchResponse(searchRequest);
+    }
+
+    @RequestMapping(value = "/identity", method = RequestMethod.POST, headers = "content-type=application/json")
+    @ResponseBody
+    public IdentityResponse getIdentityResult(@RequestBody IdentityRequest identityRequest) {
+        return SearchService.getSearchIdentity(identityRequest);
     }
 }

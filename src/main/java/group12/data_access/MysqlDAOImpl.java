@@ -20,106 +20,91 @@ import java.util.List;
 @ImportResource("classpath:spring.xml")
 public class MysqlDAOImpl implements IDataAccessObject {
 
-    private DataSource dataSource;
-    Connection con = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
-    Logger logger;
-
-    public MysqlDAOImpl() {
-        logger = LogManager.getLogger("Logger DB");
-    }
-
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
+    Logger logger = LogManager.getLogger("Logger DB");
 
     @Override
     public int countOfUserWithEmail(String email) {
-        NumberOfEmailSQLOperation numberOfEmailSQLOperation = new NumberOfEmailSQLOperation(email);
-        int numberOfEmails = (int) numberOfEmailSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new NumberOfEmailSQLOperation(email);
+        int numberOfEmails = (int) op.executeMysqlQuery();
         return numberOfEmails;
     }
 
     @Override
     public int countOfUserWithPhone(String phoneNumber) {
-        NumberOfPhoneSQLOperation numberOfPhoneSQLOperation = new NumberOfPhoneSQLOperation(phoneNumber);
-        int numberOfPhones = (int) numberOfPhoneSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new NumberOfPhoneSQLOperation(phoneNumber);
+        int numberOfPhones = (int) op.executeMysqlQuery();
         return numberOfPhones;
     }
 
     @Override
     public int countOfUserWithCreditCardNum(String creditCardNum) {
-        NumberOfCreditCardSQLOperation numberOfCreditCardSQLOperation = new NumberOfCreditCardSQLOperation(creditCardNum);
-        int numberofCards = (int) numberOfCreditCardSQLOperation.executeMysqlQuery();
-        return numberofCards;
+        SQLOperationTemplate op = new NumberOfCreditCardSQLOperation(creditCardNum);
+        int numberOfCards = (int) op.executeMysqlQuery();
+        return numberOfCards;
     }
 
     @Override
     public int countOfActivationCodeWithValue(String codeValue) {
-        return 0;
+        SQLOperationTemplate op = new CheckActivationCodeSQLOperation(codeValue);
+        if(op.executeMysqlQuery() != null){
+            return 1;
+        }
+        else{
+            return 0;
+        }
     }
 
     @Override
     public boolean saveStudent(Student student) {
-        SaveStudentSQLOperation regStudent = new SaveStudentSQLOperation(student.getFirstName(), student.getLastName()
-                , student.getEmail(), student.getPassword(), student.getSchool(), student.getPhoneNumber());
-        int result = (int) regStudent.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else
-            return false;
+        SQLOperationTemplate op = new SaveStudentSQLOperation(student);
+        return (Boolean) op.executeMysqlQuery();
     }
 
     @Override
     public Student getStudentByEmail(String email) {
-        GetStudentByEmailSQLOperation getStudentByEmailSQLOperation = new GetStudentByEmailSQLOperation(email);
-        Student student = (Student) getStudentByEmailSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new GetStudentByEmailSQLOperation(email);
+        Student student = (Student) op.executeMysqlQuery();
         return student;
     }
 
     @Override
     public Tutor getTutorByEmail(String email) {
-        GeTTutorEmailSQLOperation authorizeTutorSQLOperation = new GeTTutorEmailSQLOperation(email);
-        Tutor tutor = (Tutor) authorizeTutorSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new GetTutorEmailSQLOperation(email);
+        Tutor tutor = (Tutor) op.executeMysqlQuery();
         return tutor;
     }
 
     @Override
     public Admin getAdminByEmail(String email) {
-        return null;
+        SQLOperationTemplate op = new GetAdminSQLOperation(email);
+        return (Admin) op.executeMysqlQuery();
     }
 
 
     @Override
     public boolean saveTutor(Tutor tutor) {
-        SaveTutorSQLOperation saveTutorSQLOperation = new SaveTutorSQLOperation(tutor.getFirstName(), tutor.getLastName()
-                , tutor.getEmail(), tutor.getPassword(), tutor.getPhoneNumber(), tutor.getCreditCardHolder()
-                , tutor.getCreditCardNum(), tutor.getExpiryDate(), tutor.getSecurityCode());
-        int result = (int) saveTutorSQLOperation.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else return false;
+        SQLOperationTemplate op = new SaveTutorSQLOperation(tutor);
+        return (Boolean) op.executeMysqlQuery();
     }
 
     @Override
     public int getStudentIDByEmail(String email) {
-        GetStudentIdSQLOperation getStudentIdSQLOperation = new GetStudentIdSQLOperation(email);
-        Student student = (Student) getStudentIdSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new GetStudentIdSQLOperation(email);
+        Student student = (Student) op.executeMysqlQuery();
         return student.getStudentID();
     }
 
     @Override
     public int getTutorIDByEmail(String email) {
-        GetTutorIdSQLOperation tutorIdSQLOperation = new GetTutorIdSQLOperation(email);
-        Tutor tutor = (Tutor) tutorIdSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new GetTutorIdSQLOperation(email);
+        Tutor tutor = (Tutor) op.executeMysqlQuery();
         return tutor.getTutorID();
     }
 
     @Override
     public boolean saveActivationCode(String code) {
-        SaveActivationCodeSQLOperation saveActivationCodeSQLOperation = new SaveActivationCodeSQLOperation(code);
-        int result = (int) saveActivationCodeSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new SaveActivationCodeSQLOperation(code);
+        int result = (int) op.executeMysqlQuery();
         if (result == 1)
             return true;
         else
@@ -128,9 +113,9 @@ public class MysqlDAOImpl implements IDataAccessObject {
 
     @Override
     public boolean setStudentActivatedStatus(int id, boolean activateCode) {
-        SetStudentActivatedStatusSQLOperation setStudentActivatedStatusSQLOperation =
+        SQLOperationTemplate op =
                 new SetStudentActivatedStatusSQLOperation(id, activateCode);
-        int result = (int) setStudentActivatedStatusSQLOperation.executeMysqlQuery();
+        int result = (int) op.executeMysqlQuery();
         if (result == 1)
             return true;
         else return false;
@@ -138,9 +123,9 @@ public class MysqlDAOImpl implements IDataAccessObject {
 
     @Override
     public boolean setTutorActivatedStatus(int id, boolean activateCode) {
-        SetTutorActivatedStatusSQLOperation setTutorActivatedStatusSQLOperation =
+        SQLOperationTemplate op =
                 new SetTutorActivatedStatusSQLOperation(id, activateCode);
-        int result = (int) setTutorActivatedStatusSQLOperation.executeMysqlQuery();
+        int result = (int) op.executeMysqlQuery();
         if (result == 1)
             return true;
         else
@@ -149,31 +134,23 @@ public class MysqlDAOImpl implements IDataAccessObject {
 
     @Override
     public boolean setStudentBannedStatus(int studentID, boolean status) {
-        SetStudentBannedStatusSQLOperation setStudentBannedStatus =
+        SQLOperationTemplate op =
                 new SetStudentBannedStatusSQLOperation(studentID, status);
-        int result = (int) setStudentBannedStatus.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else
-            return false;
+        return (Boolean) op.executeMysqlQuery();
     }
 
     @Override
     public boolean setTutorBannedStatus(int tutorID, boolean status) {
-        SetTutorBannedStatusSQLOperation setStudentBannedStatus =
+        SQLOperationTemplate op =
                 new SetTutorBannedStatusSQLOperation(tutorID, status);
-        int result = (int) setStudentBannedStatus.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else
-            return false;
+        return (Boolean) op.executeMysqlQuery();
     }
 
     @Override
     public boolean deleteActivationCodeByValue(String codeValue) {
-        DeleteActivationCodeByValueSQLOperation deleteActivationCodeByValueSQLOperation =
+        SQLOperationTemplate op =
                 new DeleteActivationCodeByValueSQLOperation(codeValue);
-        int result = (int) deleteActivationCodeByValueSQLOperation.executeMysqlQuery();
+        int result = (int) op.executeMysqlQuery();
         if (result == 1)
             return true;
         else return false;
@@ -181,8 +158,8 @@ public class MysqlDAOImpl implements IDataAccessObject {
 
     @Override
     public boolean deleteStudent(int id) {
-        DeleteStudentSQLOperation deleteStudentSQLOperation = new DeleteStudentSQLOperation(id);
-        int result = (int) deleteStudentSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new DeleteStudentSQLOperation(id);
+        int result = (int) op.executeMysqlQuery();
         if (result == 1)
             return true;
         else return false;
@@ -190,8 +167,8 @@ public class MysqlDAOImpl implements IDataAccessObject {
 
     @Override
     public boolean deleteTutor(int id) {
-        DeleteTutorSQLOperation deleteTutorSQLOperation = new DeleteTutorSQLOperation(id);
-        int result = (int) deleteTutorSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new DeleteTutorSQLOperation(id);
+        int result = (int) op.executeMysqlQuery();
         if (result == 1)
             return true;
         else return false;
@@ -199,8 +176,8 @@ public class MysqlDAOImpl implements IDataAccessObject {
 
     @Override
     public boolean updateStudentPassword(String email, String newPassword) {
-        UpdateStudentPasswordSQLOperation updateStudentPasswordSQLOperation = new UpdateStudentPasswordSQLOperation(email, newPassword);
-        int result = (int) updateStudentPasswordSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new UpdateStudentPasswordSQLOperation(email, newPassword);
+        int result = (int) op.executeMysqlQuery();
         if (result == 1)
             return true;
         else return false;
@@ -208,9 +185,9 @@ public class MysqlDAOImpl implements IDataAccessObject {
 
     @Override
     public boolean updateTutorPassword(String email, String newPassword) {
-        UpdateTutorPasswordSQLOperation updateTutorPasswordSQLOperation =
+        SQLOperationTemplate op =
                 new UpdateTutorPasswordSQLOperation(email, newPassword);
-        int result = (int) updateTutorPasswordSQLOperation.executeMysqlQuery();
+        int result = (int) op.executeMysqlQuery();
         if (result == 1)
             return true;
         else return false;
@@ -218,8 +195,8 @@ public class MysqlDAOImpl implements IDataAccessObject {
 
     @Override
     public boolean setCourseToTutor(int tutorId, int courseId, float price) {
-        SetCourseToTutorSQLOperation setCourseToTutorSQLOperation = new SetCourseToTutorSQLOperation(tutorId, courseId, price);
-        int result = (int) setCourseToTutorSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new SetCourseToTutorSQLOperation(tutorId, courseId, price);
+        int result = (int) op.executeMysqlQuery();
         if (result == 1)
             return true;
         else
@@ -228,49 +205,49 @@ public class MysqlDAOImpl implements IDataAccessObject {
 
     @Override
     public List<Course> getCoursesOFTutor(int tutorId) {
-        GetCoursesOFTutorSQLOperation getCoursesOFTutorSQLOperation = new GetCoursesOFTutorSQLOperation(tutorId);
-        List<Course> courses = (List<Course>) getCoursesOFTutorSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new GetCoursesOfTutorSQLOperation(tutorId);
+        List<Course> courses = (List<Course>) op.executeMysqlQuery();
         return courses;
     }
 
     @Override
     public int numberOfCourse(String courseName) {
-        NumberOFCourseSQLOperation numberOFCourseSQLOperation = new NumberOFCourseSQLOperation(courseName);
-        int result = (int) numberOFCourseSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new NumberOfCourseSQLOperation(courseName);
+        int result = (int) op.executeMysqlQuery();
         return result;
     }
 
     @Override
     public ActivationCode checkActivationCode(String code) {
-        CheckActivationCodeSQLOperation activationCodeSQLOperation = new CheckActivationCodeSQLOperation(code);
-        ActivationCode activationCode = (ActivationCode) activationCodeSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new CheckActivationCodeSQLOperation(code);
+        ActivationCode activationCode = (ActivationCode) op.executeMysqlQuery();
         return activationCode;
     }
 
     @Override
     public Course getCourseByName(String nameCourse) {
-        GetCourseByNameSQLOperation getCourseByNameSQLOperation = new GetCourseByNameSQLOperation(nameCourse);
-        Course course = (Course) getCourseByNameSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new GetCourseByNameSQLOperation(nameCourse);
+        Course course = (Course) op.executeMysqlQuery();
         return course;
     }
 
     @Override
     public List<Course> getAllCourses() {
-        GetAllCourseSQLOperation getAllCourseSQLOperation = new GetAllCourseSQLOperation();
-        List<Course> courseList = (List<Course>) getAllCourseSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new GetAllCourseSQLOperation();
+        List<Course> courseList = (List<Course>) op.executeMysqlQuery();
         return courseList;
     }
 
     @Override
     public boolean saveCourse(Course course) {
-        SaveCourseSQLOperation saveCourseSQLOperation = new SaveCourseSQLOperation(course.getName(), course.getSchool());
-        int result = (int) saveCourseSQLOperation.executeMysqlQuery();
+        SQLOperationTemplate op = new SaveCourseSQLOperation(course.getName(), course.getSchool());
+        int result = (int) op.executeMysqlQuery();
         if (result == 1)
             return true;
         else
             return false;
     }
-
+  
     @Override
     public boolean updateStudentEmail(String oldMail, String newMail) {
         UpdateStudentEmailSQLOperation updateStudentEmailSQLOperation =

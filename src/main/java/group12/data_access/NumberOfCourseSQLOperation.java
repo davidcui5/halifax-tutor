@@ -4,9 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class NumberOFCourseSQLOperation extends SQLOperationTemplate {
+public class NumberOfCourseSQLOperation extends SQLOperationTemplate {
 
-    public NumberOFCourseSQLOperation(Object... parameters) {
+    public NumberOfCourseSQLOperation(Object... parameters) {
         super(parameters);
     }
 

@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SaveTutorSQLOperation extends SQLOperationTemplate {
-    public SaveTutorSQLOperation(Object... parameters) {
-        super(parameters);
+    public SaveTutorSQLOperation(Tutor tutor) {
+        super(tutor);
     }
 
     @Override
@@ -16,31 +16,22 @@ public class SaveTutorSQLOperation extends SQLOperationTemplate {
 
     @Override
     PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
-        String firstName = (String) getParameters().get(0);
-        String lastName = (String) getParameters().get(1);
-        String email = (String) getParameters().get(2);
-        String password = (String) getParameters().get(3);
-        String phoneNumber = (String) getParameters().get(4);
-        String cardHolderName = (String) getParameters().get(5);
-        String cardNumber = (String) getParameters().get(6);
-        String expertDate = (String) getParameters().get(7);
-        String securityCode = (String) getParameters().get(8);
-        ps.setString(1, firstName);
-        ps.setString(2, lastName);
-        ps.setString(3, email);
-        ps.setString(4, password);
-        ps.setString(5, phoneNumber);
-        ps.setString(6, cardHolderName);
-        ps.setString(7, cardNumber);
-        ps.setString(8, expertDate);
-        ps.setString(9, securityCode);
+        Tutor t = (Tutor) getParameters().get(0);
+        ps.setString(1, t.getFirstName());
+        ps.setString(2, t.getLastName());
+        ps.setString(3, t.getEmail());
+        ps.setString(4, t.getPassword());
+        ps.setString(5, t.getPhoneNumber());
+        ps.setString(6, t.getCreditCardHolder());
+        ps.setString(7, t.getCreditCardNum());
+        ps.setString(8, t.getCreditCardExpiryDate());
+        ps.setString(9, t.getSecurityCode());
         return ps;
     }
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        int result = rs.getInt(1);
-        return result;
+        return rs.getBoolean(1);
     }
 
     @Override
