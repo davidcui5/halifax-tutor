@@ -120,6 +120,33 @@ $(document).ready(function() {
 
     });
 
+    $("#Cphone").submit(function (event) {
+        event.preventDefault();
+        let phone = $("#phone").val();
+
+        var ChangePhoneData = {
+            'token': token,
+            'phone' : phone
+        };
+
+        $.ajax({
+            url: location.origin +"/tutor/setting/phone",
+            data: JSON.stringify(ChangePhoneData),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "text"
+        }).done(function (data) {
+            if (data.result === "Success") {
+                alert("Phone Number change succeed!");
+            } else {
+                alert(data.details);
+            }
+        }).fail(function (xhr, status, errorThrown) {
+
+        });
+
+    });
+
     $("#Ccard").submit(function (event) {
         event.preventDefault();
         let creditCardNumber = $("#cardnum").val();
@@ -152,32 +179,6 @@ $(document).ready(function() {
 
     });
 
-    $("#Cphone").submit(function (event) {
-        event.preventDefault();
-        let phone = $("#phone").val();
-
-        var ChangePhoneData = {
-            'token': token,
-            'phone' : phone
-        };
-
-        $.ajax({
-            url: location.origin +"/tutor/setting/phone",
-            data: JSON.stringify(ChangePhoneData),
-            contentType: "application/json",
-            type: "POST",
-            dataType: "text"
-        }).done(function (data) {
-            if (data.result === "Success") {
-                alert("Phone Number change succeed!");
-            } else {
-                alert(data.details);
-            }
-        }).fail(function (xhr, status, errorThrown) {
-
-        });
-
-    });
 
     $("#Cedu").submit(function (event) {
         event.preventDefault();
