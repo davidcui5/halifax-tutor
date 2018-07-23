@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import static junit.framework.TestCase.*;
 
 public class DBDAORegistration {
+    /*
     static ClassPathXmlApplicationContext context;
     static IDataAccessObject dbda;
 
@@ -68,4 +69,5 @@ public class DBDAORegistration {
         boolean actual = dbda.deleteStudent(id);
         assertTrue(actual);
     }
+    */
 }
