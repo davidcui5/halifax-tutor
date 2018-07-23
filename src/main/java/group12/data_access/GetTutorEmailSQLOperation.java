@@ -17,9 +17,9 @@ public class GetTutorEmailSQLOperation extends SQLOperationTemplate {
     @Override
     PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         String email = (String) getParameters().get(0);
-        String password = (String) getParameters().get(1);
+//        String password = (String) getParameters().get(1);
         ps.setString(1, email);
-        ps.setString(2, password);
+//        ps.setString(2, password);
         return ps;
     }
 
