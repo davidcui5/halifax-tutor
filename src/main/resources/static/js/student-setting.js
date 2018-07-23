@@ -4,7 +4,7 @@ $(document).ready(function () {
     var token = localStorage.getItem("token");
     var objToken = {'token': token};
 
-    $("#remail_btn").hide();
+    $(".remail").hide();
     $.ajax({
         url: location.origin + "/student/setting/access",
         data: JSON.stringify(objToken),
@@ -29,10 +29,10 @@ $(document).ready(function () {
     }).done(function (data) {
         if (data === "NOT_ACTIVE") {
             alert("Please, activate your account.");
-            $("#remail_btn").show();
+            $(".remail").show();
         }
         else {
-            $("#remail_btn").hide();
+            $(".remail").hide();
         }
     }).fail(function (xhr, status, errorThrown) {
         //window.location.replace("../index.html");
@@ -66,7 +66,7 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            alert(data);
+            //
         }).fail(function (xhr, status, errorThrown) {
             //empty
         });
@@ -105,6 +105,26 @@ $(document).ready(function () {
 
         $.ajax({
             url: location.origin + "/student/setting/phone",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "text"
+        }).done(function (data) {
+            alert(data);
+        }).fail(function (xhr, status, errorThrown) {
+            //empty
+        });
+    });
+
+    $("#RemailBtn").submit(function (event) {
+        event.preventDefault();
+
+        var data = {
+            'token': token
+        }
+
+        $.ajax({
+            url: location.origin + "/student/setting/reactivation",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",

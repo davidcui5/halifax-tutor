@@ -20,6 +20,10 @@
 
     <!--ForgotPasswordController beans ENDT-->
 
+    <bean id="studentSetting" class="group12.student_setting.StudentSettingService">
+        <property name="db" ref="DBDAO"/>
+        <property name="mailer" ref="mailer"/>
+    </bean>
 
     <!--RegistrationController beans START-->
     <bean id="registrationService" class="group12.registration.RegistrationService">
