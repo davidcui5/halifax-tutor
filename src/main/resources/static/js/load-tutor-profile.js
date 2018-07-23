@@ -21,6 +21,7 @@ function loadProfile() {
             document.getElementById("email").innerHTML = data.email;
             document.getElementById("same-email").innerHTML = data.email;
             document.getElementById("education").innerHTML = data.education;
+            document.getElementById("experience").innerHTML = data.experience;
             document.getElementById("tutor-rating").innerHTML = data.rating;
 
             var courseInfo =  data.courseList;

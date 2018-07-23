@@ -42,6 +42,7 @@ public class TutorProfileService implements iTutorProfile {
             response.setPhoneNumber(tutorProfileForm.getPhoneNumber());
             response.setEmail(tutorProfileForm.getEmail());
             response.setEducation(tutorProfileForm.getEducation());
+            response.setExperience(tutorProfileForm.getExperience());
             response.setRating(tutorProfileForm.getRating());
             response.setCourseList(tutorProfileForm.getCourseList());
             response.setTutorSchedule(tutorProfileForm.getTutorSchedule());

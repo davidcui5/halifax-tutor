@@ -13,6 +13,7 @@ public class TutorProfileResponse {
     private String email;
     private String education;
     private String rating;
+    private String experience;
     private ArrayList<String[]> courseList;
     private int[] tutorSchedule = new int[21];
 
@@ -112,5 +113,13 @@ public class TutorProfileResponse {
 
     public void setPhotoURL(String photoURL) {
         this.photoURL = photoURL;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
     }
 }

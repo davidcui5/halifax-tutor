@@ -449,8 +449,9 @@ public class DBDAO implements DatabaseInterface {
         tutorProfileForm.setPhoneNumber(tutorInfo[2]);
         tutorProfileForm.setEmail(tutorInfo[3]);
         tutorProfileForm.setEducation(tutorInfo[4]);
-        tutorProfileForm.setRating(tutorInfo[5]);
-        tutorProfileForm.setPhotoURL(tutorInfo[6]);
+        tutorProfileForm.setExperience(tutorInfo[5]);
+        tutorProfileForm.setRating(tutorInfo[6]);
+        tutorProfileForm.setPhotoURL(tutorInfo[7]);
 
         ArrayList<String[]> courseList = getTutorCourses(tutorId);
         tutorProfileForm.setCourseList(courseList);
@@ -467,7 +468,7 @@ public class DBDAO implements DatabaseInterface {
         Connection con = null;
         PreparedStatement psTutor = null;
         ResultSet rsTutor = null;
-        String[] tutorInfo = new String[7];
+        String[] tutorInfo = new String[8];
 
         try {
             con = dataSource.getConnection();
@@ -480,8 +481,9 @@ public class DBDAO implements DatabaseInterface {
                 tutorInfo[2] = rsTutor.getString("PhoneNumber");
                 tutorInfo[3] = rsTutor.getString("Email");
                 tutorInfo[4] = rsTutor.getString("Education");
-                tutorInfo[5] = rsTutor.getString("Rating"); // TODO Float.parseFloat
-                tutorInfo[6] = rsTutor.getString("PhotoUrl");
+                tutorInfo[5] = rsTutor.getString("Experience");
+                tutorInfo[6] = rsTutor.getString("Rating");
+                tutorInfo[7] = rsTutor.getString("PhotoUrl");
                 System.out.println("Tutor Found:" + tutorId);
             } else {
                 System.out.println("No Tutor found with id=" + tutorId);

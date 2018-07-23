@@ -16,7 +16,7 @@ public class TutorProfileForm {
     private String feedback;
     private ArrayList<String[]> courseList  ;
     private int[] tutorSchedule = new int[21];
-
+    private String experience;
     private String message;
 
 
@@ -118,6 +118,15 @@ public class TutorProfileForm {
 
     public void setFeedback(String feedback) {
         this.feedback = feedback;
+    }
+
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
     }
 }
 
