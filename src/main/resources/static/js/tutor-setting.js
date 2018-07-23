@@ -301,6 +301,8 @@ $(document).ready(function() {
     });
 
     $("#plan1").click(function (event) {
+        event.preventDefault();
+
         var ChangePlan = {
             'token':token,
             'planNo':1
@@ -324,6 +326,8 @@ $(document).ready(function() {
     });
 
     $("#plan2").click(function (event) {
+        event.preventDefault();
+
         var ChangePlan = {
             'token':token,
             'planNo':2
@@ -347,6 +351,8 @@ $(document).ready(function() {
     });
 
     $("#plan3").click(function (event) {
+        event.preventDefault();
+
         var ChangePlan = {
             'token':token,
             'planNo':3
@@ -370,6 +376,8 @@ $(document).ready(function() {
     });
 
     $("#plan4").click(function (event) {
+        event.preventDefault();
+
         var ChangePlan = {
             'token':token,
             'planNo':4
@@ -392,7 +400,11 @@ $(document).ready(function() {
         });
     });
 
-    $("#resend".click(function (event) {
+    $("#resend").click(function (event) {
+        event.preventDefault();
+
+
+
         var ResendEmail = {
             'token':token
         };
@@ -412,7 +424,13 @@ $(document).ready(function() {
         }).fail(function (xhr, status, errorThrown) {
 
         });
-    }));
+    });
+
+    $("#cancel").click(function (event) {
+        event.preventDefault();
+
+    });
+
     //get subscription info
     $.ajax({
         url: location.origin +"/tutor/setting/postplan",

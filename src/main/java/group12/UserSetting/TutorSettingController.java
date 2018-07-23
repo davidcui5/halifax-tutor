@@ -3,6 +3,8 @@ package group12.UserSetting;
 import group12.data_access.Availability;
 import group12.data_access.GetPlanSQLOperation;
 import group12.data_access.Subscribe_Plan;
+import group12.email.IMailer;
+import group12.email.SpringMailer;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import group12.token_auth.IAccessToken;
@@ -179,7 +181,19 @@ public class TutorSettingController {
             return FAILURE;
         }
     }
-
+    @PostMapping(path="/tutor/setting/resend", consumes = "application/json", produces = "text/plain")
+    public String resendEmail(@RequestBody Map<String,String> body){
+        String email = accessToken.decodeToken(body.get("token"));
+        logger.log(Level.INFO,email);
+        IMailer mailer = new SpringMailer();
+        mailer.sendMail();
+//        if(tutorSettingDAO.setPlan(email,planNo)){
+//            return SUCCESS;
+//        }
+//        else{
+//            return FAILURE;
+//        }
+    }
     @PostMapping(path = "/tutor/setting/postplan")
     public Map<String,Object> SendPlan() {
         Map<String, Object> map = new HashMap<String, Object>();
