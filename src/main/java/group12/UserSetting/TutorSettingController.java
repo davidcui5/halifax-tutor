@@ -166,7 +166,7 @@ public class TutorSettingController {
         }
     }
 
-    @PostMapping(path = "/tutor/setting/plan")
+    @PostMapping(path = "/tutor/setting/postplan")
     public Map<String,Object> SendPlan() {
         Map<String, Object> map = new HashMap<String, Object>();
         GetPlanSQLOperation getPlanSQLOperation1 = new GetPlanSQLOperation(1);
@@ -185,22 +185,5 @@ public class TutorSettingController {
 
         return map;
     }
-// @PostMapping(path = "/tutor/setting/plan1")
-//    public ArrayList<Subscribe_Plan> SendPlan(@RequestBody ArrayList<Subscribe_Plan> plans) {
-//        ArrayList<Subscribe_Plan> planArrayList = new ArrayList<Subscribe_Plan>();
-//
-//        GetPlanSQLOperation getPlanSQLOperation1 = new GetPlanSQLOperation(1);
-//        planArrayList.add((Subscribe_Plan) getPlanSQLOperation1.executeMysqlQuery());
-//
-//        GetPlanSQLOperation getPlanSQLOperation2 = new GetPlanSQLOperation(2);
-//        planArrayList.add((Subscribe_Plan) getPlanSQLOperation2.executeMysqlQuery());
-//
-//        GetPlanSQLOperation getPlanSQLOperation3 = new GetPlanSQLOperation(3);
-//        planArrayList.add((Subscribe_Plan) getPlanSQLOperation3.executeMysqlQuery());
-//
-//        GetPlanSQLOperation getPlanSQLOperation4 = new GetPlanSQLOperation(4);
-//        planArrayList.add((Subscribe_Plan) getPlanSQLOperation4.executeMysqlQuery());
-//
-//        return planArrayList;
-//    }
+
 }

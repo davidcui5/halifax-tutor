@@ -73,7 +73,7 @@ $(document).ready(function() {
         let password = $("#pwd").val();
         var ChangePwdData = {
             'token': token,
-            "password": password
+            'password': password
         };
 
         $.ajax({
@@ -99,7 +99,7 @@ $(document).ready(function() {
 
         var ChangeEmailData = {
             'token': token,
-            "email": email
+            'email': email
         };
 
         $.ajax({
@@ -128,10 +128,10 @@ $(document).ready(function() {
         let cardname = $("#cardname").val();
         var ChangeCardData = {
             'token': token,
-            "cardname": cardname,
-            "creditCardNumber": creditCardNumber,
-            "expireDate":expireDate,
-            "securityCode" : securityCode
+            'cardname': cardname,
+            'creditCardNumber': creditCardNumber,
+            'expireDate':expireDate,
+            'securityCode' : securityCode
         };
 
         $.ajax({
@@ -158,7 +158,7 @@ $(document).ready(function() {
 
         var ChangePhoneData = {
             'token': token,
-            "phone" : phone
+            'phone' : phone
         };
 
         $.ajax({
@@ -185,7 +185,7 @@ $(document).ready(function() {
 
         var ChangeEduData = {
             'token': token,
-            "education" : education
+            'education' : education
         };
 
         $.ajax({
@@ -212,7 +212,7 @@ $(document).ready(function() {
 
         var ChangeExpData = {
             'token': token,
-            "experience" : experience
+            'experience' : experience
         };
 
         $.ajax({
@@ -234,7 +234,7 @@ $(document).ready(function() {
     });
 
     $("#Cavailability").submit(function (event) {
-        
+
         event.preventDefault();
         let A1 = $("#A1").is(":checked");
         let A2 = $("#A2").is(":checked");
@@ -301,11 +301,14 @@ $(document).ready(function() {
     });
 
     $("#plan1").click(function (event) {
-
+        var ChangePlan1 = {
+            'token':token,
+            'planNo':1
+        }
     });
     //get subscription info
     $.ajax({
-        url: location.origin +"/tutor/setting/plan",
+        url: location.origin +"/tutor/setting/postplan",
         // contentType: "application/json",
         type: "GET",
         dataType: "json"
