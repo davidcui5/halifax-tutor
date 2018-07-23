@@ -301,11 +301,97 @@ $(document).ready(function() {
     });
 
     $("#plan1").click(function (event) {
-        var ChangePlan1 = {
+        var ChangePlan = {
             'token':token,
             'planNo':1
-        }
+        };
+
+        $.ajax({
+            url: location.origin +"/tutor/setting/plan",
+            data: JSON.stringify(ChangePlan),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "text"
+        }).done(function (data) {
+            if (data.result === "Success") {
+                alert("Subscription Plan change succeed!");
+            } else {
+                alert(data.details);
+            }
+        }).fail(function (xhr, status, errorThrown) {
+
+        });
     });
+
+    $("#plan2").click(function (event) {
+        var ChangePlan = {
+            'token':token,
+            'planNo':2
+        };
+
+        $.ajax({
+            url: location.origin +"/tutor/setting/plan",
+            data: JSON.stringify(ChangePlan),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "text"
+        }).done(function (data) {
+            if (data.result === "Success") {
+                alert("Subscription Plan change succeed!");
+            } else {
+                alert(data.details);
+            }
+        }).fail(function (xhr, status, errorThrown) {
+
+        });
+    });
+
+    $("#plan3").click(function (event) {
+        var ChangePlan = {
+            'token':token,
+            'planNo':3
+        };
+
+        $.ajax({
+            url: location.origin +"/tutor/setting/plan",
+            data: JSON.stringify(ChangePlan),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "text"
+        }).done(function (data) {
+            if (data.result === "Success") {
+                alert("Subscription Plan change succeed!");
+            } else {
+                alert(data.details);
+            }
+        }).fail(function (xhr, status, errorThrown) {
+
+        });
+    });
+
+    $("#plan4").click(function (event) {
+        var ChangePlan = {
+            'token':token,
+            'planNo':4
+        };
+
+        $.ajax({
+            url: location.origin +"/tutor/setting/plan",
+            data: JSON.stringify(ChangePlan),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "text"
+        }).done(function (data) {
+            if (data.result === "Success") {
+                alert("Subscription Plan change succeed!");
+            } else {
+                alert(data.details);
+            }
+        }).fail(function (xhr, status, errorThrown) {
+
+        });
+    });
+
     //get subscription info
     $.ajax({
         url: location.origin +"/tutor/setting/postplan",
