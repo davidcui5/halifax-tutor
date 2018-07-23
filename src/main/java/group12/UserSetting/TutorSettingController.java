@@ -187,7 +187,7 @@ public class TutorSettingController {
         String email = accessToken.decodeToken(body.get("token"));
         logger.log(Level.INFO,email);
 
-        if(tutorSettingDAO.CancelPlan(email)){
+        if(tutorSettingDAO.cancelPlan(email)){
             return SUCCESS;
         }
         else{
