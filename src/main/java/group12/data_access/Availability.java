@@ -1,27 +1,27 @@
 package group12.data_access;
 
 public class Availability {
-    String A1;
-    String A2;
-    String A3;
-    String A4;
-    String A5;
-    String A6;
-    String A7;
-    String B1;
-    String B2;
-    String B3;
-    String B4;
-    String B5;
-    String B6;
-    String B7;
-    String C1;
-    String C2;
-    String C3;
-    String C4;
-    String C5;
-    String C6;
-    String C7;
+    private String A1;
+    private String A2;
+    private String A3;
+    private String A4;
+    private String A5;
+    private String A6;
+    private String A7;
+    private String B1;
+    private String B2;
+    private String B3;
+    private String B4;
+    private String B5;
+    private String B6;
+    private String B7;
+    private String C1;
+    private String C2;
+    private String C3;
+    private String C4;
+    private String C5;
+    private String C6;
+    private String C7;
 
     public String getA1() {
         return A1;
