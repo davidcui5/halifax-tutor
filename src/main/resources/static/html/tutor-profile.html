@@ -22,97 +22,114 @@
 
 <div class="row">
     <div class="column" style="background-color:#ccc;">
-        <h3>Tutor name</h3>
         <table>
             <tr>
-                <td>Jone Doe</td>
+                <img style="width: 50%; height: 40%;" id="profile-pic">
+                <td><h4><p id="tutor-name"></p></h4></td>
             </tr>
         </table>
 
-        <br><br>
+        <br>
+        <h5>Rating:</h5>
+        <p id="tutor-rating"></p>
 
-        <h4>Contact</h4>
+        <br>
+
+        <h5>Contact</h5>
         <table>
             <tr>
-                <td><label for="phone">Phone Number: </label></td>
-                <td><p id="phone">000 000 0000</p></td>
+                <td><label for="phone">Phone Number:   </label></td>
+                <td><p id="phone"></p></td>
             </tr>
             <tr>
                 <td><label for="email">Email:   </label></td>
-                <td><p id="email">tutor@gmail.com</p></td>
-            </tr>
-        </table>
-        <br><br>
-        <h4>Education</h4>
-        <table>
-            <tr>
-                <td>Dalhousie University</td>
+                <td><p id="email"></p></td>
             </tr>
         </table>
 
+
     </div>
     <div class="column" style="background-color:#bbb;">
-        <h4>Experience</h4>
+
+
+        <h5>Education</h5>
+        <table>
+            <tr>
+                <td><p id="education"></p></td>
+            </tr>
+        </table>
+        <br>
+        <h5>Experience</h5>
         <table>
             <tr>
                 <td>Post Experiences</td>
             </tr>
         </table>
         <br><br>
-        <h4>Courses and Price</h4>
-        <table>
-            <tr>
-                <td>Course</td>
-                <td>Price</td>
-            </tr>
-        </table>
+        <h5>Courses and Price</h5>
+            <table id="tutor-courses">
+                <tr>
+                    <th>Course&ensp;</th>
+                    <th>School&ensp;</th>
+                    <th>Price&ensp;</th>
+                </tr>
+            </table>
         <br><br>
-        <h4>Availability</h4>
-        <table>
+        <h5>Availability</h5>
+
+        <table id="tutor-schedule">
             <tr>
-                <td>Available on Monday and Friday</td>
+                <th></th>
+                <th>Mon&ensp;</th>
+                <th>Tue&ensp;</th>
+                <th>Wed&ensp;</th>
+                <th>Thu&ensp;</th>
+                <th>Fri&ensp;</th>
+                <th>Sat&ensp;</th>
+                <th>Sun&ensp;</th>
             </tr>
         </table>
-
     </div>
     <div class="column" style="background-color:#ccc;">
-        <h4>Message</h4>
-        <table>
-            <tr>
-                <td><textarea rows="4" cols="50"></textarea></td>
-            </tr>
-            <tr>
-                <td><button>Send Message</button></td>
-            </tr>
-        </table>
+        <h5>Message</h5>
+        <form name="message">
+            <table>
+                <tr>
+                    <td><textarea id="message-text" rows="4" cols="50"></textarea></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" name="send_message" onclick="sendMessage()" value="Send Message" /></td>
+                </tr>
+            </table>
+        </form>
         <br><br>
-        <h4>Rating / Feedback</h4>
-        <table>
-            <tr>
-                <td>
-                    <br>
-                    <label for="rating">Rating:</label>
-                    <select id="rating">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="feedback">Feedback:</label>
-                    <textarea id="feedback" rows="4" cols="50"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td><button>Submit</button></td>
-            </tr>
-        </table>
-
+        <h5>Rating / Feedback</h5>
+        <form name="feedback">
+            <table>
+                <tr>
+                    <td>
+                        <br>
+                        <label for="rating">Rating:</label>
+                        <select id="rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="feedback-text">Feedback:</label>
+                        <textarea id="feedback-text" rows="4" cols="50"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" name="submit_button" onclick="submitFeedback()" value="Submit" /></td>
+                </tr>
+            </table>
+        </form>
     </div>
 </div>
 
@@ -129,6 +146,7 @@
         crossorigin="anonymous"></script>
 
 <script src="../js/load-tutor-profile.js"></script>
+<script src="../js/tutor-profile-actions.js"></script>
 
 </body>
 

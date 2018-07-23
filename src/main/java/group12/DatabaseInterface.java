@@ -2,6 +2,9 @@ package group12;
 
 import group12.registration.StudentSignupForm;
 import group12.registration.TutorSignupForm;
+import group12.tutor_profile.TutorProfileForm;
+
+import java.util.ArrayList;
 
 public interface DatabaseInterface {
 
@@ -32,5 +35,21 @@ public interface DatabaseInterface {
     boolean updateStudentPassword(String email, String new_password);
 
     boolean updateTutorPassword(String email, String new_password);
+
+    TutorProfileForm getTutorProfile(int tutorId);
+
+    String[] getTutorInfo(int tutorId);
+
+    ArrayList<String[]> getTutorCourses(int tutorId);
+
+    int[] getTutorSchedule(int tutorId);
+
+    boolean saveFeedback(int tutorId,String rating);
+
+    float calculateAverageRating(int tutorId,String rating);
+
+    String[] getCourseFromCourseId(String courseId);
+
+    boolean increaseTotalRating(int tutorId, float ratingCount);
 
 }

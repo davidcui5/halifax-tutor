@@ -13,9 +13,21 @@ public class TutorProfileController {
     private iTutorProfile iTutorProfile;
 
     @PostMapping(path = "/gettutorprofiledata")
-    public @ResponseBody
-    TutorProfileResponse getTutorProfileData(@RequestBody TutorProfileForm tutorProfile){
-        TutorProfileResponse response = iTutorProfile.getTutorProfile(tutorProfile);
+    public @ResponseBody TutorProfileResponse getTutorProfileData(@RequestBody TutorProfileForm tutorProfile){
+        TutorProfileResponse response = iTutorProfile.getTutorProfile(tutorProfile.getId());
         return response;
     }
+
+    @PostMapping(path = "/sendtutormessage")
+    public @ResponseBody TutorProfileResponse sendTutorMessage(@RequestBody TutorProfileForm tutorProfile){
+        TutorProfileResponse response = iTutorProfile.sendMessage(tutorProfile);
+        return response;
+    }
+
+    @PostMapping(path = "/sendtutorfeedback")
+    public @ResponseBody TutorProfileResponse sendTutorFeedback(@RequestBody TutorProfileForm tutorProfile){
+        TutorProfileResponse response = iTutorProfile.sendFeedback(tutorProfile);
+        return response;
+    }
+
 }

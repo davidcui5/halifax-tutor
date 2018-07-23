@@ -1,7 +1,10 @@
 package group12.tutor_profile;
 
 import group12.DatabaseInterface;
+import group12.email.IMailer;
 import group12.registration.RegistrationService;
+import group12.token_auth.IAccessToken;
+import group12.token_auth.JWTAccessToken;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,7 +12,10 @@ import org.springframework.beans.factory.annotation.Value;
 public class TutorProfileService implements iTutorProfile {
 
     private DatabaseInterface db;
+    private IMailer mailer;
     private static Logger logger = LogManager.getLogger(RegistrationService.class);
+    @Value("${email.sender}")
+    String emailSender;
 
     @Value("${server.url}")
     String serverURL;
@@ -18,9 +24,63 @@ public class TutorProfileService implements iTutorProfile {
         this.db = db;
     }
 
-    @Override
-    public TutorProfileResponse getTutorProfile(TutorProfileForm tutorProfileForm) {
-
-        return null;
+    public void setMailer(IMailer mailer) {
+        this.mailer = mailer;
     }
+
+    @Override
+    public TutorProfileResponse getTutorProfile(int tutorId) {
+
+        TutorProfileForm tutorProfileForm = db.getTutorProfile(tutorId);
+        TutorProfileResponse response = new TutorProfileResponse();
+
+        if (tutorProfileForm != null){
+
+            response.setPhotoURL(tutorProfileForm.getPhotoURL());
+            response.setFirstName(tutorProfileForm.getFirstName());
+            response.setLastName(tutorProfileForm.getLastName());
+            response.setPhoneNumber(tutorProfileForm.getPhoneNumber());
+            response.setEmail(tutorProfileForm.getEmail());
+            response.setEducation(tutorProfileForm.getEducation());
+            response.setRating(tutorProfileForm.getRating());
+            response.setCourseList(tutorProfileForm.getCourseList());
+            response.setTutorSchedule(tutorProfileForm.getTutorSchedule());
+
+            response.setResult("Success");
+        }
+        else{
+            response.setResult("Failure");
+            response.addDetail("Internal Server Error");
+        }
+        return response;
+    }
+
+    @Override
+    public TutorProfileResponse sendMessage(TutorProfileForm tutorProfileForm) {
+        TutorProfileResponse response = new TutorProfileResponse();
+
+        String studentEmail = JWTAccessToken.getInstance().decodeToken(tutorProfileForm.getEmailToken());
+        String emailBody = "Message From: " + studentEmail + " " + tutorProfileForm.getMessage();
+
+        mailer.sendMail(emailSender, studentEmail, "Message From Student", emailBody);
+        response.setResult("Success");
+
+        return response;
+    }
+
+    @Override
+    public TutorProfileResponse sendFeedback(TutorProfileForm tutorProfileForm) {
+        TutorProfileResponse response = new TutorProfileResponse();
+        if(db.saveFeedback(tutorProfileForm.getId(), tutorProfileForm.getRating())){
+            response.setResult("Success");
+        }
+        else{
+            response.setResult("Failure");
+            response.addDetail("Internal Server Error");
+        }
+
+        return response;
+    }
+
+
 }

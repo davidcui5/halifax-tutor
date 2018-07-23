@@ -4,22 +4,26 @@ import java.util.ArrayList;
 
 public class TutorProfileForm {
 
-    private String id;
+    private String emailToken;
+    private int id;
+    private String photoURL;
     private String firstName;
     private String lastName;
     private String phoneNumber;
     private String email;
     private String education;
-    private ArrayList<ArrayList<String>> coursePrice = new ArrayList<ArrayList<String>>();
-    private String availability; // ToDo : what is availability format
+    private String rating;
+    private ArrayList<String[]> courseList  ;
+    private int[] tutorSchedule = new int[21];
+
+    private String message;
 
 
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -63,11 +67,48 @@ public class TutorProfileForm {
         this.education = education;
     }
 
-    public ArrayList<ArrayList<String>> getCoursePrice() {
-        return coursePrice;
+    public String getRating() { return rating;    }
+
+    public void setRating(String rating) { this.rating = rating; }
+
+    public ArrayList<String[]> getCourseList() {
+        return courseList;
     }
 
-    public void setCoursePrice(ArrayList<ArrayList<String>> coursePrice) {
-        this.coursePrice = coursePrice;
+    public void setCourseList(ArrayList<String[]> courseList) {
+        this.courseList = courseList;
+    }
+
+    public int[] getTutorSchedule() {
+        return tutorSchedule;
+    }
+
+    public void setTutorSchedule(int[] tutorSchedule) {
+        this.tutorSchedule = tutorSchedule;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
+
+    public String getEmailToken() {
+        return emailToken;
+    }
+
+    public void setEmailToken(String emailToken) {
+        this.emailToken = emailToken;
     }
 }
+

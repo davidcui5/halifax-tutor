@@ -20,6 +20,13 @@
 
     <!--ForgotPasswordController beans ENDT-->
 
+    <!--ForgotPasswordController beans START-->
+    <bean id="tutorProfileService" class="group12.tutor_profile.TutorProfileService">
+        <property name="db" ref="DBDAO"/>
+    </bean>
+
+    <!--ForgotPasswordController beans ENDT-->
+
 
     <!--RegistrationController beans START-->
     <bean id="registrationService" class="group12.registration.RegistrationService">

@@ -1,6 +1,7 @@
 package group12;
 
 
+import group12.tutor_profile.TutorProfileForm;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import group12.registration.StudentSignupForm;
@@ -15,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @Transactional
@@ -410,8 +412,7 @@ public class DBDAO implements DatabaseInterface {
     }
 
     @Override
-    public boolean updateTutorPassword
-            (String email, String new_password) {
+    public boolean updateTutorPassword(String email, String new_password) {
         String sql = "UPDATE Tutor SET Password=? WHERE Email=?";
         Connection con = null;
         PreparedStatement ps;
@@ -437,5 +438,270 @@ public class DBDAO implements DatabaseInterface {
         return true;
     }
 
+    @Override
+    public TutorProfileForm getTutorProfile(int tutorId) {
+        TutorProfileForm tutorProfileForm = new TutorProfileForm();
 
+        String[] tutorInfo = getTutorInfo(tutorId);
+
+        tutorProfileForm.setFirstName(tutorInfo[0]);
+        tutorProfileForm.setLastName(tutorInfo[1]);
+        tutorProfileForm.setPhoneNumber(tutorInfo[2]);
+        tutorProfileForm.setEmail(tutorInfo[3]);
+        tutorProfileForm.setEducation(tutorInfo[4]);
+        tutorProfileForm.setRating(tutorInfo[5]);
+        tutorProfileForm.setPhotoURL(tutorInfo[6]);
+
+        ArrayList<String[]> courseList = getTutorCourses(tutorId);
+        tutorProfileForm.setCourseList(courseList);
+
+        int[] tutorSchedule = getTutorSchedule(tutorId);
+        tutorProfileForm.setTutorSchedule(tutorSchedule);
+
+        return tutorProfileForm;
+    }
+
+    @Override
+    public String[] getTutorInfo(int tutorId) {
+        String sqlTutor = "SELECT * FROM Tutor Where ID =?";
+        Connection con = null;
+        PreparedStatement psTutor = null;
+        ResultSet rsTutor = null;
+        String[] tutorInfo = new String[7];
+
+        try {
+            con = dataSource.getConnection();
+            psTutor = con.prepareStatement(sqlTutor);
+            psTutor.setString(1, String.valueOf(tutorId));
+            rsTutor = psTutor.executeQuery();
+            if (rsTutor.next()) {
+                tutorInfo[0] = rsTutor.getString("FirstName");
+                tutorInfo[1] = rsTutor.getString("LastName");
+                tutorInfo[2] = rsTutor.getString("PhoneNumber");
+                tutorInfo[3] = rsTutor.getString("Email");
+                tutorInfo[4] = rsTutor.getString("Education");
+                tutorInfo[5] = rsTutor.getString("Rating"); // TODO Float.parseFloat
+                tutorInfo[6] = rsTutor.getString("PhotoUrl");
+                System.out.println("Tutor Found:" + tutorId);
+            } else {
+                System.out.println("No Tutor found with id=" + tutorId);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rsTutor.close();
+                psTutor.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return tutorInfo;
+
+    }
+
+    @Override
+    public ArrayList<String[]> getTutorCourses(int tutorId) {
+
+        String sqlTutorCourse = "SELECT * FROM TutorCourse Where TutorId =?";
+        PreparedStatement psTutorCourse = null;
+        ResultSet rsTutorCourse = null;
+        ArrayList<String[]> courseList = new ArrayList();
+        String courseId;
+
+        try {
+            con = dataSource.getConnection();
+
+            psTutorCourse = con.prepareStatement(sqlTutorCourse);
+            psTutorCourse.setString(1, String.valueOf(tutorId));
+            rsTutorCourse = psTutorCourse.executeQuery();
+
+            while (rsTutorCourse.next()) {
+                courseId = rsTutorCourse.getString("CourseId");
+                String[] row = {getCourseFromCourseId(courseId)[0],getCourseFromCourseId(courseId)[1], rsTutorCourse.getString("Price")};
+                courseList.add(row);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rsTutorCourse.close();
+                psTutorCourse.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return courseList;
+    }
+
+    @Override
+    public String[] getCourseFromCourseId(String courseId) {
+        String sqlCourse = "SELECT * FROM Course Where ID =?";
+        PreparedStatement psCourse = null;
+        ResultSet rsCourse = null;
+        String courseInfo[] = new String[2];
+
+        try {
+            con = dataSource.getConnection();
+            psCourse = con.prepareStatement(sqlCourse);
+            psCourse.setString(1, courseId);
+            rsCourse = psCourse.executeQuery();
+            if (rsCourse.next()) {
+                courseInfo[0] = rsCourse.getString("Name");
+                courseInfo[1] = rsCourse.getString("School");
+
+            } else {
+                System.out.println("No Course found with id=" + courseId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rsCourse.close();
+                psCourse.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return courseInfo;
+    }
+
+    @Override
+    public int[] getTutorSchedule(int tutorId) {
+        String sqlTutorSchedule = "SELECT * FROM WeeklySchedule Where TutorID =?";
+        PreparedStatement psTutorSchedule = null;
+        ResultSet rsTutorSchedule = null;
+        int[] tutorSchedule = new int[21];
+        try {
+            con = dataSource.getConnection();
+            psTutorSchedule = con.prepareStatement(sqlTutorSchedule);
+            psTutorSchedule.setString(1, String.valueOf(tutorId));
+            rsTutorSchedule = psTutorSchedule.executeQuery();
+            if (rsTutorSchedule.next()) {
+
+                for (int i=3;i<24;i++){
+                    tutorSchedule[i-3] = rsTutorSchedule.getInt(i);
+                }
+
+            } else {
+                System.out.println("No Tutor found with id=" + tutorId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rsTutorSchedule.close();
+                psTutorSchedule.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return tutorSchedule;
+    }
+
+    @Override
+    public boolean saveFeedback(int tutorId ,String rating) {
+        String sql = "UPDATE Tutor SET Rating=? WHERE ID=?";
+        Connection con = null;
+        PreparedStatement ps;
+        float averageRating = calculateAverageRating(tutorId ,rating);
+
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, String.valueOf(averageRating));
+            ps.setString(2, String.valueOf(tutorId));
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    return true;
+                } catch (SQLException ex) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public float calculateAverageRating(int tutorId, String rating) {
+        String sql = "SELECT * FROM Tutor Where ID =?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        float ratingCount;
+        float oldRating;
+        float newRating = 0;
+        float tutorrating = Float.parseFloat(rating);
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, String.valueOf(tutorId));
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                ratingCount = Float.parseFloat(rs.getString("TotalRatings"));
+                oldRating = Float.parseFloat(rs.getString("Rating"));
+                //https://stackoverflow.com/questions/12636613/how-to-calculate-moving-average-without-keeping-the-count-and-data-total
+
+                newRating = (oldRating * (ratingCount - 1) / ratingCount) + (tutorrating / ratingCount);
+
+                increaseTotalRating(tutorId, ratingCount);
+
+            } else {
+                System.out.println("No Tutor found with id=" + tutorId);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return newRating;
+    }
+
+    @Override
+    public boolean increaseTotalRating(int tutorId, float ratingCount) {
+        String sql = "UPDATE Tutor SET TotalRatings=? WHERE ID=?";
+        Connection con = null;
+        PreparedStatement ps;
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, String.valueOf(ratingCount+1));
+            ps.setString(2, String.valueOf(tutorId));
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    return true;
+                } catch (SQLException ex) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
