@@ -287,6 +287,9 @@ public class MysqlDAOImpl implements IDataAccessObject {
         UpdateStudentPhoneSQLOperation updateStudentPhoneSQLOperation =
                 new UpdateStudentPhoneSQLOperation(email, newPhone);
         int result = (int) updateStudentPhoneSQLOperation.executeMysqlQuery();
-        return false;
+        if (result == 1)
+            return true;
+        else
+            return false;
     }
 }

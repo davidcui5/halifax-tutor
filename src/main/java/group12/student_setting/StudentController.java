@@ -37,7 +37,7 @@ public class StudentController {
         this.decoder = decoder;
     }
 
-    private boolean authorizeAdmin(String token) {
+    private boolean authorizeUser(String token) {
         String email = decoder.decodeToken(token);
         int count = dbao.countOfUserWithEmail(email);
         if (count == 1) {
@@ -48,8 +48,8 @@ public class StudentController {
     }
 
     @PostMapping(path = "/access")
-    public String authorizeAdmin(@RequestBody Map<String, String> body) {
-        boolean isAuthorized = authorizeAdmin(body.get("token"));
+    public String authorizeUser(@RequestBody Map<String, String> body) {
+        boolean isAuthorized = authorizeUser(body.get("token"));
         if (isAuthorized) {
             return AUTHORIZED;
         } else {
@@ -59,7 +59,7 @@ public class StudentController {
 
     @PostMapping(path = "/password")
     public String changePassword(@RequestBody Map<String, String> body) {
-        boolean isAuthorized = authorizeAdmin(body.get("token"));
+        boolean isAuthorized = authorizeUser(body.get("token"));
         if (isAuthorized) {
             String email = decoder.decodeToken(body.get("token"));
             logger.log(Level.INFO, email);
@@ -79,7 +79,7 @@ public class StudentController {
 
     @PostMapping(path = "/email")
     public String changeEmail(@RequestBody Map<String, String> body) {
-        boolean isAuthorized = authorizeAdmin(body.get("token"));
+        boolean isAuthorized = authorizeUser(body.get("token"));
         if (isAuthorized) {
             String email = decoder.decodeToken(body.get("token"));
             logger.log(Level.INFO, email);
@@ -98,14 +98,15 @@ public class StudentController {
 
     @PostMapping(path = "/phone")
     public String changePhone(@RequestBody Map<String, String> body) {
-        boolean isAuthorized = authorizeAdmin(body.get("token"));
+        boolean isAuthorized = authorizeUser(body.get("token"));
         if (isAuthorized) {
             String email = decoder.decodeToken(body.get("token"));
             logger.log(Level.INFO, email);
             logger.log(Level.INFO, body.get("phone"));
             String phone = body.get("phone");
             logger.log(Level.INFO, phone);
-            if (dbao.updateStudentPhone(email, phone)) {
+            boolean s = dbao.updateStudentPhone(email, phone);
+            if (s) {
                 return SUCCESS;
             } else {
                 return FAILURE;

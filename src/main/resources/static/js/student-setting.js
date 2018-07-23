@@ -22,6 +22,7 @@ $(document).ready(function () {
     $("#logout").click(function (event) {
         event.preventDefault();
         localStorage.removeItem("token");
+        window.location.replace("../index.html");
     });
 
     $("#Cpassword").submit(function (event) {
