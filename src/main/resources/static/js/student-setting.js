@@ -4,6 +4,7 @@ $(document).ready(function () {
     var token = localStorage.getItem("token");
     var objToken = {'token': token};
 
+    $("#remail_btn").hide();
     $.ajax({
         url: location.origin + "/student/setting/access",
         data: JSON.stringify(objToken),
@@ -17,6 +18,25 @@ $(document).ready(function () {
         }
     }).fail(function (xhr, status, errorThrown) {
         //window.location.replace("../index.html");
+    });
+
+    $.ajax({
+        url: location.origin + "/student/setting/activation",
+        data: JSON.stringify(objToken),
+        contentType: "application/json",
+        type: "POST",
+        dataType: "text"
+    }).done(function (data) {
+        if (data === "NOT_ACTIVE") {
+            alert("Please, activate your account.");
+            $("#remail_btn").show();
+        }
+        else {
+            $("#remail_btn").hide();
+        }
+    }).fail(function (xhr, status, errorThrown) {
+        //window.location.replace("../index.html");
+        console.log("asdasd");
     });
 
     $("#logout").click(function (event) {

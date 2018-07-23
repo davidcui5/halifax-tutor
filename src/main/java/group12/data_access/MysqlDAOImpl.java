@@ -292,4 +292,11 @@ public class MysqlDAOImpl implements IDataAccessObject {
         else
             return false;
     }
+
+    @Override
+    public int getStudentActivationStatus(String email) {
+        getActivationStudentStatusSQLOperation getActivationStudentStatusSQLOperation = new getActivationStudentStatusSQLOperation(email);
+        int result = (int) getActivationStudentStatusSQLOperation.executeMysqlQuery();
+        return result;
+    }
 }
