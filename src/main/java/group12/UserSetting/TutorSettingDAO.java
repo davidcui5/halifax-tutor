@@ -51,4 +51,10 @@ public class TutorSettingDAO implements ITutorSettingDAO{
         SQLOperationTemplate operation  = new UpdateTutorAvailabilitySQLOperation(email,availability);
         return (Boolean)operation.executeMysqlQuery();
     }
+
+    @Override
+    public boolean setPlan(String email, String planNo) {
+        SQLOperationTemplate operation = new UpdateTutorSbuscriptionSQLOperation(email,planNo);
+        return (Boolean) operation.executeMysqlQuery();
+    }
 }
