@@ -429,6 +429,25 @@ $(document).ready(function() {
     $("#cancel").click(function (event) {
         event.preventDefault();
 
+        var Cancel = {
+            'token':token
+        };
+
+        $.ajax({
+            url: location.origin +"/tutor/setting/cancel",
+            data: JSON.stringify(Cancel),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "text"
+        }).done(function (data) {
+            if (data.result === "Success") {
+                alert("Subscroption cancel succeed!");
+            } else {
+                alert(data.details);
+            }
+        }).fail(function (xhr, status, errorThrown) {
+
+        });
     });
 
     //get subscription info
