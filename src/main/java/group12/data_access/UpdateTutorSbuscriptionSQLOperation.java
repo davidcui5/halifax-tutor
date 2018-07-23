@@ -4,24 +4,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UpdateTutorExperienceSQLOperation extends SQLOperationTemplate {
+public class UpdateTutorSbuscriptionSQLOperation extends SQLOperationTemplate {
 
-    public UpdateTutorExperienceSQLOperation(String email, String experience){
-        super(email, experience);
+    public UpdateTutorSbuscriptionSQLOperation(String email, String planNo){
+        super(email, planNo);
     }
 
     //TODO: function
     @Override
     String makeSQL() {
-        return "SELECT UpdateExperienceTutor(?, ?)";
+        return "SELECT UpdateSbuscriptionTutor(?, ?)";
     }
 
     @Override
     PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         String email = (String) getParameters().get(0);
-        String experience = (String) getParameters().get(1);
+        String planNo = (String) getParameters().get(1);
         ps.setString(1, email);
-        ps.setString(2, experience);
+        ps.setString(2, planNo);
         return ps;
     }
 

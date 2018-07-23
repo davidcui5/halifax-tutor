@@ -137,8 +137,28 @@ public class TutorSettingController {
         logger.log(Level.INFO,email);
         Availability availability = new Availability();
         availability.setA1(body.get("A1"));
+        availability.setA2(body.get("A2"));
+        availability.setA3(body.get("A3"));
+        availability.setA4(body.get("A4"));
+        availability.setA5(body.get("A5"));
+        availability.setA6(body.get("A6"));
+        availability.setA7(body.get("A7"));
+        availability.setB1(body.get("B1"));
+        availability.setB2(body.get("B2"));
+        availability.setB3(body.get("B3"));
+        availability.setB4(body.get("B4"));
+        availability.setB5(body.get("B5"));
+        availability.setB6(body.get("B6"));
+        availability.setB7(body.get("B7"));
+        availability.setC1(body.get("C1"));
+        availability.setC2(body.get("C2"));
+        availability.setC3(body.get("C3"));
+        availability.setC4(body.get("C4"));
+        availability.setC5(body.get("C5"));
+        availability.setC6(body.get("C6"));
+        availability.setC7(body.get("C7"));
 
-        if(tutorSettingDAO.setExperience(email,availability)){
+        if(tutorSettingDAO.setAvailability(email,availability)){
             return SUCCESS;
         }
         else{
