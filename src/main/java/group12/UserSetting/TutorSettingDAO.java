@@ -37,7 +37,7 @@ public class TutorSettingDAO implements ITutorSettingDAO{
 
     @Override
     public boolean setExperience(String email, String experience) {
-        SQLOperationTemplate operation = new  UpdateTutorEx
+        SQLOperationTemplate operation = new UpdateTutorExperienceSQLOperation();
         return false;
     }
 

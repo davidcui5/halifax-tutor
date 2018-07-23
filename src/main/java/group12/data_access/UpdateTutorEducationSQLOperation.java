@@ -5,8 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UpdateTutorEducationSQLOperation extends SQLOperationTemplate {
-    public UpdateTutorEducationSQLOperation(String email, String experience){
-        super(email, phone);
+    public UpdateTutorEducationSQLOperation(String email, String education){
+        super(email, education);
     }
 
     @Override
