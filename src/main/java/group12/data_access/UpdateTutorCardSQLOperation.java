@@ -36,4 +36,6 @@ public class UpdateTutorCardSQLOperation extends SQLOperationTemplate {
     Object extractResultSet(ResultSet rs) throws SQLException {
         return rs.getBoolean(1);
     }
+
+
 }

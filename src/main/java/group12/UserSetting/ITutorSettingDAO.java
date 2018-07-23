@@ -1,6 +1,8 @@
 package group12.UserSetting;
 
 
+import group12.data_access.Availability;
+
 public interface ITutorSettingDAO {
     boolean setTutorPassword(String email, String password);
     boolean setTutorEmail(String email,String newemail);
@@ -9,5 +11,5 @@ public interface ITutorSettingDAO {
     boolean setEducation(String email, String education);
     boolean setExperience (String email, String experience);
     boolean addCourse(String email,String school,int code, String price);
-
+    boolean setAvailability(String email, Availability availability);
 }

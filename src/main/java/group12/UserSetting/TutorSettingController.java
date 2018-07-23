@@ -1,5 +1,6 @@
 package group12.UserSetting;
 
+import group12.data_access.Availability;
 import group12.data_access.GetPlanSQLOperation;
 import group12.data_access.Subscribe_Plan;
 import group12.encryption.IEncryptor;
@@ -134,8 +135,10 @@ public class TutorSettingController {
     public String changeAvailability(@RequestBody Map<String,String> body){
         String email = accessToken.decodeToken(body.get("token"));
         logger.log(Level.INFO,email);
-        String A1 = body.get("A1");
-        if(tutorSettingDAO.setExperience(email,)){
+        Availability availability = new Availability();
+        availability.setA1(body.get("A1"));
+
+        if(tutorSettingDAO.setExperience(email,availability)){
             return SUCCESS;
         }
         else{
