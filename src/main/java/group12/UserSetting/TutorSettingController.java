@@ -166,6 +166,20 @@ public class TutorSettingController {
         }
     }
 
+    @PostMapping(path="/tutor/setting/plan", consumes = "application/json", produces = "text/plain")
+    public String changePlan(@RequestBody Map<String,String> body){
+        String email = accessToken.decodeToken(body.get("token"));
+        logger.log(Level.INFO,email);
+        String planNo = body.get("planNo");
+
+        if(tutorSettingDAO.setPlan(email,planNo)){
+            return SUCCESS;
+        }
+        else{
+            return FAILURE;
+        }
+    }
+
     @PostMapping(path = "/tutor/setting/postplan")
     public Map<String,Object> SendPlan() {
         Map<String, Object> map = new HashMap<String, Object>();
