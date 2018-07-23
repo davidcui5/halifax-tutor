@@ -234,6 +234,8 @@ $(document).ready(function() {
     });
 
     $("#Cavailability").submit(function (event) {
+        
+        event.preventDefault();
         let A1 = $("#A1").is(":checked");
         let A2 = $("#A2").is(":checked");
         let A3 = $("#A3").is(":checked");
@@ -298,6 +300,9 @@ $(document).ready(function() {
         });
     });
 
+    $("#plan1").click(function (event) {
+
+    });
     //get subscription info
     $.ajax({
         url: location.origin +"/tutor/setting/plan",
