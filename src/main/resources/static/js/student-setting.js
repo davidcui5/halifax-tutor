@@ -5,6 +5,7 @@ $(document).ready(function () {
     var objToken = {'token': token};
 
     $(".remail").hide();
+    $(".alert").hide();
     $.ajax({
         url: location.origin + "/student/setting/access",
         data: JSON.stringify(objToken),
@@ -28,11 +29,12 @@ $(document).ready(function () {
         dataType: "text"
     }).done(function (data) {
         if (data === "NOT_ACTIVE") {
-            alert("Please, activate your account.");
             $(".remail").show();
+            $(".alert").show();
         }
         else {
             $(".remail").hide();
+            $(".alert").hide();
         }
     }).fail(function (xhr, status, errorThrown) {
         //window.location.replace("../index.html");
@@ -66,9 +68,11 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            //
+            alert(data);
+            $("#pwd").val('');
+            $("#Rpwd").val('');
         }).fail(function (xhr, status, errorThrown) {
-            //empty
+            // alert()
         });
     });
 
@@ -89,6 +93,7 @@ $(document).ready(function () {
             dataType: "text"
         }).done(function (data) {
             alert(data);
+            $("#email").val('');
         }).fail(function (xhr, status, errorThrown) {
             //empty
         });
@@ -111,6 +116,7 @@ $(document).ready(function () {
             dataType: "text"
         }).done(function (data) {
             alert(data);
+            $("#phone").val('');
         }).fail(function (xhr, status, errorThrown) {
             //empty
         });

@@ -45,7 +45,7 @@
     </bean>
 
     <bean id="mailer" class="group12.email.SpringMailer">
-        <property name="mailSender" ref="mailSender"/>
+            <property name="mailSender" ref="mailSender"/>
     </bean>
 
     <!-- SET default mail properties -->

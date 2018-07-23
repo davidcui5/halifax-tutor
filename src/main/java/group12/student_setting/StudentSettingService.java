@@ -106,7 +106,6 @@ public class StudentSettingService implements IStudentSetting {
     @Override
     public String resendActivateCode(String token) {
         if (isAuthorized(token)) {
-            this.mailer = new SpringMailer();
             String email = decoder.decodeToken(token);
             int studentID = db.getStudentIDByEmail(email);
             UUID uuid = UUID.randomUUID();
