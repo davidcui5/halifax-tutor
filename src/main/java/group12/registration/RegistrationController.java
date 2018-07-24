@@ -28,12 +28,6 @@ public class RegistrationController {
         return response;
     }
 
-    /*@RequestMapping(value = "/student/activate/{email}")
-    public String sendActivationEmail(@PathVariable String email) {
-
-        return "Sent email to this email" + email;
-    }*/
-
     @GetMapping(value = "/student/studentid/{studentid}/activation/{activationcode}/")
     public String activateStudent(@PathVariable int studentid, @PathVariable String activationcode) {
         String response = registerService.activateStudent(studentid, activationcode);
@@ -41,7 +35,6 @@ public class RegistrationController {
     }
 
     @GetMapping(value = "/tutor/tutorid/{tutorid}/activation/{activationcode}/")
-    @ResponseBody
     public String activateTutor(@PathVariable int tutorid, @PathVariable String activationcode) {
         String response = registerService.activateTutor(tutorid, activationcode);
         return response;
