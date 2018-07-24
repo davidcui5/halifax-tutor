@@ -1,11 +1,14 @@
 package group12.DBDAOTest;
 
-import group12.registration.StudentSignupForm;
-import group12.registration.TutorSignupForm;
+import group12.data_access.Course;
+import group12.data_access.Student;
+import group12.data_access.Tutor;
+/*import group12.registration.StudentSignupForm;
+import group12.registration.TutorSignupForm;*/
 
 public class MockData {
-    public static StudentSignupForm getStudentObject() {
-        StudentSignupForm student = new StudentSignupForm();
+    public static Student getStudentObject() {
+        Student student = new Student();
         student.setEmail("testemailStu@gmail.com");
         student.setFirstName("testName");
         student.setLastName("testLName");
@@ -15,13 +18,17 @@ public class MockData {
         return student;
     }
 
-    public static TutorSignupForm getTutorObject() {
-        TutorSignupForm tutor = new TutorSignupForm();
+    public static Tutor getTutorObject() {
+        Tutor tutor = new Tutor();
         tutor.setEmail("testemailTut@gmail.com");
         tutor.setFirstName("testName");
         tutor.setLastName("testLName");
         tutor.setPhoneNumber("9021234567T");
         tutor.setPassword("pass123456T");
+        tutor.setCreditCardHolder(tutor.getFirstName());
+        tutor.setCreditCardNum("123456789T234567");
+        tutor.setExpiryDate("12-12");
+        tutor.setSecurityCode("123");
         return tutor;
     }
 
@@ -41,7 +48,7 @@ public class MockData {
         return "testemailTut@gmail.com";
     }
 
-    public static StudentSignupForm getUnRegStudent() {
+    /*public static StudentSignupForm getUnRegStudent() {
         StudentSignupForm student = new StudentSignupForm();
         student.setEmail("testemailWrong@gmail.com");
         student.setPassword("pass123456S");
@@ -53,7 +60,7 @@ public class MockData {
         tutor.setEmail("testemailWrong@gmail.com");
         tutor.setPassword("pass123456T");
         return tutor;
-    }
+    }*/
 
     public static String getEmailRegistredStudent() {
         return "testemailStu@gmail.com";
@@ -73,6 +80,13 @@ public class MockData {
 
     public static String getOldActivationCode() {
         return "713ec00e-e9ae-4833-bba2-75d8729f554e";
+    }
+
+    public static Course getCourseObject(){
+        Course course=new Course();
+        course.setName("CSI101");
+        course.setSchool("DAl");
+        return course;
     }
 }
 

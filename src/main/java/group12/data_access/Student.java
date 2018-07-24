@@ -3,6 +3,9 @@ package group12.data_access;
 import group12.login.IAuthenticationStrategy;
 import group12.login.StudentAuthStrategy;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Student extends User {
 
     private int studentID;
@@ -13,11 +16,11 @@ public class Student extends User {
     private String phoneNumber;
     private String school;
 
-    public Student(){
+    public Student() {
         super();
     }
 
-    public Student(String email, String password){
+    public Student(String email, String password) {
         super(email, password);
     }
 
@@ -81,4 +84,5 @@ public class Student extends User {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
 }

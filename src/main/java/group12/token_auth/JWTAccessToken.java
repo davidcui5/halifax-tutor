@@ -2,24 +2,19 @@ package group12.token_auth;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.crypto.MacProvider;
-
-import java.security.Key;
 
 
 public class JWTAccessToken implements IAccessToken {
     private static final JWTAccessToken INSTANCE = new JWTAccessToken();
+    private final String secret = "secret";
 
-    private Key key;
     private SignatureAlgorithm algorithm;
 
     private JWTAccessToken() {
-        this.key = MacProvider.generateKey();
         this.algorithm = SignatureAlgorithm.HS512;
     }
 
-    private JWTAccessToken(Key key, SignatureAlgorithm algorithm) {
-        this.key = key;
+    private JWTAccessToken(SignatureAlgorithm algorithm) {
         this.algorithm = algorithm;
     }
 
@@ -29,14 +24,13 @@ public class JWTAccessToken implements IAccessToken {
 
     @Override
     public String generateToken(String userEmail) {
-        return Jwts.builder().setSubject(userEmail).signWith(this.algorithm, this.key).compact();
+        return Jwts.builder().setSubject(userEmail).signWith(algorithm, secret).compact();
     }
 
     @Override
     public String decodeToken(String token) {
         try {
-            String userEmail = Jwts.parser().setSigningKey(this.key).parseClaimsJws(token).getBody().getSubject();
-            return userEmail;
+            return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
         } catch (Exception e) {
             return null;
         }

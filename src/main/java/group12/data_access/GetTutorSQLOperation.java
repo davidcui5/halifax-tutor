@@ -7,11 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GetTutorSQLOperation extends SQLOperationTemplate{
+public class GetTutorSQLOperation extends SQLOperationTemplate {
 
     private static Logger logger = LogManager.getLogger(GetTutorSQLOperation.class);
 
-    public GetTutorSQLOperation(Object... parameters){
+    public GetTutorSQLOperation(Object... parameters) {
         super(parameters);
     }
 
@@ -21,9 +21,9 @@ public class GetTutorSQLOperation extends SQLOperationTemplate{
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) throws SQLException{
+    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         String email = (String) getParameters().get(0);
-        ps.setString(1,email);
+        ps.setString(1, email);
         return ps;
     }
 
@@ -38,13 +38,18 @@ public class GetTutorSQLOperation extends SQLOperationTemplate{
         tutor.setActivated(rs.getBoolean("AccountActivation"));
         tutor.setBanned(rs.getBoolean("Banned"));
         tutor.setPhoneNumber(rs.getString("PhoneNumber"));
-        tutor.setBio(rs.getString("Bio"));
+        tutor.setEducation(rs.getString("Education"));
         tutor.setPlanID(rs.getInt("PlanID"));
-        tutor.setExpiryDate(rs.getString("SubExpiryDate"));
+        tutor.setExpiryDate(rs.getString("ExpiryDate"));
         tutor.setCreditCardHolder(rs.getString("CreditCardHoldName"));
         tutor.setCreditCardNum(rs.getString("CreditCardNumber"));
         tutor.setCreditCardExpiryDate(rs.getString("CreditCardExpiryDate"));
-        tutor.setSecurityCode(rs.getInt("SecurityCode"));
+        tutor.setSecurityCode(rs.getString("SecurityCode"));
         return tutor;
+    }
+
+    @Override
+    ResultSet execute(PreparedStatement ps) throws SQLException {
+        return ps.executeQuery();
     }
 }

@@ -1,5 +1,8 @@
 package group12.registration;
 
+import group12.data_access.Student;
+import group12.data_access.Tutor;
+import group12.encryption.IEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,43 +11,32 @@ public class RegistrationController {
 
     @Autowired
     private IRegister registerService;
+    @Autowired
+    private IEncryptor encryptor;
 
     @PostMapping(path = "/student")
-    @ResponseBody
-    public RegistrationResponse registerStudent(@RequestBody StudentSignupForm student){
+    public RegistrationResponse registerStudent(@RequestBody Student student){
+        student.setPassword(encryptor.encrypt(student.getPassword()));
         RegistrationResponse response = registerService.registerStudent(student);
         return response;
     }
 
     @PostMapping(path = "/tutor")
-    @ResponseBody
-    public RegistrationResponse registerTutor(@RequestBody TutorSignupForm tutor){
+    public RegistrationResponse registerTutor(@RequestBody Tutor tutor){
+        tutor.setPassword(encryptor.encrypt(tutor.getPassword()));
         RegistrationResponse response = registerService.registerTutor(tutor);
         return response;
     }
 
-    //look into this later
-    @RequestMapping(value = "/student/activate/{email}")
-    @ResponseBody
-    public String sendActivationEmail(@PathVariable String email) {
-
-        return "Sent email to this email" + email;
-    }
-
-    //look into
     @GetMapping(value = "/student/studentid/{studentid}/activation/{activationcode}/")
-    @ResponseBody
     public String activateStudent(@PathVariable int studentid, @PathVariable String activationcode) {
         String response = registerService.activateStudent(studentid, activationcode);
         return response;
     }
 
-    //look into
     @GetMapping(value = "/tutor/tutorid/{tutorid}/activation/{activationcode}/")
-    @ResponseBody
     public String activateTutor(@PathVariable int tutorid, @PathVariable String activationcode) {
         String response = registerService.activateTutor(tutorid, activationcode);
         return response;
     }
-
 }

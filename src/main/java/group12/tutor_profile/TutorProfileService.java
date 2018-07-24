@@ -1,9 +1,8 @@
 package group12.tutor_profile;
 
-import group12.DatabaseInterface;
+import group12.data_access.IDataAccessObject;
 import group12.email.IMailer;
 import group12.registration.RegistrationService;
-import group12.token_auth.IAccessToken;
 import group12.token_auth.JWTAccessToken;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 public class TutorProfileService implements iTutorProfile {
 
-    private DatabaseInterface db;
+    private IDataAccessObject db;
     private IMailer mailer;
     private static Logger logger = LogManager.getLogger(RegistrationService.class);
     @Value("${email.sender}")
@@ -20,7 +19,7 @@ public class TutorProfileService implements iTutorProfile {
     @Value("${server.url}")
     String serverURL;
 
-    public void setDb(DatabaseInterface db) {
+    public void setDb(IDataAccessObject db) {
         this.db = db;
     }
 
