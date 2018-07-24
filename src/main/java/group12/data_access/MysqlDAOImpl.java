@@ -61,10 +61,9 @@ public class MysqlDAOImpl implements IDataAccessObject {
     @Override
     public int countOfActivationCodeWithValue(String codeValue) {
         SQLOperationTemplate op = new CheckActivationCodeSQLOperation(codeValue);
-        if(op.executeMysqlQuery() != null){
+        if (op.executeMysqlQuery() != null) {
             return 1;
-        }
-        else{
+        } else {
             return 0;
         }
     }
@@ -119,103 +118,73 @@ public class MysqlDAOImpl implements IDataAccessObject {
     @Override
     public boolean saveActivationCode(String code) {
         SQLOperationTemplate op = new SaveActivationCodeSQLOperation(code);
-        int result = (int) op.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else
-            return false;
+        return (boolean) op.executeMysqlQuery();
     }
 
     @Override
     public boolean setStudentActivatedStatus(int id, boolean activateCode) {
         SQLOperationTemplate op =
                 new SetStudentActivatedStatusSQLOperation(id, activateCode);
-        int result = (int) op.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else return false;
+        return (boolean) op.executeMysqlQuery();
     }
 
     @Override
     public boolean setTutorActivatedStatus(int id, boolean activateCode) {
         SQLOperationTemplate op =
                 new SetTutorActivatedStatusSQLOperation(id, activateCode);
-        int result = (int) op.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else
-            return false;
+        return (boolean) op.executeMysqlQuery();
     }
 
     @Override
     public boolean setStudentBannedStatus(int studentID, boolean status) {
         SQLOperationTemplate op =
                 new SetStudentBannedStatusSQLOperation(studentID, status);
-        return (Boolean) op.executeMysqlQuery();
+        return (boolean) op.executeMysqlQuery();
     }
 
     @Override
     public boolean setTutorBannedStatus(int tutorID, boolean status) {
         SQLOperationTemplate op =
                 new SetTutorBannedStatusSQLOperation(tutorID, status);
-        return (Boolean) op.executeMysqlQuery();
+        return (boolean) op.executeMysqlQuery();
     }
 
     @Override
     public boolean deleteActivationCodeByValue(String codeValue) {
         SQLOperationTemplate op =
                 new DeleteActivationCodeByValueSQLOperation(codeValue);
-        int result = (int) op.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else return false;
+        return (boolean) op.executeMysqlQuery();
     }
 
     @Override
     public boolean deleteStudent(int id) {
         SQLOperationTemplate op = new DeleteStudentSQLOperation(id);
-        int result = (int) op.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else return false;
+        return (boolean) op.executeMysqlQuery();
     }
 
     @Override
     public boolean deleteTutor(int id) {
         SQLOperationTemplate op = new DeleteTutorSQLOperation(id);
-        int result = (int) op.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else return false;
+        return (boolean) op.executeMysqlQuery();
     }
 
     @Override
     public boolean updateStudentPassword(String email, String newPassword) {
         SQLOperationTemplate op = new UpdateStudentPasswordSQLOperation(email, newPassword);
-        int result = (int) op.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else return false;
+        return (boolean) op.executeMysqlQuery();
     }
 
     @Override
     public boolean updateTutorPassword(String email, String newPassword) {
         SQLOperationTemplate op =
                 new UpdateTutorPasswordSQLOperation(email, newPassword);
-        int result = (int) op.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else return false;
+        return (boolean) op.executeMysqlQuery();
     }
 
     @Override
     public boolean setCourseToTutor(int tutorId, int courseId, float price) {
         SQLOperationTemplate op = new SetCourseToTutorSQLOperation(tutorId, courseId, price);
-        int result = (int) op.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else
-            return false;
+        return (boolean) op.executeMysqlQuery();
     }
 
     @Override
@@ -256,33 +225,21 @@ public class MysqlDAOImpl implements IDataAccessObject {
     @Override
     public boolean saveCourse(Course course) {
         SQLOperationTemplate op = new SaveCourseSQLOperation(course.getName(), course.getSchool());
-        int result = (int) op.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else
-            return false;
+        return (boolean) op.executeMysqlQuery();
     }
-  
+
     @Override
     public boolean updateStudentEmail(String oldMail, String newMail) {
         UpdateStudentEmailSQLOperation updateStudentEmailSQLOperation =
                 new UpdateStudentEmailSQLOperation(oldMail, newMail);
-        int result = (int) updateStudentEmailSQLOperation.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else
-            return false;
+        return (boolean) updateStudentEmailSQLOperation.executeMysqlQuery();
     }
 
     @Override
     public boolean updateStudentPhone(String email, String newPhone) {
         UpdateStudentPhoneSQLOperation updateStudentPhoneSQLOperation =
                 new UpdateStudentPhoneSQLOperation(email, newPhone);
-        int result = (int) updateStudentPhoneSQLOperation.executeMysqlQuery();
-        if (result == 1)
-            return true;
-        else
-            return false;
+        return (boolean) updateStudentPhoneSQLOperation.executeMysqlQuery();
     }
 
     @Override
@@ -347,9 +304,9 @@ public class MysqlDAOImpl implements IDataAccessObject {
             e.printStackTrace();
         } finally {
             try {
-                assert (rsTutor!=null);
-                assert (psTutor!=null);
-                assert (con!=null);
+                assert (rsTutor != null);
+                assert (psTutor != null);
+                assert (con != null);
                 rsTutor.close();
                 psTutor.close();
                 con.close();
@@ -380,7 +337,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
 
             while (rsTutorCourse.next()) {
                 courseId = rsTutorCourse.getString("CourseId");
-                String[] row = {getCourseFromCourseId(courseId)[0],getCourseFromCourseId(courseId)[1], rsTutorCourse.getString("Price")};
+                String[] row = {getCourseFromCourseId(courseId)[0], getCourseFromCourseId(courseId)[1], rsTutorCourse.getString("Price")};
                 courseList.add(row);
             }
 
@@ -388,9 +345,9 @@ public class MysqlDAOImpl implements IDataAccessObject {
             e.printStackTrace();
         } finally {
             try {
-                assert (rsTutorCourse!=null);
-                assert (psTutorCourse!=null);
-                assert (con!=null);
+                assert (rsTutorCourse != null);
+                assert (psTutorCourse != null);
+                assert (con != null);
                 rsTutorCourse.close();
                 psTutorCourse.close();
                 con.close();
@@ -424,9 +381,9 @@ public class MysqlDAOImpl implements IDataAccessObject {
             e.printStackTrace();
         } finally {
             try {
-                assert (rsCourse!=null);
-                assert (psCourse!=null);
-                assert(con!=null);
+                assert (rsCourse != null);
+                assert (psCourse != null);
+                assert (con != null);
                 rsCourse.close();
                 psCourse.close();
                 con.close();
@@ -450,8 +407,8 @@ public class MysqlDAOImpl implements IDataAccessObject {
             rsTutorSchedule = psTutorSchedule.executeQuery();
             if (rsTutorSchedule.next()) {
 
-                for (int i=3;i<24;i++){
-                    tutorSchedule[i-3] = rsTutorSchedule.getInt(i);
+                for (int i = 3; i < 24; i++) {
+                    tutorSchedule[i - 3] = rsTutorSchedule.getInt(i);
                 }
 
             } else {
@@ -461,9 +418,9 @@ public class MysqlDAOImpl implements IDataAccessObject {
             e.printStackTrace();
         } finally {
             try {
-                assert (rsTutorSchedule!=null);
-                assert (psTutorSchedule!=null);
-                assert(con!=null);
+                assert (rsTutorSchedule != null);
+                assert (psTutorSchedule != null);
+                assert (con != null);
                 rsTutorSchedule.close();
                 psTutorSchedule.close();
                 con.close();
@@ -476,11 +433,11 @@ public class MysqlDAOImpl implements IDataAccessObject {
     }
 
     @Override
-    public boolean saveRating(int tutorId ,String rating) {
+    public boolean saveRating(int tutorId, String rating) {
         String sql = "UPDATE Tutor SET Rating=? WHERE ID=?";
         Connection con = null;
         PreparedStatement ps;
-        float averageRating = calculateAverageRating(tutorId ,rating);
+        float averageRating = calculateAverageRating(tutorId, rating);
 
         try {
             con = dataSource.getConnection();
@@ -488,7 +445,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
             ps.setString(1, String.valueOf(averageRating));
             ps.setString(2, String.valueOf(tutorId));
             ps.executeUpdate();
-            assert (ps!=null);
+            assert (ps != null);
             ps.close();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
@@ -496,7 +453,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
             if (con != null) {
                 try {
 
-                    assert(con!=null);
+                    assert (con != null);
                     con.close();
                     return true;
                 } catch (SQLException ex) {
@@ -530,14 +487,14 @@ public class MysqlDAOImpl implements IDataAccessObject {
             ps.setString(5, String.valueOf(tutorProfileForm.getId()));
 
             ps.executeUpdate();
-            assert (ps!=null);
+            assert (ps != null);
             ps.close();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         } finally {
             if (con != null) {
                 try {
-                    assert (con!=null);
+                    assert (con != null);
                     con.close();
                     return true;
                 } catch (SQLException ex) {
@@ -579,9 +536,9 @@ public class MysqlDAOImpl implements IDataAccessObject {
             e.printStackTrace();
         } finally {
             try {
-                assert (rs!=null);
-                assert (ps!=null);
-                assert (con!=null);
+                assert (rs != null);
+                assert (ps != null);
+                assert (con != null);
                 rs.close();
                 ps.close();
                 con.close();
@@ -601,17 +558,17 @@ public class MysqlDAOImpl implements IDataAccessObject {
         try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setString(1, String.valueOf(ratingCount+1));
+            ps.setString(1, String.valueOf(ratingCount + 1));
             ps.setString(2, String.valueOf(tutorId));
             ps.executeUpdate();
-            assert (ps!=null);
+            assert (ps != null);
             ps.close();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         } finally {
             if (con != null) {
                 try {
-                    assert (con!=null);
+                    assert (con != null);
                     con.close();
                     return true;
                 } catch (SQLException ex) {
