@@ -4,9 +4,10 @@ import group12.data_access.Student;
 import group12.data_access.Tutor;
 import group12.encryption.IEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class RegistrationController {
 
     @Autowired
@@ -15,6 +16,7 @@ public class RegistrationController {
     private IEncryptor encryptor;
 
     @PostMapping(path = "/student")
+    @ResponseBody
     public RegistrationResponse registerStudent(@RequestBody Student student){
         student.setPassword(encryptor.encrypt(student.getPassword()));
         RegistrationResponse response = registerService.registerStudent(student);
@@ -22,6 +24,7 @@ public class RegistrationController {
     }
 
     @PostMapping(path = "/tutor")
+    @ResponseBody
     public RegistrationResponse registerTutor(@RequestBody Tutor tutor){
         tutor.setPassword(encryptor.encrypt(tutor.getPassword()));
         RegistrationResponse response = registerService.registerTutor(tutor);
