@@ -3,12 +3,17 @@ package group12.search;
 import group12.data_access.*;
 import group12.exceptions.SearchQuerySQLException;
 import group12.token_auth.JWTAccessToken;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class SearchService {
-    static SearchResponse getSearchResponse(SearchRequest searchRequest) {
+
+    @Value("${search.auth}")
+    private String auth;
+
+    SearchResponse getSearchResponse(SearchRequest searchRequest) {
         String school = searchRequest.getSchool();
         String courseName = searchRequest.getCourseName();
         TutorPublicInfoDAO tutorPublicInfoDAO = new TutorPublicInfoDaoImpl();
@@ -36,22 +41,27 @@ class SearchService {
         return searchResponse;
     }
 
-    static IdentityResponse getSearchIdentity(IdentityRequest identityRequest) {
-        String token = identityRequest.getToken();
+    IdentityResponse getSearchIdentity(IdentityRequest identityRequest) {
         IdentityResponse identityResponse = new IdentityResponse();
-        String email = JWTAccessToken.getInstance().decodeToken(token);
-        if (email == null) {
-            identityResponse.setSuccess(false);
-        } else {
-            IDataAccessObject dataAccessObject = new MysqlDAOImpl();
-            if (dataAccessObject.getStudentByEmail(email) != null) {
-                identityResponse.setType("student");
-            } else if (dataAccessObject.getTutorByEmail(email) != null) {
-                identityResponse.setType("tutor");
-            } else {
-                identityResponse.setType("admin");
-            }
+        if (!auth.equals("true")) {
             identityResponse.setSuccess(true);
+            identityResponse.setType("any");
+        } else {
+            String token = identityRequest.getToken();
+            String email = JWTAccessToken.getInstance().decodeToken(token);
+            if (email == null) {
+                identityResponse.setSuccess(false);
+            } else {
+                IDataAccessObject dataAccessObject = new MysqlDAOImpl();
+                if (dataAccessObject.getStudentByEmail(email) != null) {
+                    identityResponse.setType("student");
+                } else if (dataAccessObject.getTutorByEmail(email) != null) {
+                    identityResponse.setType("tutor");
+                } else {
+                    identityResponse.setType("admin");
+                }
+                identityResponse.setSuccess(true);
+            }
         }
         return identityResponse;
     }

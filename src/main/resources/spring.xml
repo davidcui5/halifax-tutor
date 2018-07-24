@@ -12,6 +12,9 @@
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
 
+    <bean id="searchService" class="group12.search.SearchService">
+    </bean>
+
     <!--ForgotPasswordController beans START-->
     <bean id="forgotPasswordService" class="group12.ForgotPassword.ForgotPasswordService">
         <property name="db" ref="DBDAO"/>
