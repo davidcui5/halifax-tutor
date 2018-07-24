@@ -73,7 +73,6 @@ public class TutorProfileService implements iTutorProfile {
     public TutorProfileResponse sendFeedback(TutorProfileForm tutorProfileForm) {
         TutorProfileResponse response = new TutorProfileResponse();
         String studentEmail = JWTAccessToken.getInstance().decodeToken(tutorProfileForm.getEmailToken());
-        studentEmail = "newstu5@dal.ca"; // TODO: Remove
 
         if(db.saveRating(tutorProfileForm.getId(), tutorProfileForm.getRating()) && db.saveFeedback(studentEmail, tutorProfileForm)){
             String emailBody = "Student : " + studentEmail + "  Sent you Feedback: " + tutorProfileForm.getFeedback();

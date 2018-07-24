@@ -518,8 +518,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
         Date date = new Date();
         String currentDate = dateFormat.format(date);
 
-//        int studentID = getStudentId(studentEmail); TODO: Remove
-        int studentID = 869;
+        int studentID = getStudentIDByEmail(studentEmail);
 
         try {
             con = dataSource.getConnection();

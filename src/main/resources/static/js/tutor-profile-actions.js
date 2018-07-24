@@ -3,9 +3,6 @@
 
 function sendMessage(){
     let id = localStorage.getItem("tutor-public-id");
-
-    id = 437; // remove
-
     let message = $("#message-text").val();
     let email = $("#same-email").text();
 
@@ -38,9 +35,6 @@ function sendMessage(){
 
 function submitFeedback(){
     let id = localStorage.getItem("tutor-public-id");
-
-    id = 437; // remove
-
     let rating = $("#rating").val();
     let feedback = $("#feedback-text").val();
     let email = $("#same-email").text();

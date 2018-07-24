@@ -2,8 +2,6 @@
 function loadProfile() {
     let id = localStorage.getItem("tutor-public-id");
 
-    id = 437; // remove
-
     var tutorData = {
         "id": id
     };
