@@ -11,7 +11,7 @@ public class UpdateTutorPhoneSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "SELECT UpdatePhoneTutor(?, ?)";
+        return "SELECT UpdateTutorPhone(?, ?)";
     }
 
     @Override

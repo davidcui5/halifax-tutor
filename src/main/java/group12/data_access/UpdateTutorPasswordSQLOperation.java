@@ -11,7 +11,7 @@ public class UpdateTutorPasswordSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "SELECT UpdatePasswordTutor(?, ?)";
+        return "SELECT UpdateTutorPassword(?, ?)";
     }
 
     @Override

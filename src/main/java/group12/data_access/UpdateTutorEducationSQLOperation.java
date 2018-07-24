@@ -12,7 +12,7 @@ public class UpdateTutorEducationSQLOperation extends SQLOperationTemplate {
     //TODO: function
     @Override
     String makeSQL() {
-        return "SELECT UpdateEducationTutor(?, ?)";
+        return "SELECT UpdateTutorEducation(?, ?)";
     }
 
     @Override

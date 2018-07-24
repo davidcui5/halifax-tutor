@@ -13,7 +13,7 @@ public class UpdateTutorCardSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "SELECT UpdateCardTutor(?, ?)";
+        return "SELECT UpdateTutorCard(?, ?, ?, ?, ?)";
     }
 
     @Override

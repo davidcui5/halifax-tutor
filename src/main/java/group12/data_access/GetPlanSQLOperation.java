@@ -41,5 +41,9 @@ public class GetPlanSQLOperation extends SQLOperationTemplate{
         return plan;
     }
 
+    @Override
+    ResultSet execute(PreparedStatement ps) throws SQLException {
+        return ps.executeQuery();
+    }
 }
 

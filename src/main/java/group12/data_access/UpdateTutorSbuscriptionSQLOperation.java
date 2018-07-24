@@ -13,7 +13,7 @@ public class UpdateTutorSbuscriptionSQLOperation extends SQLOperationTemplate {
     //TODO: function
     @Override
     String makeSQL() {
-        return "SELECT UpdateSbuscriptionTutor(?, ?)";
+        return "SELECT UpdateTutorSbuscription(?, ?)";
     }
 
     @Override

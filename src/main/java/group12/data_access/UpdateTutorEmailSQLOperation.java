@@ -11,7 +11,7 @@ public class UpdateTutorEmailSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "SELECT UpdateEmailTutor(?, ?)";
+        return "SELECT UpdateTutorEmail(?, ?)";
     }
 
     @Override

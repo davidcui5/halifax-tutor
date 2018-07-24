@@ -12,7 +12,7 @@ public class UpdateTutorAvailabilitySQLOperation extends SQLOperationTemplate {
     //TODO: function
     @Override
     String makeSQL() {
-        return "SELECT UpdateAvailabilityTutor(?, ?)";
+        return "SELECT UpdateTutorAvailability(?, ?)";
     }
 
     @Override

@@ -13,7 +13,7 @@ public class UpdateTutorExperienceSQLOperation extends SQLOperationTemplate {
     //TODO: function
     @Override
     String makeSQL() {
-        return "SELECT UpdateExperienceTutor(?, ?)";
+        return "SELECT UpdateTutorExperience(?, ?)";
     }
 
     @Override
