@@ -4,10 +4,18 @@ import group12.data_access.Student;
 import group12.data_access.User;
 import group12.token_auth.IAccessToken;
 import group12.token_auth.JWTAccessToken;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StudentAuthStrategy implements IAuthenticationStrategy {
-    private static final String SEARCH_PAGE_URL = "html/search-tutor.html";
-    private static final String STUDENT_SETTING_PAGE_URL = "html/student-setting.html";
+
+    @Value("${login.bannedStudentGoTo}")
+    String bannedStudentGoTo;
+    @Value("${login.inactiveStudentGoTo}")
+    String inactiveStudentGoTo;
+    @Value("${login.activeAndUnbannedStudentGoTo}")
+    String activeAndUnbannedStudentGoTo;
 
     @Override
     public void authenticate(User student) {
@@ -35,13 +43,13 @@ public class StudentAuthStrategy implements IAuthenticationStrategy {
 
     private String makeUrl(boolean isActivated, boolean isBanned){
         if(isBanned){
-            return STUDENT_SETTING_PAGE_URL;
+            return bannedStudentGoTo;
         }
         else if(isActivated){
-            return SEARCH_PAGE_URL;
+            return activeAndUnbannedStudentGoTo;
         }
         else{
-            return STUDENT_SETTING_PAGE_URL;
+            return inactiveStudentGoTo;
         }
     }
 }

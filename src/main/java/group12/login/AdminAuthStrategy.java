@@ -4,9 +4,14 @@ import group12.data_access.Admin;
 import group12.data_access.User;
 import group12.token_auth.IAccessToken;
 import group12.token_auth.JWTAccessToken;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AdminAuthStrategy implements IAuthenticationStrategy {
-    private static final String SEARCH_PAGE_URL = "html/search-tutor.html";
+
+    @Value("${login.adminGoTo}")
+    String adminGoTo;
 
     @Override
     public void authenticate(User admin) {
@@ -18,7 +23,7 @@ public class AdminAuthStrategy implements IAuthenticationStrategy {
         else if(validAdmin.getPassword().equals(admin.getPassword())){
             AuthenticationResult result = AuthenticationResult.SUCCESS;
             String message = "Welcome Back Admin";
-            String url = SEARCH_PAGE_URL;
+            String url = adminGoTo;
             String token = makeToken(admin.getEmail());
             admin.setLoginResponse(new LoginResponse(result, message, url, token));
         }
