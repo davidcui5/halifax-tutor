@@ -25,7 +25,7 @@ public class UpdateStudentPhoneSQLOperation extends SQLOperationTemplate {
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        return rs.getInt(1);
+        return rs.getBoolean(1);
     }
 
     @Override
