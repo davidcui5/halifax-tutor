@@ -69,50 +69,34 @@ $(document).ready(function () {
     let results;
     let identity;
     let token = localStorage.getItem("token");
-    if (token === null) {
-        console.log("You are not logged in. Please log in to search for tutors.");
-        window.location.assign("../index.html");
-    }
-    let authData = { "token": token };
+    // if (token === null) {
+    //     console.log("You are not logged in. Please log in to search for tutors.");
+    //     window.location.assign("../index.html");
+    // }
+
+    let identityData = { "token": token };
     $.ajax({
-        url: location.origin + "/search/auth",
-        data: JSON.stringify(authData),
+        url: location.origin + "/search/identity",
+        data: JSON.stringify(identityData),
         type: "POST",
         contentType: "application/json",
         dataType: "json"
     }).done(function (data) {
-        let auth = data["success"];
+        success = data["success"];
         if (!success) {
-            console.log("You are not logged in. Please log in to search for tutors.");
+            alert("Something wrong with your identity.");
             window.location.assign("../index.html");
         } else {
-            let identityData = { "token": token };
-            $.ajax({
-                url: location.origin + "/search/identity",
-                data: JSON.stringify(identityData),
-                type: "POST",
-                contentType: "application/json",
-                dataType: "json"
-            }).done(function (data) {
-                success = data["success"];
-                if (!success) {
-                    alert("Something wrong with your identity.");
-                    window.location.assign("../index.html");
-                }
-                identity = data["type"];
-                if (identity === "student") {
-                    $("#settings").attr("href", "./student-setting.html");
-                } else if (identity === "tutor") {
-                    $("#settings").attr("href", "./tutor-setting.html");
-                } else {
-                    $("#settings").attr("href", "./admin-setting.html");
-                }
-            }).fail(function (xhr, status, errorThrown) {
-                alert("Sorry, there was a problem!");
-                console.log("Error: " + errorThrown);
-                console.log("Status: " + status);
-                console.dir(xhr);
-            });
+            identity = data["type"];
+            if (identity === "student") {
+                $("#settings").attr("href", "./student-setting.html");
+            } else if (identity === "tutor") {
+                $("#settings").attr("href", "./tutor-setting.html");
+            } else if (identity === 'admin') {
+                $("#settings").attr("href", "./admin-setting.html");
+            } else {
+                $("#settings").attr("href", "?");
+            }
         }
     }).fail(function (xhr, status, errorThrown) {
         alert("Sorry, there was a problem!");
@@ -120,8 +104,6 @@ $(document).ready(function () {
         console.log("Status: " + status);
         console.dir(xhr);
     });
-
-
 
     $("form").submit(function (event) {
         event.preventDefault();
