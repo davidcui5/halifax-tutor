@@ -14,6 +14,7 @@ import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 public class DBDAOFunctionsTest {
+    /*
     static ClassPathXmlApplicationContext context;
     static MysqlDAOImpl dbda;
 
@@ -54,6 +55,8 @@ public class DBDAOFunctionsTest {
         int actual = dbda.countOfUserWithPhone(MockData.getNewPhone());
         assertTrue(actual == 0);
     }*/
+
+    /*
 
     @Test
     public void testIsPhoneNewWithUsedPhone() {
@@ -114,5 +117,6 @@ public class DBDAOFunctionsTest {
         boolean actual = dbda.deleteTutor(id);
         assertTrue(actual);
     }
+    */
 }
 

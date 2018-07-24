@@ -6,6 +6,7 @@ import group12.data_access.Tutor;
 import group12.email.IMailer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.UUID;
@@ -16,8 +17,9 @@ public class RegistrationService implements IRegister {
     private IMailer mailer;
     private static final String FAILURE = "FAILURE";
     private static final String SUCCESS = "SUCCESS";
-    private static final String CODE_EXPIRED = "Code Expired";
+    private static final String CODE_EXPIRED = "Code Expired Or Fake";
     private static final String LOGIN_PAGE_URL = "../index.html";
+    private static final String LOGIN_PAGE_PATH = "/index.html";
     private static Logger logger = LogManager.getLogger(RegistrationService.class);
 
     @Value("${email.sender}")
@@ -111,11 +113,16 @@ public class RegistrationService implements IRegister {
             if(dao.checkActivationCode(activationCode) == null){
                 return CODE_EXPIRED;
             }
-            dao.setStudentActivatedStatus(studentID, true);
+            if(dao.setStudentActivatedStatus(studentID, true)){
+                return SUCCESS + " Please Login at " + serverURL + LOGIN_PAGE_PATH;
+            }
+            else{
+                return FAILURE;
+            }
         } catch (Exception e) {
             logger.error(studentID + " " + activationCode, e);
         }
-        return LOGIN_PAGE_URL;
+        return FAILURE;
     }
 
     public String activateTutor(int tutorID, String activationCode) {
@@ -123,10 +130,15 @@ public class RegistrationService implements IRegister {
             if(dao.checkActivationCode(activationCode) == null){
                 return CODE_EXPIRED;
             }
-            dao.setTutorActivatedStatus(tutorID, true);
+            if(dao.setTutorActivatedStatus(tutorID, true)){
+                return SUCCESS + " Please Login at " + serverURL + LOGIN_PAGE_PATH;
+            }
+            else{
+                return FAILURE;
+            }
         } catch (Exception e) {
             logger.error(tutorID + " " + activationCode, e);
         }
-        return LOGIN_PAGE_URL;
+        return FAILURE;
     }
 }

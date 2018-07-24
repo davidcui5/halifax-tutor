@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>HalifaxTutor</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Zongming Liu">
+    <meta name="Description" content="The Login/Index page of HalifaxTutor">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/forgot-password.css">
+    <link rel="stylesheet" href="../css/tutor-profile.css">
+
+</head>
+<body onload="loadProfile();">
+<div id="header">
+    <h1>HalifaxTutor</h1>
+</div>
+<!--https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_three_columns-->
+
+<div class="row">
+    <div class="column" style="background-color:#ccc;">
+        <form action="search-tutor.html">
+            <input type="submit" value="Back To Search Results">
+        </form>
+        <br>
+
+        <table>
+            <tr>
+                <img style="width: 50%; height: 40%;" id="profile-pic">
+                <td><h4><p id="tutor-name"></p></h4></td>
+            </tr>
+        </table>
+
+        <br>
+        <h5 style="display: inline-block;">Rating:</h5> &nbsp;
+        <h5 style="display: inline-block;" id="tutor-rating"></h5>
+
+        <br><br>
+
+        <h5>Contact</h5>
+        <br>
+        <table>
+            <tr>
+                <td>
+                    <label style="display: inline-block;" for="phone"><b>Phone Number: </b></label> &nbsp;
+                    <p style="display: inline-block;" id="phone"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style="display: inline-block;" for="email"><b>Email:</b></label> &nbsp;
+                    <p style="display: inline-block;" id="email"></p>
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+    <div class="column" style="background-color:#bbb;">
+
+
+        <h5>Education</h5>
+        <table>
+            <tr>
+                <td><p id="education"></p></td>
+            </tr>
+        </table>
+        <br>
+        <h5>Experience</h5>
+        <table>
+            <tr>
+                <td><p id="experience"></p></td>
+            </tr>
+        </table>
+        <br>
+        <h5>Courses and Price</h5>
+            <table style="border: 1px solid black; border-collapse: collapse;" id="tutor-courses">
+                <tr>
+                    <th>Course&ensp;</th>
+                    <th>School&ensp;</th>
+                    <th>Price&ensp;</th>
+                </tr>
+            </table>
+        <br><br>
+        <h5>Availability</h5>
+
+        <table style="border: 1px solid black; border-collapse: collapse;" id="tutor-schedule">
+            <tr>
+                <th></th>
+                <th>Mon&ensp;</th>
+                <th>Tue&ensp;</th>
+                <th>Wed&ensp;</th>
+                <th>Thu&ensp;</th>
+                <th>Fri&ensp;</th>
+                <th>Sat&ensp;</th>
+                <th>Sun&ensp;</th>
+            </tr>
+        </table>
+    </div>
+    <div class="column" style="background-color:#ccc;">
+        <h5>Message</h5>
+        <form name="message">
+            <table>
+                <p style="color: green;  display: inline-block;">Your message will be sent to:</p> &nbsp;
+                <p style="color: green;  display: inline-block;" id="same-email"></p>
+                <tr>
+                    <td><textarea id="message-text" rows="4" cols="50"></textarea></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" name="send_message" onclick="sendMessage()" value="Send Message" /></td>
+                </tr>
+            </table>
+        </form>
+        <br><br>
+        <h5>Rating / Feedback</h5>
+        <form name="feedback">
+            <table>
+                <tr>
+                    <td>
+                        <br>
+                        <label for="rating">Rating:</label>
+                        <select id="rating">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="feedback-text">Feedback:</label>
+                        <textarea id="feedback-text" rows="4" cols="50"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" name="submit_button" onclick="submitFeedback()" value="Submit" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<div id="footer">
+    <p>&copy; Zongming Liu, David Cui, and Zaher Abd Ulmoula</p>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+<script src="../js/load-tutor-profile.js"></script>
+<script src="../js/tutor-profile-actions.js"></script>
+
+</body>
+
+</html>

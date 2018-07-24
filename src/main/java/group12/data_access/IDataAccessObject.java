@@ -1,5 +1,8 @@
 package group12.data_access;
 
+import group12.tutor_profile.TutorProfileForm;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public interface IDataAccessObject {
@@ -55,9 +58,33 @@ public interface IDataAccessObject {
 
     boolean updateTutorPassword(String tutorEmail, String newPassword);
 
-    boolean setCourseToTutor(int tutorId,int courseId,float price);
+    boolean setCourseToTutor(int tutorId, int courseId, float price);
 
     List<Course> getCoursesOFTutor(int tutorId);
 
     int numberOfCourse(String courseName);
+
+    boolean updateStudentEmail(String oldMail, String newMail);
+
+    boolean updateStudentPhone(String email, String newPhone);
+
+    int getStudentActivationStatus(String email);
+
+    TutorProfileForm getTutorProfile(int tutorId);
+
+    String[] getTutorInfo(int tutorId);
+
+    ArrayList<String[]> getTutorCourses(int tutorId);
+
+    int[] getTutorSchedule(int tutorId);
+
+    boolean saveRating(int tutorId,String rating);
+
+    boolean saveFeedback(String studentEmail, TutorProfileForm tutorProfileForm);
+
+    float calculateAverageRating(int tutorId,String rating);
+
+    String[] getCourseFromCourseId(String courseId);
+
+    boolean increaseTotalRating(int tutorId, float ratingCount);
 }
