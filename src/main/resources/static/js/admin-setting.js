@@ -188,13 +188,16 @@ $(document).ready(function () {
                 $("#studentReviews").html("<p>Student Email Not Found</p>");
             }
             else{
+                $("#studentReviews").html("");
                 var result =    "<table><tr><td>ID: </td><td>" + data.studentID + "</td></tr>" +
                     "<tr><td>Email: </td><td>" + data.studentEmail + "</td></tr>" +
                     "<tr><td>ReviewID</td><td>Review</td></tr>";
 
-                for (var i = 0; i < data.reviews.length; i++) {
-                    result += "<tr><td>" + data.reviews[i].reviewID + "</td>" +
-                        "<td>" + data.reviews[i].reviewText + "</td></tr>";
+                if(data.reviews != null){
+                    for (var i = 0; i < data.reviews.length; i++) {
+                        result += "<tr><td>" + data.reviews[i].reviewID + "</td>" +
+                            "<td>" + data.reviews[i].reviewText + "</td></tr>";
+                    }
                 }
                 result += "</table>";
                 $("#studentReviews").html(result);
@@ -220,17 +223,20 @@ $(document).ready(function () {
             type: "POST",
             dataType: "json"
         }).done(function (data) {
-            if(data.tutorID==-1){
+            if(data.tutorID < 0){
                 $("#tutorReviews").html("<tr><td>Tutor Email Not Found</td></tr>");
             }
             else{
+                $("#tutorReviews").html("");
                 var result =    "<table><tr><td>ID: </td><td>" + data.tutorID + "</td></tr>" +
                     "<tr><td>Email: </td><td>" + data.tutorEmail + "</td></tr>" +
                     "<tr><td>ReviewID</td><td>Review</td></tr>";
 
-                for (var i = 0; i < data.reviews.length; i++) {
-                    result += "<tr><td>" + data.reviews[i].reviewID + "</td>" +
-                        "<td>" + data.reviews[i].reviewText + "</td></tr>";
+                if(data.reviews != null){
+                    for (var i = 0; i < data.reviews.length; i++) {
+                        result += "<tr><td>" + data.reviews[i].reviewID + "</td>" +
+                            "<td>" + data.reviews[i].reviewText + "</td></tr>";
+                    }
                 }
                 result += "</table>";
                 $("#tutorReviews").html(result);

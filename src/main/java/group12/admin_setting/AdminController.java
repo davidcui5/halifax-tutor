@@ -64,11 +64,8 @@ public class AdminController {
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
             String email = decoder.decodeToken(body.get("token"));
-            logger.log(Level.INFO,email);
-            logger.log(Level.INFO,body.get("password"));
             IEncryptor encryptor = new SimpleMD5Encryptor();
             String password = encryptor.encrypt(body.get("password"));
-            logger.log(Level.INFO,password);
             if(dao.setAdminPassword(email,password)){
                 return SUCCESS;
             }
@@ -89,10 +86,6 @@ public class AdminController {
             float pTwo = Float.parseFloat(body.get("priceTwo"));
             float pThree = Float.parseFloat(body.get("priceThree"));
             float pFour = Float.parseFloat(body.get("priceFour"));
-            logger.log(Level.INFO,pOne);
-            logger.log(Level.INFO,pTwo);
-            logger.log(Level.INFO,pThree);
-            logger.log(Level.INFO,pFour);
             if(dao.setSubPlanPrice(1,pOne) == Boolean.FALSE){
                 return FAILURE;
             }
@@ -118,7 +111,6 @@ public class AdminController {
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
             int id = Integer.parseInt(body.get("studentID"));
-            logger.log(Level.INFO,id);
             if(dao.setStudentBanStatus(id, true)){
                 return SUCCESS;
             }
@@ -136,7 +128,6 @@ public class AdminController {
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
             int id = Integer.parseInt(body.get("studentID"));
-            logger.log(Level.INFO,id);
             if(dao.setStudentBanStatus(id, false)){
                 return SUCCESS;
             }
@@ -155,7 +146,6 @@ public class AdminController {
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
             int id = Integer.parseInt(body.get("tutorID"));
-            logger.log(Level.INFO,id);
             if(dao.setTutorBanStatus(id, true)){
                 return SUCCESS;
             }
@@ -173,7 +163,6 @@ public class AdminController {
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
             int id = Integer.parseInt(body.get("tutorID"));
-            logger.log(Level.INFO,id);
             if(dao.setTutorBanStatus(id, false)){
                 return SUCCESS;
             }
@@ -191,7 +180,6 @@ public class AdminController {
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
             String email = body.get("email");
-            logger.log(Level.INFO,email);
 
             SQLOperationTemplate op = new GetStudentSQLOperation(email);
             Student s = (Student)op.executeMysqlQuery();
@@ -201,7 +189,6 @@ public class AdminController {
             }
 
             int sID = s.getStudentID();
-            logger.log(Level.INFO,sID);
 
             List<ReviewDTO> reviews = dao.getReviewsMadeByStudent(sID);
 
@@ -217,7 +204,6 @@ public class AdminController {
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
             String email = body.get("email");
-            logger.log(Level.INFO,email);
 
             SQLOperationTemplate op = new GetTutorSQLOperation(email);
             Tutor t = (Tutor)op.executeMysqlQuery();
@@ -241,7 +227,6 @@ public class AdminController {
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
             int id = Integer.parseInt(body.get("reviewID"));
-            logger.log(Level.INFO,id);
             if(dao.deleteReviewByID(id)){
                 return SUCCESS;
             }
