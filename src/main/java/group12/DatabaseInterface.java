@@ -44,7 +44,9 @@ public interface DatabaseInterface {
 
     int[] getTutorSchedule(int tutorId);
 
-    boolean saveFeedback(int tutorId,String rating);
+    boolean saveRating(int tutorId,String rating);
+
+    boolean saveFeedback(String studentEmail, TutorProfileForm tutorProfileForm);
 
     float calculateAverageRating(int tutorId,String rating);
 

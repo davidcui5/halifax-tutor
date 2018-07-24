@@ -16,8 +16,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 @Transactional
 @Component
@@ -610,7 +613,7 @@ public class DBDAO implements DatabaseInterface {
     }
 
     @Override
-    public boolean saveFeedback(int tutorId ,String rating) {
+    public boolean saveRating(int tutorId ,String rating) {
         String sql = "UPDATE Tutor SET Rating=? WHERE ID=?";
         Connection con = null;
         PreparedStatement ps;
@@ -621,6 +624,44 @@ public class DBDAO implements DatabaseInterface {
             ps = con.prepareStatement(sql);
             ps.setString(1, String.valueOf(averageRating));
             ps.setString(2, String.valueOf(tutorId));
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                    return true;
+                } catch (SQLException ex) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean saveFeedback(String studentEmail, TutorProfileForm tutorProfileForm) {
+        String sql = "INSERT INTO Review (StudentID, Text, Date, Rate, TutorID) VALUES (?,?,?,?,?)";
+        Connection con = null;
+        PreparedStatement ps;
+
+        //https://www.mkyong.com/java/java-how-to-get-current-date-time-date-and-calender/
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String currentDate = dateFormat.format(date);
+
+        int studentID = getStudentId(studentEmail);
+        try {
+            con = dataSource.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, String.valueOf(studentID));
+            ps.setString(2, String.valueOf(tutorProfileForm.getFeedback()));
+            ps.setString(3, String.valueOf(currentDate));
+            ps.setString(4, String.valueOf(tutorProfileForm.getRating()));
+            ps.setString(5, String.valueOf(tutorProfileForm.getId()));
+
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
@@ -706,4 +747,6 @@ public class DBDAO implements DatabaseInterface {
         }
         return true;
     }
+
+
 }
