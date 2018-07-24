@@ -189,3 +189,10 @@ database.properties
 
 # logs
 logs/
+
+# visual studio code generated files
+.classpath
+.factorypath
+.project
+.settings/
+.vscode/

@@ -12,30 +12,56 @@
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
 
-    <!--RegistrationController beans START-->
-    <bean id="registrationService" class="group12.registration.RegistrationService">
+    <bean id="searchService" class="group12.search.SearchService">
+    </bean>
+
+    <!--ForgotPasswordController beans START-->
+    <bean id="forgotPasswordService" class="group12.ForgotPassword.ForgotPasswordService">
         <property name="db" ref="DBDAO"/>
         <property name="mailer" ref="mailer"/>
     </bean>
 
-    <bean id="DBDAO" class="group12.DBDAO">
+    <!--ForgotPasswordController beans ENDT-->
+
+    <!--ForgotPasswordController beans START-->
+    <bean id="tutorProfileService" class="group12.tutor_profile.TutorProfileService">
+        <property name="db" ref="DBDAO"/>
+        <property name="mailer" ref="mailer"/>
+    </bean>
+
+    <!--ForgotPasswordController beans ENDT-->
+
+    <bean id="studentSetting" class="group12.student_setting.StudentSettingService">
+        <property name="db" ref="DBDAO"/>
+        <property name="mailer" ref="mailer"/>
+    </bean>
+
+    <!--RegistrationController beans START-->
+    <bean id="registrationService" class="group12.registration.RegistrationService">
+        <property name="dao" ref="DBDAO"/>
+        <property name="mailer" ref="mailer"/>
+    </bean>
+
+    <bean id="encryptor" class="group12.encryption.SimpleMD5Encryptor">
+    </bean>
+
+    <bean id="DBDAO" class="group12.data_access.MysqlDAOImpl">
         <property name="dataSource" ref="dataSource"/>
+<!--
+        <property name="dataSource" ref="dataSource"/>
+-->
     </bean>
     <!--RegistrationController beans ENDT-->
 
-    <!--LoginController beans START-->
-    <bean id="loginController" class="group12.login.LoginController">
-        <constructor-arg ref="authService"/>
+    <bean id="student" class="group12.login.StudentAuthStrategy">
     </bean>
 
-    <bean id="authService" class="group12.login.AuthenticationService">
-        <constructor-arg ref="mysqlAuthDAO"/>
+    <bean id="tutor" class="group12.login.TutorAuthStrategy">
     </bean>
 
-    <bean id="mysqlAuthDAO" class="group12.login.MysqlAuthDAO">
-        <constructor-arg ref="dataSource"/>
+    <bean id="admin" class="group12.login.AdminAuthStrategy">
     </bean>
-    <!--LoginController beans END-->
+
 
     <!--DataSource bean is shared-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -46,7 +72,7 @@
     </bean>
 
     <bean id="mailer" class="group12.email.SpringMailer">
-        <property name="mailSender" ref="mailSender"/>
+            <property name="mailSender" ref="mailSender"/>
     </bean>
 
     <!-- SET default mail properties -->

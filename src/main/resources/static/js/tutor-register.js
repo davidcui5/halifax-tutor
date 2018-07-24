@@ -9,6 +9,7 @@ $(document).ready(function () {
         let firstName = $("#user-first-name").val();
         let lastName = $("#user-last-name").val();
         let creditCardNumber = $("#user-credit-card").val();
+        let creditCardHolder = $("#user-credit-card-holder").val();
         let expireDate = $("#expire-date").val();
         let securityCode = $("#security-code").val();
         securityCode = parseInt(securityCode, 10);
@@ -23,8 +24,9 @@ $(document).ready(function () {
             "phoneNumber": phoneNumber,
             "firstName": firstName,
             "lastName": lastName,
-            "creditCardNumber": creditCardNumber,
-            "expireDate": expireDate,
+            "creditCardNum": creditCardNumber,
+            "creditCardHolder": creditCardHolder,
+            "creditCardExpiryDate": expireDate,
             "securityCode": securityCode
         };
 
@@ -35,13 +37,12 @@ $(document).ready(function () {
             contentType: "application/json",
             dataType: "json"
         }).done(function (data) {
-            if (data.result === "Success") {
-                alert("registration succeed!");
-                window.location.replace("../index.html");
+            if (data.result === "SUCCESS") {
+                alert("Registration Success! Check mailbox for Activation Email");
+                window.location.replace(data.detail);
             } else {
-                alert(data.details);
+                alert(data.detail);
             }
-
         }).fail(function (xhr, status, errorThrown) {
 
         });

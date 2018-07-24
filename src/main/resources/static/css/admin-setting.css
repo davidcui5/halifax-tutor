@@ -1,0 +1,55 @@
+
+html, body {
+    background: #f1f1f1;
+    font-family: 'Merriweather', sans-serif;
+}
+.tablerow{
+    padding: 10px 0 10px 0;
+}
+.tablecolumn{
+    padding: 5px;
+}
+.innertab{
+    margin: 20px;
+}
+
+
+.btn{
+    margin: 5px;
+}
+
+.navbar-header, a{
+    font-size: 15px;
+    color: #f1f1f1;
+}
+
+.nav a{
+    color: #f1f1f1;
+}
+a:hover{
+    color: #558FCA;
+}
+.navbar-header a:hover{
+    color: #f1f1f1;
+}
+label{
+    font-size: 13px;
+    font-weight: normal;
+}
+h4{
+    font-size: 16px;
+    display : inline;
+}
+input{
+    padding: 5px;
+    border-width: 1px;
+    border-color: white;
+    border-radius: 8px;
+}
+.col-sm-6{
+    padding: 0 12% 0 12%;
+
+}
+.container{
+    padding-top: 80px;
+}

@@ -1,7 +1,5 @@
 package group12.token_auth;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
@@ -15,12 +13,12 @@ public class JWTAccessTokenTest {
 
     @Before
     public void testSetup() {
-        this.accessToken = new JWTAccessToken();
+        this.accessToken = JWTAccessToken.getInstance();
     }
 
     @Test
     public void testTokenWithTrueEmail() {
-        String userEmail = "zongming.liu@dal.ca";
+        String userEmail = "newstu5@dal.ca";
         String token = this.accessToken.generateToken(userEmail);
 
         assertEquals(userEmail, this.accessToken.decodeToken(token));
