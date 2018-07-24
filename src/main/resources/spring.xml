@@ -44,6 +44,16 @@
     </bean>
     <!--RegistrationController beans ENDT-->
 
+    <bean id="student" class="group12.login.StudentAuthStrategy">
+    </bean>
+
+    <bean id="tutor" class="group12.login.TutorAuthStrategy">
+    </bean>
+
+    <bean id="admin" class="group12.login.AdminAuthStrategy">
+    </bean>
+
+
     <!--DataSource bean is shared-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
