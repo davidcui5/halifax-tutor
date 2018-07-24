@@ -652,7 +652,9 @@ public class DBDAO implements DatabaseInterface {
         Date date = new Date();
         String currentDate = dateFormat.format(date);
 
-        int studentID = getStudentId(studentEmail);
+//        int studentID = getStudentId(studentEmail); TODO: Remove
+        int studentID = 869;
+
         try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(sql);

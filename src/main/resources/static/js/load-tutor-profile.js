@@ -22,7 +22,16 @@ function loadProfile() {
             document.getElementById("same-email").innerHTML = data.email;
             document.getElementById("education").innerHTML = data.education;
             document.getElementById("experience").innerHTML = data.experience;
-            document.getElementById("tutor-rating").innerHTML = data.rating;
+            document.getElementById("tutor-rating").innerHTML = data.rating.substring(0, 5);
+            var rating = parseFloat(data.rating);
+            if(rating <= 2)
+                document.getElementById("tutor-rating").style.color = "red"
+            else if (rating > 2 && rating <= 3.5 )
+                document.getElementById("tutor-rating").style.color = "yellow";
+            else if (rating > 3.5)
+                document.getElementById("tutor-rating").style.color = "green"
+
+
 
             var courseInfo =  data.courseList;
             var courseList = document.getElementById("tutor-courses");
