@@ -11,26 +11,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ConnectionFactory {
 
-    private static ApplicationContext context;
-
-    private static BasicDataSource dataSource;
-
-    public void setDataSource(BasicDataSource theDataSource) {
-        dataSource = theDataSource;
+    private interface Singleton {
+        ConnectionFactory INSTANCE = new ConnectionFactory();
     }
 
-    public BasicDataSource getDataSource() {
-        return dataSource;
-    }
+    private final BasicDataSource dataSource;
 
+    private ConnectionFactory() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        dataSource = (BasicDataSource) context.getBean("dataSource");
+    }
 
     public static Connection getDatabaseConnection() throws SQLException {
-        if (context == null) {
-            context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        }
-        if (dataSource == null) {
-            dataSource = (BasicDataSource) context.getBean("dataSource");
-        }
-        return dataSource.getConnection();
+        return Singleton.INSTANCE.dataSource.getConnection();
     }
 }

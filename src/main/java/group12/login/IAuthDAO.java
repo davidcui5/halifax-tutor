@@ -1,9 +1,9 @@
 package group12.login;
 
+import group12.data_access.*;
+
 public interface IAuthDAO {
-
-    UserDTO getStudentByEmail(String email);
-    UserDTO getTutorByEmail(String email);
-    UserDTO getAdminByEmail(String email);
-
+    Student getStudentByEmail(String email);
+    Tutor getTutorByEmail(String email);
+    Admin getAdminByEmail(String email);
 }

@@ -33,11 +33,6 @@ public class LoginForm {
     //this is to make logging easier
     @Override
     public String toString() {
-        if(type != null && email != null && password != null){
-            return "Login Type: " + type + " Email: " + email + " Password " + password;
-        }
-        else{
-            return "Invalid Login Form: Contains NULL";
-        }
+        return "Login Type: " + type + " Email: " + email + " Password " + password;
     }
 }

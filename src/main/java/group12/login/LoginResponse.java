@@ -2,32 +2,39 @@ package group12.login;
 
 public class LoginResponse {
 
-    private String result; //SUCCESS or FAILURE
-    private String detail; //failure reason
+    private AuthenticationResult result; //SUCCESS or FAILURE
+    private String message; //message
     private String url; //url to redirect to
     private String token; //access token
 
-    public LoginResponse(){
-        result = "";
-        detail = "";
+    public LoginResponse(AuthenticationResult result, String message){
+        this.result = result;
+        this.message = message;
         url = "";
         token = "";
     }
 
-    public void setResult(String result) {
+    public LoginResponse(AuthenticationResult result, String message, String url, String token){
+        this.result = result;
+        this.message = message;
+        this.url = url;
+        this.token = token;
+    }
+
+    public void setResult(AuthenticationResult result) {
         this.result = result;
     }
 
-    public String getResult() {
+    public AuthenticationResult getResult() {
         return result;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getMessage() {
+        return message;
     }
 
     public void setUrl(String url) {
@@ -48,6 +55,6 @@ public class LoginResponse {
 
     @Override
     public String toString() {
-        return "Login Result: " + result + " Detail: " + detail + " Url: " + url + " Token: " + token;
+        return "Login Result: " + result + " Message: " + message + " Url: " + url + " Token: " + token;
     }
 }
