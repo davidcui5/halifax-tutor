@@ -31,13 +31,13 @@ public class RegistrationController {
         return response;
     }
 
-    @RequestMapping(value = "/student/studentid/{studentid}/activation/{activationcode}/")
+    @GetMapping(value = "/student/studentid/{studentid}/activation/{activationcode}/")
     public String activateStudent(@PathVariable int studentid, @PathVariable String activationcode) {
         String response = registerService.activateStudent(studentid, activationcode);
         return response;
     }
 
-    @RequestMapping(value = "/tutor/tutorid/{tutorid}/activation/{activationcode}/")
+    @GetMapping(value = "/tutor/tutorid/{tutorid}/activation/{activationcode}/")
     public String activateTutor(@PathVariable int tutorid, @PathVariable String activationcode) {
         String response = registerService.activateTutor(tutorid, activationcode);
         return response;
