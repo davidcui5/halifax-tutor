@@ -56,6 +56,7 @@ function generateTutorProfile(tutorProfile) {
     viewProfileElement.addEventListener("click", function () {
         localStorage.setItem('tutor-public-id', tutorPublicId);
         console.log(tutorPublicId);
+//        window.location.assign("../");
     });
     element.appendChild(viewProfileElement);
 
@@ -70,7 +71,7 @@ $(document).ready(function () {
     let token = localStorage.getItem("token");
     if (token === null) {
         console.log("You are not logged in. Please log in to search for tutors.");
-        // window.location.assign("../index.html");
+        window.location.assign("../index.html");
     }
     let identityData = { "token": token };
     $.ajax({
