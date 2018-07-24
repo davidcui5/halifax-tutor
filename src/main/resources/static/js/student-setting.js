@@ -88,6 +88,8 @@ $(document).ready(function () {
     });
 
     $("#Cemail").submit(function (event) {
+        if (!validateEmail())
+            return;
         event.preventDefault();
 
         let email = $("#email").val();
@@ -115,6 +117,8 @@ $(document).ready(function () {
     });
 
     $("#Cphone").submit(function (event) {
+        if (!validatePhone())
+            return;
         event.preventDefault();
 
         let phone = $("#phone").val();
