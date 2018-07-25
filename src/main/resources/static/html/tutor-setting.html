@@ -21,9 +21,9 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item link-3"><a href="#" ><span class="glyphicon glyphicon-search"></span>Search</a></li>
-                <li class="nav-item link-3"><a href="#">Setting</a></li>
-                <li class="nav-item link-3"><a href="#">Sign out</a></li>
+                <li class="nav-item"><a href="#" ><span class="glyphicon glyphicon-search"></span>Search</a></li>
+                <li class="nav-item"><a href="#">Setting</a></li>
+                <li class="nav-item"><a id="logout" href="../index.html">Sign out</a></li>
             </ul>
         </div>
     </div>
@@ -100,6 +100,14 @@
                                     <table class="innertab">
                                     <tr class="tablerow">
                                         <td class="tablecolumn">
+                                            <label for="cardname">Card Number</label>
+                                        </td>
+                                        <td>
+                                            <input type="number" id="cardname" placeholder="Card Holder Name" name="cardname" required>
+                                        </td>
+                                    </tr>
+                                    <tr class="tablerow">
+                                        <td class="tablecolumn">
                                             <label for="cardnum">Card Number</label>
                                         </td>
                                         <td>
@@ -126,7 +134,7 @@
                                     <input type="submit" class="btn btn-primary" id="cardS" value="Confirm">
                                 </form>
                                 <div class="remail">
-                                    <button class="btn btn-primary">Resend Confirmation Email</button>
+                                    <button id="resend" class="btn btn-primary">Resend Confirmation Email</button>
                                 </div>
                                 <div class="infoformr ">
                                     <ul class="list-inline pull-right">
@@ -146,18 +154,22 @@
                                         <br>
                                         <input class="btn btn-primary" type="button" id="photoS" value="Confirm">
                                     </div>
-                                    <div class="tablerow">
-                                        <h4>Change Education</h4>
-                                        <br><br>
-                                        <textarea id="education" placeholder="Education" name="education"></textarea>
-                                        <input class="btn btn-primary" type="button" id="educationS" value="Confirm" name="educationS">
-                                    </div>
-                                    <div class="tablerow">
-                                        <h4>Change Experience</h4>
-                                        <br><br>
-                                        <textarea id="experience" placeholder="Experience" name="experience"></textarea>
-                                        <input class="btn btn-primary" type="button" id="experienceS" value="Confirm" name="experienceS">
-                                    </div>
+                                    <form name="Cedu" class="tablerow">
+                                        <div>
+                                            <h4>Change Education</h4>
+                                            <br><br>
+                                            <textarea id="education" placeholder="Education" name="education"></textarea>
+                                            <input class="btn btn-primary" type="button" id="educationS" value="Confirm" name="educationS">
+                                        </div>
+                                    </form>
+                                    <form name="Cexperience" class="tablerow">
+                                        <div>
+                                            <h4>Change Experience</h4>
+                                            <br><br>
+                                            <textarea id="experience" placeholder="Experience" name="experience"></textarea>
+                                            <input class="btn btn-primary" type="button" id="experienceS" value="Confirm" name="experienceS">
+                                        </div>
+                                    </form>
                                 </form>
                             </div>
                             <div class="col-sm-6">
@@ -214,124 +226,123 @@
                                 </div>
                                 <!--Change availability-->
                                 <div>
-                                    <div class="tablerow">
-                                        <h4>Change Availability</h4>
-                                        <br>
-                                        <div id="availability">
-                                                <table>
-                                                    <tr>
-                                                        <td>
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <label>S</label>
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <label>M</label>
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <label>T</label>
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <label>W</label>
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <label>T</label>
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <label>F</label>
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <label>S</label>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td  class="tablecolumn">
-                                                            <label>Morning:</label>
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tablecolumn">
-                                                            <label>Noon:</label>
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tablecolumn">
-                                                            <label>Night:</label>
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                        <td class="tablecolumn">
-                                                            <input type="checkbox" name="check">
-                                                        </td>
-                                                    </tr>
+                                    <form id="Cavailability" name="Cavailability">
+                                        <div class="tablerow">
+                                            <h4>Change Availability</h4>
+                                            <br>
+                                            <div id="availability">
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <label>S</label>
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <label>M</label>
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <label>T</label>
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <label>W</label>
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <label>T</label>
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <label>F</label>
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <label>S</label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td  class="tablecolumn">
+                                                                <label>Morning:</label>
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="A1" id="A1">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="A2" id="A2">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="A3" id="A3">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="A4" id="A4">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="A5" id="A5">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="A6" id="A6">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="A7" id="A7">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="tablecolumn">
+                                                                <label>Noon:</label>
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="B1" id="B1">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="B2" id="B2">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="B3" id="B3">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="B4" id="B4">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="B5" id="B5">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="B6" id="B6">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="B7" id="B7">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="tablecolumn">
+                                                                <label>Night:</label>
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="C1" id="C1">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="C2" id="C2">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="C3" id="C3">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="C4" id="C4">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="C5" id="C5">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="C6" id="C6">
+                                                            </td>
+                                                            <td class="tablecolumn">
+                                                                <input type="checkbox" name="C7" id="C7">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                            </div>
 
-                                                </table>
+                                            <div class="tablecolumn">
+                                                <input type="button" class="btn btn-primary" id="availabilityS" value="Confirm">
+                                            </div>
                                         </div>
-
-                                        <div class="tablecolumn">
-                                            <input type="button" class="btn btn-primary" id="availabilityS" value="Confirm">
-                                        </div>
-
-                                    </tr>
-                                    </div>
+                                    </form>
                                 </div>
                                 <ul class="list-inline pull-right">
                                     <li><button type="button" class="Bbtn prev-step">Previous</button></li>
@@ -345,7 +356,7 @@
                             <div>
                                 <h4>Current Subscription:</h4>
                                 <div id="currentSubscription" class="tablerow"></div>
-                                <button class="btn btn-danger">Cancel Current Subscription</button>
+                                <button id="cancel" class="btn btn-danger">Cancel Current Subscription</button>
                                 <div id="renew" class="tablerow">
                                     <h4>Select Your New Plan</h4>
                                     <!--pricing-->
@@ -356,7 +367,7 @@
                                                     <div class="pricing_item">
                                                         <h3 class="pricing_title">1 Month</h3>
                                                         <span class="pricing_details">$19.99</span>
-                                                        <button class="pricing_button" href="#">Select Plan</button>
+                                                        <button id="plan1" class="pricing_button" href="#">Select Plan</button>
                                                     </div>
                                                 </div>
                                             </tr>
@@ -365,7 +376,7 @@
                                                     <div class="pricing_item">
                                                         <h3 class="pricing_title">3 Month</h3>
                                                         <span class="pricing_details">$49.99</span>
-                                                        <button class="pricing_button" href="#">Select Plan</button>
+                                                        <button id="plan2"class="pricing_button" href="#">Select Plan</button>
                                                     </div>
                                                 </div>
                                             </tr>
@@ -374,7 +385,7 @@
                                                     <div class="pricing_item">
                                                         <h3 class="pricing_title">6 Month</h3>
                                                         <span class="pricing_details">$89.99</span>
-                                                        <button class="pricing_button" href="#">Select Plan</button>
+                                                        <button id="plan3"class="pricing_button" href="#">Select Plan</button>
                                                     </div>
                                                 </div>
                                             </tr>
@@ -383,7 +394,7 @@
                                                     <div class="pricing_item">
                                                         <h3 class="pricing_title">12 Month</h3>
                                                         <span class="pricing_details">$159.00</span>
-                                                        <button class="pricing_button" href="#">Select Plan</button>
+                                                        <button id="plan4"class="pricing_button" href="#">Select Plan</button>
                                                     </div>
                                                 </div>
                                             </tr>
