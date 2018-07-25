@@ -432,6 +432,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
         return tutorSchedule;
     }
 
+
     @Override
     public boolean saveRating(int tutorId, String rating) {
         String sql = "UPDATE Tutor SET Rating=? WHERE ID=?";
@@ -445,6 +446,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
             ps.setString(1, String.valueOf(averageRating));
             ps.setString(2, String.valueOf(tutorId));
             ps.executeUpdate();
+
             assert (ps != null);
             ps.close();
         } catch (SQLException ex) {
@@ -452,6 +454,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
         } finally {
             if (con != null) {
                 try {
+
 
                     assert (con != null);
                     con.close();
@@ -487,6 +490,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
             ps.setString(5, String.valueOf(tutorProfileForm.getId()));
 
             ps.executeUpdate();
+
             assert (ps != null);
             ps.close();
         } catch (SQLException ex) {
@@ -494,6 +498,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
         } finally {
             if (con != null) {
                 try {
+
                     assert (con != null);
                     con.close();
                     return true;
@@ -536,6 +541,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
             e.printStackTrace();
         } finally {
             try {
+
                 assert (rs != null);
                 assert (ps != null);
                 assert (con != null);
@@ -558,6 +564,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
         try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
+
             ps.setString(1, String.valueOf(ratingCount + 1));
             ps.setString(2, String.valueOf(tutorId));
             ps.executeUpdate();
@@ -568,6 +575,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
         } finally {
             if (con != null) {
                 try {
+
                     assert (con != null);
                     con.close();
                     return true;

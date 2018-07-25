@@ -114,6 +114,7 @@ public class RegistrationService implements IRegister {
                 return CODE_EXPIRED;
             }
             if(dao.setStudentActivatedStatus(studentID, true)){
+
                 return "redirect:/index.html";
             }
             else{
@@ -131,6 +132,7 @@ public class RegistrationService implements IRegister {
                 return CODE_EXPIRED;
             }
             if(dao.setTutorActivatedStatus(tutorID, true)){
+
                 return "redirect:/index.html";
             }
             else{

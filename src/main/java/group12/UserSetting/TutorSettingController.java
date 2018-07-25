@@ -64,6 +64,7 @@ public class TutorSettingController {
         logger.log(Level.INFO,body.get("email"));
         String newemail =body.get("email");
         if (tutorSettingDAO.setTutorEmail(email,newemail)){
+
             return SUCCESS;
         }else {
             return FAILURE;
@@ -208,24 +209,24 @@ public class TutorSettingController {
 //            return FAILURE;
 //        }
 //    }
-    @PostMapping(path = "/tutor/setting/postplan")
-    public Map<String,Object> SendPlan() {
-        Map<String, Object> map = new HashMap<String, Object>();
-        GetPlanSQLOperation getPlanSQLOperation1 = new GetPlanSQLOperation(1);
-        Subscribe_Plan plan1 = (Subscribe_Plan) getPlanSQLOperation1.executeMysqlQuery();
-        GetPlanSQLOperation getPlanSQLOperation2 = new GetPlanSQLOperation(2);
-        Subscribe_Plan plan2 = (Subscribe_Plan) getPlanSQLOperation2.executeMysqlQuery();
-        GetPlanSQLOperation getPlanSQLOperation3 = new GetPlanSQLOperation(3);
-        Subscribe_Plan plan3 = (Subscribe_Plan) getPlanSQLOperation3.executeMysqlQuery();
-        GetPlanSQLOperation getPlanSQLOperation4 = new GetPlanSQLOperation(4);
-        Subscribe_Plan plan4 = (Subscribe_Plan) getPlanSQLOperation4.executeMysqlQuery();
-
-        map.put("plan1", plan1);
-        map.put("plan2", plan2);
-        map.put("plan3", plan3);
-        map.put("plan4", plan4);
-
-        return map;
-    }
+//    @PostMapping(path = "/tutor/setting/postplan")
+//    public Map<String,Object> SendPlan() {
+//        Map<String, Object> map = new HashMap<String, Object>();
+//        GetPlanSQLOperation getPlanSQLOperation1 = new GetPlanSQLOperation(1);
+//        Subscribe_Plan plan1 = (Subscribe_Plan) getPlanSQLOperation1.executeMysqlQuery();
+//        GetPlanSQLOperation getPlanSQLOperation2 = new GetPlanSQLOperation(2);
+//        Subscribe_Plan plan2 = (Subscribe_Plan) getPlanSQLOperation2.executeMysqlQuery();
+//        GetPlanSQLOperation getPlanSQLOperation3 = new GetPlanSQLOperation(3);
+//        Subscribe_Plan plan3 = (Subscribe_Plan) getPlanSQLOperation3.executeMysqlQuery();
+//        GetPlanSQLOperation getPlanSQLOperation4 = new GetPlanSQLOperation(4);
+//        Subscribe_Plan plan4 = (Subscribe_Plan) getPlanSQLOperation4.executeMysqlQuery();
+//
+//        map.put("plan1", plan1);
+//        map.put("plan2", plan2);
+//        map.put("plan3", plan3);
+//        map.put("plan4", plan4);
+//
+//        return map;
+//    }
 
 }
