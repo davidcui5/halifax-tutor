@@ -62,19 +62,20 @@ $(document).ready(function() {
         localStorage.removeItem("token");
     });
 
-    $("#Cpassword").submit(function (event) {
+    $("#Cpassword-form").submit(function (event) {
         event.preventDefault();
-
-        if($("#pwd").val() != $("#Rpwd").val()){
-            alert("The two password fields didn't match.")
-            return;
-        }
 
         let password = $("#pwd").val();
         var ChangePwdData = {
             'token': token,
             'password': password
         };
+
+        // if($("#pwd").val() != $("#Rpwd").val()){
+        //     alert("The two password fields didn't match.");
+        //     return;
+        // }
+
 
         $.ajax({
             url: location.origin + "/tutor/setting/password",
@@ -83,19 +84,19 @@ $(document).ready(function() {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            if (data.result === "Success") {
+            if (data=== "Success") {
                 alert("Password change succeed!");
             } else {
-                alert(data.details);
+                alert(data);
             }
         }).fail(function (xhr, status, errorThrown) {
 
         });
     });
 
-    $("#Cemail").submit(function (event) {
+    $("#Cemail-form").submit(function (event) {
         event.preventDefault();
-        let email = $("#email").val();
+        var email = $("#email").val();
 
         var ChangeEmailData = {
             'token': token,
@@ -109,10 +110,10 @@ $(document).ready(function() {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            if (data.result === "Success") {
+            if (data === "SUCCESS") {
                 alert("Email change succeed!");
             } else {
-                alert(data.details);
+                alert(data);
             }
         }).fail(function (xhr, status, errorThrown) {
 
@@ -120,7 +121,7 @@ $(document).ready(function() {
 
     });
 
-    $("#Cphone").submit(function (event) {
+    $("#Cphone-form").submit(function (event) {
         event.preventDefault();
         let phone = $("#phone").val();
 
@@ -136,10 +137,10 @@ $(document).ready(function() {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            if (data.result === "Success") {
+            if (data === "Success") {
                 alert("Phone Number change succeed!");
             } else {
-                alert(data.details);
+                alert(data);
             }
         }).fail(function (xhr, status, errorThrown) {
 
@@ -147,11 +148,11 @@ $(document).ready(function() {
 
     });
 
-    $("#Ccard").submit(function (event) {
+    $("#Ccard-form").submit(function (event) {
         event.preventDefault();
         let creditCardNumber = $("#cardnum").val();
         let expireDate = $("#expire_date").val();
-        let securityCode = $("#phone").val();
+        let securityCode = $("#code").val();
         let cardname = $("#cardname").val();
         var ChangeCardData = {
             'token': token,
@@ -168,10 +169,10 @@ $(document).ready(function() {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            if (data.result === "Success") {
+            if (data=== "Success") {
                 alert("Card information change succeed!");
             } else {
-                alert(data.details);
+                alert(data);
             }
         }).fail(function (xhr, status, errorThrown) {
 
@@ -195,10 +196,10 @@ $(document).ready(function() {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            if (data.result === "Success") {
+            if (data === "Success") {
                 alert("Education change succeed!");
             } else {
-                alert(data.details);
+                alert(data);
             }
         }).fail(function (xhr, status, errorThrown) {
 
@@ -222,10 +223,10 @@ $(document).ready(function() {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            if (data.result === "Success") {
+            if (data === "Success") {
                 alert("Experience change succeed!");
             } else {
-                alert(data.details);
+                alert(data);
             }
         }).fail(function (xhr, status, errorThrown) {
 
@@ -290,10 +291,10 @@ $(document).ready(function() {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            if (data.result === "Success") {
+            if (data === "Success") {
                 alert("Availability change succeed!");
             } else {
-                alert(data.details);
+                alert(data);
             }
         }).fail(function (xhr, status, errorThrown) {
 
@@ -315,10 +316,10 @@ $(document).ready(function() {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            if (data.result === "Success") {
+            if (data === "Success") {
                 alert("Subscription Plan change succeed!");
             } else {
-                alert(data.details);
+                alert(data);
             }
         }).fail(function (xhr, status, errorThrown) {
 
@@ -340,10 +341,10 @@ $(document).ready(function() {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            if (data.result === "Success") {
+            if (data=== "Success") {
                 alert("Subscription Plan change succeed!");
             } else {
-                alert(data.details);
+                alert(data);
             }
         }).fail(function (xhr, status, errorThrown) {
 
@@ -365,10 +366,10 @@ $(document).ready(function() {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            if (data.result === "Success") {
+            if (data === "Success") {
                 alert("Subscription Plan change succeed!");
             } else {
-                alert(data.details);
+                alert(data);
             }
         }).fail(function (xhr, status, errorThrown) {
 
@@ -390,10 +391,10 @@ $(document).ready(function() {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            if (data.result === "Success") {
+            if (data === "Success") {
                 alert("Subscription Plan change succeed!");
             } else {
-                alert(data.details);
+                alert(data);
             }
         }).fail(function (xhr, status, errorThrown) {
 
@@ -416,10 +417,10 @@ $(document).ready(function() {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            if (data.result === "Success") {
+            if (data === "Success") {
                 alert("Confiem Email resend  succeed!");
             } else {
-                alert(data.details);
+                alert(data);
             }
         }).fail(function (xhr, status, errorThrown) {
 
@@ -440,32 +441,32 @@ $(document).ready(function() {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
-            if (data.result === "Success") {
+            if (data === "Success") {
                 alert("Subscroption cancel succeed!");
             } else {
-                alert(data.details);
+                alert(data);
             }
         }).fail(function (xhr, status, errorThrown) {
 
         });
     });
 
-    //get subscription info
-    $.ajax({
-        url: location.origin +"/tutor/setting/postplan",
-        // contentType: "application/json",
-        type: "GET",
-        dataType: "json"
-    }).done(function (data) {
-        if (data.result === "Success") {
-            //TODO POST TO HTML
-        } else {
-            alert(data.details);
-        }
-    }).fail(function (xhr, status, errorThrown) {
-
-    });
-
+    // //get subscription info
+    // $.ajax({
+    //     url: location.origin +"/tutor/setting/postplan",
+    //     // contentType: "application/json",
+    //     type: "POST",
+    //     dataType: "json"
+    // }).done(function (data) {
+    //     if (data.result === "Success") {
+    //         //TODO POST TO HTML
+    //     } else {
+    //         alert(data.details);
+    //     }
+    // }).fail(function (xhr, status, errorThrown) {
+    //
+    // });
+    //
 
 });
 
