@@ -20,7 +20,7 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "SELECT Tutor.ID, Tutor.PhotoUrl, Tutor.FirstName, Tutor.LastName, Tutor.Education, " +
+        return "SELECT Tutor.Banned, Tutor.ID, Tutor.PhotoUrl, Tutor.FirstName, Tutor.LastName, Tutor.Education, " +
                 " Tutor.Rating, TutorCourse.Price " +
                 "FROM TutorCourse " +
                 "JOIN Tutor on TutorCourse.TutorId = Tutor.ID " +
@@ -48,7 +48,8 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
         String education = rs.getString("Education");
         float rating = rs.getFloat("Rating");
         float price = rs.getFloat("Price");
-        return new TutorPublicInfo(id, photoURL, firstName, lastName, education, rating, price);
+        boolean banned = rs.getBoolean("Banned");
+        return new TutorPublicInfo(id, photoURL, firstName, lastName, education, rating, price, banned);
     }
 
     @Override
@@ -69,7 +70,9 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
             rs = ps.executeQuery();
             while (rs.next()) {
                 TutorPublicInfo curInfo = (TutorPublicInfo) extractResultSet(rs);
-                results.add(curInfo);
+                if (!curInfo.isBanned()) {
+                    results.add(curInfo);
+                }
             }
         } catch (SQLException e) {
             logger.error("SQL Error", e);
