@@ -114,7 +114,8 @@ public class RegistrationService implements IRegister {
                 return CODE_EXPIRED;
             }
             if(dao.setStudentActivatedStatus(studentID, true)){
-                return SUCCESS + " Please Login at " + serverURL + LOGIN_PAGE_PATH;
+
+                return "redirect:/index.html";
             }
             else{
                 return FAILURE;
@@ -131,7 +132,8 @@ public class RegistrationService implements IRegister {
                 return CODE_EXPIRED;
             }
             if(dao.setTutorActivatedStatus(tutorID, true)){
-                return SUCCESS + " Please Login at " + serverURL + LOGIN_PAGE_PATH;
+
+                return "redirect:/index.html";
             }
             else{
                 return FAILURE;
