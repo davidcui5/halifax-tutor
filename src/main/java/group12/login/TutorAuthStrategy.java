@@ -46,10 +46,10 @@ public class TutorAuthStrategy implements IAuthenticationStrategy{
             return bannedTutorGoTo;
         }
         else if(isActivated){
-            return inactiveTutorGoTo;
+            return activeAndUnbannedTutorGoTo;
         }
         else{
-            return activeAndUnbannedTutorGoTo;
+            return inactiveTutorGoTo;
         }
     }
 }
