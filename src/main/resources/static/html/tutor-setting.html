@@ -72,7 +72,7 @@
                         <div class="tab-pane active" role="tabpanel" id="step1">
                             <h3>Account Setting</h3><br>
                             <div class="col-sm-6">
-                                <form name="Cpassword" class="tablerow" onsubmit="return validatePwd()">
+                                <form name="Cpassword-form" class="tablerow">
                                     <h4>Change Password</h4>
                                     <br><br>
                                     <input type="password" id="pwd" placeholder="Password" name="pwd" required>
@@ -80,13 +80,19 @@
                                     <input type="password" id="Rpwd" placeholder="Repeat Password" name="Rpwd" required>
                                     <input class="btn btn-primary" type="submit" id="passwordS" value="Confirm">
                                 </form>
-                                <form name="Cemail" class="tablerow" onsubmit="return validateEmail()">
+                                <!--<form name="Cemail" class="tablerow" onsubmit="return validateEmail()">-->
+                                    <!--<h4>Change Email</h4>-->
+                                    <!--<br><br>-->
+                                    <!--<input type="email" id="email" placeholder="Email" name="email" required>-->
+                                    <!--<input class="btn btn-primary" type="submit" id="emailS" value="Confirm" name="emailS">-->
+                                <!--</form>-->
+                                <form name="Cemail" class="tablerow" id="Cemail-form">
                                     <h4>Change Email</h4>
                                     <br><br>
                                     <input type="email" id="email" placeholder="Email" name="email" required>
                                     <input class="btn btn-primary" type="submit" id="emailS" value="Confirm" name="emailS">
                                 </form>
-                                <form name="Cphone" class="tablerow" onsubmit="return validatePhone()">
+                                <form name="Cphone" class="tablerow" id="Cphone-form">
                                     <h4>Change Phone</h4>
                                     <br><br>
                                     <input type="number" id="phone" placeholder="Phone" name="phone" required>
@@ -95,15 +101,15 @@
                             </div>
                             <div class="col-sm-6">
                                 <!--<h4>Change Credit Card Info</h4>-->
-                                <form name="Ccard" onsubmit="validateCard()">
+                                <form name="Ccard" id="Ccard-form">
                                     <h4>Change Credit Card Info</h4>
                                     <table class="innertab">
                                     <tr class="tablerow">
                                         <td class="tablecolumn">
-                                            <label for="cardname">Card Number</label>
+                                            <label for="cardname">Card Holder Number</label>
                                         </td>
                                         <td>
-                                            <input type="number" id="cardname" placeholder="Card Holder Name" name="cardname" required>
+                                            <input type="text" id="cardname" placeholder="Card Holder Name" name="cardname" required>
                                         </td>
                                     </tr>
                                     <tr class="tablerow">
