@@ -74,7 +74,11 @@ function loadProfile() {
             eveningRow.insertCell(6).innerHTML = scheduleArray[17];
             eveningRow.insertCell(7).innerHTML = scheduleArray[20];
 
-            document.getElementById('profile-pic').src = data.photoURL;
+            if (data.photoURL !== null) {
+                document.getElementById('profile-pic').src = data.photoURL;
+            } else {
+                document.getElementById('profile-pic').src = "../images/profile-placeholder.png";
+            }
 
         } else {
             alert("Something went wrong: " + text);
