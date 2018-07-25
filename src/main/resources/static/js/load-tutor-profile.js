@@ -20,17 +20,19 @@ function loadProfile() {
             document.getElementById("same-email").innerHTML = data.email;
             document.getElementById("education").innerHTML = data.education;
             document.getElementById("experience").innerHTML = data.experience;
-            document.getElementById("tutor-rating").innerHTML = data.rating.substring(0, 5);
-            var rating = parseFloat(data.rating);
-            if(rating <= 2)
-                document.getElementById("tutor-rating").style.color = "red"
-            else if (rating > 2 && rating <= 3.5 )
-                document.getElementById("tutor-rating").style.color = "yellow";
-            else if (rating > 3.5)
-                document.getElementById("tutor-rating").style.color = "green"
-
-
-
+            if (data.rating !== null) {
+                document.getElementById("tutor-rating").innerHTML = data.rating.substring(0, 5);
+                var rating = parseFloat(data.rating);
+                if (rating <= 2) {
+                    document.getElementById("tutor-rating").style.color = "red"
+                } else if (rating > 2 && rating <= 3.5) {
+                    document.getElementById("tutor-rating").style.color = "yellow";
+                } else if (rating > 3.5) {
+                    document.getElementById("tutor-rating").style.color = "green"
+                }
+            } else {
+                document.getElementById("tutor-rating").innerHTML = "N/A";
+            }
             var courseInfo =  data.courseList;
             var courseList = document.getElementById("tutor-courses");
             for (var i=0;i<courseInfo.length;i++){
@@ -39,8 +41,6 @@ function loadProfile() {
                 row.insertCell(1).innerHTML = courseInfo[i][1];
                 row.insertCell(2).innerHTML = courseInfo[i][2];
             }
-
-
             var scheduleArray = data.tutorSchedule;
             var schedule = document.getElementById("tutor-schedule");
             var morningRow = schedule.insertRow(1);
@@ -74,7 +74,11 @@ function loadProfile() {
             eveningRow.insertCell(6).innerHTML = scheduleArray[17];
             eveningRow.insertCell(7).innerHTML = scheduleArray[20];
 
-            document.getElementById('profile-pic').src = data.photoURL;
+            if (data.photoURL !== null) {
+                document.getElementById('profile-pic').src = data.photoURL;
+            } else {
+                document.getElementById('profile-pic').src = "../images/profile-placeholder.png";
+            }
 
         } else {
             alert("Something went wrong: " + text);
