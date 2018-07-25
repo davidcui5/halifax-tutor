@@ -1,8 +1,21 @@
 #header {
     margin: 0 auto;
     text-align: center;
-    top: 0;
+    top:0;
+    padding-top: 100px;
+    font-family: Intro-Inline;
+    font-size: 60px;
+    color:  #4279b2;
 }
+@font-face {
+    font-family:"Intro-Inline";
+    src:url("../font/Intro_Inline.eot") format("eot"),
+    url("../font/Intro_Inline.woff") format("woff"),
+    url("../font/Intro_Inline.ttf") format("truetype"),
+    url("../font/Intro_Inline.svg") format("svg");
+    font-weight:normal;font-style:normal;
+}
+
 
 table {
     text-align: left;
@@ -23,3 +36,80 @@ table {
     bottom: 0;
     width: 100%;
 }
+
+
+
+html, body {
+     background: #f1f1f1;
+     font-family: 'Merriweather', sans-serif;
+ }
+
+
+input{
+    padding: 5px;
+    border-width: 1px;
+    border-color: white;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.Bbtn{
+    margin-top: 20px;
+    font-size: 2.0rem;
+    padding: 0.5rem 1rem;
+    background-color: #4279b2;
+    border: 1px solid transparent;
+    color: #ffffff;
+    font-weight: 300;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.Bbtn:hover {
+    background-color: #ffffff;
+    color: #4279b2;
+    border-color: #4279b2;
+}
+.bbtn{
+    margin-top: 20px;
+    font-size: 1.0rem;
+    padding: 0.5rem 1rem;
+    background-color: #ffffff;
+    border: 1px solid transparent;
+    color: #4279b2;
+    font-weight: 300;
+    border-color: #4279b2;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.bbtn:hover {
+    background-color: #4279b2;
+    color: #ffffff;
+    border-color: #4279b2;
+}
+#forget{
+    color: #4279b2;
+}
+.navbar-header, a{
+    font-size: 15px;
+    color: #f1f1f1;
+}
+
+.nav a{
+    color: #f1f1f1;
+}
+a:hover{
+    color: #558FCA;
+}
+.navbar-header a:hover{
+    color: #f1f1f1;
+}
+
