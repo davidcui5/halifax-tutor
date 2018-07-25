@@ -3,21 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>Search for tutors</title>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="../css/search.css">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
-          integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"-->
+          <!--integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">-->
 
     <title>Search for tutors</title>
 </head>
 
 <body>
+<nav class="navbar bg-primary navbar-fixed-top" >
+    <!-- Navbar content -->
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="../index.html">HalifaxTutor</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../index.html">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="nav-item"><a id="logout" href="../index.html">Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div id="header">
     <h>HalifaxTutor</h>
-    <a href="?">Search</a>
-    <a href="#" id="settings">Settings</a>
-    <input type="button" class="button" id="sign-out-button" value="Sign out"/>
+
     <hr>
 </div>
 
@@ -32,7 +48,7 @@
 
         <label for="course-id">Enter the course:</label>
         <input type="text" id="course-id" placeholder="e.g., CSCI5308" required>
-        <button type="submit">Search</button>
+        <button class="btn btn-primary" type="submit">Search</button>
     </form>
 
     <hr>
@@ -51,7 +67,7 @@
             <option value="asc">Ascending</option>
         </select>
 
-        <button type="button" id="sort-button">Sort</button>
+        <button class="btn btn-primary" type="button" id="sort-button">Sort</button>
         
         <hr>
 
