@@ -38,11 +38,13 @@ function submitFeedback(){
     let rating = $("#rating").val();
     let feedback = $("#feedback-text").val();
     let email = $("#same-email").text();
-
+//https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+    let emailToken = localStorage.getItem("token");
     var feedbackData = {
         "id": id,
         "rating": rating,
         "feedback": feedback,
+        "emailToken": emailToken,
         "email":email
     };
     $.ajax({
