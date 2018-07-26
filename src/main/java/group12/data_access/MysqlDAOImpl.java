@@ -592,11 +592,4 @@ public class MysqlDAOImpl implements IDataAccessObject {
         SQLOperationTemplate getSearchAuthConfSQlOperation = new GetSearchAuthConfSQlOperation();
         return (boolean) getSearchAuthConfSQlOperation.executeMysqlQuery();
     }
-
-    @Override
-    public boolean setSearchAuthConf(boolean searchAuth) {
-        SQLOperationTemplate setSearchAuthConfSQlOperation = new SetSearchAuthConfSQlOperation(searchAuth);
-        return (boolean) setSearchAuthConfSQlOperation.executeMysqlQuery();
-    }
-
 }

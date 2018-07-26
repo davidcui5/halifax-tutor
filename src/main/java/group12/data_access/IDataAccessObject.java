@@ -90,5 +90,4 @@ public interface IDataAccessObject {
 
     boolean getSearchAuthConf();
 
-    boolean setSearchAuthConf(boolean searchAuth);
 }

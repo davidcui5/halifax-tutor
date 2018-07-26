@@ -17,10 +17,6 @@ public class Configuration {
         return isSearchAuth;
     }
 
-    public void setSearchAuth(boolean isSearchAuth) {
-        db.setSearchAuthConf(isSearchAuth);
-    }
-
     public static Configuration getInstance() {
         return instance;
     }
