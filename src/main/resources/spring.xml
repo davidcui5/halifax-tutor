@@ -15,6 +15,10 @@
     <bean id="searchService" class="group12.search.SearchService">
     </bean>
 
+    <bean id="configuration" class="group12.Configuration">
+        <property name="db" ref="DBDAO"/>
+    </bean>
+
     <!--ForgotPasswordController beans START-->
     <bean id="forgotPasswordService" class="group12.ForgotPassword.ForgotPasswordService">
         <property name="db" ref="DBDAO"/>
@@ -47,9 +51,9 @@
 
     <bean id="DBDAO" class="group12.data_access.MysqlDAOImpl">
         <property name="dataSource" ref="dataSource"/>
-<!--
-        <property name="dataSource" ref="dataSource"/>
--->
+        <!--
+                <property name="dataSource" ref="dataSource"/>
+        -->
     </bean>
     <!--RegistrationController beans ENDT-->
 
@@ -72,7 +76,7 @@
     </bean>
 
     <bean id="mailer" class="group12.email.SpringMailer">
-            <property name="mailSender" ref="mailSender"/>
+        <property name="mailSender" ref="mailSender"/>
     </bean>
 
     <!-- SET default mail properties -->
