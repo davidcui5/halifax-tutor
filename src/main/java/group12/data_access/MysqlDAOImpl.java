@@ -459,7 +459,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
                 //https://stackoverflow.com/questions/12636613/how-to-calculate-moving-average-without-keeping-the-count-and-data-total
 
 
-                newRating = (oldRating * (ratingCount - 1)/ratingCount+1) + (tutorrating/ratingCount+1);
+                newRating = (float) ((oldRating * (ratingCount - 1)/ratingCount+ 0.0001) + (tutorrating/ratingCount+0.0001));
 
                 increaseTotalRating(tutorId, ratingCount);
 
