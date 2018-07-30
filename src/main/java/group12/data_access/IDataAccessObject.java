@@ -78,13 +78,16 @@ public interface IDataAccessObject {
 
     int[] getTutorSchedule(int tutorId);
 
-    boolean saveRating(int tutorId,String rating);
+    boolean saveRating(int tutorId, String rating);
 
     boolean saveFeedback(String studentEmail, TutorProfileForm tutorProfileForm);
 
-    float calculateAverageRating(int tutorId,String rating);
+    float calculateAverageRating(int tutorId, String rating);
 
     String[] getCourseFromCourseId(String courseId);
 
     boolean increaseTotalRating(int tutorId, float ratingCount);
+
+    boolean getSearchAuthConf();
+
 }
