@@ -7,33 +7,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.Map;
 
-//the login controller controls login
 @RestController
 public class LoginController {
 
-    @Autowired
-    private Map<String,IAuthenticationStrategy> strategies = new HashMap<>();
+    private Map<String,IAuthenticationStrategy> strategies;
 
-    //processes login
-    //context for authentication strategy pattern
+    @Autowired
+    public LoginController(Map<String,IAuthenticationStrategy> strategies){
+        this.strategies = strategies;
+    }
+
     @PostMapping(path = "/login")
-    public LoginResponse login(@RequestBody LoginForm form){
-        User user = makeUser(form);
-        /*IAuthenticationStrategy authStrategy = user.createAuthenticationStrategy();*/
-        IAuthenticationStrategy authStrategy = strategies.get(form.getType());
+    public LoginResponse login(@RequestBody Map<String,String> body){
+        User user = makeUser(body);
+        String type = body.get("type");
+        IAuthenticationStrategy authStrategy = strategies.get(type);
         authStrategy.authenticate(user);
         return user.getLoginResponse();
     }
 
-    //helper method makes User from LoginForm
-    public User makeUser(LoginForm form){
-        String type = form.getType();
-        String email = form.getEmail();
-        IEncryptor encryptor = new SimpleMD5Encryptor();
-        String password = encryptor.encrypt(form.getPassword());
+    private User makeUser(Map<String,String> body){
+        String type = body.get("type");
+        String email = body.get("email");
+        IEncryptor encryptor = SimpleMD5Encryptor.getInstance();
+        String password = encryptor.encrypt(body.get("password"));
         if(type.equals("student")){
             return new Student(email, password);
         }
