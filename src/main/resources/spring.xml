@@ -15,6 +15,31 @@
     <bean id="searchService" class="group12.search.SearchService">
     </bean>
 
+    <!--LoginController beans START-->
+    <bean id="student" class="group12.login.StudentAuthStrategy">
+        <property name="authDAO" ref="authDAO"/>
+        <property name="bannedStudentGoTo" value="${login.bannedStudentGoTo}"/>
+        <property name="inactiveStudentGoTo" value="${login.inactiveStudentGoTo}"/>
+        <property name="activeAndUnbannedStudentGoTo" value="${login.activeAndUnbannedStudentGoTo}"/>
+    </bean>
+
+    <bean id="tutor" class="group12.login.TutorAuthStrategy">
+        <property name="authDAO" ref="authDAO"/>
+        <property name="bannedTutorGoTo" value="${login.bannedTutorGoTo}"/>
+        <property name="inactiveTutorGoTo" value="${login.inactiveTutorGoTo}"/>
+        <property name="activeAndUnbannedTutorGoTo" value="${login.activeAndUnbannedTutorGoTo}"/>
+    </bean>
+
+    <bean id="admin" class="group12.login.AdminAuthStrategy">
+        <property name="authDAO" ref="authDAO"/>
+        <property name="adminGoTo" value="${login.adminGoTo}"/>
+    </bean>
+
+    <bean id="authDAO" class="group12.login.MysqlAuthDAO">
+    </bean>
+    <!--LoginController beans END-->
+
+
     <!--ForgotPasswordController beans START-->
     <bean id="forgotPasswordService" class="group12.ForgotPassword.ForgotPasswordService">
         <property name="db" ref="DBDAO"/>
@@ -47,21 +72,8 @@
 
     <bean id="DBDAO" class="group12.data_access.MysqlDAOImpl">
         <property name="dataSource" ref="dataSource"/>
-<!--
-        <property name="dataSource" ref="dataSource"/>
--->
     </bean>
     <!--RegistrationController beans ENDT-->
-
-    <bean id="student" class="group12.login.StudentAuthStrategy">
-    </bean>
-
-    <bean id="tutor" class="group12.login.TutorAuthStrategy">
-    </bean>
-
-    <bean id="admin" class="group12.login.AdminAuthStrategy">
-    </bean>
-
 
     <!--DataSource bean is shared-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">

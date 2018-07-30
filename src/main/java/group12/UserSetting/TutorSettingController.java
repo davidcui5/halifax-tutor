@@ -46,7 +46,7 @@ public class TutorSettingController {
         String email = accessToken.decodeToken(body.get("token"));
         logger.log(Level.INFO,email);
         logger.log(Level.INFO,body.get("password"));
-        IEncryptor encryptor = new SimpleMD5Encryptor();
+        IEncryptor encryptor = SimpleMD5Encryptor.getInstance();
         String password = encryptor.encrypt(body.get("password"));
         logger.log(Level.INFO,password);
         if(tutorSettingDAO.setTutorPassword(email,password)){

@@ -1,12 +1,8 @@
 package group12.login;
 
 import group12.data_access.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class MysqlAuthDAO implements IAuthDAO {
-
-    private static final Logger logger = LogManager.getLogger(MysqlAuthDAO.class);
 
     @Override
     public Student getStudentByEmail(String email) {

@@ -10,25 +10,35 @@ import java.security.NoSuchAlgorithmException;
 //Simple encryptor uses Java's simple MD5 Message-Digest algorithm to encrypts without using salt
 public class SimpleMD5Encryptor implements IEncryptor {
 
+    private static final IEncryptor INSTANCE = new SimpleMD5Encryptor();
+    private MessageDigest digest;
+    private static Logger logger = LogManager.getLogger(SimpleMD5Encryptor.class);
+
+    private SimpleMD5Encryptor(){
+        try{
+            digest = MessageDigest.getInstance("MD5");
+        }
+        catch(NoSuchAlgorithmException e) {
+            logger.log(Level.ERROR, e);
+        }
+    }
+
+    public static IEncryptor getInstance(){
+        return INSTANCE;
+    }
+
     public String encrypt (String input){
         try {
-            //Java's MessageDigest class has algorithms for encryption
-            MessageDigest digest = MessageDigest.getInstance("MD5");
-            //input needs to be bytes
             byte[] inputBytes = input.getBytes();
             digest.update(inputBytes);
-            //output is also in bytes
             byte[] outputBytes = digest.digest();
-            //Java's DatatypeConverter has method that converts bytes to string
             String output = DatatypeConverter.printHexBinary(outputBytes);
             return output;
         }
-        catch(NoSuchAlgorithmException e) {
-            //No such algorithm, return password without encrypting and log this
-            Logger logger = LogManager.getLogger(SimpleMD5Encryptor.class);
+        catch(Exception e) {
             logger.log(Level.ERROR, e);
-            return input;
         }
+        return input;
     }
 
 }
