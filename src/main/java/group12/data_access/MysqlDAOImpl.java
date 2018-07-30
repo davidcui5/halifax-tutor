@@ -264,15 +264,19 @@ public class MysqlDAOImpl implements IDataAccessObject {
         tutorProfileForm.setRating(tutorInfo[6]);
         tutorProfileForm.setPhotoURL(tutorInfo[7]);
 
-        ArrayList<String[]> courseList = getTutorCourses(tutorId);
-        tutorProfileForm.setCourseList(courseList);
+        List<Course> courseList = getCoursesOFTutor(tutorId);
+        ArrayList<String[]> courseInfo = new ArrayList<>();
+        for (int i=0;i<courseList.size();i++){
+            String[] str = {courseList.get(i).getName(), courseList.get(i).getSchool(), String.valueOf(courseList.get(i).getPrice())};
+            courseInfo.add(str);
+        }
+        tutorProfileForm.setCourseList(courseInfo);
 
         int[] tutorSchedule = getTutorSchedule(tutorId);
         tutorProfileForm.setTutorSchedule(tutorSchedule);
 
         return tutorProfileForm;
     }
-
     @Override
     public String[] getTutorInfo(int tutorId) {
         String sqlTutor = "SELECT * FROM Tutor Where ID =?";
@@ -317,81 +321,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
 
         return tutorInfo;
 
-    }
-
-    @Override
-    public ArrayList<String[]> getTutorCourses(int tutorId) {
-
-        String sqlTutorCourse = "SELECT * FROM TutorCourse Where TutorId =?";
-        PreparedStatement psTutorCourse = null;
-        ResultSet rsTutorCourse = null;
-        ArrayList<String[]> courseList = new ArrayList();
-        String courseId;
-
-        try {
-            con = dataSource.getConnection();
-
-            psTutorCourse = con.prepareStatement(sqlTutorCourse);
-            psTutorCourse.setString(1, String.valueOf(tutorId));
-            rsTutorCourse = psTutorCourse.executeQuery();
-
-            while (rsTutorCourse.next()) {
-                courseId = rsTutorCourse.getString("CourseId");
-                String[] row = {getCourseFromCourseId(courseId)[0], getCourseFromCourseId(courseId)[1], rsTutorCourse.getString("Price")};
-                courseList.add(row);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                assert (rsTutorCourse != null);
-                assert (psTutorCourse != null);
-                assert (con != null);
-                rsTutorCourse.close();
-                psTutorCourse.close();
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return courseList;
-    }
-
-    @Override
-    public String[] getCourseFromCourseId(String courseId) {
-        String sqlCourse = "SELECT * FROM Course Where ID =?";
-        PreparedStatement psCourse = null;
-        ResultSet rsCourse = null;
-        String courseInfo[] = new String[2];
-
-        try {
-            con = dataSource.getConnection();
-            psCourse = con.prepareStatement(sqlCourse);
-            psCourse.setString(1, courseId);
-            rsCourse = psCourse.executeQuery();
-            if (rsCourse.next()) {
-                courseInfo[0] = rsCourse.getString("Name");
-                courseInfo[1] = rsCourse.getString("School");
-
-            } else {
-                System.out.println("No Course found with id=" + courseId);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                assert (rsCourse != null);
-                assert (psCourse != null);
-                assert (con != null);
-                rsCourse.close();
-                psCourse.close();
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return courseInfo;
     }
 
     @Override
@@ -529,7 +458,8 @@ public class MysqlDAOImpl implements IDataAccessObject {
                 oldRating = Float.parseFloat(rs.getString("Rating"));
                 //https://stackoverflow.com/questions/12636613/how-to-calculate-moving-average-without-keeping-the-count-and-data-total
 
-                newRating = (tutorrating + oldRating) / (ratingCount + 1);
+
+                newRating = (float) ((oldRating * (ratingCount - 1)/ratingCount+ 0.0001) + (tutorrating/ratingCount+0.0001));
 
                 increaseTotalRating(tutorId, ratingCount);
 

@@ -74,8 +74,6 @@ public interface IDataAccessObject {
 
     String[] getTutorInfo(int tutorId);
 
-    ArrayList<String[]> getTutorCourses(int tutorId);
-
     int[] getTutorSchedule(int tutorId);
 
     boolean saveRating(int tutorId, String rating);
@@ -83,8 +81,6 @@ public interface IDataAccessObject {
     boolean saveFeedback(String studentEmail, TutorProfileForm tutorProfileForm);
 
     float calculateAverageRating(int tutorId, String rating);
-
-    String[] getCourseFromCourseId(String courseId);
 
     boolean increaseTotalRating(int tutorId, float ratingCount);
 
