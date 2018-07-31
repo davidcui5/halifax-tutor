@@ -110,7 +110,7 @@ public class ForgotPasswordService implements IForgotPassword {
         }
         else{
             response.setResult("Failure");
-            response.addDetail("Email already registered");
+            response.addDetail("Student Not Found");
         }
 
 
@@ -133,7 +133,7 @@ public class ForgotPasswordService implements IForgotPassword {
         }
         else{
             response.setResult("Failure");
-            response.addDetail("Email already registered");
+            response.addDetail("Tutor Not Found");
         }
         return response;
 
