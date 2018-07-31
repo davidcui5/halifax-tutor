@@ -1,10 +1,6 @@
-package group12.UserSetting;
+package group12.tutor_setting;
 
 import group12.data_access.Availability;
-import group12.data_access.GetPlanSQLOperation;
-import group12.data_access.Subscribe_Plan;
-import group12.email.IMailer;
-import group12.email.SpringMailer;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import group12.token_auth.IAccessToken;
@@ -12,14 +8,10 @@ import group12.token_auth.JWTAccessToken;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController

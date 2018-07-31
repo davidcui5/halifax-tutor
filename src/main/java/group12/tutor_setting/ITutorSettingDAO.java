@@ -1,4 +1,4 @@
-package group12.UserSetting;
+package group12.tutor_setting;
 
 
 import group12.data_access.Availability;
