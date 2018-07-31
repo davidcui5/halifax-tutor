@@ -1,4 +1,4 @@
-package ForgotPassword;
+package group12.ForgotPassword;
 
 import group12.ForgotPassword.ForgotPasswordForm;
 import group12.ForgotPassword.ForgotPasswordResponse;

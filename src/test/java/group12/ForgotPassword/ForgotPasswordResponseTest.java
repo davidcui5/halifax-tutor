@@ -1,4 +1,4 @@
-package ForgotPassword;
+package group12.ForgotPassword;
 
 import group12.ForgotPassword.ForgotPasswordResponse;
 import org.junit.Before;
@@ -13,14 +13,14 @@ public class ForgotPasswordResponseTest {
     private ForgotPasswordResponse response = new ForgotPasswordResponse();
 
     @Test
-    public void testGetResult(){
+    public void testResult(){
         String result = "Success";
         response.setResult("Success");
         assertEquals(result, response.getResult());
     }
 
     @Test
-    public void testSetResult(){
+    public void testDetails(){
         ArrayList<String> details = new ArrayList<>();
         details.add("Test1");
         response.addDetail("Test1");
