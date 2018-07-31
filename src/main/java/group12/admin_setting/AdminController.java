@@ -1,11 +1,9 @@
 package group12.admin_setting;
 
-import group12.data_access.*;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import group12.token_auth.IAccessToken;
 import group12.token_auth.JWTAccessToken;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -138,7 +136,6 @@ public class AdminController {
         else{
             return UNAUTHORIZED;
         }
-
     }
 
     @PostMapping(path="admin/setting/ban/tutor", consumes = "application/json", produces = "text/plain")
@@ -180,18 +177,11 @@ public class AdminController {
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
             String email = body.get("email");
-
-            SQLOperationTemplate op = new GetStudentSQLOperation(email);
-            Student s = (Student)op.executeMysqlQuery();
-
-            if(s==null){
+            int sID = dao.getStudentIDByEmail(email);
+            if(sID < 0){
                 return new StudentReviews(-1,null,null);
             }
-
-            int sID = s.getStudentID();
-
             List<ReviewDTO> reviews = dao.getReviewsMadeByStudent(sID);
-
             return new StudentReviews(sID, email, reviews);
         }
         else{
@@ -204,17 +194,11 @@ public class AdminController {
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
             String email = body.get("email");
-
-            SQLOperationTemplate op = new GetTutorSQLOperation(email);
-            Tutor t = (Tutor)op.executeMysqlQuery();
-
-            if(t==null){
+            int tID = dao.getTutorIDByEmail(email);
+            if(tID < 0){
                 return new TutorReviews(-1,null,null);
             }
-            int tID = t.getTutorID();
-
             List<ReviewDTO> reviews = dao.getReviewsMadeOnTutors(tID);
-
             return new TutorReviews(tID, email, reviews);
         }
         else{

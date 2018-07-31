@@ -19,4 +19,8 @@ public interface IAdminSettingDAO {
     List<ReviewDTO> getReviewsMadeOnTutors(int tutorID);
 
     boolean deleteReviewByID(int id);
+
+    int getStudentIDByEmail(String email);
+
+    int getTutorIDByEmail(String email);
 }
