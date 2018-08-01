@@ -126,25 +126,26 @@ $(document).ready(function() {
         event.preventDefault();
         let phone = $("#phone").val();
 
-        var ChangePhoneData = {
+        let data = {
             'token': token,
             'phone' : phone
         };
 
         $.ajax({
             url: location.origin +"/tutor/setting/phone",
-            data: JSON.stringify(ChangePhoneData),
+            data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
-            dataType: "text"
-        }).done(function (data) {
-            if (data === "Success") {
+            dataType: "json"
+        }).done(function (json) {
+            let success = json['success'];
+            if (success) {
                 alert("Phone Number change succeed!");
             } else {
-                alert(data);
+                alert("Something went wrong on our database...");
             }
         }).fail(function (xhr, status, errorThrown) {
-
+            alert("Something went wrong with our server...");
         });
 
     });
