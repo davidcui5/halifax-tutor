@@ -237,67 +237,60 @@ $(document).ready(function() {
     $("#Cavailability").submit(function (event) {
 
         event.preventDefault();
-        let A1 = $("#A1").is(":checked");
-        let A2 = $("#A2").is(":checked");
-        let A3 = $("#A3").is(":checked");
-        let A4 = $("#A4").is(":checked");
-        let A5 = $("#A5").is(":checked");
-        let A6 = $("#A6").is(":checked");
-        let A7 = $("#A7").is(":checked");
-        let B1 = $("#B1").is(":checked");
-        let B2 = $("#B2").is(":checked");
-        let B3 = $("#B3").is(":checked");
-        let B4 = $("#B4").is(":checked");
-        let B5 = $("#B5").is(":checked");
-        let B6 = $("#B6").is(":checked");
-        let B7 = $("#B7").is(":checked");
-        let C1 = $("#C1").is(":checked");
-        let C2 = $("#C2").is(":checked");
-        let C3 = $("#C3").is(":checked");
-        let C4 = $("#C4").is(":checked");
-        let C5 = $("#C5").is(":checked");
-        let C6 = $("#C6").is(":checked");
-        let C7 = $("#C7").is(":checked");
+        let su1 = $("#Su1").is(":checked");
+        let mo1 = $("#Mo1").is(":checked");
+        let tu1 = $("#Tu1").is(":checked");
+        let we1 = $("#We1").is(":checked");
+        let th1 = $("#Th1").is(":checked");
+        let fr1 = $("#Fr1").is(":checked");
+        let sa1 = $("#Sa1").is(":checked");
 
-        var ChangeAvaData = {
+        let su2 = $("#Su2").is(":checked");
+        let mo2 = $("#Mo2").is(":checked");
+        let tu2 = $("#Tu2").is(":checked");
+        let we2 = $("#We2").is(":checked");
+        let th2 = $("#Th2").is(":checked");
+        let fr2 = $("#Fr2").is(":checked");
+        let sa2 = $("#Sa2").is(":checked");
+
+        let su3 = $("#Su3").is(":checked");
+        let mo3 = $("#Mo3").is(":checked");
+        let tu3 = $("#Tu3").is(":checked");
+        let we3 = $("#We3").is(":checked");
+        let th3 = $("#Th3").is(":checked");
+        let fr3 = $("#Fr3").is(":checked");
+        let sa3 = $("#Sa3").is(":checked");
+
+        let weeklySchedule = [
+            [su1, su2, su3],
+            [mo1, mo2, mo3],
+            [tu1, tu2, tu3],
+            [we1, we2, we3],
+            [th1, th2, th3],
+            [fr1, fr2, fr3],
+            [sa1, sa2, sa3]
+        ];
+
+        let data = {
             'token': token,
-            "A1" : A1,
-            "A2" : A2,
-            "A3" : A3,
-            "A4" : A4,
-            "A5" : A5,
-            "A6" : A6,
-            "A7" : A7,
-            "B1" : B1,
-            "B2" : B2,
-            "B3" : B3,
-            "B4" : B4,
-            "B5" : B5,
-            "B6" : B6,
-            "B7" : B7,
-            "C1" : C1,
-            "C2" : C2,
-            "C3" : C3,
-            "C4" : C4,
-            "C5" : C5,
-            "C6" : C6,
-            "C7" : C7
+            'weeklySchedule': weeklySchedule
         };
 
         $.ajax({
-            url: location.origin +"/tutor/setting/availability",
-            data: JSON.stringify(ChangeExpData),
+            url: location.origin +"/tutor/setting/weeklySchedule",
+            data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
-            dataType: "text"
+            dataType: "json"
         }).done(function (data) {
-            if (data === "Success") {
+            let success = data['success'];
+            if (success) {
                 alert("Availability change succeed!");
             } else {
-                alert(data);
+                alert("Something went wrong in the backend...");
             }
         }).fail(function (xhr, status, errorThrown) {
-
+            alert("Something went wrong...");
         });
     });
 
