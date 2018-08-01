@@ -13,12 +13,20 @@ class SearchService {
     @Value("${search.auth}")
     private String auth;
 
+    private TutorPublicInfoDAO tutorPublicInfoDAO;
+
+    public SearchService() {
+        tutorPublicInfoDAO = new TutorPublicInfoDaoImpl();
+    }
+
+    public SearchService(TutorPublicInfoDAO tutorPublicInfoDAO) {
+        this.tutorPublicInfoDAO = tutorPublicInfoDAO;
+    }
+
     SearchResponse getSearchResponse(SearchRequest searchRequest) {
         String school = searchRequest.getSchool();
         String courseName = searchRequest.getCourseName();
-        TutorPublicInfoDAO tutorPublicInfoDAO = new TutorPublicInfoDaoImpl();
 
-        boolean success;
         int numOfResults;
         List<TutorPublicInfo> results;
 
@@ -26,16 +34,14 @@ class SearchService {
 
         try {
             results = tutorPublicInfoDAO.getTutorPublicInfo(school, courseName);
-            success = true;
             numOfResults = results.size();
 
-            searchResponse = new SearchResponse(success, numOfResults, results);
+            searchResponse = new SearchResponse(true, numOfResults, results);
         } catch (SearchQuerySQLException e) {
             results = new ArrayList<>();
-            success = false;
             numOfResults = 0;
 
-            searchResponse = new SearchResponse(success, numOfResults, results);
+            searchResponse = new SearchResponse(false, numOfResults, results);
         }
 
         return searchResponse;
