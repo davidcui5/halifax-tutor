@@ -44,13 +44,8 @@ public class DBDAORegistration {
     public void testActivationCode() {
         boolean actual = dbda.saveActivationCode(MockData.getActivationCode());
         assertTrue(actual);
-        ActivationCode activationCode = dbda.checkActivationCode(MockData.getActivationCode());
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String strDate = dtf.format(LocalDateTime.now());
-        assertEquals(strDate, activationCode.getDate().toString());
         actual = dbda.deleteActivationCodeByValue(MockData.getActivationCode());
         assertTrue(actual);
-
     }
 
     @AfterClass
