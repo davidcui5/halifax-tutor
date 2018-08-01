@@ -8,7 +8,7 @@ public class TutorSettingDAOImpl implements ITutorSettingDAO {
     private SQLOperationTemplate operation;
 
     @Override
-    public boolean setTutorPassword(String email, String password) {
+    public boolean updateTutorPassword(String email, String password) {
         operation = new UpdateTutorPasswordSQLOperation(email, password);
         return (Boolean) operation.executeMysqlQuery();
     }

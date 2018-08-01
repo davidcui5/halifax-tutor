@@ -4,7 +4,7 @@ package group12.tutorsetting;
 import group12.dataaccess.tutorsetting.WeeklySchedule;
 
 public interface ITutorSettingDAO {
-    boolean setTutorPassword(String email, String password);
+    boolean updateTutorPassword(String email, String password);
     boolean setTutorEmail(String email,String newemail);
     boolean setTutorPhone(String email, String phone);
     boolean setTutorCard(String email, String creditCardHolder,String creditCardNum,String creditCardExpiryDate,int securityCode);

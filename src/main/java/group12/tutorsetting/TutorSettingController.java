@@ -4,6 +4,7 @@ import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import group12.tokenauth.IAccessToken;
 import group12.tokenauth.JWTAccessToken;
+import group12.tutorsetting.request.UpdatePasswordRequest;
 import group12.tutorsetting.request.UpdateWeeklyScheduleRequest;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -35,19 +36,10 @@ public class TutorSettingController {
     }
 
 
-    @PostMapping(path = "/tutor/setting/password", consumes = "application/json", produces = "text/plain")
-    public String changePassword(@RequestBody Map<String, String> body) {
-        String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO, email);
-        logger.log(Level.INFO, body.get("password"));
-        IEncryptor encryptor = SimpleMD5Encryptor.getInstance();
-        String password = encryptor.encrypt(body.get("password"));
-        logger.log(Level.INFO, password);
-        if (tutorSettingDAO.setTutorPassword(email, password)) {
-            return SUCCESS;
-        } else {
-            return FAILURE;
-        }
+    @PostMapping(path = "/tutor/setting/password", headers = "content-type=application/json")
+    public TutorSettingResponse updatePassword(@RequestBody UpdatePasswordRequest updatePasswordRequest) {
+        TutorSettingResponse response = tutorSettingService.getUpdatePasswordResponse(updatePasswordRequest);
+        return response;
     }
 
     @PostMapping(path = "/tutor/setting/email", consumes = "application/json", produces = "text/plain")
