@@ -1,5 +1,6 @@
 package group12.data_access;
 
+import group12.data_access.search.TutorPublicInfo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

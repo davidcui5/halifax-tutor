@@ -1,4 +1,4 @@
-package group12.data_access;
+package group12.data_access.search;
 
 public class TutorPublicInfo {
     private int id;

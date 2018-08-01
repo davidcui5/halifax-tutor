@@ -1,5 +1,6 @@
-package group12.data_access;
+package group12.data_access.search;
 
+import group12.data_access.SQLOperationTemplate;
 import group12.exceptions.SearchQuerySQLException;
 import group12.logging.ConnectionFactory;
 import org.apache.logging.log4j.LogManager;
