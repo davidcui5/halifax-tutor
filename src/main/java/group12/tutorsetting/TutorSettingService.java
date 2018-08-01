@@ -64,7 +64,7 @@ class TutorSettingService {
         String creditCardNumber = updateCardRequest.getCreditCardNumber();
         String expiryDate = updateCardRequest.getExpireDate();
         int securityCode = updateCardRequest.getSecurityCode();
-        
+
         String email = accessToken.decodeToken(token);
 
         boolean success = tutorSettingDAO.updateTutorCard(email, holderName, creditCardNumber, expiryDate, securityCode);
