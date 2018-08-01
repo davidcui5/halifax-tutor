@@ -60,6 +60,8 @@ $(document).ready(function() {
 
     $("#logout").click(function () {
         localStorage.removeItem("token");
+        alert("Signing out...");
+        windows.location = "../index.html";
     });
 
     $("#Cpassword-form").submit(function (event) {
@@ -108,6 +110,9 @@ $(document).ready(function() {
             let success = json['success'];
             if (success) {
                 alert("Email change succeed!");
+                localStorage.removeItem("token");
+                alert("Signing out... Please log in with your new email");
+                windows.location = "../index.html";
             } else {
                 alert("Something went wrong with our database...");
             }
