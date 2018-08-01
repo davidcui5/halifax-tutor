@@ -18,20 +18,21 @@ import static org.junit.Assert.assertEquals;
 public class ForgotPasswordTest {
 
     ForgotPasswordService forgotPasswordService = new ForgotPasswordService();
-    static ClassPathXmlApplicationContext context;
-    static IDataAccessObject dbda;
-    static IMailer mailer;
+
 
     ForgotPasswordForm forgotStudentPasswordForm = new ForgotPasswordForm();
     ForgotPasswordForm forgotTutorPasswordForm = new ForgotPasswordForm();
 
+    MockForgotPasswordData mockDbda;
+    MockMailer mailer;
+
     @Before
     public void testSetup() {
-        context = new ClassPathXmlApplicationContext("spring.xml");
-        dbda = context.getBean("DBDAO", MysqlDAOImpl.class);
-        mailer = context.getBean("mailer", SpringMailer.class);
 
-        forgotPasswordService.setDb(dbda);
+        mockDbda = new MockForgotPasswordData();
+        mailer = new MockMailer();
+
+        forgotPasswordService.setDb(mockDbda);
         forgotPasswordService.setMailer(mailer);
     }
 
