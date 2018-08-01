@@ -4,20 +4,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DeleteTutorSQLOperation extends SQLOperationTemplate {
-    public DeleteTutorSQLOperation(Object... parameters) {
+public class GetSearchAuthConfSQlOperation extends SQLOperationTemplate {
+    public GetSearchAuthConfSQlOperation(Object... parameters) {
         super(parameters);
     }
 
     @Override
     String makeSQL() {
-            return "SELECT DeleteTutor(?)";
+        return "select GetSearchAuthConf()";
     }
 
     @Override
     PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
-        int id = (int) getParameters().get(0);
-        ps.setInt(1, id);
         return ps;
     }
 

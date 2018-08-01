@@ -64,7 +64,7 @@ public class AdminController {
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
             String email = decoder.decodeToken(body.get("token"));
-            IEncryptor encryptor = new SimpleMD5Encryptor();
+            IEncryptor encryptor = SimpleMD5Encryptor.getInstance();
             String password = encryptor.encrypt(body.get("password"));
             if(dao.setAdminPassword(email,password)){
                 return SUCCESS;
