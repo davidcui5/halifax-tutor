@@ -1,7 +1,7 @@
 package group12.tutorsetting;
 
 
-import group12.dataaccess.tutorsetting.WeeklySchedule;
+import group12.dataaccess.WeeklySchedule;
 
 public interface ITutorSettingDAO {
     boolean updateTutorPassword(String email, String password);

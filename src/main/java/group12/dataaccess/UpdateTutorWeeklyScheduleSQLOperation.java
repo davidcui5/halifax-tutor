@@ -1,6 +1,5 @@
-package group12.dataaccess.tutorsetting;
+package group12.dataaccess;
 
-import group12.dataaccess.SQLOperationTemplate;
 import group12.logging.ConnectionFactory;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

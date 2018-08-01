@@ -1,7 +1,6 @@
 package group12.dataaccess;
 
 
-import group12.dataaccess.tutorsetting.UpdateTutorPasswordSQLOperation;
 import group12.tutorprofile.TutorProfileForm;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

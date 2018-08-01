@@ -1,5 +1,6 @@
-package group12.dataaccess.search;
+package group12.dataaccess;
 
+import group12.dataaccess.TutorPublicInfo;
 import group12.exceptions.SearchQuerySQLException;
 
 import java.util.List;

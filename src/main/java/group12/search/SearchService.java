@@ -2,9 +2,9 @@ package group12.search;
 
 import group12.Configuration;
 import group12.dataaccess.*;
-import group12.dataaccess.search.TutorPublicInfo;
-import group12.dataaccess.search.TutorPublicInfoDAO;
-import group12.dataaccess.search.TutorPublicInfoDaoImpl;
+import group12.dataaccess.TutorPublicInfo;
+import group12.dataaccess.TutorPublicInfoDAO;
+import group12.dataaccess.TutorPublicInfoDaoImpl;
 import group12.exceptions.SearchQuerySQLException;
 import group12.tokenauth.JWTAccessToken;
 

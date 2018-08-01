@@ -1,6 +1,5 @@
-package group12.dataaccess.tutorsetting;
+package group12.dataaccess;
 
-import group12.dataaccess.SQLOperationTemplate;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

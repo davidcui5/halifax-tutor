@@ -2,7 +2,6 @@ package group12.tutorsetting;
 
 
 import group12.dataaccess.*;
-import group12.dataaccess.tutorsetting.*;
 
 public class TutorSettingDAOImpl implements ITutorSettingDAO {
     private SQLOperationTemplate operation;

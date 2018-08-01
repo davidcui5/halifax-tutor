@@ -1,4 +1,4 @@
-package group12.dataaccess.tutorsetting;
+package group12.dataaccess;
 
 public class WeeklySchedule {
 
