@@ -1,9 +1,9 @@
 package group12.login;
 
-import group12.dataaccess.Tutor;
-import group12.dataaccess.User;
-import group12.tokenauth.IAccessToken;
-import group12.tokenauth.JWTAccessToken;
+import group12.data_access.Tutor;
+import group12.data_access.User;
+import group12.token_auth.IAccessToken;
+import group12.token_auth.JWTAccessToken;
 
 public class TutorAuthStrategy implements IAuthenticationStrategy{
 

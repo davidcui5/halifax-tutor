@@ -1,7 +1,7 @@
 package group12.ForgotPassword;
 
-import group12.dataaccess.IDataAccessObject;
-import group12.dataaccess.MysqlDAOImpl;
+import group12.data_access.IDataAccessObject;
+import group12.data_access.MysqlDAOImpl;
 import group12.email.IMailer;
 import group12.email.SpringMailer;
 import org.junit.Before;

@@ -1,9 +1,9 @@
 package group12.tutorprofile;
 
-import group12.dataaccess.IDataAccessObject;
+import group12.data_access.IDataAccessObject;
 import group12.email.IMailer;
 import group12.registration.RegistrationService;
-import group12.tokenauth.JWTAccessToken;
+import group12.token_auth.JWTAccessToken;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;

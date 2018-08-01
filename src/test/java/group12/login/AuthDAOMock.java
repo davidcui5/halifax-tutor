@@ -1,8 +1,8 @@
 package group12.login;
 
-import group12.dataaccess.Admin;
-import group12.dataaccess.Student;
-import group12.dataaccess.Tutor;
+import group12.data_access.Admin;
+import group12.data_access.Student;
+import group12.data_access.Tutor;
 
 public class AuthDAOMock implements IAuthDAO {
     @Override

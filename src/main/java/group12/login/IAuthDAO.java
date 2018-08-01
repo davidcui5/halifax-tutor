@@ -1,6 +1,6 @@
 package group12.login;
 
-import group12.dataaccess.*;
+import group12.data_access.*;
 
 public interface IAuthDAO {
     Student getStudentByEmail(String email);

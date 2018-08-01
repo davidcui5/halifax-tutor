@@ -1,6 +1,6 @@
 package group12.login;
 
-import group12.dataaccess.*;
+import group12.data_access.*;
 import group12.encryption.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

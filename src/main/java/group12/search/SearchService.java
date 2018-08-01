@@ -1,12 +1,12 @@
 package group12.search;
 
 import group12.Configuration;
-import group12.dataaccess.*;
-import group12.dataaccess.TutorPublicInfo;
-import group12.dataaccess.TutorPublicInfoDAO;
-import group12.dataaccess.TutorPublicInfoDaoImpl;
+import group12.data_access.*;
+import group12.data_access.TutorPublicInfo;
+import group12.data_access.TutorPublicInfoDAO;
+import group12.data_access.TutorPublicInfoDaoImpl;
 import group12.exceptions.SearchQuerySQLException;
-import group12.tokenauth.JWTAccessToken;
+import group12.token_auth.JWTAccessToken;
 
 import java.util.ArrayList;
 import java.util.List;

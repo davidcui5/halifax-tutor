@@ -1,7 +1,7 @@
 package group12.registration;
 
-import group12.dataaccess.Student;
-import group12.dataaccess.Tutor;
+import group12.data_access.Student;
+import group12.data_access.Tutor;
 import group12.encryption.IEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
