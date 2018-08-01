@@ -1,6 +1,6 @@
 package group12.tutor_setting;
 
-import group12.data_access.tutor.WeeklySchedule;
+import group12.data_access.tutor_setting.WeeklySchedule;
 import group12.token_auth.IAccessToken;
 import group12.token_auth.JWTAccessToken;
 import group12.tutor_setting.request.WeeklyScheduleRequest;

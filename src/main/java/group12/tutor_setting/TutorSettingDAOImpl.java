@@ -2,8 +2,8 @@ package group12.tutor_setting;
 
 
 import group12.data_access.*;
-import group12.data_access.tutor.WeeklySchedule;
-import group12.data_access.tutor.UpdateTutorWeeklyScheduleSQLOperation;
+import group12.data_access.tutor_setting.WeeklySchedule;
+import group12.data_access.tutor_setting.UpdateTutorWeeklyScheduleSQLOperation;
 
 public class TutorSettingDAOImpl implements ITutorSettingDAO {
 
