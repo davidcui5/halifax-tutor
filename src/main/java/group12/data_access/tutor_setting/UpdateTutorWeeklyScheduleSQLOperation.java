@@ -1,4 +1,4 @@
-package group12.data_access.tutor;
+package group12.data_access.tutor_setting;
 
 import group12.data_access.SQLOperationTemplate;
 import group12.logging.ConnectionFactory;
