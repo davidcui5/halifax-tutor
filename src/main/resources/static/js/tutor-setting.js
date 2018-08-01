@@ -123,6 +123,12 @@ $(document).ready(function() {
         });
     });
 
+    $("#courseAdd").submit(function (event) {
+        event.preventDefault();
+        let school = $("#university").val();
+        let courseName = $("#courseCode").val();
+    });
+
     $("#Cemail-form").submit(function (event) {
         event.preventDefault();
         let email = $("#email").val();
@@ -479,23 +485,5 @@ $(document).ready(function() {
 
         });
     });
-
-    // //get subscription info
-    // $.ajax({
-    //     url: location.origin +"/tutor/setting/postplan",
-    //     // contentType: "application/json",
-    //     type: "POST",
-    //     dataType: "json"
-    // }).done(function (data) {
-    //     if (data.result === "Success") {
-    //         //TODO POST TO HTML
-    //     } else {
-    //         alert(data.details);
-    //     }
-    // }).fail(function (xhr, status, errorThrown) {
-    //
-    // });
-    //
-
 });
 
