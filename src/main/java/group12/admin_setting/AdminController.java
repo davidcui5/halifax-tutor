@@ -1,5 +1,7 @@
 package group12.admin_setting;
 
+import group12.data_access.Student;
+import group12.data_access.Tutor;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import group12.token_auth.IAccessToken;
@@ -177,10 +179,11 @@ public class AdminController {
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
             String email = body.get("email");
-            int sID = dao.getStudentIDByEmail(email);
-            if(sID < 0){
+            Student student = dao.getStudentByEmail(email);
+            if(student == null){
                 return new StudentReviews(-1,null,null);
             }
+            int sID = student.getStudentID();
             List<ReviewDTO> reviews = dao.getReviewsMadeByStudent(sID);
             return new StudentReviews(sID, email, reviews);
         }
@@ -194,10 +197,11 @@ public class AdminController {
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
             String email = body.get("email");
-            int tID = dao.getTutorIDByEmail(email);
-            if(tID < 0){
+            Tutor tutor = dao.getTutorByEmail(email);
+            if(tutor == null){
                 return new TutorReviews(-1,null,null);
             }
+            int tID = tutor.getTutorID();
             List<ReviewDTO> reviews = dao.getReviewsMadeOnTutors(tID);
             return new TutorReviews(tID, email, reviews);
         }
@@ -210,9 +214,25 @@ public class AdminController {
     public String deleteReview(@RequestBody Map<String,String> body){
         boolean isAuthorized = authorizeAdmin(body.get("token"));
         if(isAuthorized){
-            int id = Integer.parseInt(body.get("reviewID"));
-            if(dao.deleteReviewByID(id)){
+            int reviewID = Integer.parseInt(body.get("reviewID"));
+            ReviewDTO review = dao.getReviewByReviewID(reviewID);
+            if(review == null){
                 return SUCCESS;
+            }
+            if(dao.deleteReviewByID(reviewID)){
+                int tutorID = review.getTutorID();
+                float rating = review.getRating();
+                Tutor tutor = dao.getTutorByID(tutorID);
+                float tutorRating = tutor.getRating();
+                int tutorTotalRatings = tutor.getTotalRating();
+                tutorRating = (tutorRating * tutorTotalRatings - rating) / (tutorTotalRatings - 1);
+                tutorTotalRatings--;
+                if(dao.setTutorRatingAndTotalRatings(tutorRating, tutorTotalRatings, tutorID)){
+                    return SUCCESS;
+                }
+                else {
+                    return FAILURE;
+                }
             }
             else{
                 return FAILURE;

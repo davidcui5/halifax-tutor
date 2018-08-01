@@ -6,13 +6,13 @@ public class MysqlAuthDAO implements IAuthDAO {
 
     @Override
     public Student getStudentByEmail(String email) {
-        SQLOperationTemplate op = new GetStudentSQLOperation(email);
+        SQLOperationTemplate op = new GetStudentByEmailSQLOperation(email);
         return (Student) op.executeMysqlQuery();
     }
 
     @Override
     public Tutor getTutorByEmail(String email) {
-        SQLOperationTemplate op = new GetTutorSQLOperation(email);
+        SQLOperationTemplate op = new GetTutorEmailSQLOperation(email);
         return (Tutor) op.executeMysqlQuery();
     }
 
