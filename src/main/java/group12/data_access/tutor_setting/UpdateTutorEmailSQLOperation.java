@@ -1,25 +1,27 @@
-package group12.data_access;
+package group12.data_access.tutor_setting;
+
+import group12.data_access.SQLOperationTemplate;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UpdateTutorPhoneSQLOperation extends SQLOperationTemplate {
-    public UpdateTutorPhoneSQLOperation(String email, String phone){
-        super(email, phone);
+public class UpdateTutorEmailSQLOperation extends SQLOperationTemplate {
+    public UpdateTutorEmailSQLOperation(String email, String newemail){
+        super(email, newemail);
     }
 
     @Override
     protected String makeSQL() {
-        return "SELECT UpdateTutorPhone(?, ?)";
+        return "SELECT UpdateTutorEmail(?, ?)";
     }
 
     @Override
     protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         String email = (String) getParameters().get(0);
-        String phone = (String) getParameters().get(1);
+        String newemail = (String) getParameters().get(1);
         ps.setString(1, email);
-        ps.setString(2, phone);
+        ps.setString(2, newemail);
         return ps;
     }
 

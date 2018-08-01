@@ -1,27 +1,27 @@
-package group12.data_access;
+package group12.data_access.tutor_setting;
+
+import group12.data_access.SQLOperationTemplate;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UpdateTutorExperienceSQLOperation extends SQLOperationTemplate {
-
-    public UpdateTutorExperienceSQLOperation(String email, String experience){
-        super(email, experience);
+public class UpdateTutorPasswordSQLOperation extends SQLOperationTemplate {
+    public UpdateTutorPasswordSQLOperation(String email, String password){
+        super(email, password);
     }
 
-    //TODO: function
     @Override
     protected String makeSQL() {
-        return "SELECT UpdateTutorExperience(?, ?)";
+        return "SELECT UpdateTutorPassword(?, ?)";
     }
 
     @Override
     protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         String email = (String) getParameters().get(0);
-        String experience = (String) getParameters().get(1);
+        String password = (String) getParameters().get(1);
         ps.setString(1, email);
-        ps.setString(2, experience);
+        ps.setString(2, password);
         return ps;
     }
 

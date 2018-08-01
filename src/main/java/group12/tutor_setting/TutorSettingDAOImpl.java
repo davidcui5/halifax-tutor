@@ -2,8 +2,7 @@ package group12.tutor_setting;
 
 
 import group12.data_access.*;
-import group12.data_access.tutor_setting.WeeklySchedule;
-import group12.data_access.tutor_setting.UpdateTutorWeeklyScheduleSQLOperation;
+import group12.data_access.tutor_setting.*;
 
 public class TutorSettingDAOImpl implements ITutorSettingDAO {
     private SQLOperationTemplate operation;
