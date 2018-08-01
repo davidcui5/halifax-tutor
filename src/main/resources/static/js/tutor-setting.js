@@ -112,7 +112,7 @@ $(document).ready(function() {
                 alert("Email change succeed!");
                 localStorage.removeItem("token");
                 alert("Signing out... Please log in with your new email");
-                windows.location = "../index.html";
+                window.location = "../index.html";
             } else {
                 alert("Something went wrong with our database...");
             }

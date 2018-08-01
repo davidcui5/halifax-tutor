@@ -1,9 +1,8 @@
 package group12.tutorsetting;
 
-import group12.encryption.IEncryptor;
-import group12.encryption.SimpleMD5Encryptor;
 import group12.tokenauth.IAccessToken;
 import group12.tokenauth.JWTAccessToken;
+import group12.tutorsetting.request.UpdateEmailRequest;
 import group12.tutorsetting.request.UpdatePasswordRequest;
 import group12.tutorsetting.request.UpdateWeeklyScheduleRequest;
 import org.apache.logging.log4j.Level;
@@ -42,18 +41,10 @@ public class TutorSettingController {
         return response;
     }
 
-    @PostMapping(path = "/tutor/setting/email", consumes = "application/json", produces = "text/plain")
-    public String changeEmail(@RequestBody Map<String, String> body) {
-        String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO, email);
-        logger.log(Level.INFO, body.get("email"));
-        String newemail = body.get("email");
-        if (tutorSettingDAO.updateTutorEmail(email, newemail)) {
-
-            return SUCCESS;
-        } else {
-            return FAILURE;
-        }
+    @PostMapping(path = "/tutor/setting/email", headers = "content-type=application/json")
+    public TutorSettingResponse updateEmail(@RequestBody UpdateEmailRequest updateEmailRequest) {
+        TutorSettingResponse response = tutorSettingService.getUpdateEmailResponse(updateEmailRequest);
+        return response;
     }
 
     @PostMapping(path = "/tutor/setting/card", consumes = "application/json", produces = "text/plain")
