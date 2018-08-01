@@ -16,7 +16,7 @@ public interface ITutorSettingDAO {
 
     boolean updatePhoto(String email, String photoURL);
 
-    boolean setExperience(String email, String experience);
+    boolean updateExperience(String email, String experience);
 
     boolean addCourse(String email, String school, int code, String price);
 

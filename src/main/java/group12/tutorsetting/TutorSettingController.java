@@ -63,17 +63,10 @@ public class TutorSettingController {
         return response;
     }
 
-    @PostMapping(path = "/tutor/setting/experience", consumes = "application/json", produces = "text/plain")
-    public String changeExperience(@RequestBody Map<String, String> body) {
-        String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO, email);
-        logger.log(Level.INFO, body.get("experience"));
-        String experience = body.get("experience");
-        if (tutorSettingDAO.setExperience(email, experience)) {
-            return SUCCESS;
-        } else {
-            return FAILURE;
-        }
+    @PostMapping(path = "/tutor/setting/experience", headers = "content-type=application/json")
+    public TutorSettingResponse updateExperience(@RequestBody UpdateExperienceRequest updateExperienceRequest) {
+        TutorSettingResponse tutorSettingResponse = tutorSettingService.getUpdateExperienceResponse(updateExperienceRequest);
+        return tutorSettingResponse;
     }
 
     @PostMapping(path = "/tutor/setting/weeklySchedule", headers = "content-type=application/json")

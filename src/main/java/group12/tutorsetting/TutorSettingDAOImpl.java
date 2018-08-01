@@ -44,7 +44,7 @@ public class TutorSettingDAOImpl implements ITutorSettingDAO {
     }
 
     @Override
-    public boolean setExperience(String email, String experience) {
+    public boolean updateExperience(String email, String experience) {
         operation = new UpdateTutorExperienceSQLOperation(email, experience);
         return (Boolean) operation.executeMysqlQuery();
     }

@@ -104,4 +104,14 @@ class TutorSettingService {
 
         return new TutorSettingResponse(success);
     }
+
+    TutorSettingResponse getUpdateExperienceResponse(UpdateExperienceRequest updateExperienceRequest) {
+        String token = updateExperienceRequest.getToken();
+        String experience = updateExperienceRequest.getExperience();
+
+        String email = accessToken.decodeToken(token);
+
+        boolean success = tutorSettingDAO.updateExperience(email, experience);
+        return new TutorSettingResponse(success);
+    }
 }

@@ -247,25 +247,26 @@ $(document).ready(function() {
         event.preventDefault();
         let experience = $("#experience").val();
 
-        var ChangeExpData = {
+        let data = {
             'token': token,
             'experience' : experience
         };
 
         $.ajax({
             url: location.origin +"/tutor/setting/experience",
-            data: JSON.stringify(ChangeExpData),
+            data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
-            dataType: "text"
-        }).done(function (data) {
-            if (data === "Success") {
+            dataType: "json"
+        }).done(function (json) {
+            let success = json['success'];
+            if (success) {
                 alert("Experience change succeed!");
             } else {
-                alert(data);
+                alert("Something wrong with our database...");
             }
         }).fail(function (xhr, status, errorThrown) {
-
+            alert("Something wrong with our server...");
         });
 
     });
