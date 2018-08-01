@@ -1,6 +1,44 @@
-package group12.data_access;
+package group12.data_access.tutor;
 
 public class Availability {
+    enum Day {
+        Sunday,
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
+        Saturday
+    }
+
+    enum Time {
+        Morning,
+        Noon,
+        Night
+    }
+
+    private boolean[][] availability;
+
+    public Availability() {
+        this.availability = new boolean[7][3];
+    }
+
+    public void setOneAvailability(Day day, Time time, boolean availability) {
+        int dayIndex = Day.valueOf(day.toString()).ordinal();
+        int timeIndex = Time.valueOf(time.toString()).ordinal();
+        this.availability[dayIndex][timeIndex] = availability;
+    }
+
+    public boolean isAvailable(Day day, Time time) {
+        int dayIndex = Day.valueOf(day.toString()).ordinal();
+        int timeIndex = Time.valueOf(time.toString()).ordinal();
+        return availability[dayIndex][timeIndex];
+    }
+
+    public void setAllAvailability(boolean[][] availability) {
+        this.availability = availability;
+    }
+
     private String A1;
     private String A2;
     private String A3;

@@ -1,13 +1,14 @@
 package group12.tutor_setting;
 
-import group12.data_access.Availability;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import group12.token_auth.IAccessToken;
 import group12.token_auth.JWTAccessToken;
+import group12.tutor_setting.request.WeeklyScheduleRequest;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,171 +20,139 @@ public class TutorSettingController {
     private static final String SUCCESS = "SUCCESS";
     private static final String FAILURE = "FAILURE";
     private static final Logger logger = LogManager.getLogger(TutorSettingController.class);
-    IAccessToken accessToken;
-    ITutorSettingDAO tutorSettingDAO;
+    private IAccessToken accessToken;
+    private ITutorSettingDAO tutorSettingDAO;
+    private TutorSettingService tutorSettingService;
 
-    public TutorSettingController(){
+    public TutorSettingController() {
         accessToken = JWTAccessToken.getInstance();
-        tutorSettingDAO = new TutorSettingDAO();
+        tutorSettingDAO = new TutorSettingDAOImpl();
+        tutorSettingService = new TutorSettingService();
     }
 
-    public TutorSettingController(IAccessToken accessToken, ITutorSettingDAO tutorSettingDAO){
+    public TutorSettingController(IAccessToken accessToken, ITutorSettingDAO tutorSettingDAO) {
         this.accessToken = accessToken;
         this.tutorSettingDAO = tutorSettingDAO;
     }
 
 
-    @PostMapping(path="/tutor/setting/password", consumes = "application/json", produces = "text/plain")
-    public String changePassword(@RequestBody Map<String,String> body){
+    @PostMapping(path = "/tutor/setting/password", consumes = "application/json", produces = "text/plain")
+    public String changePassword(@RequestBody Map<String, String> body) {
         String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO,email);
-        logger.log(Level.INFO,body.get("password"));
+        logger.log(Level.INFO, email);
+        logger.log(Level.INFO, body.get("password"));
         IEncryptor encryptor = SimpleMD5Encryptor.getInstance();
         String password = encryptor.encrypt(body.get("password"));
-        logger.log(Level.INFO,password);
-        if(tutorSettingDAO.setTutorPassword(email,password)){
+        logger.log(Level.INFO, password);
+        if (tutorSettingDAO.setTutorPassword(email, password)) {
             return SUCCESS;
-        }
-        else{
+        } else {
             return FAILURE;
         }
     }
 
     @PostMapping(path = "/tutor/setting/email", consumes = "application/json", produces = "text/plain")
-    public  String changeEmail(@RequestBody Map<String,String> body){
+    public String changeEmail(@RequestBody Map<String, String> body) {
         String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO,email);
-        logger.log(Level.INFO,body.get("email"));
-        String newemail =body.get("email");
-        if (tutorSettingDAO.setTutorEmail(email,newemail)){
+        logger.log(Level.INFO, email);
+        logger.log(Level.INFO, body.get("email"));
+        String newemail = body.get("email");
+        if (tutorSettingDAO.setTutorEmail(email, newemail)) {
 
             return SUCCESS;
-        }else {
+        } else {
             return FAILURE;
         }
     }
 
     @PostMapping(path = "/tutor/setting/card", consumes = "application/json", produces = "text/plain")
-    public  String changeCardinfo(@RequestBody Map<String,String> body){
+    public String changeCardinfo(@RequestBody Map<String, String> body) {
         String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO,email);
-        logger.log(Level.INFO,body.get("cardname"));
-        logger.log(Level.INFO,body.get("creditCardNumber"));
-        logger.log(Level.INFO,body.get("expireDate"));
-        logger.log(Level.INFO,body.get("securityCode"));
+        logger.log(Level.INFO, email);
+        logger.log(Level.INFO, body.get("cardname"));
+        logger.log(Level.INFO, body.get("creditCardNumber"));
+        logger.log(Level.INFO, body.get("expireDate"));
+        logger.log(Level.INFO, body.get("securityCode"));
 
         String cardname = body.get("cardname");
-        String creditCardNumber =body.get("creditCardNumber");
-        String expireDate =body.get("expireDate");
+        String creditCardNumber = body.get("creditCardNumber");
+        String expireDate = body.get("expireDate");
         int securityCode = Integer.parseInt(body.get("securityCode"));
 
-        if (tutorSettingDAO.setTutorCard(email,cardname,creditCardNumber,expireDate,securityCode)){
+        if (tutorSettingDAO.setTutorCard(email, cardname, creditCardNumber, expireDate, securityCode)) {
             return SUCCESS;
-        }else {
+        } else {
             return FAILURE;
         }
     }
 
     @PostMapping(path = "/tutor/setting/phone", consumes = "application/json", produces = "text/plain")
-    public  String changePhone(@RequestBody Map<String,String> body){
+    public String changePhone(@RequestBody Map<String, String> body) {
         String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO,email);
-        logger.log(Level.INFO,body.get("phone"));
+        logger.log(Level.INFO, email);
+        logger.log(Level.INFO, body.get("phone"));
         String phone = body.get("phone");
 
-        if (tutorSettingDAO.setTutorPhone(email,phone)){
+        if (tutorSettingDAO.setTutorPhone(email, phone)) {
             return SUCCESS;
-        }else {
+        } else {
             return FAILURE;
         }
     }
 
-    @PostMapping(path="/tutor/setting/education", consumes = "application/json", produces = "text/plain")
-    public String changeEducation(@RequestBody Map<String,String> body){
+    @PostMapping(path = "/tutor/setting/education", consumes = "application/json", produces = "text/plain")
+    public String changeEducation(@RequestBody Map<String, String> body) {
         String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO,email);
-        logger.log(Level.INFO,body.get("education"));
-        String education =body.get("education");
-        if(tutorSettingDAO.setEducation(email,education)){
+        logger.log(Level.INFO, email);
+        logger.log(Level.INFO, body.get("education"));
+        String education = body.get("education");
+        if (tutorSettingDAO.setEducation(email, education)) {
             return SUCCESS;
-        }
-        else{
+        } else {
             return FAILURE;
         }
     }
 
-    @PostMapping(path="/tutor/setting/experience", consumes = "application/json", produces = "text/plain")
-    public String changeExperience(@RequestBody Map<String,String> body){
+    @PostMapping(path = "/tutor/setting/experience", consumes = "application/json", produces = "text/plain")
+    public String changeExperience(@RequestBody Map<String, String> body) {
         String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO,email);
-        logger.log(Level.INFO,body.get("experience"));
+        logger.log(Level.INFO, email);
+        logger.log(Level.INFO, body.get("experience"));
         String experience = body.get("experience");
-        if(tutorSettingDAO.setExperience(email,experience)){
+        if (tutorSettingDAO.setExperience(email, experience)) {
             return SUCCESS;
-        }
-        else{
+        } else {
             return FAILURE;
         }
     }
 
-    @PostMapping(path="/tutor/setting/availability", consumes = "application/json", produces = "text/plain")
-    public String changeAvailability(@RequestBody Map<String,String> body){
-        String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO,email);
-        Availability availability = new Availability();
-        availability.setA1(body.get("A1"));
-        availability.setA2(body.get("A2"));
-        availability.setA3(body.get("A3"));
-        availability.setA4(body.get("A4"));
-        availability.setA5(body.get("A5"));
-        availability.setA6(body.get("A6"));
-        availability.setA7(body.get("A7"));
-        availability.setB1(body.get("B1"));
-        availability.setB2(body.get("B2"));
-        availability.setB3(body.get("B3"));
-        availability.setB4(body.get("B4"));
-        availability.setB5(body.get("B5"));
-        availability.setB6(body.get("B6"));
-        availability.setB7(body.get("B7"));
-        availability.setC1(body.get("C1"));
-        availability.setC2(body.get("C2"));
-        availability.setC3(body.get("C3"));
-        availability.setC4(body.get("C4"));
-        availability.setC5(body.get("C5"));
-        availability.setC6(body.get("C6"));
-        availability.setC7(body.get("C7"));
-
-        if(tutorSettingDAO.setAvailability(email,availability)){
-            return SUCCESS;
-        }
-        else{
-            return FAILURE;
-        }
+    @PostMapping(path = "/tutor/setting/weeklySchedule", headers = "content-type=application/json")
+    public TutorSettingResponse changeWeeklySchedule(@RequestBody WeeklyScheduleRequest weeklyScheduleRequest) {
+        TutorSettingResponse response = tutorSettingService.getChangeWeeklyScheduleResponse(weeklyScheduleRequest);
+        return response;
     }
 
-    @PostMapping(path="/tutor/setting/plan", consumes = "application/json", produces = "text/plain")
-    public String changePlan(@RequestBody Map<String,String> body){
+    @PostMapping(path = "/tutor/setting/plan", consumes = "application/json", produces = "text/plain")
+    public String changePlan(@RequestBody Map<String, String> body) {
         String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO,email);
+        logger.log(Level.INFO, email);
         String planNo = body.get("planNo");
 
-        if(tutorSettingDAO.setPlan(email,planNo)){
+        if (tutorSettingDAO.setPlan(email, planNo)) {
             return SUCCESS;
-        }
-        else{
+        } else {
             return FAILURE;
         }
     }
 
-    @PostMapping(path="/tutor/setting/cancel", consumes = "application/json", produces = "text/plain")
-    public String cancelPlan(@RequestBody Map<String,String> body){
+    @PostMapping(path = "/tutor/setting/cancel", consumes = "application/json", produces = "text/plain")
+    public String cancelPlan(@RequestBody Map<String, String> body) {
         String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO,email);
+        logger.log(Level.INFO, email);
 
-        if(tutorSettingDAO.cancelPlan(email)){
+        if (tutorSettingDAO.cancelPlan(email)) {
             return SUCCESS;
-        }
-        else{
+        } else {
             return FAILURE;
         }
     }

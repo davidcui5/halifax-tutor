@@ -1,7 +1,7 @@
 package group12.tutor_setting;
 
 
-import group12.data_access.Availability;
+import group12.data_access.tutor.WeeklySchedule;
 
 public interface ITutorSettingDAO {
     boolean setTutorPassword(String email, String password);
@@ -11,7 +11,7 @@ public interface ITutorSettingDAO {
     boolean setEducation(String email, String education);
     boolean setExperience (String email, String experience);
     boolean addCourse(String email,String school,int code, String price);
-    boolean setAvailability(String email, Availability availability);
+    boolean setWeeklySchedule(String email, WeeklySchedule weeklySchedule);
     boolean setPlan(String email, String planNo);
     boolean cancelPlan(String email);
 }
