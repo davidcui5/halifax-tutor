@@ -20,7 +20,7 @@ public class TutorSettingDAOImpl implements ITutorSettingDAO {
     }
 
     @Override
-    public boolean setTutorPhone(String email, String phone) {
+    public boolean updateTutorPhone(String email, String phone) {
         operation = new UpdateTutorPhoneSQLOperation(email, phone);
         return (Boolean) operation.executeMysqlQuery();
     }

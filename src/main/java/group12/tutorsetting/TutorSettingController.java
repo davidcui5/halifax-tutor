@@ -75,7 +75,7 @@ public class TutorSettingController {
         logger.log(Level.INFO, body.get("phone"));
         String phone = body.get("phone");
 
-        if (tutorSettingDAO.setTutorPhone(email, phone)) {
+        if (tutorSettingDAO.updateTutorPhone(email, phone)) {
             return SUCCESS;
         } else {
             return FAILURE;

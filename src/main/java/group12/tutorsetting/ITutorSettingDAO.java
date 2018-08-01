@@ -6,7 +6,7 @@ import group12.dataaccess.tutorsetting.WeeklySchedule;
 public interface ITutorSettingDAO {
     boolean updateTutorPassword(String email, String password);
     boolean updateTutorEmail(String email,String newEmail);
-    boolean setTutorPhone(String email, String phone);
+    boolean updateTutorPhone(String email, String phone);
     boolean setTutorCard(String email, String creditCardHolder,String creditCardNum,String creditCardExpiryDate,int securityCode);
     boolean setEducation(String email, String education);
     boolean setExperience (String email, String experience);
