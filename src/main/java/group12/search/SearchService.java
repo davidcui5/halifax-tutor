@@ -1,29 +1,31 @@
 package group12.search;
 
+import group12.Configuration;
 import group12.dataaccess.*;
 import group12.dataaccess.search.TutorPublicInfo;
 import group12.dataaccess.search.TutorPublicInfoDAO;
 import group12.dataaccess.search.TutorPublicInfoDaoImpl;
 import group12.exceptions.SearchQuerySQLException;
 import group12.tokenauth.JWTAccessToken;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class SearchService {
-
-    @Value("${search.auth}")
-    private String auth;
+    private Configuration configuration;
 
     private TutorPublicInfoDAO tutorPublicInfoDAO;
 
     public SearchService() {
         tutorPublicInfoDAO = new TutorPublicInfoDaoImpl();
+        Configuration.setDb(new MysqlDAOImpl());
+        configuration = Configuration.getInstance();
     }
 
     public SearchService(TutorPublicInfoDAO tutorPublicInfoDAO) {
         this.tutorPublicInfoDAO = tutorPublicInfoDAO;
+        Configuration.setDb(new MysqlDAOImpl());
+        configuration = Configuration.getInstance();
     }
 
     SearchResponse getSearchResponse(SearchRequest searchRequest) {
@@ -52,26 +54,33 @@ class SearchService {
 
     IdentityResponse getSearchIdentity(IdentityRequest identityRequest) {
         IdentityResponse identityResponse = new IdentityResponse();
-        if (!auth.equals("true")) {
-            identityResponse.setSuccess(true);
-            identityResponse.setType("any");
+
+        String token = identityRequest.getToken();
+        String email = JWTAccessToken.getInstance().decodeToken(token);
+        if (email == null) {
+            identityResponse.setSuccess(false);
         } else {
-            String token = identityRequest.getToken();
-            String email = JWTAccessToken.getInstance().decodeToken(token);
-            if (email == null) {
-                identityResponse.setSuccess(false);
+            IDataAccessObject dataAccessObject = new MysqlDAOImpl();
+            if (dataAccessObject.getStudentByEmail(email) != null) {
+                identityResponse.setType("student");
+            } else if (dataAccessObject.getTutorByEmail(email) != null) {
+                identityResponse.setType("tutor");
             } else {
-                IDataAccessObject dataAccessObject = new MysqlDAOImpl();
-                if (dataAccessObject.getStudentByEmail(email) != null) {
-                    identityResponse.setType("student");
-                } else if (dataAccessObject.getTutorByEmail(email) != null) {
-                    identityResponse.setType("tutor");
-                } else {
-                    identityResponse.setType("admin");
-                }
-                identityResponse.setSuccess(true);
+                identityResponse.setType("admin");
             }
+            identityResponse.setSuccess(true);
         }
         return identityResponse;
+    }
+
+    NoLoginSearchResponse getNoLoginSearchResponse(NoLoginSearchRequest request) {
+        NoLoginSearchResponse response = new NoLoginSearchResponse();
+        Boolean auth = configuration.isSearchAuth();
+        if (!auth) {
+            response.setSuccess(true);
+        } else {
+            response.setSuccess(false);
+        }
+        return response;
     }
 }

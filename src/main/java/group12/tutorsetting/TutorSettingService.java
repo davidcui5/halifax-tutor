@@ -12,6 +12,14 @@ class TutorSettingService {
     private ITutorSettingDAO tutorSettingDAO = new TutorSettingDAOImpl();
     private IAccessToken accessToken = JWTAccessToken.getInstance();
 
+    public void setAccessToken(IAccessToken accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public void setTutorSettingDAO(ITutorSettingDAO tutorSettingDAO) {
+        this.tutorSettingDAO = tutorSettingDAO;
+    }
+
     TutorSettingResponse getUpdateWeeklyScheduleResponse(UpdateWeeklyScheduleRequest updateWeeklyScheduleRequest) {
         String token = updateWeeklyScheduleRequest.getToken();
         String email = accessToken.decodeToken(token);
