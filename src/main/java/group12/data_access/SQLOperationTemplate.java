@@ -23,13 +23,13 @@ public abstract class SQLOperationTemplate {
         }
     }
 
-    abstract String makeSQL();
+    protected abstract String makeSQL();
 
-    abstract PreparedStatement addParameters(PreparedStatement ps) throws SQLException;
+    protected abstract PreparedStatement addParameters(PreparedStatement ps) throws SQLException;
 
-    abstract Object extractResultSet(ResultSet rs) throws SQLException;
+    protected abstract Object extractResultSet(ResultSet rs) throws SQLException;
 
-    abstract ResultSet execute(PreparedStatement ps) throws SQLException;
+    protected abstract ResultSet execute(PreparedStatement ps) throws SQLException;
 
     public ArrayList<Object> getParameters() {
         return parameters;

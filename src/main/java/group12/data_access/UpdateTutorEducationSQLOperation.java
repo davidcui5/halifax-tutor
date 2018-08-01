@@ -11,12 +11,12 @@ public class UpdateTutorEducationSQLOperation extends SQLOperationTemplate {
 
     //TODO: function
     @Override
-    String makeSQL() {
+    protected String makeSQL() {
         return "SELECT UpdateTutorEducation(?, ?)";
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
+    protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         String email = (String) getParameters().get(0);
         String education = (String) getParameters().get(1);
         ps.setString(1, email);
@@ -26,13 +26,13 @@ public class UpdateTutorEducationSQLOperation extends SQLOperationTemplate {
 
 
     @Override
-    Object extractResultSet(ResultSet rs) throws SQLException {
+    protected Object extractResultSet(ResultSet rs) throws SQLException {
         return rs.getBoolean(1);
 
 
     }
 
     @Override
-    ResultSet execute(PreparedStatement ps) throws SQLException {
+    protected ResultSet execute(PreparedStatement ps) throws SQLException {
         return ps.executeQuery();    }
 }

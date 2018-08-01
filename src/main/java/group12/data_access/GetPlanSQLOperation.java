@@ -19,19 +19,19 @@ public class GetPlanSQLOperation extends SQLOperationTemplate{
 
 
     @Override
-    String makeSQL() {
+    protected String makeSQL() {
         return "SELECE * FROM SubscriptionPlan WHERE ID=?";
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
+    protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         int ID = (int) getParameters().get(0);
         ps.setInt(1,ID);
         return ps;
     }
 
     @Override
-    Object extractResultSet(ResultSet rs) throws SQLException {
+    protected Object extractResultSet(ResultSet rs) throws SQLException {
         Subscribe_Plan plan = new Subscribe_Plan();
         plan.setID(rs.getInt("ID"));
         plan.setName(rs.getString("Name"));
@@ -42,7 +42,7 @@ public class GetPlanSQLOperation extends SQLOperationTemplate{
     }
 
     @Override
-    ResultSet execute(PreparedStatement ps) throws SQLException {
+    protected ResultSet execute(PreparedStatement ps) throws SQLException {
         return ps.executeQuery();
     }
 }

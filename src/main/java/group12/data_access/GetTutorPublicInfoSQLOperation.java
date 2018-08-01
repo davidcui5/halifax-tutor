@@ -19,7 +19,7 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    String makeSQL() {
+    protected String makeSQL() {
         return "SELECT Tutor.ID, Tutor.PhotoUrl, Tutor.FirstName, Tutor.LastName, Tutor.Education, " +
                 " Tutor.Rating, TutorCourse.Price " +
                 "FROM TutorCourse " +
@@ -30,7 +30,7 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
+    protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         ArrayList<Object> parameters = getParameters();
         String school = (String) parameters.get(0);
         String courseName = (String) parameters.get(1);
@@ -40,7 +40,7 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    Object extractResultSet(ResultSet rs) throws SQLException {
+    protected Object extractResultSet(ResultSet rs) throws SQLException {
         int id = rs.getInt("ID");
         String photoURL = rs.getString("PhotoURL");
         String firstName = rs.getString("FirstName");
@@ -52,7 +52,7 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    ResultSet execute(PreparedStatement ps) throws SQLException {
+    protected ResultSet execute(PreparedStatement ps) throws SQLException {
         return null;
     }
 
