@@ -4,7 +4,7 @@ import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import group12.tokenauth.IAccessToken;
 import group12.tokenauth.JWTAccessToken;
-import group12.tutorsetting.request.WeeklyScheduleRequest;
+import group12.tutorsetting.request.UpdateWeeklyScheduleRequest;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -126,8 +126,8 @@ public class TutorSettingController {
     }
 
     @PostMapping(path = "/tutor/setting/weeklySchedule", headers = "content-type=application/json")
-    public TutorSettingResponse changeWeeklySchedule(@RequestBody WeeklyScheduleRequest weeklyScheduleRequest) {
-        TutorSettingResponse response = tutorSettingService.getChangeWeeklyScheduleResponse(weeklyScheduleRequest);
+    public TutorSettingResponse changeWeeklySchedule(@RequestBody UpdateWeeklyScheduleRequest updateWeeklyScheduleRequest) {
+        TutorSettingResponse response = tutorSettingService.getChangeWeeklyScheduleResponse(updateWeeklyScheduleRequest);
         return response;
     }
 

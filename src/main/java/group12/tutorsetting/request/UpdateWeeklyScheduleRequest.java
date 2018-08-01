@@ -1,6 +1,6 @@
 package group12.tutorsetting.request;
 
-public class WeeklyScheduleRequest {
+public class UpdateWeeklyScheduleRequest {
     private String token;
     private boolean[][] weeklySchedule;
 
