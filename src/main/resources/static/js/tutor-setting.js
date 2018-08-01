@@ -400,26 +400,25 @@ $(document).ready(function() {
     $("#resend").click(function (event) {
         event.preventDefault();
 
-
-
-        var ResendEmail = {
-            'token':token
+        let data = {
+            'token': token
         };
 
         $.ajax({
             url: location.origin +"/tutor/setting/resend",
-            data: JSON.stringify(ChangePlan),
+            data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
-            dataType: "text"
-        }).done(function (data) {
-            if (data === "Success") {
-                alert("Confiem Email resend  succeed!");
+            dataType: "json"
+        }).done(function (json) {
+            let success = json['success'];
+            if (success) {
+                alert("Confirmation Email resend succeed!");
             } else {
-                alert(data);
+                alert("Something wrong with our back end.");
             }
         }).fail(function (xhr, status, errorThrown) {
-
+            alert("Something wrong with our server.");
         });
     });
 

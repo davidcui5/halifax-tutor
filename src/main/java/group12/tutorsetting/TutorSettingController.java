@@ -113,4 +113,10 @@ public class TutorSettingController {
             return FAILURE;
         }
     }
+
+    @PostMapping(path = "/tutor/setting/resend", headers = "content-type=application/json")
+    public TutorSettingResponse resendConfirmationEmail(@RequestBody ResendConfirmationRequest resendConfirmationRequest) {
+        TutorSettingResponse tutorSettingResponse = tutorSettingService.getResendConfirmationEmailResponse(resendConfirmationRequest);
+        return tutorSettingResponse;
+    }
 }

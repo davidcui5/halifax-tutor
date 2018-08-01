@@ -3,6 +3,7 @@ package group12.tutorsetting;
 import group12.dataaccess.tutorsetting.WeeklySchedule;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
+import group12.registration.RegistrationService;
 import group12.tokenauth.IAccessToken;
 import group12.tokenauth.JWTAccessToken;
 import group12.tutorsetting.request.*;
@@ -70,5 +71,15 @@ class TutorSettingService {
         boolean success = tutorSettingDAO.updateTutorCard(email, holderName, creditCardNumber, expiryDate, securityCode);
 
         return new TutorSettingResponse(success);
+    }
+
+    TutorSettingResponse getResendConfirmationEmailResponse(ResendConfirmationRequest resendConfirmationRequest) {
+        String token = resendConfirmationRequest.getToken();
+
+        String email = accessToken.decodeToken(token);
+
+        new RegistrationService().sendTutorActivationEmail(email);
+
+        return new TutorSettingResponse(true);
     }
 }
