@@ -128,7 +128,7 @@ $(document).ready(function() {
 
         let data = {
             'token': token,
-            'phone' : phone
+            'phone': phone
         };
 
         $.ajax({
