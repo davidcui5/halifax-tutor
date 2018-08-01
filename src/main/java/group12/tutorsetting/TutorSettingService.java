@@ -93,4 +93,15 @@ class TutorSettingService {
 
         return new TutorSettingResponse(success);
     }
+
+    TutorSettingResponse getUpdatePhotoResponse(UpdatePhotoRequest updatePhotoRequest) {
+        String token = updatePhotoRequest.getToken();
+        String photoURL = updatePhotoRequest.getPhotoURL();
+
+        String email = accessToken.decodeToken(token);
+
+        boolean success = tutorSettingDAO.updatePhoto(email, photoURL);
+
+        return new TutorSettingResponse(success);
+    }
 }

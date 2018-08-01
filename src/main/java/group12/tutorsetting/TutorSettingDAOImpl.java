@@ -38,6 +38,12 @@ public class TutorSettingDAOImpl implements ITutorSettingDAO {
     }
 
     @Override
+    public boolean updatePhoto(String email, String photoURL) {
+        operation = new UpdateTutorPhotoSQLOperation(email, photoURL);
+        return (Boolean) ((UpdateTutorPhotoSQLOperation) operation).executeMysqlUpdate();
+    }
+
+    @Override
     public boolean setExperience(String email, String experience) {
         operation = new UpdateTutorExperienceSQLOperation(email, experience);
         return (Boolean) operation.executeMysqlQuery();

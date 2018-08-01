@@ -30,7 +30,39 @@ $(document).ready(function () {
 $(document).ready(function(){
     document.getElementById("upload_widget_opener").addEventListener("click", function() {
         cloudinary.openUploadWidget({ cloud_name: 'yrzzzzzz', upload_preset: 'ktpg8ic7', folder: 'user_photos'},
-            function(error, result) { console.log(error, result) });
+            function(error, result) {
+                if (error !== null) {
+                    alert(error);
+                } else {
+                    alert("Upload successfully. Please press confirm to save it.");
+
+                    let photoURL = result[0]["secure_url"];
+                    console.log(photoURL);
+                    let token = localStorage.getItem("token");
+                    let data = {
+                        "token": token,
+                        "photoURL": photoURL
+                    };
+                    $("#photoS").on("click", function() {
+                        $.ajax({
+                            url: location.origin + "/tutor/setting/photo",
+                            data: JSON.stringify(data),
+                            contentType: "application/json",
+                            type: "POST",
+                            dataType: "json"
+                        }).done(function (json) {
+                            let success = json['success'];
+                            if (success) {
+                                alert("Your profile picture is updated!");
+                            } else {
+                                alert("Something went wrong on our database..");
+                            }
+                        }).fail(function () {
+                            alert("Something wrong with our server");
+                        });
+                    });
+                }
+            });
     }, false);
 }) ;
 

@@ -112,4 +112,10 @@ public class TutorSettingController {
         TutorSettingResponse tutorSettingResponse = tutorSettingService.getResendConfirmationEmailResponse(resendConfirmationRequest);
         return tutorSettingResponse;
     }
+
+    @PostMapping(path = "/tutor/setting/photo", headers = "content-type=application/json")
+    public TutorSettingResponse updateProfilePicture(@RequestBody UpdatePhotoRequest updatePhotoRequest) {
+        TutorSettingResponse tutorSettingResponse = tutorSettingService.getUpdatePhotoResponse(updatePhotoRequest);
+        return tutorSettingResponse;
+    }
 }
