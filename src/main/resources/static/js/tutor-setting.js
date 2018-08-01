@@ -91,27 +91,28 @@ $(document).ready(function() {
 
     $("#Cemail-form").submit(function (event) {
         event.preventDefault();
-        var email = $("#email").val();
+        let email = $("#email").val();
 
-        var ChangeEmailData = {
+        let data = {
             'token': token,
             'email': email
         };
 
         $.ajax({
             url: location.origin + "/tutor/setting/email",
-            data: JSON.stringify(ChangeEmailData),
+            data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
-            dataType: "text"
-        }).done(function (data) {
-            if (data === "SUCCESS") {
+            dataType: "json"
+        }).done(function (json) {
+            let success = json['success'];
+            if (success) {
                 alert("Email change succeed!");
             } else {
-                alert(data);
+                alert("Something went wrong with our database...");
             }
         }).fail(function (xhr, status, errorThrown) {
-
+            alert("Something went wrong on our backend");
         });
 
     });
