@@ -66,31 +66,26 @@ $(document).ready(function() {
         event.preventDefault();
 
         let password = $("#pwd").val();
-        var ChangePwdData = {
+        let data = {
             'token': token,
             'password': password
         };
 
-        // if($("#pwd").val() != $("#Rpwd").val()){
-        //     alert("The two password fields didn't match.");
-        //     return;
-        // }
-
-
         $.ajax({
             url: location.origin + "/tutor/setting/password",
-            data: JSON.stringify(ChangePwdData),
+            data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
-            dataType: "text"
-        }).done(function (data) {
-            if (data=== "Success") {
+            dataType: "json"
+        }).done(function (json) {
+            let success = json['success'];
+            if (success) {
                 alert("Password change succeed!");
             } else {
-                alert(data);
+                alert("Something went wrong with database...");
             }
         }).fail(function (xhr, status, errorThrown) {
-
+            alert("Something went wrong on our back end...");
         });
     });
 
