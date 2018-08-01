@@ -11,7 +11,7 @@ public class DeleteTutorSQLOperation extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "SELECT DeleteTutor(?)";
+            return "SELECT DeleteTutor(?)";
     }
 
     @Override
@@ -23,8 +23,7 @@ public class DeleteTutorSQLOperation extends SQLOperationTemplate {
 
     @Override
     Object extractResultSet(ResultSet rs) throws SQLException {
-        int result = rs.getInt(1);
-        return result;
+        return rs.getBoolean(1);
     }
 
     @Override
