@@ -7,7 +7,7 @@ import group12.data_access.Tutor;
 import java.util.UUID;
 
 public class MockData {
-    public static String activeCode="";
+    public static String activeCode = "";
 
     public static Student getStudentObject() {
         Student student = new Student();
@@ -75,7 +75,7 @@ public class MockData {
     public static String getActivationCode() {
         UUID uuid = UUID.randomUUID();
         if (activeCode.isEmpty())
-        activeCode = uuid.toString();
+            activeCode = uuid.toString();
         return activeCode;
     }
 
@@ -92,6 +92,18 @@ public class MockData {
         course.setName("CSI101");
         course.setSchool("DAl");
         return course;
+    }
+
+    public static String getPasswordForTest() {
+        return "testPassword";
+    }
+
+    public static String getPhoneForTest() {
+        return "t9024412277";
+    }
+
+    public static String getEmailForTest() {
+        return "testEmailtest@test.test";
     }
 }
 
