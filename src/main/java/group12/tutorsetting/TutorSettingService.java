@@ -5,10 +5,7 @@ import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import group12.tokenauth.IAccessToken;
 import group12.tokenauth.JWTAccessToken;
-import group12.tutorsetting.request.UpdateEmailRequest;
-import group12.tutorsetting.request.UpdatePasswordRequest;
-import group12.tutorsetting.request.UpdatePhoneRequest;
-import group12.tutorsetting.request.UpdateWeeklyScheduleRequest;
+import group12.tutorsetting.request.*;
 
 class TutorSettingService {
     private ITutorSettingDAO tutorSettingDAO = new TutorSettingDAOImpl();
@@ -58,6 +55,20 @@ class TutorSettingService {
         String email = accessToken.decodeToken(token);
 
         boolean success = tutorSettingDAO.updateTutorPhone(email, phone);
+        return new TutorSettingResponse(success);
+    }
+
+    TutorSettingResponse getUpdateCardResponse(UpdateCardRequest updateCardRequest) {
+        String token = updateCardRequest.getToken();
+        String holderName = updateCardRequest.getHolderName();
+        String creditCardNumber = updateCardRequest.getCreditCardNumber();
+        String expiryDate = updateCardRequest.getExpireDate();
+        int securityCode = updateCardRequest.getSecurityCode();
+        
+        String email = accessToken.decodeToken(token);
+
+        boolean success = tutorSettingDAO.updateTutorCard(email, holderName, creditCardNumber, expiryDate, securityCode);
+
         return new TutorSettingResponse(success);
     }
 }

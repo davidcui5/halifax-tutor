@@ -155,10 +155,10 @@ $(document).ready(function() {
         let creditCardNumber = $("#cardnum").val();
         let expireDate = $("#expire_date").val();
         let securityCode = $("#code").val();
-        let cardname = $("#cardname").val();
-        var ChangeCardData = {
+        let holderName = $("#cardname").val();
+        let data = {
             'token': token,
-            'cardname': cardname,
+            'holderName': holderName,
             'creditCardNumber': creditCardNumber,
             'expireDate':expireDate,
             'securityCode' : securityCode
@@ -166,18 +166,19 @@ $(document).ready(function() {
 
         $.ajax({
             url: location.origin +"/tutor/setting/card",
-            data: JSON.stringify(ChangeCardData),
+            data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
-            dataType: "text"
-        }).done(function (data) {
-            if (data=== "Success") {
+            dataType: "json"
+        }).done(function (json) {
+            let success = json['success'];
+            if (success) {
                 alert("Card information change succeed!");
             } else {
-                alert(data);
+                alert("Something went wrong on our database");
             }
         }).fail(function (xhr, status, errorThrown) {
-
+            alert("Something went wrong with our server");
         });
 
     });

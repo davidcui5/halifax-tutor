@@ -2,10 +2,7 @@ package group12.tutorsetting;
 
 import group12.tokenauth.IAccessToken;
 import group12.tokenauth.JWTAccessToken;
-import group12.tutorsetting.request.UpdateEmailRequest;
-import group12.tutorsetting.request.UpdatePasswordRequest;
-import group12.tutorsetting.request.UpdatePhoneRequest;
-import group12.tutorsetting.request.UpdateWeeklyScheduleRequest;
+import group12.tutorsetting.request.*;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -48,25 +45,10 @@ public class TutorSettingController {
         return response;
     }
 
-    @PostMapping(path = "/tutor/setting/card", consumes = "application/json", produces = "text/plain")
-    public String changeCardinfo(@RequestBody Map<String, String> body) {
-        String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO, email);
-        logger.log(Level.INFO, body.get("cardname"));
-        logger.log(Level.INFO, body.get("creditCardNumber"));
-        logger.log(Level.INFO, body.get("expireDate"));
-        logger.log(Level.INFO, body.get("securityCode"));
-
-        String cardname = body.get("cardname");
-        String creditCardNumber = body.get("creditCardNumber");
-        String expireDate = body.get("expireDate");
-        int securityCode = Integer.parseInt(body.get("securityCode"));
-
-        if (tutorSettingDAO.setTutorCard(email, cardname, creditCardNumber, expireDate, securityCode)) {
-            return SUCCESS;
-        } else {
-            return FAILURE;
-        }
+    @PostMapping(path = "/tutor/setting/card", headers = "content-type=application/json")
+    public TutorSettingResponse updateCard(@RequestBody UpdateCardRequest updateCardRequest) {
+        TutorSettingResponse response = tutorSettingService.getUpdateCardResponse(updateCardRequest);
+        return response;
     }
 
     @PostMapping(path = "/tutor/setting/phone", headers = "content-type=application/json")
@@ -131,38 +113,4 @@ public class TutorSettingController {
             return FAILURE;
         }
     }
-
-//    @PostMapping(path="/tutor/setting/resend", consumes = "application/json", produces = "text/plain")
-//    public String resendEmail(@RequestBody Map<String,String> body){
-//        String email = accessToken.decodeToken(body.get("token"));
-//        logger.log(Level.INFO,email);
-//        IMailer mailer = new SpringMailer();
-//        mailer.sendMail();
-//        if(tutorSettingDAO.setPlan(email,planNo)){
-//            return SUCCESS;
-//        }
-//        else{
-//            return FAILURE;
-//        }
-//    }
-//    @PostMapping(path = "/tutor/setting/postplan")
-//    public Map<String,Object> SendPlan() {
-//        Map<String, Object> map = new HashMap<String, Object>();
-//        GetPlanSQLOperation getPlanSQLOperation1 = new GetPlanSQLOperation(1);
-//        Subscribe_Plan plan1 = (Subscribe_Plan) getPlanSQLOperation1.executeMysqlQuery();
-//        GetPlanSQLOperation getPlanSQLOperation2 = new GetPlanSQLOperation(2);
-//        Subscribe_Plan plan2 = (Subscribe_Plan) getPlanSQLOperation2.executeMysqlQuery();
-//        GetPlanSQLOperation getPlanSQLOperation3 = new GetPlanSQLOperation(3);
-//        Subscribe_Plan plan3 = (Subscribe_Plan) getPlanSQLOperation3.executeMysqlQuery();
-//        GetPlanSQLOperation getPlanSQLOperation4 = new GetPlanSQLOperation(4);
-//        Subscribe_Plan plan4 = (Subscribe_Plan) getPlanSQLOperation4.executeMysqlQuery();
-//
-//        map.put("plan1", plan1);
-//        map.put("plan2", plan2);
-//        map.put("plan3", plan3);
-//        map.put("plan4", plan4);
-//
-//        return map;
-//    }
-
 }
