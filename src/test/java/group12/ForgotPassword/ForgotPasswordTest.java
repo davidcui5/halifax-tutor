@@ -1,15 +1,10 @@
 package group12.ForgotPassword;
 
-import group12.ForgotPassword.ForgotPasswordForm;
-import group12.ForgotPassword.ForgotPasswordResponse;
-import group12.ForgotPassword.ForgotPasswordService;
-import group12.ForgotPassword.IForgotPassword;
-import group12.data_access.IDataAccessObject;
-import group12.data_access.MysqlDAOImpl;
+import group12.dataaccess.IDataAccessObject;
+import group12.dataaccess.MysqlDAOImpl;
 import group12.email.IMailer;
 import group12.email.SpringMailer;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

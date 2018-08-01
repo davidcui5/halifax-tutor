@@ -1,11 +1,11 @@
 package group12.search;
 
-import group12.data_access.*;
-import group12.data_access.search.TutorPublicInfo;
-import group12.data_access.search.TutorPublicInfoDAO;
-import group12.data_access.search.TutorPublicInfoDaoImpl;
+import group12.dataaccess.*;
+import group12.dataaccess.search.TutorPublicInfo;
+import group12.dataaccess.search.TutorPublicInfoDAO;
+import group12.dataaccess.search.TutorPublicInfoDaoImpl;
 import group12.exceptions.SearchQuerySQLException;
-import group12.token_auth.JWTAccessToken;
+import group12.tokenauth.JWTAccessToken;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;

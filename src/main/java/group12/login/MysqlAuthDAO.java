@@ -1,6 +1,6 @@
 package group12.login;
 
-import group12.data_access.*;
+import group12.dataaccess.*;
 
 public class MysqlAuthDAO implements IAuthDAO {
 

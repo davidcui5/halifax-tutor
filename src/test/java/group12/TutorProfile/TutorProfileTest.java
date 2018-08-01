@@ -1,13 +1,13 @@
 package group12.TutorProfile;
 
-import group12.data_access.IDataAccessObject;
-import group12.data_access.MysqlDAOImpl;
+import group12.dataaccess.IDataAccessObject;
+import group12.dataaccess.MysqlDAOImpl;
 import group12.email.IMailer;
 import group12.email.SpringMailer;
-import group12.token_auth.IAccessToken;
-import group12.token_auth.JWTAccessToken;
-import group12.tutor_profile.TutorProfileForm;
-import group12.tutor_profile.TutorProfileService;
+import group12.tokenauth.IAccessToken;
+import group12.tokenauth.JWTAccessToken;
+import group12.tutorprofile.TutorProfileForm;
+import group12.tutorprofile.TutorProfileService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

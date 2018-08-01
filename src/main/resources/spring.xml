@@ -52,14 +52,14 @@
     <!--ForgotPasswordController beans ENDT-->
 
     <!--ForgotPasswordController beans START-->
-    <bean id="tutorProfileService" class="group12.tutor_profile.TutorProfileService">
+    <bean id="tutorProfileService" class="group12.tutorprofile.TutorProfileService">
         <property name="db" ref="DBDAO"/>
         <property name="mailer" ref="mailer"/>
     </bean>
 
     <!--ForgotPasswordController beans ENDT-->
 
-    <bean id="studentSetting" class="group12.student_setting.StudentSettingService">
+    <bean id="studentSetting" class="group12.studentsetting.StudentSettingService">
         <property name="db" ref="DBDAO"/>
         <property name="mailer" ref="mailer"/>
     </bean>
@@ -73,7 +73,7 @@
     <bean id="encryptor" class="group12.encryption.SimpleMD5Encryptor">
     </bean>
 
-    <bean id="DBDAO" class="group12.data_access.MysqlDAOImpl">
+    <bean id="DBDAO" class="group12.dataaccess.MysqlDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
     <!--RegistrationController beans ENDT-->
