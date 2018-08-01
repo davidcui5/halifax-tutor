@@ -57,17 +57,10 @@ public class TutorSettingController {
         return response;
     }
 
-    @PostMapping(path = "/tutor/setting/education", consumes = "application/json", produces = "text/plain")
-    public String changeEducation(@RequestBody Map<String, String> body) {
-        String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO, email);
-        logger.log(Level.INFO, body.get("education"));
-        String education = body.get("education");
-        if (tutorSettingDAO.setEducation(email, education)) {
-            return SUCCESS;
-        } else {
-            return FAILURE;
-        }
+    @PostMapping(path = "/tutor/setting/education", headers = "content-type=application/json")
+    public TutorSettingResponse updateEducation(@RequestBody UpdateEducationRequest updateEducationRequest) {
+        TutorSettingResponse response = tutorSettingService.getUpdateEducationResponse(updateEducationRequest);
+        return response;
     }
 
     @PostMapping(path = "/tutor/setting/experience", consumes = "application/json", produces = "text/plain")

@@ -187,25 +187,26 @@ $(document).ready(function() {
         event.preventDefault();
         let education = $("#education").val();
 
-        var ChangeEduData = {
+        let data = {
             'token': token,
             'education' : education
         };
 
         $.ajax({
             url: location.origin +"/tutor/setting/education",
-            data: JSON.stringify(ChangeEduData),
+            data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
-            dataType: "text"
-        }).done(function (data) {
-            if (data === "Success") {
+            dataType: "json"
+        }).done(function (json) {
+            let success = json['success'];
+            if (success) {
                 alert("Education change succeed!");
             } else {
-                alert(data);
+                alert("Something went wrong with our database...");
             }
         }).fail(function (xhr, status, errorThrown) {
-
+            alert("Something went wrong on our server....");
         });
 
     });

@@ -12,7 +12,7 @@ public interface ITutorSettingDAO {
 
     boolean updateTutorCard(String email, String creditCardHolder, String creditCardNum, String creditCardExpiryDate, int securityCode);
 
-    boolean setEducation(String email, String education);
+    boolean updateEducation(String email, String education);
 
     boolean setExperience(String email, String experience);
 

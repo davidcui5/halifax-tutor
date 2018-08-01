@@ -82,4 +82,15 @@ class TutorSettingService {
 
         return new TutorSettingResponse(true);
     }
+
+    TutorSettingResponse getUpdateEducationResponse(UpdateEducationRequest updateEducationRequest) {
+        String token = updateEducationRequest.getToken();
+        String education = updateEducationRequest.getEducation();
+
+        String email = accessToken.decodeToken(token);
+
+        boolean success = tutorSettingDAO.updateEducation(email, education);
+
+        return new TutorSettingResponse(success);
+    }
 }

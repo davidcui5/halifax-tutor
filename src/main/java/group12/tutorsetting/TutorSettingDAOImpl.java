@@ -32,7 +32,7 @@ public class TutorSettingDAOImpl implements ITutorSettingDAO {
     }
 
     @Override
-    public boolean setEducation(String email, String education) {
+    public boolean updateEducation(String email, String education) {
         operation = new UpdateTutorEducationSQLOperation(email, education);
         return (Boolean) operation.executeMysqlQuery();
     }
