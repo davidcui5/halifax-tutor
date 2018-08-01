@@ -4,6 +4,7 @@ import group12.tokenauth.IAccessToken;
 import group12.tokenauth.JWTAccessToken;
 import group12.tutorsetting.request.UpdateEmailRequest;
 import group12.tutorsetting.request.UpdatePasswordRequest;
+import group12.tutorsetting.request.UpdatePhoneRequest;
 import group12.tutorsetting.request.UpdateWeeklyScheduleRequest;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -68,18 +69,10 @@ public class TutorSettingController {
         }
     }
 
-    @PostMapping(path = "/tutor/setting/phone", consumes = "application/json", produces = "text/plain")
-    public String changePhone(@RequestBody Map<String, String> body) {
-        String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO, email);
-        logger.log(Level.INFO, body.get("phone"));
-        String phone = body.get("phone");
-
-        if (tutorSettingDAO.updateTutorPhone(email, phone)) {
-            return SUCCESS;
-        } else {
-            return FAILURE;
-        }
+    @PostMapping(path = "/tutor/setting/phone", headers = "content-type=application/json")
+    public TutorSettingResponse updatePhone(@RequestBody UpdatePhoneRequest updatePhoneRequest) {
+        TutorSettingResponse response = tutorSettingService.getUpdatePhoneResponse(updatePhoneRequest);
+        return response;
     }
 
     @PostMapping(path = "/tutor/setting/education", consumes = "application/json", produces = "text/plain")

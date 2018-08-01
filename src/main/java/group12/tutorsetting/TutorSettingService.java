@@ -7,6 +7,7 @@ import group12.tokenauth.IAccessToken;
 import group12.tokenauth.JWTAccessToken;
 import group12.tutorsetting.request.UpdateEmailRequest;
 import group12.tutorsetting.request.UpdatePasswordRequest;
+import group12.tutorsetting.request.UpdatePhoneRequest;
 import group12.tutorsetting.request.UpdateWeeklyScheduleRequest;
 
 class TutorSettingService {
@@ -47,6 +48,16 @@ class TutorSettingService {
 
         boolean success = tutorSettingDAO.updateTutorEmail(email, newEmail);
 
+        return new TutorSettingResponse(success);
+    }
+
+    TutorSettingResponse getUpdatePhoneResponse(UpdatePhoneRequest updatePhoneRequest) {
+        String token = updatePhoneRequest.getToken();
+        String phone = updatePhoneRequest.getPhone();
+
+        String email = accessToken.decodeToken(token);
+
+        boolean success = tutorSettingDAO.updateTutorPhone(email, phone);
         return new TutorSettingResponse(success);
     }
 }
