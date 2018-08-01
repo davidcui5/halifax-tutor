@@ -49,7 +49,7 @@ public class TutorSettingDAOImpl implements ITutorSettingDAO {
     }
 
     @Override
-    public boolean setWeeklySchedule(String email, WeeklySchedule weeklySchedule) {
+    public boolean updateWeeklySchedule(String email, WeeklySchedule weeklySchedule) {
         IDataAccessObject dataAccessObject = new MysqlDAOImpl();
         int tutorId = dataAccessObject.getTutorIDByEmail(email);
 

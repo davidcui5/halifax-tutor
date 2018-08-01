@@ -9,14 +9,14 @@ class TutorSettingService {
     private ITutorSettingDAO tutorSettingDAO = new TutorSettingDAOImpl();
     private IAccessToken accessToken = JWTAccessToken.getInstance();
 
-    TutorSettingResponse getChangeWeeklyScheduleResponse(UpdateWeeklyScheduleRequest updateWeeklyScheduleRequest) {
+    TutorSettingResponse getUpdateWeeklyScheduleResponse(UpdateWeeklyScheduleRequest updateWeeklyScheduleRequest) {
         String token = updateWeeklyScheduleRequest.getToken();
         String email = accessToken.decodeToken(token);
 
         boolean[][] schedule = updateWeeklyScheduleRequest.getWeeklySchedule();
         WeeklySchedule weeklySchedule = new WeeklySchedule(schedule);
 
-        boolean success = tutorSettingDAO.setWeeklySchedule(email, weeklySchedule);
+        boolean success = tutorSettingDAO.updateWeeklySchedule(email, weeklySchedule);
 
         return new TutorSettingResponse(success);
     }

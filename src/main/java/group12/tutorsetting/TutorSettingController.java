@@ -126,8 +126,8 @@ public class TutorSettingController {
     }
 
     @PostMapping(path = "/tutor/setting/weeklySchedule", headers = "content-type=application/json")
-    public TutorSettingResponse changeWeeklySchedule(@RequestBody UpdateWeeklyScheduleRequest updateWeeklyScheduleRequest) {
-        TutorSettingResponse response = tutorSettingService.getChangeWeeklyScheduleResponse(updateWeeklyScheduleRequest);
+    public TutorSettingResponse updateWeeklySchedule(@RequestBody UpdateWeeklyScheduleRequest updateWeeklyScheduleRequest) {
+        TutorSettingResponse response = tutorSettingService.getUpdateWeeklyScheduleResponse(updateWeeklyScheduleRequest);
         return response;
     }
 

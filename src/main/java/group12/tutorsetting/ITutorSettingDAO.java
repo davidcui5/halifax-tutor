@@ -11,7 +11,7 @@ public interface ITutorSettingDAO {
     boolean setEducation(String email, String education);
     boolean setExperience (String email, String experience);
     boolean addCourse(String email,String school,int code, String price);
-    boolean setWeeklySchedule(String email, WeeklySchedule weeklySchedule);
+    boolean updateWeeklySchedule(String email, WeeklySchedule weeklySchedule);
     boolean setPlan(String email, String planNo);
     boolean cancelPlan(String email);
 }
