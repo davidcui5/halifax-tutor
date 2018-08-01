@@ -14,8 +14,8 @@ public class TutorSettingDAOImpl implements ITutorSettingDAO {
     }
 
     @Override
-    public boolean setTutorEmail(String email, String newemail) {
-        operation = new UpdateTutorEmailSQLOperation(email, newemail);
+    public boolean updateTutorEmail(String email, String newEmail) {
+        operation = new UpdateTutorEmailSQLOperation(email, newEmail);
         return (Boolean) operation.executeMysqlQuery();
     }
 

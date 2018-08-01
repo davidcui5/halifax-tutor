@@ -48,7 +48,7 @@ public class TutorSettingController {
         logger.log(Level.INFO, email);
         logger.log(Level.INFO, body.get("email"));
         String newemail = body.get("email");
-        if (tutorSettingDAO.setTutorEmail(email, newemail)) {
+        if (tutorSettingDAO.updateTutorEmail(email, newemail)) {
 
             return SUCCESS;
         } else {
