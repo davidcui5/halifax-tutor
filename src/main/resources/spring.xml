@@ -65,7 +65,7 @@
         <property name="mailer" ref="mailer"/>
     </bean>
 
-    <!--ForgotPasswordController beans ENDT-->
+    <!--ForgotPasswordController beans END-->
 
     <bean id="studentSetting" class="group12.student_setting.StudentSettingService">
         <property name="db" ref="DBDAO"/>
@@ -81,9 +81,9 @@
     <bean id="DBDAO" class="group12.data_access.MysqlDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <!--RegistrationController beans ENDT-->
+    <!--RegistrationController beans END-->
 
-    <!--DataSource bean is shared-->
+    <!--DataSource bean-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
         <property name="url" value="${spring.datasource.url}"/>
@@ -91,6 +91,7 @@
         <property name="password" value="${spring.datasource.password}"/>
     </bean>
 
+    <!--Mailer bean-->
     <bean id="mailer" class="group12.email.SpringMailer">
         <property name="mailSender" ref="mailSender"/>
     </bean>
