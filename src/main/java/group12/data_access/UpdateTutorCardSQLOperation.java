@@ -1,5 +1,6 @@
 package group12.data_access;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,12 +13,12 @@ public class UpdateTutorCardSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    String makeSQL() {
+    protected String makeSQL() {
         return "SELECT UpdateTutorCard(?, ?, ?, ?, ?)";
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
+    protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         String email = (String) getParameters().get(0);
         String creditCardHolder = (String) getParameters().get(1);
         String creditCardNum = (String) getParameters().get(2);
@@ -33,12 +34,12 @@ public class UpdateTutorCardSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    Object extractResultSet(ResultSet rs) throws SQLException {
+    protected Object extractResultSet(ResultSet rs) throws SQLException {
         return rs.getBoolean(1);
     }
 
     @Override
-    ResultSet execute(PreparedStatement ps) throws SQLException {
+    protected ResultSet execute(PreparedStatement ps) throws SQLException {
         return ps.executeQuery();
     }
 }

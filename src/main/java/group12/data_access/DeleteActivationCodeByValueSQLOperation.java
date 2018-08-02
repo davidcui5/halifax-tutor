@@ -10,24 +10,24 @@ public class DeleteActivationCodeByValueSQLOperation extends SQLOperationTemplat
     }
 
     @Override
-    String makeSQL() {
+    protected String makeSQL() {
         return "SELECT DeleteActivationCodeByValue(?)";
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
+    protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         String activationCode = (String) getParameters().get(0);
         ps.setString(1, activationCode);
         return ps;
     }
 
     @Override
-    Object extractResultSet(ResultSet rs) throws SQLException {
+    protected Object extractResultSet(ResultSet rs) throws SQLException {
         return rs.getBoolean(1);
     }
 
     @Override
-    ResultSet execute(PreparedStatement ps) throws SQLException {
+    protected ResultSet execute(PreparedStatement ps) throws SQLException {
         return ps.executeQuery();
     }
 }

@@ -21,12 +21,12 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
     @Override
     String makeSQL() {
         return "SELECT Tutor.Banned, Tutor.ID, Tutor.PhotoUrl, Tutor.FirstName, Tutor.LastName, Tutor.Education, " +
-                " Tutor.Rating, TutorCourse.Price " +
+                "Tutor.Rating, TutorCourse.Price " +
                 "FROM TutorCourse " +
                 "JOIN Tutor on TutorCourse.TutorId = Tutor.ID " +
                 "JOIN Course on TutorCourse.CourseId = Course.ID " +
                 "WHERE " +
-                " Course.School = ? AND Course.Name = ?";
+                "Course.School = ? AND Course.Name = ?";
     }
 
     @Override

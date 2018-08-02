@@ -15,6 +15,9 @@ $(document).ready(function () {
             alert("You do not have access to this page.");
             window.location.replace("../index.html");
         }
+        if (data === "ERROR") {
+            window.location.replace("/exception-page.html");
+        }
     }).fail(function (xhr, status, errorThrown) {
         //window.location.replace("../index.html");
     });
@@ -28,6 +31,14 @@ $(document).ready(function () {
 
         if($("#pwd").val() != $("#Rpwd").val()){
             alert("The two password fields didn't match.")
+            return;
+        }
+        if ($("#pwd").val().length < 8){
+            alert("Passwords must contain at least 8 characters");
+            return;
+        }
+        if ($("#pwd").val().toLowerCase() == $("#pwd").val()){
+            alert("Passwords must contain at least one capital letter");
             return;
         }
 
@@ -44,6 +55,9 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
+            if (data === "ERROR") {
+                window.location.replace("/exception-page.html");
+            }
             alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
@@ -73,6 +87,9 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
+            if (data === "ERROR") {
+                window.location.replace("/exception-page.html");
+            }
             alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
@@ -95,6 +112,9 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
+            if (data === "ERROR") {
+                window.location.replace("/exception-page.html");
+            }
             alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
@@ -117,6 +137,9 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
+            if (data === "ERROR") {
+                window.location.replace("/exception-page.html");
+            }
             alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
@@ -140,6 +163,9 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
+            if (data === "ERROR") {
+                window.location.replace("/exception-page.html");
+            }
             alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
@@ -162,6 +188,9 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
+            if (data === "ERROR") {
+                window.location.replace("/exception-page.html");
+            }
             alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
@@ -262,6 +291,9 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
+            if (data === "ERROR") {
+                window.location.replace("/exception-page.html");
+            }
             alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
