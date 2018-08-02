@@ -19,18 +19,18 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    protected String makeSQL() {
-        return "SELECT Tutor.ID, Tutor.PhotoUrl, Tutor.FirstName, Tutor.LastName, Tutor.Education, " +
-                " Tutor.Rating, TutorCourse.Price " +
+    String makeSQL() {
+        return "SELECT Tutor.Banned, Tutor.ID, Tutor.PhotoUrl, Tutor.FirstName, Tutor.LastName, Tutor.Education, " +
+                "Tutor.Rating, TutorCourse.Price " +
                 "FROM TutorCourse " +
                 "JOIN Tutor on TutorCourse.TutorId = Tutor.ID " +
                 "JOIN Course on TutorCourse.CourseId = Course.ID " +
                 "WHERE " +
-                " Course.School = ? AND Course.Name = ?";
+                "Course.School = ? AND Course.Name = ?";
     }
 
     @Override
-    protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
+    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         ArrayList<Object> parameters = getParameters();
         String school = (String) parameters.get(0);
         String courseName = (String) parameters.get(1);
@@ -40,7 +40,7 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    protected Object extractResultSet(ResultSet rs) throws SQLException {
+    Object extractResultSet(ResultSet rs) throws SQLException {
         int id = rs.getInt("ID");
         String photoURL = rs.getString("PhotoURL");
         String firstName = rs.getString("FirstName");
@@ -48,11 +48,12 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
         String education = rs.getString("Education");
         float rating = rs.getFloat("Rating");
         float price = rs.getFloat("Price");
-        return new TutorPublicInfo(id, photoURL, firstName, lastName, education, rating, price);
+        boolean banned = rs.getBoolean("Banned");
+        return new TutorPublicInfo(id, photoURL, firstName, lastName, education, rating, price, banned);
     }
 
     @Override
-    protected ResultSet execute(PreparedStatement ps) throws SQLException {
+    ResultSet execute(PreparedStatement ps) throws SQLException {
         return null;
     }
 
@@ -69,7 +70,9 @@ public class GetTutorPublicInfoSQLOperation extends SQLOperationTemplate {
             rs = ps.executeQuery();
             while (rs.next()) {
                 TutorPublicInfo curInfo = (TutorPublicInfo) extractResultSet(rs);
-                results.add(curInfo);
+                if (!curInfo.isBanned()) {
+                    results.add(curInfo);
+                }
             }
         } catch (SQLException e) {
             logger.error("SQL Error", e);
