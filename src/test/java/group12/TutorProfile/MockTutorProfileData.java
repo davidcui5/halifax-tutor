@@ -9,7 +9,8 @@ import java.util.List;
 public class MockTutorProfileData implements IDataAccessObject {
     @Override
     public Student getStudentByEmail(String email) {
-        return null;
+        Student student = new Student();
+        return student;
     }
 
     @Override
