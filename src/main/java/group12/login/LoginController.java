@@ -15,7 +15,6 @@ import java.util.Map;
 public class LoginController {
 
     private Map<String,IAuthenticationStrategy> strategies;
-    private static Logger logger = LogManager.getLogger(LoginController.class);
 
     @Autowired
     public LoginController(Map<String,IAuthenticationStrategy> strategies){
@@ -24,16 +23,11 @@ public class LoginController {
 
     @PostMapping(path = "/login")
     public LoginResponse login(@RequestBody Map<String,String> body){
-        try{
-            User user = makeUser(body);
-            String type = body.get("type");
-            IAuthenticationStrategy authStrategy = strategies.get(type);
-            authStrategy.authenticate(user);
-            return user.getLoginResponse();
-        }catch(Exception e){
-            logger.error("Login Error", e);
-        }
-        return null;
+        User user = makeUser(body);
+        String type = body.get("type");
+        IAuthenticationStrategy authStrategy = strategies.get(type);
+        authStrategy.authenticate(user);
+        return user.getLoginResponse();
     }
 
     private User makeUser(Map<String,String> body){
