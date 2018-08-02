@@ -74,7 +74,11 @@ public class TutorProfileService implements iTutorProfile {
         TutorProfileResponse response = new TutorProfileResponse();
         String studentEmail = JWTAccessToken.getInstance().decodeToken(tutorProfileForm.getEmailToken());
 
-        if(db.saveRating(tutorProfileForm.getId(), tutorProfileForm.getRating()) && db.saveFeedback(studentEmail, tutorProfileForm)){
+        if(db.getStudentByEmail(studentEmail).getEmail()==null){
+            response.setResult("Failure");
+            response.addDetail("The given email is not a student email");
+        }
+        else if(db.saveRating(tutorProfileForm.getId(), tutorProfileForm.getRating()) && db.saveFeedback(studentEmail, tutorProfileForm) ){
             String emailBody = "Student : " + studentEmail + "  Sent you Feedback: " + tutorProfileForm.getFeedback();
             mailer.sendMail(emailSender, tutorProfileForm.getEmail(), "Message From Student", emailBody);
 
