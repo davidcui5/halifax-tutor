@@ -1,5 +1,8 @@
 package group12.admin_setting;
 
+import group12.data_access.Student;
+import group12.data_access.Tutor;
+
 import java.util.List;
 
 public interface IAdminSettingDAO {
@@ -14,9 +17,19 @@ public interface IAdminSettingDAO {
 
     boolean setTutorBanStatus(int id, boolean status);
 
+    boolean deleteReviewByID(int id);
+
+    boolean setTutorRatingAndTotalRatings(float rating, int totalRatings, int tutorID);
+
     List<ReviewDTO> getReviewsMadeByStudent(int studentID);
 
     List<ReviewDTO> getReviewsMadeOnTutors(int tutorID);
 
-    boolean deleteReviewByID(int id);
+    Student getStudentByEmail(String email);
+
+    Tutor getTutorByEmail(String email);
+
+    Tutor getTutorByID(int tutorID);
+
+    ReviewDTO getReviewByReviewID(int reviewID);
 }

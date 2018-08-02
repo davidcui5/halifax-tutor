@@ -1,6 +1,5 @@
 package group12.encryption;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.xml.bind.DatatypeConverter;
@@ -19,7 +18,7 @@ public class SimpleMD5Encryptor implements IEncryptor {
             digest = MessageDigest.getInstance("MD5");
         }
         catch(NoSuchAlgorithmException e) {
-            logger.log(Level.ERROR, e);
+            logger.error("Error", e);
         }
     }
 
@@ -36,7 +35,7 @@ public class SimpleMD5Encryptor implements IEncryptor {
             return output;
         }
         catch(Exception e) {
-            logger.log(Level.ERROR, e);
+            logger.error("Error", e);
         }
         return input;
     }

@@ -122,16 +122,16 @@ public class MysqlDAOImpl implements IDataAccessObject {
     }
 
     @Override
-    public boolean setStudentActivatedStatus(int id, boolean activateCode) {
+    public boolean setStudentActivatedStatus(int id, boolean status) {
         SQLOperationTemplate op =
-                new SetStudentActivatedStatusSQLOperation(id, activateCode);
+                new SetStudentActivatedStatusSQLOperation(id, status);
         return (boolean) op.executeMysqlQuery();
     }
 
     @Override
-    public boolean setTutorActivatedStatus(int id, boolean activateCode) {
+    public boolean setTutorActivatedStatus(int id, boolean status) {
         SQLOperationTemplate op =
-                new SetTutorActivatedStatusSQLOperation(id, activateCode);
+                new SetTutorActivatedStatusSQLOperation(id, status);
         return (boolean) op.executeMysqlQuery();
     }
 
