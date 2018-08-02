@@ -67,13 +67,23 @@ public class TutorSettingDAOMock implements ITutorSettingDAO {
     }
 
     @Override
-    public boolean addCourse(String email, String school, int code, String price) {
+    public boolean addCourse(String email, String school, String courseCode, float price) {
         if (email.contains("zongming")) {
             return true;
         } else {
             return false;
         }
     }
+
+    @Override
+    public boolean removeCourse(String email, String school, String courseCode) {
+        if (email.contains("zongming")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     @Override
     public boolean updateWeeklySchedule(String email, WeeklySchedule weeklySchedule) {
@@ -85,7 +95,7 @@ public class TutorSettingDAOMock implements ITutorSettingDAO {
     }
 
     @Override
-    public boolean setPlan(String email, String planNo) {
+    public boolean updatePlan(String email, String planNo) {
         if (email.contains("zongming")) {
             return true;
         } else {

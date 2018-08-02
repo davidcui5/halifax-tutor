@@ -83,6 +83,8 @@ $(document).ready(function () {
             if (!success) {
                 alert("Please login to use this feature");
                 window.location.href = "../index.html";
+            } else {
+                $("#logout").hide();
             }
         }).fail(function (xhr, status, errorThrown) {
             alert("Sorry, there was a problem!");
@@ -182,9 +184,9 @@ $(document).ready(function () {
         processResults(success, numOfResults, results);
     });
 
-    $("#sign-out-button").click(function () {
+    $("#logout").click(function () {
         localStorage.removeItem('token');
-        alert("You have successfully logged out! Now redirecting to log in page.");
+        alert("You have successfully logged out! Now redirecting to login page.");
         window.location.assign("../index.html");
     });
 });
