@@ -1,8 +1,8 @@
 package group12.DBDAOTest;
 
-import group12.data_access.Course;
-import group12.data_access.Student;
-import group12.data_access.Tutor;
+import group12.dataaccess.Course;
+import group12.dataaccess.Student;
+import group12.dataaccess.Tutor;
 
 import java.util.UUID;
 

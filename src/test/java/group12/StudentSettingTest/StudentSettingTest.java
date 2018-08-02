@@ -1,9 +1,9 @@
 package group12.StudentSettingTest;
 
 import group12.DBDAOTest.MockData;
-import group12.data_access.IDataAccessObject;
-import group12.data_access.MysqlDAOImpl;
-import group12.data_access.Student;
+import group12.dataaccess.IDataAccessObject;
+import group12.dataaccess.MysqlDAOImpl;
+import group12.dataaccess.Student;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;

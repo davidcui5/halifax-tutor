@@ -1,7 +1,7 @@
 package group12.registration;
 
-import group12.data_access.Student;
-import group12.data_access.Tutor;
+import group12.dataaccess.Student;
+import group12.dataaccess.Tutor;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

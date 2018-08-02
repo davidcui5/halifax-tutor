@@ -1,7 +1,7 @@
 package group12.login;
 
-import group12.data_access.Tutor;
-import group12.token_auth.JWTAccessToken;
+import group12.dataaccess.Tutor;
+import group12.tokenauth.JWTAccessToken;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

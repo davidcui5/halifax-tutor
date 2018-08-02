@@ -40,7 +40,7 @@
     <!--LoginController beans END-->
 
     <!--AdminController beans START-->
-    <bean id="adminDAO" class="group12.admin_setting.AdminSettingDAO">
+    <bean id="adminDAO" class="group12.adminsetting.AdminSettingDAO">
     </bean>
     <!--LoginController beans END-->
 
@@ -52,7 +52,7 @@
     </bean>
 
     <!--ForgotPasswordController beans START-->
-    <bean id="forgotPasswordService" class="group12.ForgotPassword.ForgotPasswordService">
+    <bean id="forgotPasswordService" class="group12.forgotpassword.ForgotPasswordService">
         <property name="db" ref="DBDAO"/>
         <property name="mailer" ref="mailer"/>
     </bean>
@@ -60,20 +60,20 @@
     <!--ForgotPasswordController beans ENDT-->
 
     <!-- TutorSettingService bean START-->
-    <bean id="tutorSetting" class="group12.tutor_setting.TutorSettingService">
+    <bean id="tutorSetting" class="group12.tutorsetting.TutorSettingService">
         <property name="mailer" ref="mailer"/>
     </bean>
     <!-- TutorSettingService bean END-->
 
     <!--ForgotPasswordController beans START-->
-    <bean id="tutorProfileService" class="group12.tutor_profile.TutorProfileService">
+    <bean id="tutorProfileService" class="group12.tutorprofile.TutorProfileService">
         <property name="db" ref="DBDAO"/>
         <property name="mailer" ref="mailer"/>
     </bean>
 
     <!--ForgotPasswordController beans END-->
 
-    <bean id="studentSetting" class="group12.student_setting.StudentSettingService">
+    <bean id="studentSetting" class="group12.studentsetting.StudentSettingService">
         <property name="db" ref="DBDAO"/>
         <property name="mailer" ref="mailer"/>
     </bean>
@@ -84,7 +84,7 @@
         <property name="mailer" ref="mailer"/>
     </bean>
 
-    <bean id="DBDAO" class="group12.data_access.MysqlDAOImpl">
+    <bean id="DBDAO" class="group12.dataaccess.MysqlDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
     <!--RegistrationController beans END-->

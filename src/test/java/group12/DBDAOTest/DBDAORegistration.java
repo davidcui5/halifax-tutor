@@ -1,14 +1,11 @@
 
 package group12.DBDAOTest;
 
-import group12.data_access.*;
+import group12.dataaccess.*;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
