@@ -264,15 +264,19 @@ public class MysqlDAOImpl implements IDataAccessObject {
         tutorProfileForm.setRating(tutorInfo[6]);
         tutorProfileForm.setPhotoURL(tutorInfo[7]);
 
-        ArrayList<String[]> courseList = getTutorCourses(tutorId);
-        tutorProfileForm.setCourseList(courseList);
+        List<Course> courseList = getCoursesOFTutor(tutorId);
+        ArrayList<String[]> courseInfo = new ArrayList<>();
+        for (int i=0;i<courseList.size();i++){
+            String[] str = {courseList.get(i).getName(), courseList.get(i).getSchool(), String.valueOf(courseList.get(i).getPrice())};
+            courseInfo.add(str);
+        }
+        tutorProfileForm.setCourseList(courseInfo);
 
         int[] tutorSchedule = getTutorSchedule(tutorId);
         tutorProfileForm.setTutorSchedule(tutorSchedule);
 
         return tutorProfileForm;
     }
-
     @Override
     public String[] getTutorInfo(int tutorId) {
         String sqlTutor = "SELECT * FROM Tutor Where ID =?";
@@ -280,7 +284,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
         PreparedStatement psTutor = null;
         ResultSet rsTutor = null;
         String[] tutorInfo = new String[8];
-
         try {
             con = dataSource.getConnection();
             psTutor = con.prepareStatement(sqlTutor);
@@ -299,7 +302,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
             } else {
                 System.out.println("No Tutor found with id=" + tutorId);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -314,84 +316,8 @@ public class MysqlDAOImpl implements IDataAccessObject {
                 e.printStackTrace();
             }
         }
-
         return tutorInfo;
 
-    }
-
-    @Override
-    public ArrayList<String[]> getTutorCourses(int tutorId) {
-
-        String sqlTutorCourse = "SELECT * FROM TutorCourse Where TutorId =?";
-        PreparedStatement psTutorCourse = null;
-        ResultSet rsTutorCourse = null;
-        ArrayList<String[]> courseList = new ArrayList();
-        String courseId;
-
-        try {
-            con = dataSource.getConnection();
-
-            psTutorCourse = con.prepareStatement(sqlTutorCourse);
-            psTutorCourse.setString(1, String.valueOf(tutorId));
-            rsTutorCourse = psTutorCourse.executeQuery();
-
-            while (rsTutorCourse.next()) {
-                courseId = rsTutorCourse.getString("CourseId");
-                String[] row = {getCourseFromCourseId(courseId)[0], getCourseFromCourseId(courseId)[1], rsTutorCourse.getString("Price")};
-                courseList.add(row);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                assert (rsTutorCourse != null);
-                assert (psTutorCourse != null);
-                assert (con != null);
-                rsTutorCourse.close();
-                psTutorCourse.close();
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return courseList;
-    }
-
-    @Override
-    public String[] getCourseFromCourseId(String courseId) {
-        String sqlCourse = "SELECT * FROM Course Where ID =?";
-        PreparedStatement psCourse = null;
-        ResultSet rsCourse = null;
-        String courseInfo[] = new String[2];
-
-        try {
-            con = dataSource.getConnection();
-            psCourse = con.prepareStatement(sqlCourse);
-            psCourse.setString(1, courseId);
-            rsCourse = psCourse.executeQuery();
-            if (rsCourse.next()) {
-                courseInfo[0] = rsCourse.getString("Name");
-                courseInfo[1] = rsCourse.getString("School");
-
-            } else {
-                System.out.println("No Course found with id=" + courseId);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                assert (rsCourse != null);
-                assert (psCourse != null);
-                assert (con != null);
-                rsCourse.close();
-                psCourse.close();
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return courseInfo;
     }
 
     @Override
@@ -406,11 +332,9 @@ public class MysqlDAOImpl implements IDataAccessObject {
             psTutorSchedule.setString(1, String.valueOf(tutorId));
             rsTutorSchedule = psTutorSchedule.executeQuery();
             if (rsTutorSchedule.next()) {
-
                 for (int i = 3; i < 24; i++) {
                     tutorSchedule[i - 3] = rsTutorSchedule.getInt(i);
                 }
-
             } else {
                 System.out.println("No Tutor found with id=" + tutorId);
             }
@@ -439,7 +363,9 @@ public class MysqlDAOImpl implements IDataAccessObject {
         Connection con = null;
         PreparedStatement ps;
         float averageRating = calculateAverageRating(tutorId, rating);
-
+        if(averageRating < 0){
+            return false;
+        }
         try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
@@ -454,8 +380,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
         } finally {
             if (con != null) {
                 try {
-
-
                     assert (con != null);
                     con.close();
                     return true;
@@ -498,7 +422,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
         } finally {
             if (con != null) {
                 try {
-
                     assert (con != null);
                     con.close();
                     return true;
@@ -517,8 +440,8 @@ public class MysqlDAOImpl implements IDataAccessObject {
         ResultSet rs = null;
         float ratingCount;
         float oldRating;
-        float newRating = 0;
-        float tutorrating = Float.parseFloat(rating);
+        float newRating = -1;
+        float tutorRating = Float.parseFloat(rating);
         try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
@@ -529,7 +452,8 @@ public class MysqlDAOImpl implements IDataAccessObject {
                 oldRating = Float.parseFloat(rs.getString("Rating"));
                 //https://stackoverflow.com/questions/12636613/how-to-calculate-moving-average-without-keeping-the-count-and-data-total
 
-                newRating = (tutorrating + oldRating) / (ratingCount + 1);
+
+                newRating = (oldRating * ratingCount + tutorRating) / (ratingCount + 1);
 
                 increaseTotalRating(tutorId, ratingCount);
 
@@ -541,7 +465,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
             e.printStackTrace();
         } finally {
             try {
-
                 assert (rs != null);
                 assert (ps != null);
                 assert (con != null);
@@ -575,7 +498,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
         } finally {
             if (con != null) {
                 try {
-
                     assert (con != null);
                     con.close();
                     return true;

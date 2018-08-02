@@ -12,17 +12,17 @@ public class GetAllCourseSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    String makeSQL() {
+    protected String makeSQL() {
         return "Call GetAllCourses()";
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
+    protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         return ps;
     }
 
     @Override
-    Object extractResultSet(ResultSet rs) throws SQLException {
+    protected Object extractResultSet(ResultSet rs) throws SQLException {
         List<Course> courses = new ArrayList<>();
         CourseParserWithoutPrice courseParser = new CourseParserWithoutPrice();
         courses.add(courseParser.parse(rs));
@@ -33,7 +33,7 @@ public class GetAllCourseSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    ResultSet execute(PreparedStatement ps) throws SQLException {
+    protected ResultSet execute(PreparedStatement ps) throws SQLException {
         ps.execute();
         return ps.getResultSet();
     }

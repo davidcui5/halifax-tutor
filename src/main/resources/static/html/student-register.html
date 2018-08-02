@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<nav class="navbar bg-primary navbar-fixed-top" >
+<nav class="navbar bg-primary navbar-fixed-top">
     <!-- Navbar content -->
     <div class="container-fluid">
         <div class="navbar-header">
@@ -26,21 +26,23 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item"><a href="../index.html" ><span class="glyphicon glyphicon-log-in"></span>  Login</a></li>
+                <li class="nav-item"><a href="../index.html"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                </li>
 
             </ul>
         </div>
     </div>
 </nav>
+
 <div id="header">
     <h1>HalifaxTutor</h1>
 
 </div>
 
 
-<form name="user_form">
-    <div id="registration_content">
-        <h3>Student Registration</h3>
+<div id="registration_content">
+    <h3>Student Registration</h3>
+    <form name="user_form" id="student-register-form">
         <table>
             <tr>
                 <td>
@@ -87,18 +89,17 @@
                 <td><label for="school">Your School</label></td>
                 <td>
                     <select name="school" id="school">
-                    <option value="Dalhousie University">Dalhousie University</option>
-                    <option value="Saint Mary University">Saint Mary University</option>
+                        <option value="Dalhousie University">Dalhousie University</option>
+                        <option value="Saint Mary University">Saint Mary University</option>
                     </select>
                 </td>
             </tr>
         </table>
         <button type="submit" class="Bbtn" id="register-button">Register</button>
         <br>
-        <button onclick="{location.href='../index.html'}" class="bbtn">Go to the login page</button>
-
-    </div>
-</form>
+    </form>
+    <button onclick="{location.href='../index.html'}" class="bbtn">Go to the login page</button>
+</div>
 
 
 <div id="footer">

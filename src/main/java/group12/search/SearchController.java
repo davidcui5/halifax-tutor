@@ -22,4 +22,10 @@ public class SearchController {
     public IdentityResponse getIdentityResult(@RequestBody IdentityRequest identityRequest) {
         return searchService.getSearchIdentity(identityRequest);
     }
+
+    @RequestMapping(value = "/noLogin", method = RequestMethod.POST, headers = "content-type=application/json")
+    @ResponseBody
+    public NoLoginSearchResponse getNoLoginSearchResult(@RequestBody NoLoginSearchRequest noLoginSearchRequest) {
+        return searchService.getNoLoginSearchResponse(noLoginSearchRequest);
+    }
 }

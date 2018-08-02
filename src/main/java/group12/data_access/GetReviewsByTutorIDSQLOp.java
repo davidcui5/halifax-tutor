@@ -14,19 +14,19 @@ public class GetReviewsByTutorIDSQLOp extends SQLOperationTemplate {
     }
 
     @Override
-    String makeSQL() {
+    protected String makeSQL() {
         return "SELECT * FROM Review WHERE TutorID = ?";
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
+    protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         int tutorID = (int)getParameters().get(0);
         ps.setInt(1,tutorID);
         return ps;
     }
 
     @Override
-    Object extractResultSet(ResultSet rs) throws SQLException {
+    protected Object extractResultSet(ResultSet rs) throws SQLException {
         List<ReviewDTO> reviews = new ArrayList<ReviewDTO>();
         do{
             int reviewID = rs.getInt("ID");
@@ -37,7 +37,7 @@ public class GetReviewsByTutorIDSQLOp extends SQLOperationTemplate {
     }
 
     @Override
-    ResultSet execute(PreparedStatement ps) throws SQLException {
+    protected ResultSet execute(PreparedStatement ps) throws SQLException {
         return ps.executeQuery();
     }
 }

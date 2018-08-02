@@ -110,7 +110,7 @@ public class RegistrationService implements IRegister {
         }
     }
 
-    private void sendTutorActivationEmail(String email){
+    public void sendTutorActivationEmail(String email){
         try {
             int tutorID = dao.getTutorIDByEmail(email);
             UUID uuid = UUID.randomUUID();

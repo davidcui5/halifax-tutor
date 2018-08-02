@@ -10,12 +10,12 @@ public class SaveStudentSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    String makeSQL() {
+    protected String makeSQL() {
         return "SELECT SaveStudent(?,?,?,?,?,?)";
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
+    protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         Student s = (Student) getParameters().get(0);
         ps.setString(1, s.getFirstName());
         ps.setString(2, s.getLastName());
@@ -27,12 +27,12 @@ public class SaveStudentSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    Object extractResultSet(ResultSet rs) throws SQLException {
+    protected Object extractResultSet(ResultSet rs) throws SQLException {
         return rs.getBoolean(1);
     }
 
     @Override
-    ResultSet execute(PreparedStatement ps) throws SQLException {
+    protected ResultSet execute(PreparedStatement ps) throws SQLException {
         return ps.executeQuery();
     }
 }

@@ -1,7 +1,7 @@
 'use strict';
 
 $(document).ready(function () {
-    $("form").submit(function ( event ) {
+    $("#tutor-register-form").submit(function ( event ) {
         event.preventDefault();
         let email = $("#email").val();
         let password = $("#password").val();
