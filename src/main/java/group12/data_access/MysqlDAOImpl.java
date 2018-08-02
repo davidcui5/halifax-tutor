@@ -1,7 +1,7 @@
 package group12.data_access;
 
 
-import group12.tutorprofile.TutorProfileForm;
+import group12.tutor_profile.TutorProfileForm;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.ComponentScan;

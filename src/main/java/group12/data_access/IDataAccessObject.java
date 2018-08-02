@@ -1,6 +1,6 @@
 package group12.data_access;
 
-import group12.tutorprofile.TutorProfileForm;
+import group12.tutor_profile.TutorProfileForm;
 
 import java.util.List;
 

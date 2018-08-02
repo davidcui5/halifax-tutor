@@ -1,16 +1,7 @@
-package group12.TutorProfile;
+package group12.tutor_profile;
 
-import group12.data_access.IDataAccessObject;
-import group12.data_access.MysqlDAOImpl;
-import group12.email.IMailer;
-import group12.email.SpringMailer;
-import group12.token_auth.IAccessToken;
-import group12.token_auth.JWTAccessToken;
-import group12.tutorprofile.TutorProfileForm;
-import group12.tutorprofile.TutorProfileService;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import static org.junit.Assert.assertEquals;
 
