@@ -2,16 +2,18 @@
 package group12.DBDAOTest;
 
 import group12.data_access.*;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static junit.framework.TestCase.*;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class DBDAORegistration {
-    /*
     static ClassPathXmlApplicationContext context;
     static IDataAccessObject dbda;
 
@@ -45,13 +47,8 @@ public class DBDAORegistration {
     public void testActivationCode() {
         boolean actual = dbda.saveActivationCode(MockData.getActivationCode());
         assertTrue(actual);
-        ActivationCode activationCode = dbda.checkActivationCode(MockData.getActivationCode());
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String strDate = dtf.format(LocalDateTime.now());
-        assertEquals(strDate, activationCode.getDate().toString());
         actual = dbda.deleteActivationCodeByValue(MockData.getActivationCode());
         assertTrue(actual);
-
     }
 
     @AfterClass
@@ -66,8 +63,7 @@ public class DBDAORegistration {
     public static void testDeleteTutor() {
         Tutor tutor = MockData.getTutorObject();
         int id = dbda.getTutorIDByEmail(tutor.getEmail());
-        boolean actual = dbda.deleteStudent(id);
+        boolean actual = dbda.deleteTutor(id);
         assertTrue(actual);
     }
-    */
 }

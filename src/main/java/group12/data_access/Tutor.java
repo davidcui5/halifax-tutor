@@ -16,6 +16,8 @@ public class Tutor extends User {
     private String creditCardExpiryDate;
     private String securityCode;
     private String experience;
+    private float rating;
+    private int totalRating;
 
     public Tutor() {
         super();
@@ -142,5 +144,21 @@ public class Tutor extends User {
 
     public void setExperience(String experience) {
         this.experience = experience;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public int getTotalRating() {
+        return totalRating;
+    }
+
+    public void setTotalRating(int totalRating) {
+        this.totalRating = totalRating;
     }
 }

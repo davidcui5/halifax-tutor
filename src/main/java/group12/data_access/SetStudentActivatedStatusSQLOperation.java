@@ -10,12 +10,12 @@ public class SetStudentActivatedStatusSQLOperation extends SQLOperationTemplate 
     }
 
     @Override
-    String makeSQL() {
+    protected String makeSQL() {
         return "SELECT SetStudentActivatedStatus(?,?)";
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
+    protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         int id = (int) getParameters().get(0);
         boolean activationStatus = (boolean) getParameters().get(1);
         ps.setInt(1, id);
@@ -24,12 +24,12 @@ public class SetStudentActivatedStatusSQLOperation extends SQLOperationTemplate 
     }
 
     @Override
-    Object extractResultSet(ResultSet rs) throws SQLException {
+    protected Object extractResultSet(ResultSet rs) throws SQLException {
         return rs.getBoolean(1);
     }
 
     @Override
-    ResultSet execute(PreparedStatement ps) throws SQLException {
+    protected ResultSet execute(PreparedStatement ps) throws SQLException {
         return ps.executeQuery();
     }
 }

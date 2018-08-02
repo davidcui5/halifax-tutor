@@ -5,23 +5,23 @@
     <title>Tutor Setting</title>
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
     <link rel="stylesheet" href="../css/tutor-setting.css">
-    <script src="../js/cloudinary.js" type="text/javascript"></script>
 </head>
 <body>
 
-<nav class="navbar bg-primary navbar-fixed-top" >
+<nav class="navbar bg-primary navbar-fixed-top">
     <!-- Navbar content -->
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="../index.html">HalifaxTutor</a>
+            <a class="navbar-brand" href="javascript:window.location.reload(true)">HalifaxTutor</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="../index.html">Home</a></li>
+                <li class="active" style="display: none"><a href="../index.html">Home</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item"><a href="search-tutor.html" ><span class="glyphicon glyphicon-search"></span>Search</a></li>
+                <li class="nav-item"><a href="search-tutor.html"><span class="glyphicon glyphicon-search"></span>Search</a>
+                </li>
                 <li class="nav-item"><a href="#">Setting</a></li>
                 <li class="nav-item"><a id="logout" href="../index.html">Sign out</a></li>
             </ul>
@@ -30,393 +30,415 @@
 </nav>
 <div class="container">
     <div class="wizard">
-                <!--nav-->
-                <div class="wizard-inner">
-                    <div class="connecting-line"></div>
-                    <ul class="nav nav-tabs" role="tablist">
+        <!--nav-->
+        <div class="wizard-inner">
+            <div class="connecting-line"></div>
+            <ul class="nav nav-tabs" role="tablist">
 
-                        <li role="presentation" class="active">
-                            <a href="#step1" data-toggle="tab" aria-controls="Account Setting" role="tab" title="Account Setting">
+                <li role="presentation" class="active">
+                    <a href="#step1" data-toggle="tab" aria-controls="Account Setting" role="tab"
+                       title="Account Setting">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-pencil"></i>
                                 <h5><br>Account Setting</h5>
                             </span>
-                            </a>
-                        </li>
+                    </a>
+                </li>
 
-                        <li role="presentation">
-                            <a href="#step2" data-toggle="tab" aria-controls="Background Info" role="tab" title="Background Info">
+                <li role="presentation">
+                    <a href="#step2" data-toggle="tab" aria-controls="Background Info" role="tab"
+                       title="Background Info">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-education"></i>
                                 <h5><br>Background Info</h5>
 
                             </span>
 
-                            </a>
+                    </a>
 
-                        </li>
-                        <li role="presentation">
-                            <a href="#step3" data-toggle="tab" aria-controls="Subscription" role="tab" title="Subscription">
+                </li>
+                <li role="presentation">
+                    <a href="#step3" data-toggle="tab" aria-controls="Subscription" role="tab" title="Subscription">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-plus"></i>
                                 <h5><br>Subscription</h5>
                             </span>
-                            </a>
-                        </li>
+                    </a>
+                </li>
 
+            </ul>
+        </div>
+        <!--content-->
+        <div class="tab-content">
+            <!--Step1-->
+            <div class="tab-pane active" role="tabpanel" id="step1">
+                <h3>Account Setting</h3><br>
+                <div class="col-sm-6">
+                    <form name="Cpassword-form" id="Cpassword-form" class="tablerow">
+                        <h4>Change Password</h4>
+                        <br><br>
+                        <input type="password" id="pwd" placeholder="Password" name="pwd" required>
+                        <br><br>
+                        <input type="password" id="Rpwd" placeholder="Repeat Password" name="Rpwd" required>
+                        <input class="btn btn-primary" type="submit" id="passwordS" value="Confirm">
+                    </form>
+
+                    <form name="Cemail" class="tablerow" id="Cemail-form">
+                        <h4>Change Email</h4>
+                        <br><br>
+                        <input type="email" id="email" placeholder="Email" name="email" required>
+                        <input class="btn btn-primary" type="submit" id="emailS" value="Confirm" name="emailS">
+                    </form>
+                    <form name="Cphone" class="tablerow" id="Cphone-form">
+                        <h4>Change Phone</h4>
+                        <br><br>
+                        <input type="number" id="phone" placeholder="Phone" name="phone" required>
+                        <input class="btn btn-primary" type="submit" id="phoneS" value="Confirm" name="phoneS">
+                    </form>
+                </div>
+                <div class="col-sm-6">
+                    <!--<h4>Change Credit Card Info</h4>-->
+                    <form name="Ccard" id="Ccard-form">
+                        <h4>Change Credit Card Info</h4>
+                        <table class="innertab">
+                            <tr class="tablerow">
+                                <td class="tablecolumn">
+                                    <label for="cardname">Card Holder Number</label>
+                                </td>
+                                <td>
+                                    <input type="text" id="cardname" placeholder="Card Holder Name" name="cardname"
+                                           required>
+                                </td>
+                            </tr>
+                            <tr class="tablerow">
+                                <td class="tablecolumn">
+                                    <label for="cardnum">Card Number</label>
+                                </td>
+                                <td>
+                                    <input type="number" id="cardnum" placeholder="Card Number" name="cardnum" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tablecolumn">
+                                    <label for="expire_date">Expiration Date</label>
+                                </td>
+                                <td>
+                                    <input type="month" id="expire_date" name="expire_date" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tablecolumn">
+                                    <label for="code">Secure Code</label>
+                                </td>
+                                <td>
+                                    <input type="number" id="code" name="code" required>
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="submit" class="btn btn-primary" id="cardS" value="Confirm">
+                    </form>
+                    <div class="remail">
+                        <button id="resend" class="btn btn-primary">Resend Confirmation Email</button>
+                    </div>
+                    <div class="infoformr ">
+                        <ul class="list-inline pull-right">
+                            <li>
+                                <button class="next-step Bbtn infoformr" type="button">Next</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--Step2-->
+            <div class="tab-pane" role="tabpanel" id="step2">
+                <h3>Background information</h3>
+                <div class="col-sm-6">
+
+                    <div class="tablerow">
+                        <h4>Change Photo</h4>
+                        <input class="btn" type="button" id="upload_widget_opener" name="photo" value="Upload">
+                        <br>
+                        <input class="btn btn-primary" type="button" id="photoS" value="Confirm">
+                    </div>
+                    <form name="Cedu" id="Cedu" class="tablerow">
+                        <div>
+                            <h4>Change Education</h4>
+                            <br><br>
+                            <textarea id="education" placeholder="Education" name="education"></textarea>
+                            <input class="btn btn-primary" type="submit" id="educationS" value="Confirm"
+                                   name="educationS">
+                        </div>
+                    </form>
+                    <form name="Cexperience" id="Cexperience" class="tablerow">
+                        <div>
+                            <h4>Change Experience</h4>
+                            <br><br>
+                            <textarea id="experience" placeholder="Experience" name="experience"></textarea>
+                            <input class="btn btn-primary" type="submit" id="experienceS" value="Confirm"
+                                   name="experienceS">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-6">
+                    <!--Change course and price-->
+                    <div>
+                        <div class="tablerow">
+                            <h4>Change course and price</h4>
+                            <div id="currentCourses"></div>
+                            <!--<input class="btn" type="button" id="remove" name="remove" value="Remove">-->
+                            <br>
+
+                            <button class="btn" type="button" id="add" name="add"
+                                    onclick="Addshow('AddCourse');return false;">Add
+                            </button>
+
+                            <div id="AddCourse">
+                                <form id="addCourseForm">
+                                    <table>
+                                        <tr class="tablerow">
+                                            <td class="tablecolumn">
+                                                <label for="school">University:</label>
+                                            </td>
+                                            <td>
+                                                <select name="university" id="school">
+                                                    <option value="DAL">Dalhousie University</option>
+                                                    <option value="SMU">Saint Mary University</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tablecolumn">
+                                                <label for="courseCode">Course Code:</label>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="courseCode" id="courseCode"
+                                                       placeholder="e.g., CSCI5308" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tablecolumn">
+                                                <label for="price">Course Price</label>
+                                            </td>
+                                            <td>
+                                                <input type="number" name="price" id="price" placeholder="Course Price" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tablecolumn">
+                                                <input type="submit" class="btn btn-primary" id="addCourseBtn"
+                                                       value="Add Course">
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Change weeklySchedule-->
+                    <div>
+                        <form id="Cavailability" name="Cavailability">
+                            <div class="tablerow">
+                                <h4>Change Availability</h4>
+                                <br>
+                                <div id="weeklySchedule">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <label>S</label>
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <label>M</label>
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <label>T</label>
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <label>W</label>
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <label>T</label>
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <label>F</label>
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <label>S</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tablecolumn">
+                                                <label>Morning:</label>
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Su1" id="Su1">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Mo1" id="Mo1">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Tu1" id="Tu1">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="We1" id="We1">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Th1" id="Th1">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Fr1" id="Fr1">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Sa1" id="Sa1">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tablecolumn">
+                                                <label>Noon:</label>
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Su2" id="Su2">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Mo2" id="Mo2">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Tu2" id="Tu2">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="We2" id="We2">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Th2" id="Th2">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Fr2" id="Fr2">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Sa2" id="Sa2">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tablecolumn">
+                                                <label>Night:</label>
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Su3" id="Su3">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Mo3" id="Mo3">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Tu3" id="Tu3">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="We3" id="We3">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Th3" id="Th3">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Fr3" id="Fr3">
+                                            </td>
+                                            <td class="tablecolumn">
+                                                <input type="checkbox" name="Sa3" id="Sa3">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="tablecolumn">
+                                    <input type="submit" class="btn btn-primary" id="availabilityS" value="Confirm">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <ul class="list-inline pull-right">
+                        <li>
+                            <button type="button" class="Bbtn prev-step">Previous</button>
+                        </li>
+                        <li>
+                            <button type="button" class="Bbtn next-step">Next</button>
+                        </li>
                     </ul>
                 </div>
-                <!--content-->
-                    <div class="tab-content">
-                        <!--Step1-->
-                        <div class="tab-pane active" role="tabpanel" id="step1">
-                            <h3>Account Setting</h3><br>
-                            <div class="col-sm-6">
-                                <form name="Cpassword-form" id = "Cpassword-form" class="tablerow">
-                                    <h4>Change Password</h4>
-                                    <br><br>
-                                    <input type="password" id="pwd" placeholder="Password" name="pwd" required>
-                                    <br><br>
-                                    <input type="password" id="Rpwd" placeholder="Repeat Password" name="Rpwd" required>
-                                    <input class="btn btn-primary" type="submit" id="passwordS" value="Confirm">
-                                </form>
-
-                                <form name="Cemail" class="tablerow" id="Cemail-form">
-                                    <h4>Change Email</h4>
-                                    <br><br>
-                                    <input type="email" id="email" placeholder="Email" name="email" required>
-                                    <input class="btn btn-primary" type="submit" id="emailS" value="Confirm" name="emailS">
-                                </form>
-                                <form name="Cphone" class="tablerow" id="Cphone-form">
-                                    <h4>Change Phone</h4>
-                                    <br><br>
-                                    <input type="number" id="phone" placeholder="Phone" name="phone" required>
-                                    <input class="btn btn-primary" type="submit" id="phoneS" value="Confirm" name="phoneS">
-                                </form>
-                            </div>
-                            <div class="col-sm-6">
-                                <!--<h4>Change Credit Card Info</h4>-->
-                                <form name="Ccard" id="Ccard-form">
-                                    <h4>Change Credit Card Info</h4>
-                                    <table class="innertab">
-                                    <tr class="tablerow">
-                                        <td class="tablecolumn">
-                                            <label for="cardname">Card Holder Number</label>
-                                        </td>
-                                        <td>
-                                            <input type="text" id="cardname" placeholder="Card Holder Name" name="cardname" required>
-                                        </td>
-                                    </tr>
-                                    <tr class="tablerow">
-                                        <td class="tablecolumn">
-                                            <label for="cardnum">Card Number</label>
-                                        </td>
-                                        <td>
-                                            <input type="number" id="cardnum" placeholder="Card Number" name="cardnum" required>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tablecolumn">
-                                            <label for="expire_date">Expiration Date</label>
-                                        </td>
-                                        <td>
-                                            <input type="month" id="expire_date" name="expire_date" required>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tablecolumn">
-                                            <label for="code">Secure Code</label>
-                                        </td>
-                                        <td>
-                                            <input type="number" id="code" name="code" required>
-                                        </td>
-                                    </tr>
-                                </table>
-                                    <input type="submit" class="btn btn-primary" id="cardS" value="Confirm">
-                                </form>
-                                <div class="remail">
-                                    <button id="resend" class="btn btn-primary">Resend Confirmation Email</button>
-                                </div>
-                                <div class="infoformr ">
-                                    <ul class="list-inline pull-right">
-                                        <li><button class="next-step Bbtn infoformr" type="button">Next</button></li>
-                                    </ul>
-                                 </div>
-                            </div>
-                        </div>
-                        <!--Step2-->
-                        <div class="tab-pane" role="tabpanel" id="step2">
-                            <h3>Background information</h3>
-                            <div class="col-sm-6">
-
-                                    <div class="tablerow">
-                                        <h4>Change Photo</h4>
-                                        <input class="btn" type="button" id="upload_widget_opener"  name="photo" value="Upload">
-                                        <br>
-                                        <input class="btn btn-primary" type="button" id="photoS" value="Confirm">
-                                    </div>
-                                    <form name="Cedu" id="Cedu" class="tablerow">
-                                        <div>
-                                            <h4>Change Education</h4>
-                                            <br><br>
-                                            <textarea id="education" placeholder="Education" name="education"></textarea>
-                                            <input class="btn btn-primary" type="submit" id="educationS" value="Confirm" name="educationS">
-                                        </div>
-                                    </form>
-                                    <form name="Cexperience" id="Cexperience" class="tablerow">
-                                        <div>
-                                            <h4>Change Experience</h4>
-                                            <br><br>
-                                            <textarea id="experience" placeholder="Experience" name="experience"></textarea>
-                                            <input class="btn btn-primary" type="submit" id="experienceS" value="Confirm" name="experienceS">
-                                        </div>
-                                    </form>
-                            </div>
-                            <div class="col-sm-6">
-                                <!--Change course and price-->
-                                <div>
-                                    <div class="tablerow">
-                                        <h4>Change course and price</h4>
-                                        <div id="currentcourse"></div>
-                                        <input class="btn" type="button" id="remove" name="remove" value="Remove">
-                                        <br>
-
-                                        <button class="btn" type="button" id="add" name="add" onclick="Addshow('AddCourse');return false;">Add</button>
-
-                                        <div id="AddCourse">
-                                            <form id="courseAdd">
-                                                <table>
-                                                    <tr class="tablerow">
-                                                        <td class="tablecolumn">
-                                                            <label for="university">University:</label>
-                                                        </td>
-                                                        <td>
-                                                            <select name="university" id="university">
-                                                                <option value="Dalhousie University">Dalhousie University</option>
-                                                                <option value="Saint Mary University">Saint Mary University</option>
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tablecolumn">
-                                                            <label for="courseCode">Course Code:</label>
-                                                        </td>
-                                                        <td>
-                                                            <input type="number" name="courseCode" id="courseCode" placeholder="Course Code">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tablecolumn">
-                                                            <label for="price">Course Price</label>
-                                                        </td>
-                                                        <td>
-                                                            <input type="number" name="price" id="price" placeholder="Course Price">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tablecolumn">
-                                                            <input type="button" class="btn btn-primary" id="courseS" value="Add Course">
-                                                        </td>
-
-                                                    </tr>
-                                                </table>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--Change availability-->
-                                <div>
-                                    <form id="Cavailability" name="Cavailability">
-                                        <div class="tablerow">
-                                            <h4>Change Availability</h4>
-                                            <br>
-                                            <div id="availability">
-                                                    <table>
-                                                        <tr>
-                                                            <td>
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <label>S</label>
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <label>M</label>
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <label>T</label>
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <label>W</label>
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <label>T</label>
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <label>F</label>
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <label>S</label>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td  class="tablecolumn">
-                                                                <label>Morning:</label>
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="A1" id="A1">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="A2" id="A2">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="A3" id="A3">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="A4" id="A4">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="A5" id="A5">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="A6" id="A6">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="A7" id="A7">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="tablecolumn">
-                                                                <label>Noon:</label>
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="B1" id="B1">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="B2" id="B2">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="B3" id="B3">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="B4" id="B4">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="B5" id="B5">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="B6" id="B6">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="B7" id="B7">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="tablecolumn">
-                                                                <label>Night:</label>
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="C1" id="C1">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="C2" id="C2">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="C3" id="C3">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="C4" id="C4">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="C5" id="C5">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="C6" id="C6">
-                                                            </td>
-                                                            <td class="tablecolumn">
-                                                                <input type="checkbox" name="C7" id="C7">
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                            </div>
-
-                                            <div class="tablecolumn">
-                                                <input type="button" class="btn btn-primary" id="availabilityS" value="Confirm">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <ul class="list-inline pull-right">
-                                    <li><button type="button" class="Bbtn prev-step">Previous</button></li>
-                                    <li><button type="button" class="Bbtn next-step">Next</button></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!--Step3-->
-                        <div class="tab-pane" role="tabpanel" id="step3">
-                            <h3>Subscription</h3>
-                            <div>
-                                <h4>Current Subscription:</h4>
-                                <div id="currentSubscription" class="tablerow"></div>
-                                <button id="cancel" class="btn btn-danger">Cancel Current Subscription</button>
-                                <div id="renew" class="tablerow">
-                                    <h4>Select Your New Plan</h4>
-                                    <!--pricing-->
-                                    <div class="plans_container tablerow">
-                                        <table>
-                                            <tr>
-                                                <div class="plans_container">
-                                                    <div class="pricing_item">
-                                                        <h3 class="pricing_title">1 Month</h3>
-                                                        <span class="pricing_details">$19.99</span>
-                                                        <button id="plan1" class="pricing_button" href="#">Select Plan</button>
-                                                    </div>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <div class="plans_container">
-                                                    <div class="pricing_item">
-                                                        <h3 class="pricing_title">3 Month</h3>
-                                                        <span class="pricing_details">$49.99</span>
-                                                        <button id="plan2"class="pricing_button" href="#">Select Plan</button>
-                                                    </div>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <div class="plans_container">
-                                                    <div class="pricing_item">
-                                                        <h3 class="pricing_title">6 Month</h3>
-                                                        <span class="pricing_details">$89.99</span>
-                                                        <button id="plan3"class="pricing_button" href="#">Select Plan</button>
-                                                    </div>
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <div class="plans_container">
-                                                    <div class="pricing_item">
-                                                        <h3 class="pricing_title">12 Month</h3>
-                                                        <span class="pricing_details">$159.00</span>
-                                                        <button id="plan4"class="pricing_button" href="#">Select Plan</button>
-                                                    </div>
-                                                </div>
-                                            </tr>
-                                        </table>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <ul class="list-inline pull-right">
-                                <li><button type="button" class="Bbtn  prev-step">Previous</button></li>
-                                <li><button type="button" class="Bbtn  btn-info-full" onclick="{location.href='tutor-profile.html'}">Save and Exit</button></li>
-                            </ul>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
             </div>
+            <!--Step3-->
+            <div class="tab-pane" role="tabpanel" id="step3">
+                <h3>Subscription</h3>
+                <div>
+                    <h4>Current Subscription:</h4>
+                    <div id="currentSubscription" class="tablerow"></div>
+                    <button id="cancel" class="btn btn-danger">Cancel Current Subscription</button>
+                    <div id="renew" class="tablerow">
+                        <h4>Select Your New Plan</h4>
+                        <!--pricing-->
+                        <div class="plans_container tablerow">
+                            <table>
+                                <tr>
+                                    <div class="plans_container">
+                                        <div class="pricing_item">
+                                            <h3 class="pricing_title">1 Month</h3>
+                                            <span class="pricing_details">$19.99</span>
+                                            <button id="plan1" class="pricing_button" href="#">Select Plan</button>
+                                        </div>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="plans_container">
+                                        <div class="pricing_item">
+                                            <h3 class="pricing_title">3 Month</h3>
+                                            <span class="pricing_details">$49.99</span>
+                                            <button id="plan2" class="pricing_button" href="#">Select Plan</button>
+                                        </div>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="plans_container">
+                                        <div class="pricing_item">
+                                            <h3 class="pricing_title">6 Month</h3>
+                                            <span class="pricing_details">$89.99</span>
+                                            <button id="plan3" class="pricing_button" href="#">Select Plan</button>
+                                        </div>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div class="plans_container">
+                                        <div class="pricing_item">
+                                            <h3 class="pricing_title">12 Month</h3>
+                                            <span class="pricing_details">$159.00</span>
+                                            <button id="plan4" class="pricing_button" href="#">Select Plan</button>
+                                        </div>
+                                    </div>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <ul class="list-inline pull-right">
+                    <li>
+                        <button type="button" class="Bbtn  prev-step">Previous</button>
+                    </li>
+                    <li>
+                        <button type="button" class="Bbtn  btn-info-full"
+                                onclick="{location.href='tutor-profile.html'}">Save and Exit
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
-<script  src="../js/tutor-setting.js"></script>
-<script src="../js/setting-validator.js" type="text/javascript"></script>
+<script src="../js/cloudinary.js"></script>
+<script src="../js/setting-validator.js"></script>
+<script src="../js/tutor-setting.js"></script>
 </body>
 </html>

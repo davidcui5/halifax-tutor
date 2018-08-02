@@ -22,6 +22,8 @@ public class TutorParser {
         tutor.setCreditCardExpiryDate(rs.getString("CreditCardExpiryDate"));
         tutor.setSecurityCode(rs.getString("SecurityCode"));
         tutor.setExperience(rs.getString("Experience"));
+        tutor.setRating(rs.getFloat("Rating"));
+        tutor.setTotalRating(rs.getInt("TotalRatings"));
         return tutor;
     }
 }
