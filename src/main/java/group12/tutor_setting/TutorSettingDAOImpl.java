@@ -3,6 +3,9 @@ package group12.tutor_setting;
 
 import group12.data_access.*;
 
+import java.util.Iterator;
+import java.util.List;
+
 public class TutorSettingDAOImpl implements ITutorSettingDAO {
     private SQLOperationTemplate operation;
     private IDataAccessObject dataAccessObject;
@@ -50,10 +53,42 @@ public class TutorSettingDAOImpl implements ITutorSettingDAO {
     }
 
     @Override
-    public boolean addCourse(String email, String school, String courseCode, String price) {
+    public boolean addCourse(String email, String school, String courseCode, float price) {
+        boolean result = false;
+
         dataAccessObject = new MysqlDAOImpl();
         int tutorId = dataAccessObject.getTutorIDByEmail(email);
-        return false;
+
+        List<Course> currentCourses = dataAccessObject.getAllCourses();
+        Iterator<Course> iterator = currentCourses.iterator();
+        int courseId = 0;
+        boolean courseExisted = false;
+
+
+        while (iterator.hasNext()) {
+            Course course = iterator.next();
+            if (course.getName().equals(courseCode) && course.getSchool().equals(school)) {
+                courseId = course.getId();
+                courseExisted = true;
+            }
+        }
+
+        if (courseExisted) {
+            result = dataAccessObject.setCourseToTutor(tutorId, courseId, price);
+        } else {
+            Course newCourse = new Course();
+            newCourse.setName(courseCode);
+            newCourse.setSchool(school);
+            result = dataAccessObject.saveCourse(newCourse);
+            if (result != true) {
+                return false;
+            } else {
+                operation = new GetCourseIdSQLOperation(courseCode, school);
+                courseId = (int) operation.executeMysqlQuery();
+                result = dataAccessObject.setCourseToTutor(tutorId, courseId, price);
+            }
+        }
+        return result;
     }
 
     @Override

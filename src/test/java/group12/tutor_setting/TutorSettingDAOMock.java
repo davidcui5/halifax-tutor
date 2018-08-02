@@ -67,7 +67,7 @@ public class TutorSettingDAOMock implements ITutorSettingDAO {
     }
 
     @Override
-    public boolean addCourse(String email, String school, String courseCode, String price) {
+    public boolean addCourse(String email, String school, String courseCode, float price) {
         if (email.contains("zongming")) {
             return true;
         } else {

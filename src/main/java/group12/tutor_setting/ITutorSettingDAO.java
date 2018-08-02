@@ -18,7 +18,7 @@ public interface ITutorSettingDAO {
 
     boolean updateExperience(String email, String experience);
 
-    boolean addCourse(String email, String school, String courseCode, String price);
+    boolean addCourse(String email, String school, String courseCode, float price);
 
     boolean removeCourse(String email, String school, String courseCode);
 
@@ -27,6 +27,5 @@ public interface ITutorSettingDAO {
     boolean updatePlan(String email, String planNo);
 
     boolean cancelPlan(String email);
-
 
 }

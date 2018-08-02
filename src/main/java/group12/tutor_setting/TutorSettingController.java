@@ -92,4 +92,9 @@ public class TutorSettingController {
     public TutorSettingResponse getRemoveCourseResponse(@RequestBody RemoveCourseRequest request) {
         return tutorSettingService.getRemoveCourseResponse(request);
     }
+
+    @PostMapping(path = "/tutor/setting/courseAddition", headers = "content-type=application/json")
+    public TutorSettingResponse getAddCourseResponse(@RequestBody AddCourseRequest request) {
+        return tutorSettingService.getAddCourseResponse(request);
+    }
 }

@@ -193,14 +193,14 @@
                             </button>
 
                             <div id="AddCourse">
-                                <form id="courseAdd">
+                                <form id="addCourseForm">
                                     <table>
                                         <tr class="tablerow">
                                             <td class="tablecolumn">
-                                                <label for="university">University:</label>
+                                                <label for="school">University:</label>
                                             </td>
                                             <td>
-                                                <select name="university" id="university">
+                                                <select name="university" id="school">
                                                     <option value="DAL">Dalhousie University</option>
                                                     <option value="SMU">Saint Mary University</option>
                                                 </select>
@@ -212,7 +212,7 @@
                                             </td>
                                             <td>
                                                 <input type="text" name="courseCode" id="courseCode"
-                                                       placeholder="e.g., CSCI5308">
+                                                       placeholder="e.g., CSCI5308" required>
                                             </td>
                                         </tr>
                                         <tr>
@@ -220,12 +220,12 @@
                                                 <label for="price">Course Price</label>
                                             </td>
                                             <td>
-                                                <input type="number" name="price" id="price" placeholder="Course Price">
+                                                <input type="number" name="price" id="price" placeholder="Course Price" required>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="tablecolumn">
-                                                <input type="submit" class="btn btn-primary" id="courseS"
+                                                <input type="submit" class="btn btn-primary" id="addCourseBtn"
                                                        value="Add Course">
                                             </td>
 

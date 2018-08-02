@@ -177,10 +177,36 @@ $(document).ready(function () {
         });
     });
 
-    $("#courseAdd").submit(function (event) {
+    $("#addCourseForm").submit(function (event) {
         event.preventDefault();
-        let school = $("#university").val();
+
+        let school = $("select#school").val();
         let courseName = $("#courseCode").val();
+        let price = $("#price").val();
+
+        let data = {
+            "token": token,
+            "school": school,
+            "courseCode": courseName,
+            "coursePrice": price
+        };
+
+        $.ajax({
+            url: location.origin + "/tutor/setting/courseAddition",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "json"
+        }).done(function (json) {
+            let success = json['success'];
+            if (success) {
+                alert("Course added successfully!");
+            } else {
+                alert("Something went wrong on our database.");
+            }
+        }).fail(function (xhr, status, errorThrown) {
+            alert("Something went wrong on our back end...");
+        });
     });
 
     $("#Cemail-form").submit(function (event) {

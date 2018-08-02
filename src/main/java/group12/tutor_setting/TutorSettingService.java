@@ -166,4 +166,17 @@ class TutorSettingService {
         boolean success = tutorSettingDAO.removeCourse(email, school, courseName);
         return new TutorSettingResponse(success);
     }
+
+    TutorSettingResponse getAddCourseResponse(AddCourseRequest request) {
+        String token = request.getToken();
+        String school = request.getSchool();
+        String courseCode = request.getCourseCode();
+        float coursePrice = request.getCoursePrice();
+
+        String email = accessToken.decodeToken(token);
+
+        boolean success = tutorSettingDAO.addCourse(email, school, courseCode, coursePrice);
+
+        return new TutorSettingResponse(success);
+    }
 }
