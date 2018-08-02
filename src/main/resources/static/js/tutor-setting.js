@@ -1,4 +1,11 @@
 $(document).ready(function () {
+    let token = localStorage.getItem("token");
+
+    if (token === null) {
+        alert("Please login. Redirecting to login page.");
+        location.href = "../index.html";
+    }
+
     //Initialize tooltips
     $('.nav-tabs > li a[title]').tooltip();
 

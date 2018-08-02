@@ -184,7 +184,7 @@ $(document).ready(function () {
 
     $("#sign-out-button").click(function () {
         localStorage.removeItem('token');
-        alert("You have successfully logged out! Now redirecting to log in page.");
+        alert("You have successfully logged out! Now redirecting to login page.");
         window.location.assign("../index.html");
     });
 });
