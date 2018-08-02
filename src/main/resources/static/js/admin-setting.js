@@ -15,6 +15,9 @@ $(document).ready(function () {
             alert("You do not have access to this page.");
             window.location.replace("../index.html");
         }
+        if (data === "ERROR") {
+            window.location.replace("/exception-page.html");
+        }
     }).fail(function (xhr, status, errorThrown) {
         //window.location.replace("../index.html");
     });
@@ -52,6 +55,9 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
+            if (data === "ERROR") {
+                window.location.replace("/exception-page.html");
+            }
             alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
@@ -81,6 +87,9 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
+            if (data === "ERROR") {
+                window.location.replace("/exception-page.html");
+            }
             alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
@@ -103,6 +112,9 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
+            if (data === "ERROR") {
+                window.location.replace("/exception-page.html");
+            }
             alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
@@ -125,6 +137,9 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
+            if (data === "ERROR") {
+                window.location.replace("/exception-page.html");
+            }
             alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
@@ -148,6 +163,9 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
+            if (data === "ERROR") {
+                window.location.replace("/exception-page.html");
+            }
             alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
@@ -170,6 +188,9 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
+            if (data === "ERROR") {
+                window.location.replace("/exception-page.html");
+            }
             alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
@@ -270,6 +291,9 @@ $(document).ready(function () {
             type: "POST",
             dataType: "text"
         }).done(function (data) {
+            if (data === "ERROR") {
+                window.location.replace("/exception-page.html");
+            }
             alert(data);
         }).fail(function (xhr, status, errorThrown) {
             //empty
