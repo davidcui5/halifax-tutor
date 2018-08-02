@@ -11,7 +11,7 @@ public class SetTutorRatingAndTotalRatingsSQLOp extends SQLOperationTemplate {
 
     @Override
     String makeSQL() {
-        return "SELECT SetTutorRatingAndTotalRatings(?, ?, ?);";
+        return "SELECT SetTutorRatingAndTotalRatings(?, ?, ?)";
     }
 
     @Override

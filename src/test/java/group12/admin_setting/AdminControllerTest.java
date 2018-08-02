@@ -17,7 +17,7 @@ public class AdminControllerTest {
     private static final String AUTHORIZED = "AUTHORIZED";
     private static final String UNAUTHORIZED = "UNAUTHORIZED";
     private static final String SUCCESS = "SUCCESS";
-    private static final String FAILURE = "FAILURE";
+    private static final String ERROR = "ERROR";
 
     @Before
     public void setUp() {
@@ -51,7 +51,7 @@ public class AdminControllerTest {
         Map<String, String> input2 = new HashMap<>();
         input2.put("token","sql failed");
         input2.put("password","sql failed");
-        assertEquals(FAILURE,controller.changePassword(input2));
+        assertEquals(ERROR,controller.changePassword(input2));
 
         Map<String, String> input3 = new HashMap<>();
         input3.put("token","invalid@email.com");
@@ -83,7 +83,7 @@ public class AdminControllerTest {
         input3.put("priceTwo","29.99");
         input3.put("priceThree","39.99");
         input3.put("priceFour","-49.99");
-        assertEquals(FAILURE,controller.changePrice(input3));
+        assertEquals(ERROR,controller.changePrice(input3));
     }
 
     @Test
@@ -101,7 +101,7 @@ public class AdminControllerTest {
         Map<String, String> input3 = new HashMap<>();
         input3.put("token","validAdmin@email.com");
         input3.put("studentID","-111");
-        assertEquals(FAILURE,controller.banStudent(input3));
+        assertEquals(ERROR,controller.banStudent(input3));
     }
 
     @Test
@@ -119,7 +119,7 @@ public class AdminControllerTest {
         Map<String, String> input3 = new HashMap<>();
         input3.put("token","validAdmin@email.com");
         input3.put("studentID","-111");
-        assertEquals(FAILURE,controller.unbanStudent(input3));
+        assertEquals(ERROR,controller.unbanStudent(input3));
     }
 
     @Test
@@ -137,7 +137,7 @@ public class AdminControllerTest {
         Map<String, String> input3 = new HashMap<>();
         input3.put("token","validAdmin@email.com");
         input3.put("tutorID","-333");
-        assertEquals(FAILURE,controller.banTutor(input3));
+        assertEquals(ERROR,controller.banTutor(input3));
     }
 
     @Test
@@ -155,7 +155,7 @@ public class AdminControllerTest {
         Map<String, String> input3 = new HashMap<>();
         input3.put("token","validAdmin@email.com");
         input3.put("tutorID","-333");
-        assertEquals(FAILURE,controller.unbanTutor(input3));
+        assertEquals(ERROR,controller.unbanTutor(input3));
     }
 
     @Test
@@ -259,12 +259,12 @@ public class AdminControllerTest {
         Map<String, String> input = new HashMap<>();
         input.put("token","validAdmin@email.com");
         input.put("reviewID","9");
-        assertEquals(FAILURE,controller.deleteReview(input));
+        assertEquals(ERROR,controller.deleteReview(input));
 
         Map<String, String> input2 = new HashMap<>();
         input2.put("token","validAdmin@email.com");
         input2.put("reviewID","10");
-        assertEquals(FAILURE,controller.deleteReview(input2));
+        assertEquals(ERROR,controller.deleteReview(input2));
     }
 
     @Test
@@ -279,6 +279,9 @@ public class AdminControllerTest {
     public void testCalculateNewRating() {
         float newRating = controller.calculateNewRating(3.0F,2,1.0F);
         assertEquals(5.0F, newRating, 0.0001);
+
+        newRating = controller.calculateNewRating(5.0F,1,5.0F);
+        assertEquals(0, newRating, 0.0001);
     }
 
     @After
