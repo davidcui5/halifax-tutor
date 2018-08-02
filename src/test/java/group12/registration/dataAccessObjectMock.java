@@ -115,11 +115,6 @@ public class dataAccessObjectMock implements IDataAccessObject {
     }
 
     @Override
-    public Admin getAdminByEmail(String email) {
-        return null;
-    }
-
-    @Override
     public Course getCourseByName(String nameCourse) {
         return null;
     }
@@ -130,22 +125,7 @@ public class dataAccessObjectMock implements IDataAccessObject {
     }
 
     @Override
-    public int countOfActivationCodeWithValue(String codeValue) {
-        return 0;
-    }
-
-    @Override
     public boolean saveCourse(Course course) {
-        return false;
-    }
-
-    @Override
-    public boolean setStudentBannedStatus(int studentID, boolean status) {
-        return false;
-    }
-
-    @Override
-    public boolean setTutorBannedStatus(int tutorID, boolean status) {
         return false;
     }
 
@@ -215,11 +195,6 @@ public class dataAccessObjectMock implements IDataAccessObject {
     }
 
     @Override
-    public ArrayList<String[]> getTutorCourses(int tutorId) {
-        return null;
-    }
-
-    @Override
     public int[] getTutorSchedule(int tutorId) {
         return new int[0];
     }
@@ -237,11 +212,6 @@ public class dataAccessObjectMock implements IDataAccessObject {
     @Override
     public float calculateAverageRating(int tutorId, String rating) {
         return 0;
-    }
-
-    @Override
-    public String[] getCourseFromCourseId(String courseId) {
-        return new String[0];
     }
 
     @Override

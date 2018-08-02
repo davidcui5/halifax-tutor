@@ -10,8 +10,6 @@ public interface IDataAccessObject {
 
     Tutor getTutorByEmail(String email);
 
-    Admin getAdminByEmail(String email);
-
     ActivationCode checkActivationCode(String code);
 
     Course getCourseByName(String nameCourse);
@@ -28,8 +26,6 @@ public interface IDataAccessObject {
 
     int countOfUserWithCreditCardNum(String cardNum);
 
-    int countOfActivationCodeWithValue(String codeValue);
-
     boolean saveActivationCode(String code);
 
     boolean saveCourse(Course course);
@@ -41,11 +37,6 @@ public interface IDataAccessObject {
     boolean setStudentActivatedStatus(int studentID, boolean status);
 
     boolean setTutorActivatedStatus(int tutorID, boolean status);
-
-    boolean setStudentBannedStatus(int studentID, boolean status);
-
-    boolean setTutorBannedStatus(int tutorID, boolean status);
-
 
     boolean deleteActivationCodeByValue(String codeValue);
 

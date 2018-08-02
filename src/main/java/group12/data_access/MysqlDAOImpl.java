@@ -59,16 +59,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
     }
 
     @Override
-    public int countOfActivationCodeWithValue(String codeValue) {
-        SQLOperationTemplate op = new CheckActivationCodeSQLOperation(codeValue);
-        if (op.executeMysqlQuery() != null) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
-    @Override
     public boolean saveStudent(Student student) {
         SQLOperationTemplate op = new SaveStudentSQLOperation(student);
         return (Boolean) op.executeMysqlQuery();
@@ -87,13 +77,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
         Tutor tutor = (Tutor) op.executeMysqlQuery();
         return tutor;
     }
-
-    @Override
-    public Admin getAdminByEmail(String email) {
-        SQLOperationTemplate op = new GetAdminSQLOperation(email);
-        return (Admin) op.executeMysqlQuery();
-    }
-
 
     @Override
     public boolean saveTutor(Tutor tutor) {
@@ -132,20 +115,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
     public boolean setTutorActivatedStatus(int id, boolean status) {
         SQLOperationTemplate op =
                 new SetTutorActivatedStatusSQLOperation(id, status);
-        return (boolean) op.executeMysqlQuery();
-    }
-
-    @Override
-    public boolean setStudentBannedStatus(int studentID, boolean status) {
-        SQLOperationTemplate op =
-                new SetStudentBannedStatusSQLOperation(studentID, status);
-        return (boolean) op.executeMysqlQuery();
-    }
-
-    @Override
-    public boolean setTutorBannedStatus(int tutorID, boolean status) {
-        SQLOperationTemplate op =
-                new SetTutorBannedStatusSQLOperation(tutorID, status);
         return (boolean) op.executeMysqlQuery();
     }
 

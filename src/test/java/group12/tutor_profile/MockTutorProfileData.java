@@ -17,11 +17,6 @@ public class MockTutorProfileData implements IDataAccessObject {
     }
 
     @Override
-    public Admin getAdminByEmail(String email) {
-        return null;
-    }
-
-    @Override
     public ActivationCode checkActivationCode(String code) {
         return null;
     }
@@ -62,11 +57,6 @@ public class MockTutorProfileData implements IDataAccessObject {
     }
 
     @Override
-    public int countOfActivationCodeWithValue(String codeValue) {
-        return 0;
-    }
-
-    @Override
     public boolean saveActivationCode(String code) {
         return false;
     }
@@ -93,16 +83,6 @@ public class MockTutorProfileData implements IDataAccessObject {
 
     @Override
     public boolean setTutorActivatedStatus(int tutorID, boolean status) {
-        return false;
-    }
-
-    @Override
-    public boolean setStudentBannedStatus(int studentID, boolean status) {
-        return false;
-    }
-
-    @Override
-    public boolean setTutorBannedStatus(int tutorID, boolean status) {
         return false;
     }
 

@@ -35,9 +35,8 @@ public class SimpleMD5Encryptor implements IEncryptor {
             return output;
         }
         catch(Exception e) {
-            logger.error("Error", e);
+            logger.error("Encryption Error", e);
         }
-        return input;
+        return null;
     }
-
 }
