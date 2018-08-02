@@ -23,7 +23,7 @@ public class DBDAOFunctionsTest {
     @Before
     public void testRegStudentRightInfo() {
         Student student = MockData.getStudentObject();
-        Boolean actual = dbda.saveStudent(student);
+        boolean actual = dbda.saveStudent(student);
         assertTrue(actual);
     }
 
@@ -37,7 +37,7 @@ public class DBDAOFunctionsTest {
     @Test
     public void testIsEmailNewWithNewEmail() {
         int actual = dbda.countOfUserWithEmail(MockData.getNewEmail());
-        assertTrue(actual == 0);
+        assertEquals(0, actual);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class DBDAOFunctionsTest {
     @Test
     public void testIsPhoneNewWithNewPhone() {
         int actual = dbda.countOfUserWithPhone(MockData.getNewPhone());
-        assertTrue(actual == 0);
+        assertEquals(0, actual);
     }
 
 
