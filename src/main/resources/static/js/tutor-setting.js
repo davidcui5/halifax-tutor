@@ -1,4 +1,11 @@
 $(document).ready(function () {
+    let token = localStorage.getItem("token");
+
+    if (token === null) {
+        alert("Please login. Redirecting to login page.");
+        location.href = "../index.html";
+    }
+
     //Initialize tooltips
     $('.nav-tabs > li a[title]').tooltip();
 
@@ -27,10 +34,10 @@ $(document).ready(function () {
     });
 
 });
-$(document).ready(function(){
-    document.getElementById("upload_widget_opener").addEventListener("click", function() {
-        cloudinary.openUploadWidget({ cloud_name: 'yrzzzzzz', upload_preset: 'ktpg8ic7', folder: 'user_photos'},
-            function(error, result) {
+$(document).ready(function () {
+    document.getElementById("upload_widget_opener").addEventListener("click", function () {
+        cloudinary.openUploadWidget({cloud_name: 'yrzzzzzz', upload_preset: 'ktpg8ic7', folder: 'user_photos'},
+            function (error, result) {
                 if (error !== null) {
                     alert(error);
                 } else {
@@ -43,7 +50,7 @@ $(document).ready(function(){
                         "token": token,
                         "photoURL": photoURL
                     };
-                    $("#photoS").on("click", function() {
+                    $("#photoS").on("click", function () {
                         $.ajax({
                             url: location.origin + "/tutor/setting/photo",
                             data: JSON.stringify(data),
@@ -64,9 +71,9 @@ $(document).ready(function(){
                 }
             });
     }, false);
-}) ;
+});
 
-$(document).on('cloudinarywidgetfileuploadsuccess', function(e, data) {
+$(document).on('cloudinarywidgetfileuploadsuccess', function (e, data) {
     console.log("Single file success", e, data);
 });
 
@@ -80,20 +87,74 @@ function Addshow(id) {
 function nextTab(elem) {
     $(elem).next().find('a[data-toggle="tab"]').click();
 }
+
 function prevTab(elem) {
     $(elem).prev().find('a[data-toggle="tab"]').click();
 }
 
 
+$(document).ready(function () {
+    let token = localStorage.getItem("token");
 
-$(document).ready(function() {
-    var token = localStorage.getItem("token");
-    var objToken = {'token': token};
+    $.ajax({
+        url: location.origin + "/tutor/setting/courses",
+        data: JSON.stringify({
+            "token": token
+        }),
+        contentType: "application/json",
+        type: "POST",
+        dataType: "json"
+    }).done(function (json) {
+        let success = json['success'];
+        let courses = json['courses'];
+        if (success && courses !== null && courses.length !== 0) {
+            courses.forEach(function (course) {
+                let school = course['school'];
+                let name = course['name'];
+                let price = course['price'];
+                let courseDiv = document.createElement("div");
+                let courseP = document.createElement("p");
+                courseP.innerHTML = school + " " + name + " " + price;
+                courseDiv.appendChild(courseP);
+                let button = document.createElement("button");
+                button.innerHTML = "Remove";
+                button.addEventListener("click", function (event) {
+                    let data = {
+                        "token": token,
+                        "school": school,
+                        "courseCode": name
+                    };
+                    $.ajax({
+                        url: location.origin + "/tutor/setting/courseRemoval",
+                        data: JSON.stringify(data),
+                        contentType: "application/json",
+                        type: "POST",
+                        dataType: "json"
+                    }).done(function (json) {
+                        let success = json['success'];
+                        if (success) {
+                            alert("Course removed!");
+                        } else {
+                            alert("Course is not removed.");
+                        }
+                    }).fail(function (xhr, status, errorThrown) {
+                        alert("Something went wrong when removing this course.");
+                    });
+                });
+                courseDiv.appendChild(button);
+                document.getElementById("currentCourses").appendChild(courseDiv);
+            });
+        } else {
+            document.getElementById("currentCourses").innerHTML = "<p>You don't have any course right now.</p>";
+        }
+    }).fail(function (xhr, status, errorThrown) {
+        console.log("Cannot get current courses");
+    });
 
     $("#logout").click(function () {
         localStorage.removeItem("token");
         alert("Signing out...");
-        windows.location = "../index.html";
+        window.location = "../index.html";
     });
 
     $("#Cpassword-form").submit(function (event) {
@@ -123,10 +184,36 @@ $(document).ready(function() {
         });
     });
 
-    $("#courseAdd").submit(function (event) {
+    $("#addCourseForm").submit(function (event) {
         event.preventDefault();
-        let school = $("#university").val();
+
+        let school = $("select#school").val();
         let courseName = $("#courseCode").val();
+        let price = $("#price").val();
+
+        let data = {
+            "token": token,
+            "school": school,
+            "courseCode": courseName,
+            "coursePrice": price
+        };
+
+        $.ajax({
+            url: location.origin + "/tutor/setting/courseAddition",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            type: "POST",
+            dataType: "json"
+        }).done(function (json) {
+            let success = json['success'];
+            if (success) {
+                alert("Course added successfully!");
+            } else {
+                alert("Something went wrong on our database.");
+            }
+        }).fail(function (xhr, status, errorThrown) {
+            alert("Something went wrong on our back end...");
+        });
     });
 
     $("#Cemail-form").submit(function (event) {
@@ -170,7 +257,7 @@ $(document).ready(function() {
         };
 
         $.ajax({
-            url: location.origin +"/tutor/setting/phone",
+            url: location.origin + "/tutor/setting/phone",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
@@ -198,12 +285,12 @@ $(document).ready(function() {
             'token': token,
             'holderName': holderName,
             'creditCardNumber': creditCardNumber,
-            'expireDate':expireDate,
-            'securityCode' : securityCode
+            'expireDate': expireDate,
+            'securityCode': securityCode
         };
 
         $.ajax({
-            url: location.origin +"/tutor/setting/card",
+            url: location.origin + "/tutor/setting/card",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
@@ -227,11 +314,11 @@ $(document).ready(function() {
 
         let data = {
             'token': token,
-            'education' : education
+            'education': education
         };
 
         $.ajax({
-            url: location.origin +"/tutor/setting/education",
+            url: location.origin + "/tutor/setting/education",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
@@ -255,11 +342,11 @@ $(document).ready(function() {
 
         let data = {
             'token': token,
-            'experience' : experience
+            'experience': experience
         };
 
         $.ajax({
-            url: location.origin +"/tutor/setting/experience",
+            url: location.origin + "/tutor/setting/experience",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
@@ -320,7 +407,7 @@ $(document).ready(function() {
         };
 
         $.ajax({
-            url: location.origin +"/tutor/setting/weeklySchedule",
+            url: location.origin + "/tutor/setting/weeklySchedule",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
@@ -340,100 +427,104 @@ $(document).ready(function() {
     $("#plan1").click(function (event) {
         event.preventDefault();
 
-        var ChangePlan = {
-            'token':token,
-            'planNo':1
+        let data = {
+            'token': token,
+            'planNo': 1
         };
 
         $.ajax({
-            url: location.origin +"/tutor/setting/plan",
-            data: JSON.stringify(ChangePlan),
+            url: location.origin + "/tutor/setting/plan",
+            data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
-            dataType: "text"
-        }).done(function (data) {
-            if (data === "Success") {
+            dataType: "json"
+        }).done(function (json) {
+            let success = json['success'];
+            if (success) {
                 alert("Subscription Plan change succeed!");
             } else {
-                alert(data);
+                alert("Something wrong on our database.");
             }
         }).fail(function (xhr, status, errorThrown) {
-
+            alert("Something wrong on our server.");
         });
     });
 
     $("#plan2").click(function (event) {
         event.preventDefault();
 
-        var ChangePlan = {
-            'token':token,
-            'planNo':2
+        let data = {
+            'token': token,
+            'planNo': 2
         };
 
         $.ajax({
-            url: location.origin +"/tutor/setting/plan",
-            data: JSON.stringify(ChangePlan),
+            url: location.origin + "/tutor/setting/plan",
+            data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
-            dataType: "text"
-        }).done(function (data) {
-            if (data=== "Success") {
+            dataType: "json"
+        }).done(function (json) {
+            let success = json['success'];
+            if (success) {
                 alert("Subscription Plan change succeed!");
             } else {
-                alert(data);
+                alert("Something wrong on our database.");
             }
         }).fail(function (xhr, status, errorThrown) {
-
+            alert("Something wrong on our server.");
         });
     });
 
     $("#plan3").click(function (event) {
         event.preventDefault();
 
-        var ChangePlan = {
-            'token':token,
-            'planNo':3
+        let data = {
+            'token': token,
+            'planNo': 3
         };
 
         $.ajax({
-            url: location.origin +"/tutor/setting/plan",
-            data: JSON.stringify(ChangePlan),
+            url: location.origin + "/tutor/setting/plan",
+            data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
-            dataType: "text"
-        }).done(function (data) {
-            if (data === "Success") {
+            dataType: "json"
+        }).done(function (json) {
+            let success = json['success'];
+            if (success) {
                 alert("Subscription Plan change succeed!");
             } else {
-                alert(data);
+                alert("Something wrong on our database.");
             }
         }).fail(function (xhr, status, errorThrown) {
-
+            alert("Something wrong on our server.");
         });
     });
 
     $("#plan4").click(function (event) {
         event.preventDefault();
 
-        var ChangePlan = {
-            'token':token,
-            'planNo':4
+        let data = {
+            'token': token,
+            'planNo': 4
         };
 
         $.ajax({
-            url: location.origin +"/tutor/setting/plan",
-            data: JSON.stringify(ChangePlan),
+            url: location.origin + "/tutor/setting/plan",
+            data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
-            dataType: "text"
-        }).done(function (data) {
-            if (data === "Success") {
+            dataType: "json"
+        }).done(function (json) {
+            let success = json['success'];
+            if (success) {
                 alert("Subscription Plan change succeed!");
             } else {
-                alert(data);
+                alert("Something wrong on our database.");
             }
         }).fail(function (xhr, status, errorThrown) {
-
+            alert("Something wrong on our server.");
         });
     });
 
@@ -445,7 +536,7 @@ $(document).ready(function() {
         };
 
         $.ajax({
-            url: location.origin +"/tutor/setting/resend",
+            url: location.origin + "/tutor/setting/resend",
             data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
@@ -465,24 +556,25 @@ $(document).ready(function() {
     $("#cancel").click(function (event) {
         event.preventDefault();
 
-        var Cancel = {
-            'token':token
+        let data = {
+            'token': token
         };
 
         $.ajax({
-            url: location.origin +"/tutor/setting/cancel",
-            data: JSON.stringify(Cancel),
+            url: location.origin + "/tutor/setting/cancel",
+            data: JSON.stringify(data),
             contentType: "application/json",
             type: "POST",
-            dataType: "text"
+            dataType: "json"
         }).done(function (data) {
-            if (data === "Success") {
-                alert("Subscroption cancel succeed!");
+            let success = data['success'];
+            if (success) {
+                alert("Subscription cancel succeed!");
             } else {
-                alert(data);
+                alert("Something wrong on our database.");
             }
         }).fail(function (xhr, status, errorThrown) {
-
+            alert("Something wrong on our server.");
         });
     });
 });

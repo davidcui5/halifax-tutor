@@ -4,6 +4,11 @@ $(document).ready(function () {
     var token = localStorage.getItem("token");
     var objToken = {'token': token};
 
+    if (token === null) {
+        alert("Please login. Redirecting to login page.");
+        location.href = "../index.html";
+    }
+
     $.ajax({
         url: location.origin + "/admin/setting/access",
         data: JSON.stringify(objToken),
@@ -24,6 +29,8 @@ $(document).ready(function () {
 
     $("#logout").click(function () {
         localStorage.removeItem("token");
+        alert("Logging out. Redirecting to login page.");
+        location.href = "../index.html";
     });
 
     $("#Cpassword").submit(function (event) {

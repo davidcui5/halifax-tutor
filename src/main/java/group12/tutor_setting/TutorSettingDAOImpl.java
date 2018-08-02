@@ -3,8 +3,12 @@ package group12.tutor_setting;
 
 import group12.data_access.*;
 
+import java.util.Iterator;
+import java.util.List;
+
 public class TutorSettingDAOImpl implements ITutorSettingDAO {
     private SQLOperationTemplate operation;
+    private IDataAccessObject dataAccessObject;
 
     @Override
     public boolean updateTutorPassword(String email, String password) {
@@ -49,8 +53,54 @@ public class TutorSettingDAOImpl implements ITutorSettingDAO {
     }
 
     @Override
-    public boolean addCourse(String email, String school, int code, String price) {
-        return false;
+    public boolean addCourse(String email, String school, String courseCode, float price) {
+        boolean result = false;
+
+        dataAccessObject = new MysqlDAOImpl();
+        int tutorId = dataAccessObject.getTutorIDByEmail(email);
+
+        List<Course> currentCourses = dataAccessObject.getAllCourses();
+        Iterator<Course> iterator = currentCourses.iterator();
+        int courseId = 0;
+        boolean courseExisted = false;
+
+
+        while (iterator.hasNext()) {
+            Course course = iterator.next();
+            if (course.getName().equals(courseCode) && course.getSchool().equals(school)) {
+                courseId = course.getId();
+                courseExisted = true;
+            }
+        }
+
+        if (courseExisted) {
+            result = dataAccessObject.setCourseToTutor(tutorId, courseId, price);
+        } else {
+            Course newCourse = new Course();
+            newCourse.setName(courseCode);
+            newCourse.setSchool(school);
+            result = dataAccessObject.saveCourse(newCourse);
+            if (result != true) {
+                return false;
+            } else {
+                operation = new GetCourseIdSQLOperation(courseCode, school);
+                courseId = (int) operation.executeMysqlQuery();
+                result = dataAccessObject.setCourseToTutor(tutorId, courseId, price);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean removeCourse(String email, String school, String courseCode) {
+        dataAccessObject = new MysqlDAOImpl();
+        int tutorId = dataAccessObject.getTutorIDByEmail(email);
+
+        operation = new GetCourseIdSQLOperation(courseCode, school);
+        int courseId = (int) operation.executeMysqlQuery();
+
+        operation = new RemoveTutorCourseSQLOperation(tutorId, courseId);
+        return ((RemoveTutorCourseSQLOperation) operation).executeMysqlUpdate();
     }
 
     @Override
@@ -63,13 +113,14 @@ public class TutorSettingDAOImpl implements ITutorSettingDAO {
     }
 
     @Override
-    public boolean setPlan(String email, String planNo) {
-        operation = new UpdateTutorSbuscriptionSQLOperation(email, planNo);
+    public boolean updatePlan(String email, String planNo) {
+        operation = new UpdateTutorSubscriptionSQLOperation(email, planNo);
         return (Boolean) operation.executeMysqlQuery();
     }
 
     @Override
     public boolean cancelPlan(String email) {
-        return false;
+        operation = new CancelTutorSubscriptionSQLOperation(email);
+        return (boolean) ((CancelTutorSubscriptionSQLOperation) operation).executeMysqlUpdate();
     }
 }
