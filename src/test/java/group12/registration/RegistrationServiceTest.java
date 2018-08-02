@@ -14,9 +14,10 @@ public class RegistrationServiceTest {
     private static final String SUCCESS = "SUCCESS";
     private static final String FAILURE = "FAILURE";
     private static final String ERROR = "ERROR";
-    private static final String CODE_EXPIRED = "Code Expired Or Fake";
     private static final String LOGIN_PAGE_URL = "../index.html";
-    private static final String REDIRECT_URL = "redirect:/index.html";
+    private static final String CODE_EXPIRED_PAGE = "redirect:/html/code-expired.html";
+    private static final String LOGIN_PAGE = "redirect:/index.html";
+    private static final String ERROR_PAGE = "redirect:/html/exception-page.html";
     private static final String REPEAT_EMAIL = "Email already registered";
     private static final String REPEAT_PHONE = "Phone already registered";
     private static final String REPEAT_CARD = "Card already registered";
@@ -176,18 +177,18 @@ public class RegistrationServiceTest {
 
     @Test
     public void testActivateStudent() {
-        assertEquals(REDIRECT_URL,service.activateStudent(100,"validCode"));
-        assertEquals(CODE_EXPIRED,service.activateStudent(100,"expiredCode"));
-        assertEquals(CODE_EXPIRED,service.activateStudent(0,"expiredCode"));
-        assertEquals(FAILURE,service.activateStudent(0,"validCode"));
+        assertEquals(LOGIN_PAGE,service.activateStudent(100,"validCode"));
+        assertEquals(CODE_EXPIRED_PAGE,service.activateStudent(100,"expiredCode"));
+        assertEquals(CODE_EXPIRED_PAGE,service.activateStudent(0,"expiredCode"));
+        assertEquals(ERROR_PAGE,service.activateStudent(0,"validCode"));
     }
 
     @Test
     public void testActivateTutor() {
-        assertEquals(REDIRECT_URL,service.activateTutor(100,"validCode"));
-        assertEquals(CODE_EXPIRED,service.activateTutor(100,"expiredCode"));
-        assertEquals(CODE_EXPIRED,service.activateTutor(0,"expiredCode"));
-        assertEquals(FAILURE,service.activateTutor(0,"validCode"));
+        assertEquals(LOGIN_PAGE,service.activateTutor(100,"validCode"));
+        assertEquals(CODE_EXPIRED_PAGE,service.activateTutor(100,"expiredCode"));
+        assertEquals(CODE_EXPIRED_PAGE,service.activateTutor(0,"expiredCode"));
+        assertEquals(ERROR_PAGE,service.activateTutor(0,"validCode"));
     }
 
     @After

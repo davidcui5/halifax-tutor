@@ -18,9 +18,10 @@ public class RegistrationService implements IRegister {
     private static final String SUCCESS = "SUCCESS";
     private static final String FAILURE = "FAILURE";
     private static final String ERROR = "ERROR";
-    private static final String CODE_EXPIRED = "Code Expired Or Fake";
     private static final String LOGIN_PAGE_URL = "../index.html";
-    private static final String REDIRECT_URL = "redirect:/index.html";
+    private static final String CODE_EXPIRED_PAGE = "redirect:/html/code-expired.html";
+    private static final String LOGIN_PAGE = "redirect:/index.html";
+    private static final String ERROR_PAGE = "redirect:/html/exception-page.html";
     private static final String REPEAT_EMAIL = "Email already registered";
     private static final String REPEAT_PHONE = "Phone already registered";
     private static final String REPEAT_CARD = "Card already registered";
@@ -125,34 +126,34 @@ public class RegistrationService implements IRegister {
     public String activateStudent(int studentID, String activationCode) {
         try {
             if(dao.checkActivationCode(activationCode) == null){
-                return CODE_EXPIRED;
+                return CODE_EXPIRED_PAGE;
             }
             if(dao.setStudentActivatedStatus(studentID, true)){
-                return REDIRECT_URL;
+                return LOGIN_PAGE;
             }
             else{
-                return FAILURE;
+                return ERROR_PAGE;
             }
         } catch (Exception e) {
             logger.error(studentID + " " + activationCode, e);
         }
-        return ERROR;
+        return ERROR_PAGE;
     }
 
     public String activateTutor(int tutorID, String activationCode) {
         try {
             if(dao.checkActivationCode(activationCode) == null){
-                return CODE_EXPIRED;
+                return CODE_EXPIRED_PAGE;
             }
             if(dao.setTutorActivatedStatus(tutorID, true)){
-                return REDIRECT_URL;
+                return LOGIN_PAGE;
             }
             else{
-                return FAILURE;
+                return ERROR_PAGE;
             }
         } catch (Exception e) {
             logger.error(tutorID + " " + activationCode, e);
         }
-        return ERROR;
+        return ERROR_PAGE;
     }
 }
