@@ -4,18 +4,23 @@ import group12.data_access.Admin;
 import group12.data_access.User;
 import group12.token_auth.IAccessToken;
 import group12.token_auth.JWTAccessToken;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-@Component
 public class AdminAuthStrategy implements IAuthenticationStrategy {
 
-    @Value("${login.adminGoTo}")
-    String adminGoTo;
+    private IAuthDAO authDAO;
+
+    private String adminGoTo;
+
+    public void setAuthDAO(IAuthDAO authDAO){
+        this.authDAO = authDAO;
+    }
+
+    public void setAdminGoTo(String adminGoTo) {
+        this.adminGoTo = adminGoTo;
+    }
 
     @Override
     public void authenticate(User admin) {
-        IAuthDAO authDAO = new MysqlAuthDAO();
         Admin validAdmin = authDAO.getAdminByEmail(admin.getEmail());
         if(validAdmin == null){
             admin.setLoginResponse(new LoginResponse(AuthenticationResult.FAILURE,"Wrong Email"));
@@ -37,5 +42,4 @@ public class AdminAuthStrategy implements IAuthenticationStrategy {
         IAccessToken tokenMaker = JWTAccessToken.getInstance();
         return tokenMaker.generateToken(email);
     }
-
 }

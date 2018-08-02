@@ -16,26 +16,26 @@ public class NumberOfEmailSQLOperation extends SQLOperationTemplate {
     private static Logger logger = LogManager.getLogger(NumberOfEmailSQLOperation.class);
 
     @Override
-    String makeSQL() {
+    protected String makeSQL() {
         return "SELECT NumberOfEmail(?)";
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
+    protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         String email = (String) getParameters().get(0);
         ps.setString(1, email);
         return ps;
     }
 
     @Override
-    Object extractResultSet(ResultSet rs) throws SQLException {
+    protected Object extractResultSet(ResultSet rs) throws SQLException {
         int numberOfEmails;
         numberOfEmails = rs.getInt(1);
         return numberOfEmails;
     }
 
     @Override
-    ResultSet execute(PreparedStatement ps) throws SQLException {
+    protected ResultSet execute(PreparedStatement ps) throws SQLException {
         ps.execute();
         ResultSet resultSet = ps.getResultSet();
         return resultSet;

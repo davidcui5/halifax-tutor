@@ -5,29 +5,41 @@
     <meta charset="UTF-8">
     <meta name="author" content="Zongming Liu and David Cui">
     <meta name="Description" content="The Login/Index page of HalifaxTutor">
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="css/index.css">
     <script src="js/validator.js"></script>
 </head>
 
 <body>
-<div id="header">
-    <h1>HalifaxTutor</h1>
-    <div>
-        <div>
-            <a href="html/student-register.html">Register as a student</a>
+
+<nav class="navbar bg-primary navbar-fixed-top">
+    <!-- Navbar content -->
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">HalifaxTutor</a>
         </div>
-        <div>
-            <a href="html/tutor-register.html">Register as a tutor</a>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item"><a href="html/search-tutor.html"><span class="glyphicon glyphicon-log-in"></span>Search</a>
+                </li>
+            </ul>
         </div>
     </div>
+</nav>
+
+
+<div>
+    <h1 id="header">HalifaxTutor</h1>
 </div>
 
-<form name="user_form">
-    <div id="login_content">
-        <h2>Please login</h2>
+<div id="login_content">
+    <h2>Please login</h2>
+    <form name="user_form" id="user-login-form">
         <table>
             <tr>
                 <td><label for="type">Type</label></td>
@@ -49,14 +61,17 @@
             </tr>
         </table>
         <div>
-            <button type="submit">Login</button>
+            <button class="Bbtn" type="submit">Login</button>
         </div>
         <div>
-            <a href="html/forgot-password.html">Forgot password?</a>
+            <a href="html/forgot-password.html" id="forget">Forgot password?</a>
         </div>
+    </form>
+    <div>
+        <button class="bbtn" onclick="{location.href='html/student-register.html'}">Register as a student</button>
+        <button class="bbtn" onclick="{location.href='html/tutor-register.html'}">Register as a tutor</button>
     </div>
-</form>
-
+</div>
 
 
 <div id="footer">

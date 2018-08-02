@@ -96,7 +96,7 @@ public class ForgotPasswordService implements IForgotPassword {
     @Override
     public ForgotPasswordResponse setNewPasswordStudent(ForgotPasswordForm student) {
 
-        IEncryptor encryptor = new SimpleMD5Encryptor();
+        IEncryptor encryptor = SimpleMD5Encryptor.getInstance();
 
         ForgotPasswordResponse response = new ForgotPasswordResponse();
 
@@ -110,7 +110,7 @@ public class ForgotPasswordService implements IForgotPassword {
         }
         else{
             response.setResult("Failure");
-            response.addDetail("Email already registered");
+            response.addDetail("Student Not Found");
         }
 
 
@@ -119,7 +119,7 @@ public class ForgotPasswordService implements IForgotPassword {
 
     @Override
     public ForgotPasswordResponse setNewPasswordTutor(ForgotPasswordForm tutor) {
-        IEncryptor encryptor = new SimpleMD5Encryptor();
+        IEncryptor encryptor = SimpleMD5Encryptor.getInstance();
 
         ForgotPasswordResponse response = new ForgotPasswordResponse();
 
@@ -133,7 +133,7 @@ public class ForgotPasswordService implements IForgotPassword {
         }
         else{
             response.setResult("Failure");
-            response.addDetail("Email already registered");
+            response.addDetail("Tutor Not Found");
         }
         return response;
 

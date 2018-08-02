@@ -10,12 +10,12 @@ public class UpdateStudentPasswordSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    String makeSQL() {
+    protected String makeSQL() {
         return "SELECT UpdatePasswordStudent(?,?)";
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
+    protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         String email = (String) getParameters().get(0);
         String password = (String) getParameters().get(1);
         ps.setString(1, email);
@@ -24,12 +24,12 @@ public class UpdateStudentPasswordSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    Object extractResultSet(ResultSet rs) throws SQLException {
+    protected Object extractResultSet(ResultSet rs) throws SQLException {
         return rs.getBoolean(1);
     }
 
     @Override
-    ResultSet execute(PreparedStatement ps) throws SQLException {
+    protected ResultSet execute(PreparedStatement ps) throws SQLException {
         return ps.executeQuery();
     }
 }

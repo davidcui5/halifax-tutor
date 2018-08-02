@@ -33,7 +33,7 @@ public class TutorProfileService implements iTutorProfile {
         TutorProfileForm tutorProfileForm = db.getTutorProfile(tutorId);
         TutorProfileResponse response = new TutorProfileResponse();
 
-        if (tutorProfileForm != null){
+        if (tutorProfileForm.getEmail() != null){
 
             response.setPhotoURL(tutorProfileForm.getPhotoURL());
             response.setFirstName(tutorProfileForm.getFirstName());

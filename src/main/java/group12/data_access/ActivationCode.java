@@ -1,7 +1,5 @@
 package group12.data_access;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Date;
 
 public class ActivationCode {

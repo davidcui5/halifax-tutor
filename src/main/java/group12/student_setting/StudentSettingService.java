@@ -80,7 +80,7 @@ public class StudentSettingService implements IStudentSetting {
             if (isAuthorized(token)) {
                 String email = decoder.decodeToken(token);
                 logger.log(Level.INFO, email);
-                IEncryptor encryptor = new SimpleMD5Encryptor();
+                IEncryptor encryptor = SimpleMD5Encryptor.getInstance();
                 String encryptPassword = encryptor.encrypt(password);
                 logger.log(Level.INFO, encryptPassword);
                 if (db.updateStudentPassword(email, encryptPassword)) {

@@ -70,36 +70,58 @@ $(document).ready(function () {
     let identity;
     let token = localStorage.getItem("token");
 
-    let identityData = { "token": token };
-    $.ajax({
-        url: location.origin + "/search/identity",
-        data: JSON.stringify(identityData),
-        type: "POST",
-        contentType: "application/json",
-        dataType: "json"
-    }).done(function (data) {
-        success = data["success"];
-        if (!success) {
-            alert("Something wrong with your identity.");
-            window.location.assign("../index.html");
-        } else {
-            identity = data["type"];
-            if (identity === "student") {
-                $("#settings").attr("href", "./student-setting.html");
-            } else if (identity === "tutor") {
-                $("#settings").attr("href", "./tutor-setting.html");
-            } else if (identity === 'admin') {
-                $("#settings").attr("href", "./admin-setting.html");
-            } else {
-                $("#settings").attr("href", "?");
+    if (typeof token === 'undefined' || token === null) {
+        let noLoginData = {};
+        $.ajax({
+            url: location.origin + "/search/noLogin",
+            data: JSON.stringify(noLoginData),
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json"
+        }).done(function (data) {
+            success = data["success"];
+            if (!success) {
+                alert("Please login to use this feature");
+                window.location.href = "../index.html";
             }
-        }
-    }).fail(function (xhr, status, errorThrown) {
-        alert("Sorry, there was a problem!");
-        console.log("Error: " + errorThrown);
-        console.log("Status: " + status);
-        console.dir(xhr);
-    });
+        }).fail(function (xhr, status, errorThrown) {
+            alert("Sorry, there was a problem!");
+            console.log("Error: " + errorThrown);
+            console.log("Status: " + status);
+            console.dir(xhr);
+        });
+    } else {
+        let identityData = { "token": token };
+        $.ajax({
+            url: location.origin + "/search/identity",
+            data: JSON.stringify(identityData),
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json"
+        }).done(function (data) {
+            success = data["success"];
+            if (!success) {
+                alert("Something wrong with your identity.");
+                window.location.href = "../index.html";
+            } else {
+                identity = data["type"];
+                if (identity === "student") {
+                    $("#settings").attr("href", "./student-setting.html");
+                } else if (identity === "tutor") {
+                    $("#settings").attr("href", "./tutor-setting.html");
+                } else if (identity === 'admin') {
+                    $("#settings").attr("href", "./admin-setting.html");
+                } else {
+                    $("#settings").attr("href", "?");
+                }
+            }
+        }).fail(function (xhr, status, errorThrown) {
+            alert("Sorry, there was a problem!");
+            console.log("Error: " + errorThrown);
+            console.log("Status: " + status);
+            console.dir(xhr);
+        });
+    }
 
     $("form").submit(function (event) {
         event.preventDefault();

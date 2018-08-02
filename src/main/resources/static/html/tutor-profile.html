@@ -7,13 +7,31 @@
     <meta name="author" content="Zongming Liu">
     <meta name="Description" content="The Login/Index page of HalifaxTutor">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/forgot-password.css">
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
     <link rel="stylesheet" href="../css/tutor-profile.css">
 
 </head>
 <body onload="loadProfile();">
+
+<nav class="navbar bg-primary navbar-fixed-top" >
+    <!-- Navbar content -->
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="../index.html">HalifaxTutor</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../index.html">Home</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="nav-item"><a id="logout" href="../index.html">Sign out</a></li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
 <div id="header">
     <h1>HalifaxTutor</h1>
 </div>
@@ -22,7 +40,7 @@
 <div class="row">
     <div class="column" style="background-color:#ccc;">
         <form action="search-tutor.html">
-            <input type="submit" value="Back To Search Results">
+            <input class="btn btn-primary" type="submit" value="Back To Search Results">
         </form>
         <br>
 
@@ -109,7 +127,7 @@
                     <td><textarea id="message-text" rows="4" cols="50"></textarea></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" name="send_message" onclick="sendMessage()" value="Send Message" /></td>
+                    <td><input class="btn btn-primary"  type="submit" name="send_message" onclick="sendMessage()" value="Send Message" /></td>
                 </tr>
             </table>
         </form>
@@ -137,7 +155,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="submit" name="submit_button" onclick="submitFeedback()" value="Submit" /></td>
+                    <td><input class="btn btn-primary" type="submit" name="submit_button" onclick="submitFeedback()" value="Submit" /></td>
                 </tr>
             </table>
         </form>
@@ -145,7 +163,7 @@
 </div>
 
 <div id="footer">
-    <p>&copy; Zongming Liu, David Cui, and Zaher Abd Ulmoula</p>
+    <p>&copy; Zongming Liu, David Cui,  Zaher Abd Ulmoula, Youran Zhang and Rahu Vala</p>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

@@ -2,7 +2,6 @@ package group12.data_access;
 
 import group12.tutor_profile.TutorProfileForm;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface IDataAccessObject {
@@ -10,8 +9,6 @@ public interface IDataAccessObject {
     Student getStudentByEmail(String email);
 
     Tutor getTutorByEmail(String email);
-
-    Admin getAdminByEmail(String email);
 
     ActivationCode checkActivationCode(String code);
 
@@ -29,8 +26,6 @@ public interface IDataAccessObject {
 
     int countOfUserWithCreditCardNum(String cardNum);
 
-    int countOfActivationCodeWithValue(String codeValue);
-
     boolean saveActivationCode(String code);
 
     boolean saveCourse(Course course);
@@ -42,11 +37,6 @@ public interface IDataAccessObject {
     boolean setStudentActivatedStatus(int studentID, boolean status);
 
     boolean setTutorActivatedStatus(int tutorID, boolean status);
-
-    boolean setStudentBannedStatus(int studentID, boolean status);
-
-    boolean setTutorBannedStatus(int tutorID, boolean status);
-
 
     boolean deleteActivationCodeByValue(String codeValue);
 
@@ -74,17 +64,16 @@ public interface IDataAccessObject {
 
     String[] getTutorInfo(int tutorId);
 
-    ArrayList<String[]> getTutorCourses(int tutorId);
-
     int[] getTutorSchedule(int tutorId);
 
-    boolean saveRating(int tutorId,String rating);
+    boolean saveRating(int tutorId, String rating);
 
     boolean saveFeedback(String studentEmail, TutorProfileForm tutorProfileForm);
 
-    float calculateAverageRating(int tutorId,String rating);
-
-    String[] getCourseFromCourseId(String courseId);
+    float calculateAverageRating(int tutorId, String rating);
 
     boolean increaseTotalRating(int tutorId, float ratingCount);
+
+    boolean getSearchAuthConf();
+
 }

@@ -1,11 +1,5 @@
 package group12.data_access;
 
-import group12.login.IAuthenticationStrategy;
-import group12.login.StudentAuthStrategy;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class Student extends User {
 
     private int studentID;
@@ -24,9 +18,11 @@ public class Student extends User {
         super(email, password);
     }
 
-    @Override
-    public IAuthenticationStrategy createAuthenticationStrategy() {
-        return new StudentAuthStrategy();
+    public Student(String email, String password, String firstName, boolean activated, boolean banned){
+        super(email, password);
+        this.firstName = firstName;
+        this.activated = activated;
+        this.banned = banned;
     }
 
     public int getStudentID() {

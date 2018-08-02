@@ -17,24 +17,24 @@ public class GetAdminSQLOperation extends SQLOperationTemplate{
 
     //don't change this for now.
     @Override
-    String makeSQL() {
+    protected String makeSQL() {
         return "SELECT * FROM Admin Where Email =?";
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
+    protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         String email = (String) getParameters().get(0);
         ps.setString(1,email);
         return ps;
     }
 
     @Override
-    ResultSet execute(PreparedStatement ps) throws SQLException{
+    protected ResultSet execute(PreparedStatement ps) throws SQLException{
         return ps.executeQuery();
     }
 
     @Override
-    Object extractResultSet(ResultSet rs) throws SQLException {
+    protected Object extractResultSet(ResultSet rs) throws SQLException {
         Admin admin = new Admin();
         admin.setEmail(rs.getString("Email"));
         admin.setPassword(rs.getString("Password"));
