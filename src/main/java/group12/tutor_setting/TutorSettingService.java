@@ -4,18 +4,33 @@ import group12.data_access.Course;
 import group12.data_access.IDataAccessObject;
 import group12.data_access.MysqlDAOImpl;
 import group12.data_access.WeeklySchedule;
+import group12.email.IMailer;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import group12.token_auth.IAccessToken;
 import group12.token_auth.JWTAccessToken;
 import group12.tutor_setting.request.*;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
+import java.util.UUID;
 
 class TutorSettingService {
     private ITutorSettingDAO tutorSettingDAO = new TutorSettingDAOImpl();
     private IDataAccessObject dataAccessObject = new MysqlDAOImpl();
     private IAccessToken accessToken = JWTAccessToken.getInstance();
+
+    private IMailer mailer;
+
+    @Value("${email.sender}")
+    private String emailSender;
+
+    @Value("${server.url}")
+    private String serverURL;
+
+    public void setMailer(IMailer mailer) {
+        this.mailer = mailer;
+    }
 
     public void setAccessToken(IAccessToken accessToken) {
         this.accessToken = accessToken;
@@ -23,6 +38,24 @@ class TutorSettingService {
 
     public void setTutorSettingDAO(ITutorSettingDAO tutorSettingDAO) {
         this.tutorSettingDAO = tutorSettingDAO;
+    }
+
+    public void setDataAccessObject(IDataAccessObject dataAccessObject) {
+        this.dataAccessObject = dataAccessObject;
+    }
+
+    private boolean isAuthorized(String token) throws Exception {
+        try {
+            boolean result = false;
+            String email = accessToken.decodeToken(token);
+            int count = dataAccessObject.countOfUserWithEmail(email);
+            if (count == 1) {
+                result = true;
+            }
+            return result;
+        } catch (Exception ex) {
+            throw new Exception(ex);
+        }
     }
 
     TutorSettingResponse getUpdateWeeklyScheduleResponse(UpdateWeeklyScheduleRequest updateWeeklyScheduleRequest) {
@@ -88,12 +121,22 @@ class TutorSettingService {
 
     TutorSettingResponse getResendConfirmationEmailResponse(ResendConfirmationRequest resendConfirmationRequest) {
         String token = resendConfirmationRequest.getToken();
+        boolean success = false;
 
-        String email = accessToken.decodeToken(token);
-
-        // TODO: Resend confirmation email.
-
-        return new TutorSettingResponse(true);
+        try {
+            if (isAuthorized(token)) {
+                String email = accessToken.decodeToken(token);
+                int tutorId = dataAccessObject.getTutorIDByEmail(email);
+                UUID uuid = UUID.randomUUID();
+                dataAccessObject.saveActivationCode(uuid.toString());
+                mailer.sendMail(emailSender, email, "Activation",
+                        "Activation " + serverURL + "/tutor/tutorid/" + tutorId + "/activation/" + uuid.toString() + "/");
+                success = true;
+            }
+        } catch (Exception ex) {
+            success = false;
+        }
+        return new TutorSettingResponse(success);
     }
 
     TutorSettingResponse getUpdateEducationResponse(UpdateEducationRequest updateEducationRequest) {

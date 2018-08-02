@@ -3,6 +3,7 @@ package group12.tutor_setting;
 import group12.tutor_setting.request.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ public class TutorSettingController {
 
     private static final Logger logger = LogManager.getLogger(TutorSettingController.class);
 
+    @Autowired
     private TutorSettingService tutorSettingService;
 
     public TutorSettingController() {

@@ -51,6 +51,12 @@
 
     <!--ForgotPasswordController beans ENDT-->
 
+    <!-- TutorSettingService bean START-->
+    <bean id="tutorSetting" class="group12.tutor_setting.TutorSettingService">
+        <property name="mailer" ref="mailer"/>
+    </bean>
+    <!-- TutorSettingService bean END-->
+
     <!--ForgotPasswordController beans START-->
     <bean id="tutorProfileService" class="group12.tutor_profile.TutorProfileService">
         <property name="db" ref="DBDAO"/>
