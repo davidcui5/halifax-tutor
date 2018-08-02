@@ -2,7 +2,6 @@
 package group12.DBDAOTest;
 
 public class DBDAORegistration {
-    /*
     static ClassPathXmlApplicationContext context;
     static IDataAccessObject dbda;
 
@@ -57,8 +56,7 @@ public class DBDAORegistration {
     public static void testDeleteTutor() {
         Tutor tutor = MockData.getTutorObject();
         int id = dbda.getTutorIDByEmail(tutor.getEmail());
-        boolean actual = dbda.deleteStudent(id);
+        boolean actual = dbda.deleteTutor(id);
         assertTrue(actual);
     }
-    */
 }

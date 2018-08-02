@@ -23,8 +23,7 @@ public class DeleteTutorSQLOperation extends SQLOperationTemplate {
 
     @Override
     protected Object extractResultSet(ResultSet rs) throws SQLException {
-        int result = rs.getInt(1);
-        return result;
+        return rs.getBoolean(1);
     }
 
     @Override

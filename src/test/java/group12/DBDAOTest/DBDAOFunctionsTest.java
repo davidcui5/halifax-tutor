@@ -5,9 +5,8 @@ import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 public class DBDAOFunctionsTest {
-    /*
     static ClassPathXmlApplicationContext context;
-    static MysqlDAOImpl dbda;
+    static IDataAccessObject dbda;
 
     @BeforeClass
     public static void confingDBConnection() {
@@ -41,13 +40,12 @@ public class DBDAOFunctionsTest {
         assertFalse(actual < 0);
     }
 
-    /*@Test
+    @Test
     public void testIsPhoneNewWithNewPhone() {
         int actual = dbda.countOfUserWithPhone(MockData.getNewPhone());
         assertTrue(actual == 0);
-    }*/
+    }
 
-    /*
 
     @Test
     public void testIsPhoneNewWithUsedPhone() {
@@ -84,7 +82,7 @@ public class DBDAOFunctionsTest {
         boolean actual = dbda.setCourseToTutor(tutorId, course.getId(), 5);
         assertTrue(actual);
         List<Course> courses = dbda.getCoursesOFTutor(tutorId);
-        assertEquals(1,courses.size());
+        assertEquals(1, courses.size());
     }
 
     @Test
@@ -108,6 +106,5 @@ public class DBDAOFunctionsTest {
         boolean actual = dbda.deleteTutor(id);
         assertTrue(actual);
     }
-    */
 }
 

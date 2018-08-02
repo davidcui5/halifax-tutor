@@ -284,7 +284,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
         PreparedStatement psTutor = null;
         ResultSet rsTutor = null;
         String[] tutorInfo = new String[8];
-
         try {
             con = dataSource.getConnection();
             psTutor = con.prepareStatement(sqlTutor);
@@ -303,7 +302,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
             } else {
                 System.out.println("No Tutor found with id=" + tutorId);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -318,7 +316,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
                 e.printStackTrace();
             }
         }
-
         return tutorInfo;
 
     }
@@ -335,11 +332,9 @@ public class MysqlDAOImpl implements IDataAccessObject {
             psTutorSchedule.setString(1, String.valueOf(tutorId));
             rsTutorSchedule = psTutorSchedule.executeQuery();
             if (rsTutorSchedule.next()) {
-
                 for (int i = 3; i < 24; i++) {
                     tutorSchedule[i - 3] = rsTutorSchedule.getInt(i);
                 }
-
             } else {
                 System.out.println("No Tutor found with id=" + tutorId);
             }
@@ -368,7 +363,9 @@ public class MysqlDAOImpl implements IDataAccessObject {
         Connection con = null;
         PreparedStatement ps;
         float averageRating = calculateAverageRating(tutorId, rating);
-
+        if(averageRating < 0){
+            return false;
+        }
         try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
@@ -383,8 +380,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
         } finally {
             if (con != null) {
                 try {
-
-
                     assert (con != null);
                     con.close();
                     return true;
@@ -427,7 +422,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
         } finally {
             if (con != null) {
                 try {
-
                     assert (con != null);
                     con.close();
                     return true;
@@ -446,8 +440,8 @@ public class MysqlDAOImpl implements IDataAccessObject {
         ResultSet rs = null;
         float ratingCount;
         float oldRating;
-        float newRating = 0;
-        float tutorrating = Float.parseFloat(rating);
+        float newRating = -1;
+        float tutorRating = Float.parseFloat(rating);
         try {
             con = dataSource.getConnection();
             ps = con.prepareStatement(sql);
@@ -459,7 +453,7 @@ public class MysqlDAOImpl implements IDataAccessObject {
                 //https://stackoverflow.com/questions/12636613/how-to-calculate-moving-average-without-keeping-the-count-and-data-total
 
 
-                newRating = (float) ((oldRating * (ratingCount - 1)/ratingCount+ 0.0001) + (tutorrating/ratingCount+0.0001));
+                newRating = (oldRating * ratingCount + tutorRating) / (ratingCount + 1);
 
                 increaseTotalRating(tutorId, ratingCount);
 
@@ -471,7 +465,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
             e.printStackTrace();
         } finally {
             try {
-
                 assert (rs != null);
                 assert (ps != null);
                 assert (con != null);
@@ -505,7 +498,6 @@ public class MysqlDAOImpl implements IDataAccessObject {
         } finally {
             if (con != null) {
                 try {
-
                     assert (con != null);
                     con.close();
                     return true;
