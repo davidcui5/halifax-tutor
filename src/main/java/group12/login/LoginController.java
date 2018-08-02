@@ -2,6 +2,8 @@ package group12.login;
 
 import group12.data_access.*;
 import group12.encryption.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +15,7 @@ import java.util.Map;
 public class LoginController {
 
     private Map<String,IAuthenticationStrategy> strategies;
+    private static Logger logger = LogManager.getLogger(LoginController.class);
 
     @Autowired
     public LoginController(Map<String,IAuthenticationStrategy> strategies){
@@ -21,11 +24,16 @@ public class LoginController {
 
     @PostMapping(path = "/login")
     public LoginResponse login(@RequestBody Map<String,String> body){
-        User user = makeUser(body);
-        String type = body.get("type");
-        IAuthenticationStrategy authStrategy = strategies.get(type);
-        authStrategy.authenticate(user);
-        return user.getLoginResponse();
+        try{
+            User user = makeUser(body);
+            String type = body.get("type");
+            IAuthenticationStrategy authStrategy = strategies.get(type);
+            authStrategy.authenticate(user);
+            return user.getLoginResponse();
+        }catch(Exception e){
+            logger.error("Login Error", e);
+        }
+        return null;
     }
 
     private User makeUser(Map<String,String> body){
