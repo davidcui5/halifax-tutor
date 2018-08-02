@@ -42,7 +42,6 @@ public abstract class SQLOperationTemplate {
         sql = makeSQL();
         Object result = null;
         try {
-            logger.info("Created Connection");
             con = ConnectionFactory.getDatabaseConnection();
             ps = con.prepareStatement(sql);
             ps = addParameters(ps);
@@ -63,7 +62,6 @@ public abstract class SQLOperationTemplate {
                 if (con != null) {
                     con.close();
                 }
-                logger.info("Closed Connection");
             } catch (Exception e) {
                 logger.error("Close Connection Error", e);
             }

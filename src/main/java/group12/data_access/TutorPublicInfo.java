@@ -8,6 +8,7 @@ public class TutorPublicInfo {
     private String education;
     private float rating;
     private float pricePerHour;
+    private boolean banned;
 
     public TutorPublicInfo() {
         this.id = 0;
@@ -17,10 +18,11 @@ public class TutorPublicInfo {
         this.education = "";
         this.rating = 0.0f;
         this.pricePerHour = 0.0f;
+        this.banned = false;
     }
 
     public TutorPublicInfo(int id, String photoURL, String firstName, String lastName, String education,
-                           float rating, float pricePerHour) {
+                           float rating, float pricePerHour, boolean banned) {
         this.id = id;
         this.photoURL = photoURL;
         this.firstName = firstName;
@@ -28,6 +30,7 @@ public class TutorPublicInfo {
         this.education = education;
         this.rating = rating;
         this.pricePerHour = pricePerHour;
+        this.banned = banned;
     }
 
     public void setId(int id) {
@@ -58,6 +61,10 @@ public class TutorPublicInfo {
         this.pricePerHour = pricePerHour;
     }
 
+    public void setBanned(boolean banned) {
+        this.banned = banned;
+    }
+
     public int getId() {
         return id;
     }
@@ -84,6 +91,10 @@ public class TutorPublicInfo {
 
     public float getPricePerHour() {
         return pricePerHour;
+    }
+
+    public boolean isBanned() {
+        return banned;
     }
 
     @Override
