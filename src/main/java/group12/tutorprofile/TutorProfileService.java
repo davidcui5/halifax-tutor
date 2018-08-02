@@ -1,4 +1,4 @@
-package group12.tutor_profile;
+package group12.tutorprofile;
 
 import group12.data_access.IDataAccessObject;
 import group12.email.IMailer;

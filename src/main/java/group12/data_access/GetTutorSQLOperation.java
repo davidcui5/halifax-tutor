@@ -16,19 +16,19 @@ public class GetTutorSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    String makeSQL() {
+    protected String makeSQL() {
         return "SELECT * FROM Tutor Where Email =?";
     }
 
     @Override
-    PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
+    protected PreparedStatement addParameters(PreparedStatement ps) throws SQLException {
         String email = (String) getParameters().get(0);
         ps.setString(1, email);
         return ps;
     }
 
     @Override
-    Object extractResultSet(ResultSet rs) throws SQLException {
+    protected Object extractResultSet(ResultSet rs) throws SQLException {
         Tutor tutor = new Tutor();
         tutor.setEmail(rs.getString("Email"));
         tutor.setPassword(rs.getString("Password"));
@@ -49,7 +49,7 @@ public class GetTutorSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    ResultSet execute(PreparedStatement ps) throws SQLException {
+    protected ResultSet execute(PreparedStatement ps) throws SQLException {
         return ps.executeQuery();
     }
 }

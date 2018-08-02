@@ -1,4 +1,4 @@
-package group12.tutor_profile;
+package group12.tutorprofile;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

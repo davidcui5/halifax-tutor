@@ -1,8 +1,7 @@
 package group12.data_access;
 
-import group12.tutor_profile.TutorProfileForm;
+import group12.tutorprofile.TutorProfileForm;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface IDataAccessObject {

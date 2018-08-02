@@ -6,7 +6,6 @@ import group12.data_access.Tutor;
 import group12.email.IMailer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.UUID;
@@ -96,7 +95,7 @@ public class RegistrationService implements IRegister {
         }
     }
 
-    private void sendTutorActivationEmail(String email){
+    public void sendTutorActivationEmail(String email){
         try {
             int tutorID = dao.getTutorIDByEmail(email);
             UUID uuid = UUID.randomUUID();

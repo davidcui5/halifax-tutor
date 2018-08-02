@@ -1,6 +1,6 @@
 package group12.TutorProfile;
 
-import group12.tutor_profile.TutorProfileForm;
+import group12.tutorprofile.TutorProfileForm;
 import org.junit.Test;
 
 import java.util.ArrayList;

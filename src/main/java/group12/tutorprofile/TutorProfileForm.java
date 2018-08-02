@@ -1,4 +1,4 @@
-package group12.tutor_profile;
+package group12.tutorprofile;
 
 import java.util.ArrayList;
 

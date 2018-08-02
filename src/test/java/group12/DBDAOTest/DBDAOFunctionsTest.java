@@ -1,11 +1,5 @@
 package group12.DBDAOTest;
 
-import group12.data_access.*;
-import org.junit.*;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.util.List;
-
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;

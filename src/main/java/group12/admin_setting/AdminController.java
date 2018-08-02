@@ -5,7 +5,6 @@ import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import group12.token_auth.IAccessToken;
 import group12.token_auth.JWTAccessToken;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.PostMapping;
