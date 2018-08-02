@@ -85,7 +85,7 @@ public class TutorSettingDAOMock implements ITutorSettingDAO {
     }
 
     @Override
-    public boolean setPlan(String email, String planNo) {
+    public boolean updatePlan(String email, String planNo) {
         if (email.contains("zongming")) {
             return true;
         } else {

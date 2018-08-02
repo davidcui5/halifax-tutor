@@ -4,9 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UpdateTutorSbuscriptionSQLOperation extends SQLOperationTemplate {
+public class UpdateTutorSubscriptionSQLOperation extends SQLOperationTemplate {
 
-    public UpdateTutorSbuscriptionSQLOperation(String email, String planNo){
+    public UpdateTutorSubscriptionSQLOperation(String email, String planNo){
         super(email, planNo);
     }
 

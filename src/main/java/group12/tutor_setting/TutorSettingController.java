@@ -14,23 +14,22 @@ import java.util.Map;
 
 @RestController
 public class TutorSettingController {
-    private static final String SUCCESS = "SUCCESS";
-    private static final String FAILURE = "FAILURE";
+//    private static final String SUCCESS = "SUCCESS";
+//    private static final String FAILURE = "FAILURE";
     private static final Logger logger = LogManager.getLogger(TutorSettingController.class);
-    private IAccessToken accessToken;
-    private ITutorSettingDAO tutorSettingDAO;
+//    private IAccessToken accessToken;
+//    private ITutorSettingDAO tutorSettingDAO;
     private TutorSettingService tutorSettingService;
 
     public TutorSettingController() {
-        accessToken = JWTAccessToken.getInstance();
-        tutorSettingDAO = new TutorSettingDAOImpl();
+//        accessToken = JWTAccessToken.getInstance();
+//        tutorSettingDAO = new TutorSettingDAOImpl();
         tutorSettingService = new TutorSettingService();
     }
 
-    public TutorSettingController(IAccessToken accessToken, ITutorSettingDAO tutorSettingDAO) {
-        this.accessToken = accessToken;
-        this.tutorSettingDAO = tutorSettingDAO;
-    }
+//    public TutorSettingController(ITutorSettingDAO tutorSettingDAO) {
+//        this.tutorSettingDAO = tutorSettingDAO;
+//    }
 
 
     @PostMapping(path = "/tutor/setting/password", headers = "content-type=application/json")
@@ -74,30 +73,15 @@ public class TutorSettingController {
         TutorSettingResponse response = tutorSettingService.getUpdateWeeklyScheduleResponse(updateWeeklyScheduleRequest);
         return response;
     }
-
-    @PostMapping(path = "/tutor/setting/plan", consumes = "application/json", produces = "text/plain")
-    public String changePlan(@RequestBody Map<String, String> body) {
-        String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO, email);
-        String planNo = body.get("planNo");
-
-        if (tutorSettingDAO.setPlan(email, planNo)) {
-            return SUCCESS;
-        } else {
-            return FAILURE;
-        }
+    
+    @PostMapping(path = "/tutor/setting/plan", headers = "content-type=application/json")
+    public TutorSettingResponse updatePlan(@RequestBody UpdatePlanRequest request) {
+        return tutorSettingService.getUpdatePlanResponse(request);
     }
 
-    @PostMapping(path = "/tutor/setting/cancel", consumes = "application/json", produces = "text/plain")
-    public String cancelPlan(@RequestBody Map<String, String> body) {
-        String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO, email);
-
-        if (tutorSettingDAO.cancelPlan(email)) {
-            return SUCCESS;
-        } else {
-            return FAILURE;
-        }
+    @PostMapping(path = "/tutor/setting/cancel", headers = "content-type=application/json")
+    public TutorSettingResponse cancelPlan(@RequestBody CancelSubscriptionRequest request) {
+        return tutorSettingService.getCancelSubscriptionResponse(request);
     }
 
     @PostMapping(path = "/tutor/setting/resend", headers = "content-type=application/json")

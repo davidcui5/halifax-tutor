@@ -22,7 +22,7 @@ public interface ITutorSettingDAO {
 
     boolean updateWeeklySchedule(String email, WeeklySchedule weeklySchedule);
 
-    boolean setPlan(String email, String planNo);
+    boolean updatePlan(String email, String planNo);
 
     boolean cancelPlan(String email);
 }

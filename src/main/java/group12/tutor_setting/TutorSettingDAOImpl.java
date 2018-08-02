@@ -63,13 +63,14 @@ public class TutorSettingDAOImpl implements ITutorSettingDAO {
     }
 
     @Override
-    public boolean setPlan(String email, String planNo) {
-        operation = new UpdateTutorSbuscriptionSQLOperation(email, planNo);
+    public boolean updatePlan(String email, String planNo) {
+        operation = new UpdateTutorSubscriptionSQLOperation(email, planNo);
         return (Boolean) operation.executeMysqlQuery();
     }
 
     @Override
     public boolean cancelPlan(String email) {
-        return false;
+        operation = new CancelTutorSubscriptionSQLOperation(email);
+        return (boolean) ((CancelTutorSubscriptionSQLOperation) operation).executeMysqlUpdate();
     }
 }

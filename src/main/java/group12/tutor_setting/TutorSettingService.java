@@ -3,7 +3,6 @@ package group12.tutor_setting;
 import group12.data_access.WeeklySchedule;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
-import group12.registration.RegistrationService;
 import group12.token_auth.IAccessToken;
 import group12.token_auth.JWTAccessToken;
 import group12.tutor_setting.request.*;
@@ -86,7 +85,7 @@ class TutorSettingService {
 
         String email = accessToken.decodeToken(token);
 
-        new RegistrationService().sendTutorActivationEmail(email);
+        // TODO: Resend confirmation email.
 
         return new TutorSettingResponse(true);
     }
@@ -120,6 +119,24 @@ class TutorSettingService {
         String email = accessToken.decodeToken(token);
 
         boolean success = tutorSettingDAO.updateExperience(email, experience);
+        return new TutorSettingResponse(success);
+    }
+
+    TutorSettingResponse getUpdatePlanResponse(UpdatePlanRequest request) {
+        String token = request.getToken();
+        String planNo = Integer.toString(request.getPlanNo());
+
+        String email = accessToken.decodeToken(token);
+
+        boolean success = tutorSettingDAO.updatePlan(email, planNo);
+        return new TutorSettingResponse(success);
+    }
+
+    TutorSettingResponse getCancelSubscriptionResponse(CancelSubscriptionRequest request) {
+        String token = request.getToken();
+        String email = accessToken.decodeToken(token);
+
+        boolean success = tutorSettingDAO.cancelPlan(email);
         return new TutorSettingResponse(success);
     }
 }
