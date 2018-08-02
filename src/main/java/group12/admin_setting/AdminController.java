@@ -21,7 +21,6 @@ public class AdminController {
     private static final String AUTHORIZED = "AUTHORIZED";
     private static final String UNAUTHORIZED = "UNAUTHORIZED";
     private static final String SUCCESS = "SUCCESS";
-    private static final String FAILURE = "FAILURE";
     private static final String ERROR = "ERROR";
 
     private static Logger logger = LogManager.getLogger(AdminController.class);
@@ -51,7 +50,7 @@ public class AdminController {
                 return UNAUTHORIZED;
             }
         }catch (Exception e){
-            logger.error(ERROR, e);
+            logger.error("Authorize Error", e);
         }
         return ERROR;
     }
@@ -82,14 +81,14 @@ public class AdminController {
                     return SUCCESS;
                 }
                 else{
-                    return FAILURE;
+                    return ERROR;
                 }
             }
             else{
                 return UNAUTHORIZED;
             }
         }catch (Exception e){
-            logger.error(ERROR, e);
+            logger.error("change pass error", e);
         }
         return ERROR;
     }
@@ -106,7 +105,7 @@ public class AdminController {
                 prices[3] = Float.parseFloat(body.get("priceFour"));
                 for (int i = 0; i < prices.length; i++){
                     if(adminDAO.setSubPlanPrice(i+1,prices[i]) == false){
-                        return FAILURE;
+                        return ERROR;
                     }
                 }
                 return SUCCESS;
@@ -115,7 +114,7 @@ public class AdminController {
                 return UNAUTHORIZED;
             }
         } catch (Exception e){
-            logger.error(ERROR, e);
+            logger.error("change price error", e);
         }
         return ERROR;
     }
@@ -130,14 +129,14 @@ public class AdminController {
                     return SUCCESS;
                 }
                 else{
-                    return FAILURE;
+                    return ERROR;
                 }
             }
             else{
                 return UNAUTHORIZED;
             }
         } catch (Exception e){
-            logger.error(ERROR, e);
+            logger.error("ban student error", e);
         }
         return ERROR;
     }
@@ -152,14 +151,14 @@ public class AdminController {
                     return SUCCESS;
                 }
                 else{
-                    return FAILURE;
+                    return ERROR;
                 }
             }
             else{
                 return UNAUTHORIZED;
             }
         } catch (Exception e){
-            logger.error(ERROR, e);
+            logger.error("unban student error", e);
         }
         return ERROR;
     }
@@ -174,14 +173,14 @@ public class AdminController {
                     return SUCCESS;
                 }
                 else{
-                    return FAILURE;
+                    return ERROR;
                 }
             }
             else{
                 return UNAUTHORIZED;
             }
         } catch (Exception e){
-            logger.error(ERROR, e);
+            logger.error("ban tutor error", e);
         }
         return ERROR;
     }
@@ -196,14 +195,14 @@ public class AdminController {
                     return SUCCESS;
                 }
                 else{
-                    return FAILURE;
+                    return ERROR;
                 }
             }
             else{
                 return UNAUTHORIZED;
             }
         } catch (Exception e){
-            logger.error(ERROR, e);
+            logger.error("unban tutor error", e);
         }
         return ERROR;
     }
@@ -261,7 +260,7 @@ public class AdminController {
                 return UNAUTHORIZED;
             }
         } catch (Exception e){
-            logger.error(ERROR, e);
+            logger.error("delete review error", e);
         }
         return ERROR;
     }
@@ -279,16 +278,21 @@ public class AdminController {
                 return SUCCESS;
             }
             else {
-                return FAILURE;
+                return ERROR;
             }
         }
         else{
-            return FAILURE;
+            return ERROR;
         }
     }
 
     //this method should probably be private or even refactored back, but I want to test the formula, so it's here.
     protected float calculateNewRating(float tutorRating, int totalRatings, float reviewRating){
-        return (tutorRating * totalRatings - reviewRating) / (totalRatings - 1);
+        if(totalRatings == 1){
+            return 0;
+        }
+        else{
+            return (tutorRating * totalRatings - reviewRating) / (totalRatings - 1);
+        }
     }
 }
