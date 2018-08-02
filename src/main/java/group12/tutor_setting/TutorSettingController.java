@@ -1,36 +1,23 @@
 package group12.tutor_setting;
 
-import group12.token_auth.IAccessToken;
-import group12.token_auth.JWTAccessToken;
 import group12.tutor_setting.request.*;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
 
 @RestController
 public class TutorSettingController {
-//    private static final String SUCCESS = "SUCCESS";
-//    private static final String FAILURE = "FAILURE";
+
     private static final Logger logger = LogManager.getLogger(TutorSettingController.class);
-//    private IAccessToken accessToken;
-//    private ITutorSettingDAO tutorSettingDAO;
+
     private TutorSettingService tutorSettingService;
 
     public TutorSettingController() {
-//        accessToken = JWTAccessToken.getInstance();
-//        tutorSettingDAO = new TutorSettingDAOImpl();
         tutorSettingService = new TutorSettingService();
     }
-
-//    public TutorSettingController(ITutorSettingDAO tutorSettingDAO) {
-//        this.tutorSettingDAO = tutorSettingDAO;
-//    }
-
 
     @PostMapping(path = "/tutor/setting/password", headers = "content-type=application/json")
     public TutorSettingResponse updatePassword(@RequestBody UpdatePasswordRequest updatePasswordRequest) {
@@ -73,7 +60,7 @@ public class TutorSettingController {
         TutorSettingResponse response = tutorSettingService.getUpdateWeeklyScheduleResponse(updateWeeklyScheduleRequest);
         return response;
     }
-    
+
     @PostMapping(path = "/tutor/setting/plan", headers = "content-type=application/json")
     public TutorSettingResponse updatePlan(@RequestBody UpdatePlanRequest request) {
         return tutorSettingService.getUpdatePlanResponse(request);
@@ -94,5 +81,15 @@ public class TutorSettingController {
     public TutorSettingResponse updateProfilePicture(@RequestBody UpdatePhotoRequest updatePhotoRequest) {
         TutorSettingResponse tutorSettingResponse = tutorSettingService.getUpdatePhotoResponse(updatePhotoRequest);
         return tutorSettingResponse;
+    }
+
+    @PostMapping(path = "/tutor/setting/courses", headers = "content-type=application/json")
+    public GetCoursesResponse getCoursesResponse(@RequestBody GetCoursesRequest request) {
+        return tutorSettingService.getGetCoursesResponse(request);
+    }
+
+    @PostMapping(path = "/tutor/setting/courseRemoval", headers = "content-type=application/json")
+    public TutorSettingResponse getRemoveCourseResponse(@RequestBody RemoveCourseRequest request) {
+        return tutorSettingService.getRemoveCourseResponse(request);
     }
 }

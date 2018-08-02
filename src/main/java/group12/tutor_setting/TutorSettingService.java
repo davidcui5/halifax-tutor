@@ -1,5 +1,8 @@
 package group12.tutor_setting;
 
+import group12.data_access.Course;
+import group12.data_access.IDataAccessObject;
+import group12.data_access.MysqlDAOImpl;
 import group12.data_access.WeeklySchedule;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
@@ -7,8 +10,11 @@ import group12.token_auth.IAccessToken;
 import group12.token_auth.JWTAccessToken;
 import group12.tutor_setting.request.*;
 
+import java.util.List;
+
 class TutorSettingService {
     private ITutorSettingDAO tutorSettingDAO = new TutorSettingDAOImpl();
+    private IDataAccessObject dataAccessObject = new MysqlDAOImpl();
     private IAccessToken accessToken = JWTAccessToken.getInstance();
 
     public void setAccessToken(IAccessToken accessToken) {
@@ -137,6 +143,27 @@ class TutorSettingService {
         String email = accessToken.decodeToken(token);
 
         boolean success = tutorSettingDAO.cancelPlan(email);
+        return new TutorSettingResponse(success);
+    }
+
+    GetCoursesResponse getGetCoursesResponse(GetCoursesRequest request) {
+        String token = request.getToken();
+        String email = accessToken.decodeToken(token);
+        int tutorId = dataAccessObject.getTutorIDByEmail(email);
+
+        List<Course> courses = dataAccessObject.getCoursesOFTutor(tutorId);
+
+        return new GetCoursesResponse(true, courses);
+    }
+
+    TutorSettingResponse getRemoveCourseResponse(RemoveCourseRequest request) {
+        String token = request.getToken();
+        String school = request.getSchool();
+        String courseName = request.getCourseCode();
+
+        String email = accessToken.decodeToken(token);
+
+        boolean success = tutorSettingDAO.removeCourse(email, school, courseName);
         return new TutorSettingResponse(success);
     }
 }

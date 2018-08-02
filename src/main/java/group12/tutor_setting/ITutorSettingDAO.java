@@ -18,11 +18,15 @@ public interface ITutorSettingDAO {
 
     boolean updateExperience(String email, String experience);
 
-    boolean addCourse(String email, String school, int code, String price);
+    boolean addCourse(String email, String school, String courseCode, String price);
+
+    boolean removeCourse(String email, String school, String courseCode);
 
     boolean updateWeeklySchedule(String email, WeeklySchedule weeklySchedule);
 
     boolean updatePlan(String email, String planNo);
 
     boolean cancelPlan(String email);
+
+
 }

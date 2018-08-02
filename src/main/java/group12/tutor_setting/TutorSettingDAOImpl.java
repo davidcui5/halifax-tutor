@@ -5,6 +5,7 @@ import group12.data_access.*;
 
 public class TutorSettingDAOImpl implements ITutorSettingDAO {
     private SQLOperationTemplate operation;
+    private IDataAccessObject dataAccessObject;
 
     @Override
     public boolean updateTutorPassword(String email, String password) {
@@ -49,8 +50,22 @@ public class TutorSettingDAOImpl implements ITutorSettingDAO {
     }
 
     @Override
-    public boolean addCourse(String email, String school, int code, String price) {
+    public boolean addCourse(String email, String school, String courseCode, String price) {
+        dataAccessObject = new MysqlDAOImpl();
+        int tutorId = dataAccessObject.getTutorIDByEmail(email);
         return false;
+    }
+
+    @Override
+    public boolean removeCourse(String email, String school, String courseCode) {
+        dataAccessObject = new MysqlDAOImpl();
+        int tutorId = dataAccessObject.getTutorIDByEmail(email);
+
+        operation = new GetCourseIdSQLOperation(courseCode, school);
+        int courseId = (int) operation.executeMysqlQuery();
+
+        operation = new RemoveTutorCourseSQLOperation(tutorId, courseId);
+        return ((RemoveTutorCourseSQLOperation) operation).executeMysqlUpdate();
     }
 
     @Override

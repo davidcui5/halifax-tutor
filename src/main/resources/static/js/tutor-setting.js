@@ -88,7 +88,61 @@ function prevTab(elem) {
 
 $(document).ready(function () {
     let token = localStorage.getItem("token");
-    let objToken = {'token': token};
+
+    $.ajax({
+        url: location.origin + "/tutor/setting/courses",
+        data: JSON.stringify({
+            "token": token
+        }),
+        contentType: "application/json",
+        type: "POST",
+        dataType: "json"
+    }).done(function (json) {
+        let success = json['success'];
+        let courses = json['courses'];
+        if (success && courses !== null && courses.length !== 0) {
+            courses.forEach(function (course) {
+                let school = course['school'];
+                let name = course['name'];
+                let price = course['price'];
+                let courseDiv = document.createElement("div");
+                let courseP = document.createElement("p");
+                courseP.innerHTML = school + " " + name + " " + price;
+                courseDiv.appendChild(courseP);
+                let button = document.createElement("button");
+                button.innerHTML = "Remove";
+                button.addEventListener("click", function (event) {
+                    let data = {
+                        "token": token,
+                        "school": school,
+                        "courseCode": name
+                    };
+                    $.ajax({
+                        url: location.origin + "/tutor/setting/courseRemoval",
+                        data: JSON.stringify(data),
+                        contentType: "application/json",
+                        type: "POST",
+                        dataType: "json"
+                    }).done(function (json) {
+                        let success = json['success'];
+                        if (success) {
+                            alert("Course removed!");
+                        } else {
+                            alert("Course is not removed.");
+                        }
+                    }).fail(function (xhr, status, errorThrown) {
+                        alert("Something went wrong when removing this course.");
+                    });
+                });
+                courseDiv.appendChild(button);
+                document.getElementById("currentCourses").appendChild(courseDiv);
+            });
+        } else {
+            document.getElementById("currentCourses").innerHTML = "<p>You don't have any course right now.</p>";
+        }
+    }).fail(function (xhr, status, errorThrown) {
+        console.log("Cannot get current courses");
+    });
 
     $("#logout").click(function () {
         localStorage.removeItem("token");
