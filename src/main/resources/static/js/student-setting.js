@@ -4,6 +4,11 @@ $(document).ready(function () {
     var token = localStorage.getItem("token");
     var objToken = {'token': token};
 
+    if (token === null) {
+        alert("Please login. Redirecting to login page.");
+        location.href = "../index.html";
+    }
+
     $(".remail").hide();
     $(".alert").hide();
     $.ajax({

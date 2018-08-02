@@ -1,16 +1,36 @@
 package group12.tutor_setting;
 
+import group12.data_access.Course;
+import group12.data_access.IDataAccessObject;
+import group12.data_access.MysqlDAOImpl;
 import group12.data_access.WeeklySchedule;
+import group12.email.IMailer;
 import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
-import group12.registration.RegistrationService;
 import group12.token_auth.IAccessToken;
 import group12.token_auth.JWTAccessToken;
 import group12.tutor_setting.request.*;
+import org.springframework.beans.factory.annotation.Value;
+
+import java.util.List;
+import java.util.UUID;
 
 class TutorSettingService {
     private ITutorSettingDAO tutorSettingDAO = new TutorSettingDAOImpl();
+    private IDataAccessObject dataAccessObject = new MysqlDAOImpl();
     private IAccessToken accessToken = JWTAccessToken.getInstance();
+
+    private IMailer mailer;
+
+    @Value("${email.sender}")
+    private String emailSender;
+
+    @Value("${server.url}")
+    private String serverURL;
+
+    public void setMailer(IMailer mailer) {
+        this.mailer = mailer;
+    }
 
     public void setAccessToken(IAccessToken accessToken) {
         this.accessToken = accessToken;
@@ -18,6 +38,24 @@ class TutorSettingService {
 
     public void setTutorSettingDAO(ITutorSettingDAO tutorSettingDAO) {
         this.tutorSettingDAO = tutorSettingDAO;
+    }
+
+    public void setDataAccessObject(IDataAccessObject dataAccessObject) {
+        this.dataAccessObject = dataAccessObject;
+    }
+
+    private boolean isAuthorized(String token) throws Exception {
+        try {
+            boolean result = false;
+            String email = accessToken.decodeToken(token);
+            int count = dataAccessObject.countOfUserWithEmail(email);
+            if (count == 1) {
+                result = true;
+            }
+            return result;
+        } catch (Exception ex) {
+            throw new Exception(ex);
+        }
     }
 
     TutorSettingResponse getUpdateWeeklyScheduleResponse(UpdateWeeklyScheduleRequest updateWeeklyScheduleRequest) {
@@ -83,12 +121,22 @@ class TutorSettingService {
 
     TutorSettingResponse getResendConfirmationEmailResponse(ResendConfirmationRequest resendConfirmationRequest) {
         String token = resendConfirmationRequest.getToken();
+        boolean success = false;
 
-        String email = accessToken.decodeToken(token);
-
-        new RegistrationService().sendTutorActivationEmail(email);
-
-        return new TutorSettingResponse(true);
+        try {
+            if (isAuthorized(token)) {
+                String email = accessToken.decodeToken(token);
+                int tutorId = dataAccessObject.getTutorIDByEmail(email);
+                UUID uuid = UUID.randomUUID();
+                dataAccessObject.saveActivationCode(uuid.toString());
+                mailer.sendMail(emailSender, email, "Activation",
+                        "Activation " + serverURL + "/tutor/tutorid/" + tutorId + "/activation/" + uuid.toString() + "/");
+                success = true;
+            }
+        } catch (Exception ex) {
+            success = false;
+        }
+        return new TutorSettingResponse(success);
     }
 
     TutorSettingResponse getUpdateEducationResponse(UpdateEducationRequest updateEducationRequest) {
@@ -120,6 +168,58 @@ class TutorSettingService {
         String email = accessToken.decodeToken(token);
 
         boolean success = tutorSettingDAO.updateExperience(email, experience);
+        return new TutorSettingResponse(success);
+    }
+
+    TutorSettingResponse getUpdatePlanResponse(UpdatePlanRequest request) {
+        String token = request.getToken();
+        String planNo = Integer.toString(request.getPlanNo());
+
+        String email = accessToken.decodeToken(token);
+
+        boolean success = tutorSettingDAO.updatePlan(email, planNo);
+        return new TutorSettingResponse(success);
+    }
+
+    TutorSettingResponse getCancelSubscriptionResponse(CancelSubscriptionRequest request) {
+        String token = request.getToken();
+        String email = accessToken.decodeToken(token);
+
+        boolean success = tutorSettingDAO.cancelPlan(email);
+        return new TutorSettingResponse(success);
+    }
+
+    GetCoursesResponse getGetCoursesResponse(GetCoursesRequest request) {
+        String token = request.getToken();
+        String email = accessToken.decodeToken(token);
+        int tutorId = dataAccessObject.getTutorIDByEmail(email);
+
+        List<Course> courses = dataAccessObject.getCoursesOFTutor(tutorId);
+
+        return new GetCoursesResponse(true, courses);
+    }
+
+    TutorSettingResponse getRemoveCourseResponse(RemoveCourseRequest request) {
+        String token = request.getToken();
+        String school = request.getSchool();
+        String courseName = request.getCourseCode();
+
+        String email = accessToken.decodeToken(token);
+
+        boolean success = tutorSettingDAO.removeCourse(email, school, courseName);
+        return new TutorSettingResponse(success);
+    }
+
+    TutorSettingResponse getAddCourseResponse(AddCourseRequest request) {
+        String token = request.getToken();
+        String school = request.getSchool();
+        String courseCode = request.getCourseCode();
+        float coursePrice = request.getCoursePrice();
+
+        String email = accessToken.decodeToken(token);
+
+        boolean success = tutorSettingDAO.addCourse(email, school, courseCode, coursePrice);
+
         return new TutorSettingResponse(success);
     }
 }

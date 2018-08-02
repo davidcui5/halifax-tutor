@@ -1,37 +1,25 @@
 package group12.tutor_setting;
 
-import group12.token_auth.IAccessToken;
-import group12.token_auth.JWTAccessToken;
 import group12.tutor_setting.request.*;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
 
 @RestController
 public class TutorSettingController {
-    private static final String SUCCESS = "SUCCESS";
-    private static final String FAILURE = "FAILURE";
+
     private static final Logger logger = LogManager.getLogger(TutorSettingController.class);
-    private IAccessToken accessToken;
-    private ITutorSettingDAO tutorSettingDAO;
+
+    @Autowired
     private TutorSettingService tutorSettingService;
 
     public TutorSettingController() {
-        accessToken = JWTAccessToken.getInstance();
-        tutorSettingDAO = new TutorSettingDAOImpl();
         tutorSettingService = new TutorSettingService();
     }
-
-    public TutorSettingController(IAccessToken accessToken, ITutorSettingDAO tutorSettingDAO) {
-        this.accessToken = accessToken;
-        this.tutorSettingDAO = tutorSettingDAO;
-    }
-
 
     @PostMapping(path = "/tutor/setting/password", headers = "content-type=application/json")
     public TutorSettingResponse updatePassword(@RequestBody UpdatePasswordRequest updatePasswordRequest) {
@@ -75,29 +63,14 @@ public class TutorSettingController {
         return response;
     }
 
-    @PostMapping(path = "/tutor/setting/plan", consumes = "application/json", produces = "text/plain")
-    public String changePlan(@RequestBody Map<String, String> body) {
-        String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO, email);
-        String planNo = body.get("planNo");
-
-        if (tutorSettingDAO.setPlan(email, planNo)) {
-            return SUCCESS;
-        } else {
-            return FAILURE;
-        }
+    @PostMapping(path = "/tutor/setting/plan", headers = "content-type=application/json")
+    public TutorSettingResponse updatePlan(@RequestBody UpdatePlanRequest request) {
+        return tutorSettingService.getUpdatePlanResponse(request);
     }
 
-    @PostMapping(path = "/tutor/setting/cancel", consumes = "application/json", produces = "text/plain")
-    public String cancelPlan(@RequestBody Map<String, String> body) {
-        String email = accessToken.decodeToken(body.get("token"));
-        logger.log(Level.INFO, email);
-
-        if (tutorSettingDAO.cancelPlan(email)) {
-            return SUCCESS;
-        } else {
-            return FAILURE;
-        }
+    @PostMapping(path = "/tutor/setting/cancel", headers = "content-type=application/json")
+    public TutorSettingResponse cancelPlan(@RequestBody CancelSubscriptionRequest request) {
+        return tutorSettingService.getCancelSubscriptionResponse(request);
     }
 
     @PostMapping(path = "/tutor/setting/resend", headers = "content-type=application/json")
@@ -110,5 +83,20 @@ public class TutorSettingController {
     public TutorSettingResponse updateProfilePicture(@RequestBody UpdatePhotoRequest updatePhotoRequest) {
         TutorSettingResponse tutorSettingResponse = tutorSettingService.getUpdatePhotoResponse(updatePhotoRequest);
         return tutorSettingResponse;
+    }
+
+    @PostMapping(path = "/tutor/setting/courses", headers = "content-type=application/json")
+    public GetCoursesResponse getCoursesResponse(@RequestBody GetCoursesRequest request) {
+        return tutorSettingService.getGetCoursesResponse(request);
+    }
+
+    @PostMapping(path = "/tutor/setting/courseRemoval", headers = "content-type=application/json")
+    public TutorSettingResponse getRemoveCourseResponse(@RequestBody RemoveCourseRequest request) {
+        return tutorSettingService.getRemoveCourseResponse(request);
+    }
+
+    @PostMapping(path = "/tutor/setting/courseAddition", headers = "content-type=application/json")
+    public TutorSettingResponse getAddCourseResponse(@RequestBody AddCourseRequest request) {
+        return tutorSettingService.getAddCourseResponse(request);
     }
 }
