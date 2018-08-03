@@ -19,4 +19,9 @@ public class UpdateExperienceRequest {
     public String getExperience() {
         return experience;
     }
+
+    @Override
+    public String toString() {
+        return "token: " + token + " experience: " + experience;
+    }
 }

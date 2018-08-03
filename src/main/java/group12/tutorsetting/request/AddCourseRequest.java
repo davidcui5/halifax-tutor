@@ -37,4 +37,9 @@ public class AddCourseRequest {
     public void setCoursePrice(float coursePrice) {
         this.coursePrice = coursePrice;
     }
+
+    @Override
+    public String toString() {
+        return "token: " + token + " school: " + school + " courseCode: " + courseCode + " coursePrice: " + coursePrice;
+    }
 }

@@ -19,4 +19,9 @@ public class UpdatePhotoRequest {
     public String getPhotoURL() {
         return photoURL;
     }
+
+    @Override
+    public String toString() {
+        return "token: " + token + " photoURL: " + photoURL;
+    }
 }

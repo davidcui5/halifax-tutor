@@ -5,6 +5,12 @@ public class RemoveCourseRequest {
     private String school;
     private String courseCode;
 
+    public RemoveCourseRequest(String token, String school, String courseCode) {
+        this.token = token;
+        this.school = school;
+        this.courseCode = courseCode;
+    }
+
     public void setToken(String token) {
         this.token = token;
     }
@@ -27,5 +33,10 @@ public class RemoveCourseRequest {
 
     public String getSchool() {
         return school;
+    }
+
+    @Override
+    public String toString() {
+        return "token: " + token + " school: " + school + " courseCode: " + courseCode;
     }
 }

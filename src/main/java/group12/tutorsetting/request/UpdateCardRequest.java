@@ -46,4 +46,10 @@ public class UpdateCardRequest {
     public int getSecurityCode() {
         return securityCode;
     }
+
+    @Override
+    public String toString() {
+        return "token: " + token + " holderName: " + holderName + " creditCardNumber: " + creditCardNumber
+                + " expireDate: " + expireDate + " securityCode: " + securityCode;
+    }
 }

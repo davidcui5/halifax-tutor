@@ -19,4 +19,9 @@ public class UpdatePlanRequest {
     public int getPlanNo() {
         return planNo;
     }
+
+    @Override
+    public String toString() {
+        return "token: " + token + " planNo: " + planNo;
+    }
 }

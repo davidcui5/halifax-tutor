@@ -19,4 +19,9 @@ public class UpdateEducationRequest {
     public String getEducation() {
         return education;
     }
+
+    @Override
+    public String toString() {
+        return "token: " + token + " education: " + education;
+    }
 }

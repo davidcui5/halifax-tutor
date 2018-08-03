@@ -19,4 +19,9 @@ public class UpdateEmailRequest {
     public String getEmail() {
         return email;
     }
+
+    @Override
+    public String toString() {
+        return "token: " + token + " email: " + email;
+    }
 }
