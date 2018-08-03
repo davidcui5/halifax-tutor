@@ -84,6 +84,7 @@ $(document).ready(function () {
                 alert("Please login to use this feature");
                 window.location.href = "../index.html";
             } else {
+                localStorage.setItem("noAuth", "true");
                 $("#logout").hide();
             }
         }).fail(function (xhr, status, errorThrown) {
@@ -107,11 +108,11 @@ $(document).ready(function () {
                 window.location.href = "../index.html";
             } else {
                 identity = data["type"];
-                if (identity === "student") {
+                if (identity === "STUDENT") {
                     $("#settings").attr("href", "./student-setting.html");
-                } else if (identity === "tutor") {
+                } else if (identity === "TUTOR") {
                     $("#settings").attr("href", "./tutor-setting.html");
-                } else if (identity === 'admin') {
+                } else if (identity === 'ADMIN') {
                     $("#settings").attr("href", "./admin-setting.html");
                 } else {
                     $("#settings").attr("href", "?");

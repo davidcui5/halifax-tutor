@@ -7,7 +7,6 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-@EnableAutoConfiguration
 public class App extends SpringBootServletInitializer {
 
     @Override
@@ -15,7 +14,7 @@ public class App extends SpringBootServletInitializer {
         return application.sources(App.class);
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         GlobalHandler globalHandler = new GlobalHandler();
         Thread.setDefaultUncaughtExceptionHandler(globalHandler);
         SpringApplication.run(App.class, args);

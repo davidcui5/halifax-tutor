@@ -1,6 +1,6 @@
 package group12;
 
-import group12.data_access.IDataAccessObject;
+import group12.dataaccess.IDataAccessObject;
 
 public class Configuration {
     static IDataAccessObject db;

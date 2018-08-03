@@ -1,6 +1,6 @@
 package group12.DBDAOTest;
 
-import group12.data_access.*;
+import group12.dataaccess.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
