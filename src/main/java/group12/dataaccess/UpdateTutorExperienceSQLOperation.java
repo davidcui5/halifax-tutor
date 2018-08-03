@@ -11,7 +11,6 @@ public class UpdateTutorExperienceSQLOperation extends SQLOperationTemplate {
         super(email, experience);
     }
 
-    //TODO: function
     @Override
     protected String makeSQL() {
         return "SELECT UpdateTutorExperience(?, ?)";

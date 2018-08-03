@@ -1,13 +1,13 @@
-package group12.search;
+package group12.search.request;
 
 public class IdentityRequest {
     private String token;
 
-    void setToken(String token) {
+    public void setToken(String token) {
         this.token = token;
     }
 
-    String getToken() {
+    public String getToken() {
         return token;
     }
 

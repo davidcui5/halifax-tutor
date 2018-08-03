@@ -1,4 +1,4 @@
-package group12.search;
+package group12.search.request;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

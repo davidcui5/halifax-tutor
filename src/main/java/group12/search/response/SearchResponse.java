@@ -1,6 +1,6 @@
-package group12.search;
+package group12.search.response;
 
-import group12.dataaccess.TutorPublicInfo;
+import group12.search.dataaccess.TutorPublicInfo;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,5 @@
 package group12.dataaccess;
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,7 +7,6 @@ import java.sql.SQLException;
 public class UpdateTutorCardSQLOperation extends SQLOperationTemplate {
 
     public UpdateTutorCardSQLOperation(String email, String creditCardHolder, String creditCardNum, String creditCardExpiryDate, int securityCode) {
-
             super(email, creditCardHolder,creditCardNum,creditCardExpiryDate,securityCode);
     }
 

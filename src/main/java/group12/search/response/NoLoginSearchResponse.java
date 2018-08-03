@@ -1,4 +1,4 @@
-package group12.search;
+package group12.search.response;
 
 public class NoLoginSearchResponse {
     private boolean success;

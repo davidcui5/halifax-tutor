@@ -1,15 +1,10 @@
 package group12.dataaccess;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class GetCourseIdSQLOperation extends SQLOperationTemplate {
-    private static Logger logger = LogManager.getLogger(GetCourseIdSQLOperation.class);
-
     public GetCourseIdSQLOperation(String name, String school) {
         super(name, school);
     }

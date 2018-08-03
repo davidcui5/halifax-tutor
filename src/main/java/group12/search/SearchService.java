@@ -2,18 +2,25 @@ package group12.search;
 
 import group12.Configuration;
 import group12.dataaccess.*;
-import group12.dataaccess.TutorPublicInfo;
-import group12.dataaccess.TutorPublicInfoDAO;
-import group12.dataaccess.TutorPublicInfoDaoImpl;
-import group12.exceptions.SearchQuerySQLException;
+import group12.search.dataaccess.TutorPublicInfo;
+import group12.search.dataaccess.TutorPublicInfoDAO;
+import group12.search.dataaccess.TutorPublicInfoDaoImpl;
+import group12.search.request.IdentityRequest;
+import group12.search.request.SearchRequest;
+import group12.search.response.IdentityResponse;
+import group12.search.response.NoLoginSearchResponse;
+import group12.search.response.SearchResponse;
+import group12.search.response.Type;
 import group12.tokenauth.JWTAccessToken;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class SearchService {
+    private static final Logger logger = LogManager.getLogger(SearchService.class);
     private Configuration configuration;
-
     private TutorPublicInfoDAO tutorPublicInfoDAO;
 
     public SearchService() {
@@ -34,21 +41,18 @@ class SearchService {
 
         int numOfResults;
         List<TutorPublicInfo> results;
-
         SearchResponse searchResponse;
 
         try {
             results = tutorPublicInfoDAO.getTutorPublicInfo(school, courseName);
             numOfResults = results.size();
-
             searchResponse = new SearchResponse(true, numOfResults, results);
-        } catch (SearchQuerySQLException e) {
+        } catch (Exception e) {
+            logger.error(e.getMessage());
             results = new ArrayList<>();
             numOfResults = 0;
-
             searchResponse = new SearchResponse(false, numOfResults, results);
         }
-
         return searchResponse;
     }
 
@@ -62,20 +66,20 @@ class SearchService {
         } else {
             IDataAccessObject dataAccessObject = new MysqlDAOImpl();
             if (dataAccessObject.getStudentByEmail(email) != null) {
-                identityResponse.setType("student");
+                identityResponse.setType(Type.STUDENT);
             } else if (dataAccessObject.getTutorByEmail(email) != null) {
-                identityResponse.setType("tutor");
+                identityResponse.setType(Type.TUTOR);
             } else {
-                identityResponse.setType("admin");
+                identityResponse.setType(Type.ADMIN);
             }
             identityResponse.setSuccess(true);
         }
         return identityResponse;
     }
 
-    NoLoginSearchResponse getNoLoginSearchResponse(NoLoginSearchRequest request) {
+    NoLoginSearchResponse getNoLoginSearchResponse() {
         NoLoginSearchResponse response = new NoLoginSearchResponse();
-        Boolean auth = configuration.isSearchAuth();
+        boolean auth = configuration.isSearchAuth();
         if (!auth) {
             response.setSuccess(true);
         } else {

@@ -1,7 +1,7 @@
 package group12.tokenauth;
 
 public interface IAccessToken {
-    public String generateToken(String userEmail);
+    String generateToken(String userEmail);
 
-    public String decodeToken(String token);
+    String decodeToken(String token);
 }

@@ -1,16 +1,9 @@
 package group12.dataaccess;
 
-import group12.logging.ConnectionFactory;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RemoveTutorCourseSQLOperation extends SQLOperationTemplate {
-    private static Logger logger = LogManager.getLogger(RemoveTutorCourseSQLOperation.class);
+public class RemoveTutorCourseSQLOperation extends SQLDMLOperation {
 
     public RemoveTutorCourseSQLOperation(int tutorId, int courseId) {
         super(tutorId, courseId);
@@ -32,44 +25,7 @@ public class RemoveTutorCourseSQLOperation extends SQLOperationTemplate {
     }
 
     @Override
-    Object extractResultSet(ResultSet rs) throws SQLException {
-        return null;
+    boolean isSuccess(int numOfResult) {
+        return numOfResult == 1;
     }
-
-    @Override
-    ResultSet execute(PreparedStatement ps) throws SQLException {
-        return null;
-    }
-
-    public boolean executeMysqlUpdate() {
-        Connection con = null;
-        PreparedStatement ps = null;
-        int rs = 0;
-        String sql = makeSQL();
-        boolean result = false;
-        try {
-            con = ConnectionFactory.getDatabaseConnection();
-            ps = con.prepareStatement(sql);
-            ps = addParameters(ps);
-            rs = ps.executeUpdate();
-            if (rs == 1) {
-                result = true;
-            }
-        } catch (SQLException e) {
-            logger.error("SQL Error " + sql, e);
-        } finally {
-            try {
-                if (ps != null) {
-                    ps.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (Exception e) {
-                logger.error("Close Connection Error", e);
-            }
-        }
-        return result;
-    }
-
 }

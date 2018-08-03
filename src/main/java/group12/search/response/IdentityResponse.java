@@ -1,15 +1,15 @@
-package group12.search;
+package group12.search.response;
 
 public class IdentityResponse {
     private boolean success;
-    private String type;
+    private Type type;
 
     public IdentityResponse() {
         success = false;
-        type = "student";
+        type = Type.STUDENT;
     }
 
-    public IdentityResponse(boolean success, String type) {
+    public IdentityResponse(boolean success, Type type) {
         this.success = success;
         this.type = type;
     }
@@ -18,11 +18,11 @@ public class IdentityResponse {
         return success;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 

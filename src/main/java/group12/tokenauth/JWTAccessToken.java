@@ -2,9 +2,12 @@ package group12.tokenauth;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class JWTAccessToken implements IAccessToken {
+    private static final Logger logger = LogManager.getLogger(JWTAccessToken.class);
     private static final JWTAccessToken INSTANCE = new JWTAccessToken();
     private final String secret = "secret";
 
@@ -32,6 +35,7 @@ public class JWTAccessToken implements IAccessToken {
         try {
             return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
         } catch (Exception e) {
+            logger.error(e.getMessage());
             return null;
         }
     }

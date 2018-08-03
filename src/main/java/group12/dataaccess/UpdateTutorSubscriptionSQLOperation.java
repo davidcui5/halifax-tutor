@@ -10,7 +10,6 @@ public class UpdateTutorSubscriptionSQLOperation extends SQLOperationTemplate {
         super(email, planNo);
     }
 
-    //TODO: function
     @Override
     protected String makeSQL() {
         return "SELECT UpdateTutorSbuscription(?, ?)";
