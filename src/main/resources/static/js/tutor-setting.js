@@ -98,11 +98,11 @@ $(document).ready(function () {
 
     $.ajax({
         url: location.origin + "/tutor/setting/courses",
-        data: JSON.stringify({
+        data: {
             "token": token
-        }),
+        },
         contentType: "application/json",
-        type: "POST",
+        type: "GET",
         dataType: "json"
     }).done(function (json) {
         let success = json['success'];

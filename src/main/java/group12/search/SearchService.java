@@ -28,9 +28,9 @@ class SearchService {
         configuration = Configuration.getInstance();
     }
 
-    SearchResponse getSearchResponse(SearchRequest searchRequest) {
-        String school = searchRequest.getSchool();
-        String courseName = searchRequest.getCourseName();
+    SearchResponse getSearchResponse(SearchRequest request) {
+        String school = request.getSchool();
+        String courseName = request.getCourseName();
 
         int numOfResults;
         List<TutorPublicInfo> results;
@@ -52,10 +52,10 @@ class SearchService {
         return searchResponse;
     }
 
-    IdentityResponse getSearchIdentity(IdentityRequest identityRequest) {
+    IdentityResponse getSearchIdentity(IdentityRequest request) {
         IdentityResponse identityResponse = new IdentityResponse();
 
-        String token = identityRequest.getToken();
+        String token = request.getToken();
         String email = JWTAccessToken.getInstance().decodeToken(token);
         if (email == null) {
             identityResponse.setSuccess(false);

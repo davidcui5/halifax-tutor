@@ -4,9 +4,7 @@ import group12.tutorsetting.request.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -22,45 +20,38 @@ public class TutorSettingController {
     }
 
     @PostMapping(path = "/tutor/setting/password", headers = "content-type=application/json")
-    public TutorSettingResponse updatePassword(@RequestBody UpdatePasswordRequest updatePasswordRequest) {
-        TutorSettingResponse response = tutorSettingService.getUpdatePasswordResponse(updatePasswordRequest);
-        return response;
+    public TutorSettingResponse updatePassword(@RequestBody UpdatePasswordRequest request) {
+        return tutorSettingService.getUpdatePasswordResponse(request);
     }
 
     @PostMapping(path = "/tutor/setting/email", headers = "content-type=application/json")
-    public TutorSettingResponse updateEmail(@RequestBody UpdateEmailRequest updateEmailRequest) {
-        TutorSettingResponse response = tutorSettingService.getUpdateEmailResponse(updateEmailRequest);
-        return response;
+    public TutorSettingResponse updateEmail(@RequestBody UpdateEmailRequest request) {
+        return tutorSettingService.getUpdateEmailResponse(request);
     }
 
     @PostMapping(path = "/tutor/setting/card", headers = "content-type=application/json")
-    public TutorSettingResponse updateCard(@RequestBody UpdateCardRequest updateCardRequest) {
-        TutorSettingResponse response = tutorSettingService.getUpdateCardResponse(updateCardRequest);
-        return response;
+    public TutorSettingResponse updateCard(@RequestBody UpdateCardRequest request) {
+        return tutorSettingService.getUpdateCardResponse(request);
     }
 
     @PostMapping(path = "/tutor/setting/phone", headers = "content-type=application/json")
-    public TutorSettingResponse updatePhone(@RequestBody UpdatePhoneRequest updatePhoneRequest) {
-        TutorSettingResponse response = tutorSettingService.getUpdatePhoneResponse(updatePhoneRequest);
-        return response;
+    public TutorSettingResponse updatePhone(@RequestBody UpdatePhoneRequest request) {
+        return tutorSettingService.getUpdatePhoneResponse(request);
     }
 
     @PostMapping(path = "/tutor/setting/education", headers = "content-type=application/json")
-    public TutorSettingResponse updateEducation(@RequestBody UpdateEducationRequest updateEducationRequest) {
-        TutorSettingResponse response = tutorSettingService.getUpdateEducationResponse(updateEducationRequest);
-        return response;
+    public TutorSettingResponse updateEducation(@RequestBody UpdateEducationRequest request) {
+        return tutorSettingService.getUpdateEducationResponse(request);
     }
 
     @PostMapping(path = "/tutor/setting/experience", headers = "content-type=application/json")
-    public TutorSettingResponse updateExperience(@RequestBody UpdateExperienceRequest updateExperienceRequest) {
-        TutorSettingResponse tutorSettingResponse = tutorSettingService.getUpdateExperienceResponse(updateExperienceRequest);
-        return tutorSettingResponse;
+    public TutorSettingResponse updateExperience(@RequestBody UpdateExperienceRequest request) {
+        return tutorSettingService.getUpdateExperienceResponse(request);
     }
 
     @PostMapping(path = "/tutor/setting/weeklySchedule", headers = "content-type=application/json")
-    public TutorSettingResponse updateWeeklySchedule(@RequestBody UpdateWeeklyScheduleRequest updateWeeklyScheduleRequest) {
-        TutorSettingResponse response = tutorSettingService.getUpdateWeeklyScheduleResponse(updateWeeklyScheduleRequest);
-        return response;
+    public TutorSettingResponse updateWeeklySchedule(@RequestBody UpdateWeeklyScheduleRequest request) {
+        return tutorSettingService.getUpdateWeeklyScheduleResponse(request);
     }
 
     @PostMapping(path = "/tutor/setting/plan", headers = "content-type=application/json")
@@ -74,20 +65,18 @@ public class TutorSettingController {
     }
 
     @PostMapping(path = "/tutor/setting/resend", headers = "content-type=application/json")
-    public TutorSettingResponse resendConfirmationEmail(@RequestBody ResendConfirmationRequest resendConfirmationRequest) {
-        TutorSettingResponse tutorSettingResponse = tutorSettingService.getResendConfirmationEmailResponse(resendConfirmationRequest);
-        return tutorSettingResponse;
+    public TutorSettingResponse resendConfirmationEmail(@RequestBody ResendConfirmationRequest request) {
+        return tutorSettingService.getResendConfirmationEmailResponse(request);
     }
 
     @PostMapping(path = "/tutor/setting/photo", headers = "content-type=application/json")
-    public TutorSettingResponse updateProfilePicture(@RequestBody UpdatePhotoRequest updatePhotoRequest) {
-        TutorSettingResponse tutorSettingResponse = tutorSettingService.getUpdatePhotoResponse(updatePhotoRequest);
-        return tutorSettingResponse;
+    public TutorSettingResponse updateProfilePicture(@RequestBody UpdatePhotoRequest request) {
+        return tutorSettingService.getUpdatePhotoResponse(request);
     }
 
-    @PostMapping(path = "/tutor/setting/courses", headers = "content-type=application/json")
-    public GetCoursesResponse getCoursesResponse(@RequestBody GetCoursesRequest request) {
-        return tutorSettingService.getGetCoursesResponse(request);
+    @GetMapping(path = "/tutor/setting/courses", headers = "content-type=application/json")
+    public GetCoursesResponse getCoursesResponse(@RequestParam(value = "token") String token) {
+        return tutorSettingService.getGetCoursesResponse(new GetCoursesRequest(token));
     }
 
     @PostMapping(path = "/tutor/setting/courseRemoval", headers = "content-type=application/json")
