@@ -1,6 +1,6 @@
 package group12.dataaccess;
 
-import group12.search.mock.TutorPublicInfo;
+import group12.search.dataaccess.TutorPublicInfo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

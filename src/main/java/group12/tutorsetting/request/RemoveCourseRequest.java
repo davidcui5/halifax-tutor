@@ -1,18 +1,17 @@
 package group12.tutorsetting.request;
 
-public class RemoveCourseRequest {
-    private String token;
+public class RemoveCourseRequest extends TutorSettingRequest {
     private String school;
     private String courseCode;
 
     public RemoveCourseRequest(String token, String school, String courseCode) {
-        this.token = token;
+        super(token);
         this.school = school;
         this.courseCode = courseCode;
     }
 
     public void setToken(String token) {
-        this.token = token;
+        super.setToken(token);
     }
 
     public void setCourseCode(String courseCode) {
@@ -24,7 +23,7 @@ public class RemoveCourseRequest {
     }
 
     public String getToken() {
-        return token;
+        return super.getToken();
     }
 
     public String getCourseCode() {
@@ -37,6 +36,6 @@ public class RemoveCourseRequest {
 
     @Override
     public String toString() {
-        return "token: " + token + " school: " + school + " courseCode: " + courseCode;
+        return super.toString() + " school: " + school + " courseCode: " + courseCode;
     }
 }

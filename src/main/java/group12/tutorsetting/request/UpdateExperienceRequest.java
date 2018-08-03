@@ -1,11 +1,10 @@
 package group12.tutorsetting.request;
 
-public class UpdateExperienceRequest {
-    private String token;
+public class UpdateExperienceRequest extends TutorSettingRequest {
     private String experience;
 
     public void setToken(String token) {
-        this.token = token;
+        super.setToken(token);
     }
 
     public void setExperience(String experience) {
@@ -13,7 +12,7 @@ public class UpdateExperienceRequest {
     }
 
     public String getToken() {
-        return token;
+        return super.getToken();
     }
 
     public String getExperience() {
@@ -22,6 +21,6 @@ public class UpdateExperienceRequest {
 
     @Override
     public String toString() {
-        return "token: " + token + " experience: " + experience;
+        return super.toString() + " experience: " + experience;
     }
 }

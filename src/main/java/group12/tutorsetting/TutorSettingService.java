@@ -24,9 +24,9 @@ import java.util.UUID;
 class TutorSettingService {
     private static final Logger logger = LogManager.getLogger(TutorSettingService.class);
 
-    private ITutorSettingDAO tutorSettingDAO = new TutorSettingDAOImpl();
-    private IDataAccessObject dataAccessObject = new MysqlDAOImpl();
-    private IAccessToken accessToken = JWTAccessToken.getInstance();
+    private ITutorSettingDAO tutorSettingDAO;
+    private IDataAccessObject dataAccessObject;
+    private IAccessToken accessToken;
 
     private IMailer mailer;
 
@@ -35,6 +35,12 @@ class TutorSettingService {
 
     @Value("${server.url}")
     private String serverURL;
+
+    public TutorSettingService() {
+        tutorSettingDAO = new TutorSettingDAOImpl();
+        dataAccessObject = new MysqlDAOImpl();
+        accessToken = JWTAccessToken.getInstance();
+    }
 
     public void setMailer(IMailer mailer) {
         this.mailer = mailer;
@@ -52,11 +58,11 @@ class TutorSettingService {
         this.dataAccessObject = dataAccessObject;
     }
 
-    TutorSettingResponse getUpdateWeeklyScheduleResponse(UpdateWeeklyScheduleRequest updateWeeklyScheduleRequest) {
-        String token = updateWeeklyScheduleRequest.getToken();
+    TutorSettingResponse getUpdateWeeklyScheduleResponse(UpdateWeeklyScheduleRequest request) {
+        String token = request.getToken();
         String email = accessToken.decodeToken(token);
 
-        boolean[][] schedule = updateWeeklyScheduleRequest.getWeeklySchedule();
+        boolean[][] schedule = request.getWeeklySchedule();
         WeeklySchedule weeklySchedule = new WeeklySchedule(schedule);
 
         boolean success = tutorSettingDAO.updateWeeklySchedule(email, weeklySchedule);
@@ -64,9 +70,9 @@ class TutorSettingService {
         return new TutorSettingResponse(success);
     }
 
-    TutorSettingResponse getUpdatePasswordResponse(UpdatePasswordRequest updatePasswordRequest) {
-        String token = updatePasswordRequest.getToken();
-        String password = updatePasswordRequest.getPassword();
+    TutorSettingResponse getUpdatePasswordResponse(UpdatePasswordRequest request) {
+        String token = request.getToken();
+        String password = request.getPassword();
         IEncryptor encryptor = SimpleMD5Encryptor.getInstance();
 
         password = encryptor.encrypt(password);
@@ -77,21 +83,21 @@ class TutorSettingService {
         return new TutorSettingResponse(success);
     }
 
-    TutorSettingResponse getUpdateEmailResponse(UpdateEmailRequest updateEmailRequest) {
-        String token = updateEmailRequest.getToken();
+    TutorSettingResponse getUpdateEmailResponse(UpdateEmailRequest request) {
+        String token = request.getToken();
 
         String email = accessToken.decodeToken(token);
 
-        String newEmail = updateEmailRequest.getEmail();
+        String newEmail = request.getEmail();
 
         boolean success = tutorSettingDAO.updateTutorEmail(email, newEmail);
 
         return new TutorSettingResponse(success);
     }
 
-    TutorSettingResponse getUpdatePhoneResponse(UpdatePhoneRequest updatePhoneRequest) {
-        String token = updatePhoneRequest.getToken();
-        String phone = updatePhoneRequest.getPhone();
+    TutorSettingResponse getUpdatePhoneResponse(UpdatePhoneRequest request) {
+        String token = request.getToken();
+        String phone = request.getPhone();
 
         String email = accessToken.decodeToken(token);
 
@@ -99,12 +105,12 @@ class TutorSettingService {
         return new TutorSettingResponse(success);
     }
 
-    TutorSettingResponse getUpdateCardResponse(UpdateCardRequest updateCardRequest) {
-        String token = updateCardRequest.getToken();
-        String holderName = updateCardRequest.getHolderName();
-        String creditCardNumber = updateCardRequest.getCreditCardNumber();
-        String expiryDate = updateCardRequest.getExpireDate();
-        int securityCode = updateCardRequest.getSecurityCode();
+    TutorSettingResponse getUpdateCardResponse(UpdateCardRequest request) {
+        String token = request.getToken();
+        String holderName = request.getHolderName();
+        String creditCardNumber = request.getCreditCardNumber();
+        String expiryDate = request.getExpireDate();
+        int securityCode = request.getSecurityCode();
 
         String email = accessToken.decodeToken(token);
 
@@ -129,8 +135,8 @@ class TutorSettingService {
         }
     }
 
-    TutorSettingResponse getResendConfirmationEmailResponse(ResendConfirmationRequest resendConfirmationRequest) {
-        String token = resendConfirmationRequest.getToken();
+    TutorSettingResponse getResendConfirmationEmailResponse(TutorSettingRequest request) {
+        String token = request.getToken();
         boolean success = false;
 
         // Got from Zaher's code
@@ -151,9 +157,9 @@ class TutorSettingService {
         return new TutorSettingResponse(success);
     }
 
-    TutorSettingResponse getUpdateEducationResponse(UpdateEducationRequest updateEducationRequest) {
-        String token = updateEducationRequest.getToken();
-        String education = updateEducationRequest.getEducation();
+    TutorSettingResponse getUpdateEducationResponse(UpdateEducationRequest request) {
+        String token = request.getToken();
+        String education = request.getEducation();
 
         String email = accessToken.decodeToken(token);
 
@@ -162,9 +168,9 @@ class TutorSettingService {
         return new TutorSettingResponse(success);
     }
 
-    TutorSettingResponse getUpdatePhotoResponse(UpdatePhotoRequest updatePhotoRequest) {
-        String token = updatePhotoRequest.getToken();
-        String photoURL = updatePhotoRequest.getPhotoURL();
+    TutorSettingResponse getUpdatePhotoResponse(UpdatePhotoRequest request) {
+        String token = request.getToken();
+        String photoURL = request.getPhotoURL();
 
         String email = accessToken.decodeToken(token);
 
@@ -173,9 +179,9 @@ class TutorSettingService {
         return new TutorSettingResponse(success);
     }
 
-    TutorSettingResponse getUpdateExperienceResponse(UpdateExperienceRequest updateExperienceRequest) {
-        String token = updateExperienceRequest.getToken();
-        String experience = updateExperienceRequest.getExperience();
+    TutorSettingResponse getUpdateExperienceResponse(UpdateExperienceRequest request) {
+        String token = request.getToken();
+        String experience = request.getExperience();
 
         String email = accessToken.decodeToken(token);
 
@@ -193,7 +199,7 @@ class TutorSettingService {
         return new TutorSettingResponse(success);
     }
 
-    TutorSettingResponse getCancelSubscriptionResponse(CancelSubscriptionRequest request) {
+    TutorSettingResponse getCancelSubscriptionResponse(TutorSettingRequest request) {
         String token = request.getToken();
         String email = accessToken.decodeToken(token);
 
@@ -201,7 +207,7 @@ class TutorSettingService {
         return new TutorSettingResponse(success);
     }
 
-    GetCoursesResponse getGetCoursesResponse(GetCoursesRequest request) {
+    GetCoursesResponse getGetCoursesResponse(TutorSettingRequest request) {
         String token = request.getToken();
         String email = accessToken.decodeToken(token);
         int tutorId = dataAccessObject.getTutorIDByEmail(email);

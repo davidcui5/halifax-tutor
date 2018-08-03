@@ -1,11 +1,10 @@
 package group12.tutorsetting.request;
 
-public class UpdatePhotoRequest {
-    private String token;
+public class UpdatePhotoRequest extends TutorSettingRequest {
     private String photoURL;
 
     public void setToken(String token) {
-        this.token = token;
+        super.setToken(token);
     }
 
     public void setPhotoURL(String photoURL) {
@@ -13,7 +12,7 @@ public class UpdatePhotoRequest {
     }
 
     public String getToken() {
-        return token;
+        return super.getToken();
     }
 
     public String getPhotoURL() {
@@ -22,6 +21,6 @@ public class UpdatePhotoRequest {
 
     @Override
     public String toString() {
-        return "token: " + token + " photoURL: " + photoURL;
+        return super.toString() + " photoURL: " + photoURL;
     }
 }

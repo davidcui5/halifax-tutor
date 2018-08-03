@@ -1,21 +1,20 @@
 package group12.tutorsetting.request;
 
-public class UpdatePasswordRequest {
-    private String token;
+public class UpdatePasswordRequest extends TutorSettingRequest {
     private String password;
 
     public UpdatePasswordRequest() {
-        this.token = "";
+        super();
         this.password = "";
     }
 
     public UpdatePasswordRequest(String token, String password) {
-        this.token = token;
+        super(token);
         this.password = password;
     }
 
     public void setToken(String token) {
-        this.token = token;
+        super.setToken(token);
     }
 
     public void setPassword(String password) {
@@ -23,7 +22,7 @@ public class UpdatePasswordRequest {
     }
 
     public String getToken() {
-        return token;
+        return super.getToken();
     }
 
     public String getPassword() {
@@ -32,6 +31,6 @@ public class UpdatePasswordRequest {
 
     @Override
     public String toString() {
-        return "token: " + token + " password: " + password;
+        return super.toString() + " password: " + password;
     }
 }

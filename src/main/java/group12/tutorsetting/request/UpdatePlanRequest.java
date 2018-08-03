@@ -1,11 +1,10 @@
 package group12.tutorsetting.request;
 
-public class UpdatePlanRequest {
-    private String token;
+public class UpdatePlanRequest extends TutorSettingRequest {
     private int planNo;
 
     public void setToken(String token) {
-        this.token = token;
+        super.setToken(token);
     }
 
     public void setPlanNo(int planNo) {
@@ -13,7 +12,7 @@ public class UpdatePlanRequest {
     }
 
     public String getToken() {
-        return token;
+        return super.getToken();
     }
 
     public int getPlanNo() {
@@ -22,6 +21,6 @@ public class UpdatePlanRequest {
 
     @Override
     public String toString() {
-        return "token: " + token + " planNo: " + planNo;
+        return super.toString() + " planNo: " + planNo;
     }
 }

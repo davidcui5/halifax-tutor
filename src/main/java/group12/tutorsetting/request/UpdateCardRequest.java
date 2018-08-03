@@ -1,14 +1,13 @@
 package group12.tutorsetting.request;
 
-public class UpdateCardRequest {
-    private String token;
+public class UpdateCardRequest extends TutorSettingRequest {
     private String holderName;
     private String creditCardNumber;
     private String expireDate;
     private int securityCode;
 
     public void setToken(String token) {
-        this.token = token;
+        super.setToken(token);
     }
 
     public void setHolderName(String holderName) {
@@ -28,7 +27,7 @@ public class UpdateCardRequest {
     }
 
     public String getToken() {
-        return token;
+        return super.getToken();
     }
 
     public String getHolderName() {
@@ -49,7 +48,7 @@ public class UpdateCardRequest {
 
     @Override
     public String toString() {
-        return "token: " + token + " holderName: " + holderName + " creditCardNumber: " + creditCardNumber
+        return super.toString() + " holderName: " + holderName + " creditCardNumber: " + creditCardNumber
                 + " expireDate: " + expireDate + " securityCode: " + securityCode;
     }
 }

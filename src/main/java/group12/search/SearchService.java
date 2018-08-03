@@ -2,9 +2,9 @@ package group12.search;
 
 import group12.Configuration;
 import group12.dataaccess.*;
-import group12.search.mock.TutorPublicInfo;
-import group12.search.mock.TutorPublicInfoDAO;
-import group12.search.mock.TutorPublicInfoDaoImpl;
+import group12.search.dataaccess.TutorPublicInfo;
+import group12.search.dataaccess.TutorPublicInfoDAO;
+import group12.search.dataaccess.TutorPublicInfoDaoImpl;
 import group12.search.request.IdentityRequest;
 import group12.search.request.SearchRequest;
 import group12.search.response.IdentityResponse;
@@ -16,7 +16,6 @@ import group12.tokenauth.JWTAccessToken;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 
 class SearchService {

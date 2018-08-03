@@ -1,4 +1,4 @@
-package group12.StudentSettingTest;
+package group12.studentsetting;
 
 import group12.DBDAOTest.MockData;
 import group12.dataaccess.IDataAccessObject;

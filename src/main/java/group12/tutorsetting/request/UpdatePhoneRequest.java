@@ -1,11 +1,10 @@
 package group12.tutorsetting.request;
 
-public class UpdatePhoneRequest {
-    private String token;
+public class UpdatePhoneRequest extends TutorSettingRequest {
     private String phone;
 
     public void setToken(String token) {
-        this.token = token;
+        super.setToken(token);
     }
 
     public void setPhone(String phone) {
@@ -13,7 +12,7 @@ public class UpdatePhoneRequest {
     }
 
     public String getToken() {
-        return token;
+        return super.getToken();
     }
 
     public String getPhone() {
@@ -22,6 +21,6 @@ public class UpdatePhoneRequest {
 
     @Override
     public String toString() {
-        return "token: " + token + " phone: " + phone;
+        return super.toString() + " phone: " + phone;
     }
 }

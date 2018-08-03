@@ -2,12 +2,11 @@ package group12.tutorsetting.request;
 
 import java.util.Arrays;
 
-public class UpdateWeeklyScheduleRequest {
-    private String token;
+public class UpdateWeeklyScheduleRequest extends TutorSettingRequest {
     private boolean[][] weeklySchedule;
 
     public void setToken(String token) {
-        this.token = token;
+        super.setToken(token);
     }
 
     public void setWeeklySchedule(boolean[][] weeklySchedule) {
@@ -15,7 +14,7 @@ public class UpdateWeeklyScheduleRequest {
     }
 
     public String getToken() {
-        return token;
+        return super.getToken();
     }
 
     public boolean[][] getWeeklySchedule() {
@@ -25,7 +24,7 @@ public class UpdateWeeklyScheduleRequest {
     @Override
     public String toString() {
         String result = "";
-        result = result.concat("token: ".concat(token));
+        result = result.concat(super.toString());
         for (boolean[] aWeeklySchedule : weeklySchedule) {
             result = result.concat(Arrays.toString(aWeeklySchedule));
         }

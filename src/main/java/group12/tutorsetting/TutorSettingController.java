@@ -17,10 +17,6 @@ public class TutorSettingController {
     @Autowired
     private TutorSettingService tutorSettingService;
 
-    public TutorSettingController() {
-        tutorSettingService = new TutorSettingService();
-    }
-
     @PostMapping(path = "/tutor/setting/password", headers = "content-type=application/json")
     public TutorSettingResponse updatePassword(@RequestBody UpdatePasswordRequest request) {
         logger.info("Update password request received: " + request.toString());
@@ -70,13 +66,13 @@ public class TutorSettingController {
     }
 
     @DeleteMapping(path = "/tutor/setting/plan", headers = "content-type=application/json")
-    public TutorSettingResponse cancelPlan(@RequestBody CancelSubscriptionRequest request) {
+    public TutorSettingResponse cancelPlan(@RequestBody TutorSettingRequest request) {
         logger.info("Cancel plan request received: " + request.toString());
         return tutorSettingService.getCancelSubscriptionResponse(request);
     }
 
     @PostMapping(path = "/tutor/setting/resend", headers = "content-type=application/json")
-    public TutorSettingResponse resendConfirmationEmail(@RequestBody ResendConfirmationRequest request) {
+    public TutorSettingResponse resendConfirmationEmail(@RequestBody TutorSettingRequest request) {
         logger.info("Resend confirmation email: " + request.toString());
         return tutorSettingService.getResendConfirmationEmailResponse(request);
     }
@@ -90,7 +86,7 @@ public class TutorSettingController {
     @GetMapping(path = "/tutor/setting/courses", headers = "content-type=application/json")
     public GetCoursesResponse getTutorCourses(@RequestParam(value = "token") String token) {
         logger.info("Get all courses of tutor request received with token = " + token);
-        return tutorSettingService.getGetCoursesResponse(new GetCoursesRequest(token));
+        return tutorSettingService.getGetCoursesResponse(new TutorSettingRequest(token));
     }
 
     @DeleteMapping(path = "/tutor/setting/course", headers = "content-type=application/json")

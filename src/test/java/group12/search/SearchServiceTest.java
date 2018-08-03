@@ -2,7 +2,7 @@ package group12.search;
 
 import group12.Configuration;
 import group12.dataaccess.IDataAccessObject;
-import group12.search.mock.*;
+import group12.search.dataaccess.*;
 import group12.search.request.IdentityRequest;
 import group12.search.request.SearchRequest;
 import group12.search.response.IdentityResponse;

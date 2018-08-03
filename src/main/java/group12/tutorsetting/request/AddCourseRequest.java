@@ -1,7 +1,6 @@
 package group12.tutorsetting.request;
 
-public class AddCourseRequest {
-    private String token;
+public class AddCourseRequest extends TutorSettingRequest {
     private String school;
     private String courseCode;
     private float coursePrice;
@@ -15,7 +14,7 @@ public class AddCourseRequest {
     }
 
     public String getToken() {
-        return token;
+        return super.getToken();
     }
 
     public void setSchool(String school) {
@@ -27,7 +26,7 @@ public class AddCourseRequest {
     }
 
     public void setToken(String token) {
-        this.token = token;
+        super.setToken(token);
     }
 
     public float getCoursePrice() {
@@ -40,6 +39,6 @@ public class AddCourseRequest {
 
     @Override
     public String toString() {
-        return "token: " + token + " school: " + school + " courseCode: " + courseCode + " coursePrice: " + coursePrice;
+        return super.toString() + "school: " + school + " courseCode: " + courseCode + " coursePrice: " + coursePrice;
     }
 }

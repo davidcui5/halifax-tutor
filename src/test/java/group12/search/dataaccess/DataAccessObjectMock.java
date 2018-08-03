@@ -1,4 +1,4 @@
-package group12.search.mock;
+package group12.search.dataaccess;
 
 import group12.dataaccess.*;
 import group12.tutorprofile.TutorProfileForm;

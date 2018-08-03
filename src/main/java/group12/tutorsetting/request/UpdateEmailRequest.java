@@ -1,11 +1,10 @@
 package group12.tutorsetting.request;
 
-public class UpdateEmailRequest {
-    private String token;
+public class UpdateEmailRequest extends TutorSettingRequest {
     private String email;
 
     public void setToken(String token) {
-        this.token = token;
+        super.setToken(token);
     }
 
     public void setEmail(String email) {
@@ -13,7 +12,7 @@ public class UpdateEmailRequest {
     }
 
     public String getToken() {
-        return token;
+        return super.getToken();
     }
 
     public String getEmail() {
@@ -22,6 +21,6 @@ public class UpdateEmailRequest {
 
     @Override
     public String toString() {
-        return "token: " + token + " email: " + email;
+        return super.toString() + " email: " + email;
     }
 }
