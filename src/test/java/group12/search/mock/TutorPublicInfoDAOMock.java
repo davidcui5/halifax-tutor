@@ -1,4 +1,4 @@
-package group12.search.dataaccess;
+package group12.search.mock;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package group12.search.dataaccess;
+package group12.search.mock;
 
 import group12.dataaccess.GetTutorPublicInfoSQLOperation;
 import group12.dataaccess.SQLOperationTemplate;

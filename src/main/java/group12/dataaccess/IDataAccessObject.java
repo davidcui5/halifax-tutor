@@ -75,5 +75,4 @@ public interface IDataAccessObject {
     boolean increaseTotalRating(int tutorId, float ratingCount);
 
     boolean getSearchAuthConf();
-
 }

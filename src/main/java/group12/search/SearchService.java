@@ -2,15 +2,16 @@ package group12.search;
 
 import group12.Configuration;
 import group12.dataaccess.*;
-import group12.search.dataaccess.TutorPublicInfo;
-import group12.search.dataaccess.TutorPublicInfoDAO;
-import group12.search.dataaccess.TutorPublicInfoDaoImpl;
+import group12.search.mock.TutorPublicInfo;
+import group12.search.mock.TutorPublicInfoDAO;
+import group12.search.mock.TutorPublicInfoDaoImpl;
 import group12.search.request.IdentityRequest;
 import group12.search.request.SearchRequest;
 import group12.search.response.IdentityResponse;
 import group12.search.response.NoLoginSearchResponse;
 import group12.search.response.SearchResponse;
 import group12.search.response.Type;
+import group12.tokenauth.IAccessToken;
 import group12.tokenauth.JWTAccessToken;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,17 +23,27 @@ class SearchService {
     private static final Logger logger = LogManager.getLogger(SearchService.class);
     private Configuration configuration;
     private TutorPublicInfoDAO tutorPublicInfoDAO;
+    private IDataAccessObject dataAccessObject;
+    private IAccessToken accessToken;
 
     public SearchService() {
         tutorPublicInfoDAO = new TutorPublicInfoDaoImpl();
         Configuration.setDb(new MysqlDAOImpl());
         configuration = Configuration.getInstance();
+        accessToken = JWTAccessToken.getInstance();
+        dataAccessObject = new MysqlDAOImpl();
     }
 
-    public SearchService(TutorPublicInfoDAO tutorPublicInfoDAO) {
+    public SearchService(TutorPublicInfoDAO tutorPublicInfoDAO, IAccessToken accessToken, IDataAccessObject dataAccessObject) {
         this.tutorPublicInfoDAO = tutorPublicInfoDAO;
         Configuration.setDb(new MysqlDAOImpl());
         configuration = Configuration.getInstance();
+        this.accessToken = accessToken;
+        this.dataAccessObject = dataAccessObject;
+    }
+
+    public void setConfiguration(Configuration configuration) {
+        this.configuration = configuration;
     }
 
     SearchResponse getSearchResponse(SearchRequest request) {
@@ -49,7 +60,7 @@ class SearchService {
             searchResponse = new SearchResponse(true, numOfResults, results);
         } catch (Exception e) {
             logger.error(e.getMessage());
-            results = new ArrayList<>();
+            results = null;
             numOfResults = 0;
             searchResponse = new SearchResponse(false, numOfResults, results);
         }
@@ -60,11 +71,10 @@ class SearchService {
         IdentityResponse identityResponse = new IdentityResponse();
 
         String token = request.getToken();
-        String email = JWTAccessToken.getInstance().decodeToken(token);
+        String email = accessToken.decodeToken(token);
         if (email == null) {
             identityResponse.setSuccess(false);
         } else {
-            IDataAccessObject dataAccessObject = new MysqlDAOImpl();
             if (dataAccessObject.getStudentByEmail(email) != null) {
                 identityResponse.setType(Type.STUDENT);
             } else if (dataAccessObject.getTutorByEmail(email) != null) {

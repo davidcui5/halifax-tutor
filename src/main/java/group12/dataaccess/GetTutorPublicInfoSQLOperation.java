@@ -1,6 +1,6 @@
 package group12.dataaccess;
 
-import group12.search.dataaccess.TutorPublicInfo;
+import group12.search.mock.TutorPublicInfo;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
