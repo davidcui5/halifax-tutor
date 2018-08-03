@@ -6,6 +6,19 @@ public class UpdateCardRequest extends TutorSettingRequest {
     private String expireDate;
     private int securityCode;
 
+    public UpdateCardRequest() {
+
+    }
+
+    public UpdateCardRequest(String token, String holderName, String creditCardNumber, String expireDate,
+                             int securityCode) {
+        super(token);
+        this.holderName = holderName;
+        this.creditCardNumber = creditCardNumber;
+        this.expireDate = expireDate;
+        this.securityCode = securityCode;
+    }
+
     public void setToken(String token) {
         super.setToken(token);
     }

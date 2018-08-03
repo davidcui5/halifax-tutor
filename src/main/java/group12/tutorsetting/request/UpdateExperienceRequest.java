@@ -3,6 +3,15 @@ package group12.tutorsetting.request;
 public class UpdateExperienceRequest extends TutorSettingRequest {
     private String experience;
 
+    public UpdateExperienceRequest() {
+
+    }
+
+    public UpdateExperienceRequest(String token, String experience) {
+        super(token);
+        this.experience = experience;
+    }
+
     public void setToken(String token) {
         super.setToken(token);
     }

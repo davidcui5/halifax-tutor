@@ -5,6 +5,17 @@ public class AddCourseRequest extends TutorSettingRequest {
     private String courseCode;
     private float coursePrice;
 
+    public AddCourseRequest() {
+
+    }
+
+    public AddCourseRequest(String token, String school, String courseCode, float coursePrice) {
+        super(token);
+        this.school = school;
+        this.courseCode = courseCode;
+        this.coursePrice = coursePrice;
+    }
+
     public String getSchool() {
         return school;
     }

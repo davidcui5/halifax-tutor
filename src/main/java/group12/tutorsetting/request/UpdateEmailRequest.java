@@ -3,6 +3,15 @@ package group12.tutorsetting.request;
 public class UpdateEmailRequest extends TutorSettingRequest {
     private String email;
 
+    public UpdateEmailRequest() {
+
+    }
+
+    public UpdateEmailRequest(String token, String email) {
+        super(token);
+        this.email = email;
+    }
+
     public void setToken(String token) {
         super.setToken(token);
     }

@@ -42,6 +42,12 @@ class TutorSettingService {
         accessToken = JWTAccessToken.getInstance();
     }
 
+    public TutorSettingService(ITutorSettingDAO tutorSettingDAO, IDataAccessObject dataAccessObject, IAccessToken accessToken) {
+        this.tutorSettingDAO = tutorSettingDAO;
+        this.dataAccessObject = dataAccessObject;
+        this.accessToken = accessToken;
+    }
+
     public void setMailer(IMailer mailer) {
         this.mailer = mailer;
     }
@@ -210,11 +216,15 @@ class TutorSettingService {
     GetCoursesResponse getGetCoursesResponse(TutorSettingRequest request) {
         String token = request.getToken();
         String email = accessToken.decodeToken(token);
-        int tutorId = dataAccessObject.getTutorIDByEmail(email);
+        if (email != null && !email.equals("")) {
+            int tutorId = dataAccessObject.getTutorIDByEmail(email);
 
-        List<Course> courses = dataAccessObject.getCoursesOFTutor(tutorId);
+            List<Course> courses = dataAccessObject.getCoursesOFTutor(tutorId);
 
-        return new GetCoursesResponse(true, courses);
+            return new GetCoursesResponse(true, courses);
+        } else {
+            return new GetCoursesResponse(false, null);
+        }
     }
 
     TutorSettingResponse getRemoveCourseResponse(RemoveCourseRequest request) {

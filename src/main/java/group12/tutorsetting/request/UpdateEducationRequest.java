@@ -3,6 +3,15 @@ package group12.tutorsetting.request;
 public class UpdateEducationRequest extends TutorSettingRequest {
     private String education;
 
+    public UpdateEducationRequest() {
+
+    }
+
+    public UpdateEducationRequest(String token, String education) {
+        super(token);
+        this.education = education;
+    }
+
     public void setToken(String token) {
         super.setToken(token);
     }

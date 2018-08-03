@@ -3,6 +3,15 @@ package group12.tutorsetting.request;
 public class UpdatePlanRequest extends TutorSettingRequest {
     private int planNo;
 
+    public UpdatePlanRequest() {
+
+    }
+
+    public UpdatePlanRequest(String token, int planNo) {
+        super(token);
+        this.planNo = planNo;
+    }
+
     public void setToken(String token) {
         super.setToken(token);
     }

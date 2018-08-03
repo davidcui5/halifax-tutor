@@ -3,6 +3,15 @@ package group12.tutorsetting.request;
 public class UpdatePhoneRequest extends TutorSettingRequest {
     private String phone;
 
+    public UpdatePhoneRequest() {
+
+    }
+
+    public UpdatePhoneRequest(String token, String phone) {
+        super(token);
+        this.phone = phone;
+    }
+
     public void setToken(String token) {
         super.setToken(token);
     }
