@@ -1,4 +1,4 @@
-package group12.tutorsetting;
+package group12.tutorsetting.response;
 
 import group12.dataaccess.Course;
 

@@ -1,4 +1,4 @@
-package group12.tutorsetting;
+package group12.tutorsetting.response;
 
 public class TutorSettingResponse {
     private boolean success;

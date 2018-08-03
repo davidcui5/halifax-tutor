@@ -1,5 +1,4 @@
-package group12.tutorsetting;
-
+package group12.tutorsetting.dataaccess;
 
 import group12.dataaccess.WeeklySchedule;
 
@@ -27,5 +26,4 @@ public interface ITutorSettingDAO {
     boolean updatePlan(String email, String planNo);
 
     boolean cancelPlan(String email);
-
 }

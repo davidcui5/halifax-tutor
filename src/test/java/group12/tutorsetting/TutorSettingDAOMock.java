@@ -1,6 +1,7 @@
 package group12.tutorsetting;
 
 import group12.dataaccess.WeeklySchedule;
+import group12.tutorsetting.dataaccess.ITutorSettingDAO;
 
 public class TutorSettingDAOMock implements ITutorSettingDAO {
     @Override

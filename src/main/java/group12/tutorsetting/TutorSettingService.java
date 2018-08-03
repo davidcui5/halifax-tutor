@@ -9,7 +9,11 @@ import group12.encryption.IEncryptor;
 import group12.encryption.SimpleMD5Encryptor;
 import group12.tokenauth.IAccessToken;
 import group12.tokenauth.JWTAccessToken;
+import group12.tutorsetting.dataaccess.ITutorSettingDAO;
+import group12.tutorsetting.dataaccess.TutorSettingDAOImpl;
 import group12.tutorsetting.request.*;
+import group12.tutorsetting.response.GetCoursesResponse;
+import group12.tutorsetting.response.TutorSettingResponse;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;

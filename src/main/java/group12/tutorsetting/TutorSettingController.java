@@ -1,6 +1,8 @@
 package group12.tutorsetting;
 
 import group12.tutorsetting.request.*;
+import group12.tutorsetting.response.GetCoursesResponse;
+import group12.tutorsetting.response.TutorSettingResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

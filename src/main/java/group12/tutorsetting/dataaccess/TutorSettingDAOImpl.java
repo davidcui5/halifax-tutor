@@ -1,5 +1,4 @@
-package group12.tutorsetting;
-
+package group12.tutorsetting.dataaccess;
 
 import group12.dataaccess.*;
 
@@ -54,7 +53,7 @@ public class TutorSettingDAOImpl implements ITutorSettingDAO {
 
     @Override
     public boolean addCourse(String email, String school, String courseCode, float price) {
-        boolean result = false;
+        boolean isSuccess;
 
         dataAccessObject = new MysqlDAOImpl();
         int tutorId = dataAccessObject.getTutorIDByEmail(email);
@@ -74,21 +73,19 @@ public class TutorSettingDAOImpl implements ITutorSettingDAO {
         }
 
         if (courseExisted) {
-            result = dataAccessObject.setCourseToTutor(tutorId, courseId, price);
+            isSuccess = dataAccessObject.setCourseToTutor(tutorId, courseId, price);
         } else {
             Course newCourse = new Course();
             newCourse.setName(courseCode);
             newCourse.setSchool(school);
-            result = dataAccessObject.saveCourse(newCourse);
-            if (result != true) {
-                return false;
-            } else {
+            isSuccess = dataAccessObject.saveCourse(newCourse);
+            if (isSuccess) {
                 operation = new GetCourseIdSQLOperation(courseCode, school);
                 courseId = (int) operation.executeMysqlQuery();
-                result = dataAccessObject.setCourseToTutor(tutorId, courseId, price);
+                isSuccess = dataAccessObject.setCourseToTutor(tutorId, courseId, price);
             }
         }
-        return result;
+        return isSuccess;
     }
 
     @Override
