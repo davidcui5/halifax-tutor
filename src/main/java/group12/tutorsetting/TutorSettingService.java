@@ -14,12 +14,16 @@ import group12.tutorsetting.dataaccess.TutorSettingDAOImpl;
 import group12.tutorsetting.request.*;
 import group12.tutorsetting.response.GetCoursesResponse;
 import group12.tutorsetting.response.TutorSettingResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 import java.util.UUID;
 
 class TutorSettingService {
+    private static final Logger logger = LogManager.getLogger(TutorSettingService.class);
+
     private ITutorSettingDAO tutorSettingDAO = new TutorSettingDAOImpl();
     private IDataAccessObject dataAccessObject = new MysqlDAOImpl();
     private IAccessToken accessToken = JWTAccessToken.getInstance();
@@ -46,20 +50,6 @@ class TutorSettingService {
 
     public void setDataAccessObject(IDataAccessObject dataAccessObject) {
         this.dataAccessObject = dataAccessObject;
-    }
-
-    private boolean isAuthorized(String token) throws Exception {
-        try {
-            boolean result = false;
-            String email = accessToken.decodeToken(token);
-            int count = dataAccessObject.countOfUserWithEmail(email);
-            if (count == 1) {
-                result = true;
-            }
-            return result;
-        } catch (Exception ex) {
-            throw new Exception(ex);
-        }
     }
 
     TutorSettingResponse getUpdateWeeklyScheduleResponse(UpdateWeeklyScheduleRequest updateWeeklyScheduleRequest) {
@@ -123,10 +113,27 @@ class TutorSettingService {
         return new TutorSettingResponse(success);
     }
 
+    // Got from Zaher's code
+    private boolean isAuthorized(String token) throws Exception {
+        try {
+            boolean result = false;
+            String email = accessToken.decodeToken(token);
+            int count = dataAccessObject.countOfUserWithEmail(email);
+            if (count == 1) {
+                result = true;
+            }
+            return result;
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            throw new Exception(ex);
+        }
+    }
+
     TutorSettingResponse getResendConfirmationEmailResponse(ResendConfirmationRequest resendConfirmationRequest) {
         String token = resendConfirmationRequest.getToken();
         boolean success = false;
 
+        // Got from Zaher's code
         try {
             if (isAuthorized(token)) {
                 String email = accessToken.decodeToken(token);
@@ -138,6 +145,7 @@ class TutorSettingService {
                 success = true;
             }
         } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
             success = false;
         }
         return new TutorSettingResponse(success);
