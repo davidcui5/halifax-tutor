@@ -4,8 +4,6 @@ public class UpdatePasswordRequest extends TutorSettingRequest {
     private String password;
 
     public UpdatePasswordRequest() {
-        super();
-        this.password = "";
     }
 
     public UpdatePasswordRequest(String token, String password) {

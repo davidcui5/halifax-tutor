@@ -4,7 +4,6 @@ public class TutorSettingRequest {
     private String token;
 
     public TutorSettingRequest() {
-        token = "";
     }
 
     public TutorSettingRequest(String token) {

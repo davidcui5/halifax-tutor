@@ -4,6 +4,10 @@ public class RemoveCourseRequest extends TutorSettingRequest {
     private String school;
     private String courseCode;
 
+    public RemoveCourseRequest() {
+
+    }
+
     public RemoveCourseRequest(String token, String school, String courseCode) {
         super(token);
         this.school = school;
