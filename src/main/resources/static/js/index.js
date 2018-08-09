@@ -1,7 +1,7 @@
 'use strict';
 
 $(document).ready(function () {
-    $("form").submit(function (event) {
+    $("#user-login-form").submit(function (event) {
         event.preventDefault();
 
         if(!validateForm()){

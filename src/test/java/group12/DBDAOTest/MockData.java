@@ -1,12 +1,14 @@
 package group12.DBDAOTest;
 
-import group12.data_access.Course;
-import group12.data_access.Student;
-import group12.data_access.Tutor;
-/*import group12.registration.StudentSignupForm;
-import group12.registration.TutorSignupForm;*/
+import group12.dataaccess.Course;
+import group12.dataaccess.Student;
+import group12.dataaccess.Tutor;
+
+import java.util.UUID;
 
 public class MockData {
+    public static String activeCode = "";
+
     public static Student getStudentObject() {
         Student student = new Student();
         student.setEmail("testemailStu@gmail.com");
@@ -48,19 +50,19 @@ public class MockData {
         return "testemailTut@gmail.com";
     }
 
-    /*public static StudentSignupForm getUnRegStudent() {
-        StudentSignupForm student = new StudentSignupForm();
+    public static Student getUnRegStudent() {
+        Student student = new Student();
         student.setEmail("testemailWrong@gmail.com");
         student.setPassword("pass123456S");
         return student;
     }
 
-    public static TutorSignupForm getUnRegTutor() {
-        TutorSignupForm tutor = new TutorSignupForm();
+    public static Tutor getUnRegTutor() {
+        Tutor tutor = new Tutor();
         tutor.setEmail("testemailWrong@gmail.com");
         tutor.setPassword("pass123456T");
         return tutor;
-    }*/
+    }
 
     public static String getEmailRegistredStudent() {
         return "testemailStu@gmail.com";
@@ -71,22 +73,37 @@ public class MockData {
     }
 
     public static String getActivationCode() {
-        return "e9a577f4-827d-45ee-bde0-3ec0d49d3298";
+        UUID uuid = UUID.randomUUID();
+        if (activeCode.isEmpty())
+            activeCode = uuid.toString();
+        return activeCode;
     }
 
     public static String getWrongActivationCode() {
-        return "e9a577f4-827d-47Ee-bde0-3ec0d49d3298";
+        return activeCode;
     }
 
     public static String getOldActivationCode() {
         return "713ec00e-e9ae-4833-bba2-75d8729f554e";
     }
 
-    public static Course getCourseObject(){
-        Course course=new Course();
+    public static Course getCourseObject() {
+        Course course = new Course();
         course.setName("CSI101");
         course.setSchool("DAl");
         return course;
+    }
+
+    public static String getPasswordForTest() {
+        return "testPassword";
+    }
+
+    public static String getPhoneForTest() {
+        return "t9024412277";
+    }
+
+    public static String getEmailForTest() {
+        return "testEmailtest@test.test";
     }
 }
 

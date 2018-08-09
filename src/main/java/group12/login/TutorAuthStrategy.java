@@ -1,25 +1,36 @@
 package group12.login;
 
-import group12.data_access.Tutor;
-import group12.data_access.User;
-import group12.token_auth.IAccessToken;
-import group12.token_auth.JWTAccessToken;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import group12.dataaccess.Tutor;
+import group12.dataaccess.User;
+import group12.tokenauth.IAccessToken;
+import group12.tokenauth.JWTAccessToken;
 
-@Component
 public class TutorAuthStrategy implements IAuthenticationStrategy{
 
-    @Value("${login.bannedTutorGoTo}")
-    String bannedTutorGoTo;
-    @Value("${login.inactiveTutorGoTo}")
-    String inactiveTutorGoTo;
-    @Value("${login.activeAndUnbannedTutorGoTo}")
-    String activeAndUnbannedTutorGoTo;
+    private IAuthDAO authDAO;
+
+    private String bannedTutorGoTo;
+    private String inactiveTutorGoTo;
+    private String activeAndUnbannedTutorGoTo;
+
+    public void setAuthDAO(IAuthDAO authDAO){
+        this.authDAO = authDAO;
+    }
+
+    public void setBannedTutorGoTo(String bannedTutorGoTo) {
+        this.bannedTutorGoTo = bannedTutorGoTo;
+    }
+
+    public void setInactiveTutorGoTo(String inactiveTutorGoTo) {
+        this.inactiveTutorGoTo = inactiveTutorGoTo;
+    }
+
+    public void setActiveAndUnbannedTutorGoTo(String activeAndUnbannedTutorGoTo) {
+        this.activeAndUnbannedTutorGoTo = activeAndUnbannedTutorGoTo;
+    }
 
     @Override
     public void authenticate(User tutor) {
-        IAuthDAO authDAO = new MysqlAuthDAO();
         Tutor validTutor = authDAO.getTutorByEmail(tutor.getEmail());
         if(validTutor == null){
             tutor.setLoginResponse(new LoginResponse(AuthenticationResult.FAILURE,"Wrong Email"));
@@ -45,12 +56,9 @@ public class TutorAuthStrategy implements IAuthenticationStrategy{
         if(isBanned){
             return bannedTutorGoTo;
         }
-        else if(isActivated){
-
+        if(isActivated){
             return activeAndUnbannedTutorGoTo;
         }
-        else{
-            return inactiveTutorGoTo;
-        }
+        return inactiveTutorGoTo;
     }
 }

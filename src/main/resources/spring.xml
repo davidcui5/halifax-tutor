@@ -14,24 +14,66 @@
 
     <bean id="searchService" class="group12.search.SearchService">
     </bean>
+  
+    <!--LoginController beans START-->
+    <bean id="student" class="group12.login.StudentAuthStrategy">
+        <property name="authDAO" ref="authDAO"/>
+        <property name="bannedStudentGoTo" value="${login.bannedStudentGoTo}"/>
+        <property name="inactiveStudentGoTo" value="${login.inactiveStudentGoTo}"/>
+        <property name="activeAndUnbannedStudentGoTo" value="${login.activeAndUnbannedStudentGoTo}"/>
+    </bean>
+
+    <bean id="tutor" class="group12.login.TutorAuthStrategy">
+        <property name="authDAO" ref="authDAO"/>
+        <property name="bannedTutorGoTo" value="${login.bannedTutorGoTo}"/>
+        <property name="inactiveTutorGoTo" value="${login.inactiveTutorGoTo}"/>
+        <property name="activeAndUnbannedTutorGoTo" value="${login.activeAndUnbannedTutorGoTo}"/>
+    </bean>
+
+    <bean id="admin" class="group12.login.AdminAuthStrategy">
+        <property name="authDAO" ref="authDAO"/>
+        <property name="adminGoTo" value="${login.adminGoTo}"/>
+    </bean>
+
+    <bean id="authDAO" class="group12.login.MysqlAuthDAO">
+    </bean>
+    <!--LoginController beans END-->
+
+    <!--AdminController beans START-->
+    <bean id="adminDAO" class="group12.adminsetting.AdminSettingDAO">
+    </bean>
+    <!--LoginController beans END-->
+
+
+
+
+    <bean id="configuration" class="group12.Configuration">
+        <property name="db" ref="DBDAO"/>
+    </bean>
 
     <!--ForgotPasswordController beans START-->
-    <bean id="forgotPasswordService" class="group12.ForgotPassword.ForgotPasswordService">
+    <bean id="forgotPasswordService" class="group12.forgotpassword.ForgotPasswordService">
         <property name="db" ref="DBDAO"/>
         <property name="mailer" ref="mailer"/>
     </bean>
 
     <!--ForgotPasswordController beans ENDT-->
 
+    <!-- TutorSettingService bean START-->
+    <bean id="tutorSetting" class="group12.tutorsetting.TutorSettingService">
+        <property name="mailer" ref="mailer"/>
+    </bean>
+    <!-- TutorSettingService bean END-->
+
     <!--ForgotPasswordController beans START-->
-    <bean id="tutorProfileService" class="group12.tutor_profile.TutorProfileService">
+    <bean id="tutorProfileService" class="group12.tutorprofile.TutorProfileService">
         <property name="db" ref="DBDAO"/>
         <property name="mailer" ref="mailer"/>
     </bean>
 
-    <!--ForgotPasswordController beans ENDT-->
+    <!--ForgotPasswordController beans END-->
 
-    <bean id="studentSetting" class="group12.student_setting.StudentSettingService">
+    <bean id="studentSetting" class="group12.studentsetting.StudentSettingService">
         <property name="db" ref="DBDAO"/>
         <property name="mailer" ref="mailer"/>
     </bean>
@@ -42,28 +84,12 @@
         <property name="mailer" ref="mailer"/>
     </bean>
 
-    <bean id="encryptor" class="group12.encryption.SimpleMD5Encryptor">
-    </bean>
-
-    <bean id="DBDAO" class="group12.data_access.MysqlDAOImpl">
+    <bean id="DBDAO" class="group12.dataaccess.MysqlDAOImpl">
         <property name="dataSource" ref="dataSource"/>
-<!--
-        <property name="dataSource" ref="dataSource"/>
--->
     </bean>
-    <!--RegistrationController beans ENDT-->
+    <!--RegistrationController beans END-->
 
-    <bean id="student" class="group12.login.StudentAuthStrategy">
-    </bean>
-
-    <bean id="tutor" class="group12.login.TutorAuthStrategy">
-    </bean>
-
-    <bean id="admin" class="group12.login.AdminAuthStrategy">
-    </bean>
-
-
-    <!--DataSource bean is shared-->
+    <!--DataSource bean-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
         <property name="url" value="${spring.datasource.url}"/>
@@ -71,8 +97,9 @@
         <property name="password" value="${spring.datasource.password}"/>
     </bean>
 
+    <!--Mailer bean-->
     <bean id="mailer" class="group12.email.SpringMailer">
-            <property name="mailSender" ref="mailSender"/>
+        <property name="mailSender" ref="mailSender"/>
     </bean>
 
     <!-- SET default mail properties -->

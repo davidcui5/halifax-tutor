@@ -1,25 +1,35 @@
 package group12.login;
 
-import group12.data_access.Student;
-import group12.data_access.User;
-import group12.token_auth.IAccessToken;
-import group12.token_auth.JWTAccessToken;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import group12.dataaccess.Student;
+import group12.dataaccess.User;
+import group12.tokenauth.IAccessToken;
+import group12.tokenauth.JWTAccessToken;
 
-@Component
 public class StudentAuthStrategy implements IAuthenticationStrategy {
 
-    @Value("${login.bannedStudentGoTo}")
-    String bannedStudentGoTo;
-    @Value("${login.inactiveStudentGoTo}")
-    String inactiveStudentGoTo;
-    @Value("${login.activeAndUnbannedStudentGoTo}")
-    String activeAndUnbannedStudentGoTo;
+    private IAuthDAO authDAO;
+    private String bannedStudentGoTo;
+    private String inactiveStudentGoTo;
+    private String activeAndUnbannedStudentGoTo;
+
+    public void setAuthDAO(IAuthDAO authDAO){
+        this.authDAO = authDAO;
+    }
+
+    public void setBannedStudentGoTo(String bannedStudentGoTo) {
+        this.bannedStudentGoTo = bannedStudentGoTo;
+    }
+
+    public void setInactiveStudentGoTo(String inactiveStudentGoTo) {
+        this.inactiveStudentGoTo = inactiveStudentGoTo;
+    }
+
+    public void setActiveAndUnbannedStudentGoTo(String activeAndUnbannedStudentGoTo) {
+        this.activeAndUnbannedStudentGoTo = activeAndUnbannedStudentGoTo;
+    }
 
     @Override
     public void authenticate(User student) {
-        IAuthDAO authDAO = new MysqlAuthDAO();
         Student validStudent = authDAO.getStudentByEmail(student.getEmail());
         if(validStudent == null){
             student.setLoginResponse(new LoginResponse(AuthenticationResult.FAILURE,"Wrong Email"));
@@ -45,11 +55,9 @@ public class StudentAuthStrategy implements IAuthenticationStrategy {
         if(isBanned){
             return bannedStudentGoTo;
         }
-        else if(isActivated){
+        if(isActivated){
             return activeAndUnbannedStudentGoTo;
         }
-        else{
-            return inactiveStudentGoTo;
-        }
+        return inactiveStudentGoTo;
     }
 }

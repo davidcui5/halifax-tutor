@@ -7,11 +7,13 @@ public class LoginResponse {
     private String url; //url to redirect to
     private String token; //access token
 
+    public LoginResponse(){
+
+    }
+
     public LoginResponse(AuthenticationResult result, String message){
         this.result = result;
         this.message = message;
-        url = "";
-        token = "";
     }
 
     public LoginResponse(AuthenticationResult result, String message, String url, String token){

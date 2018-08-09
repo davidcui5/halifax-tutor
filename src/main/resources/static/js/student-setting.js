@@ -4,6 +4,11 @@ $(document).ready(function () {
     var token = localStorage.getItem("token");
     var objToken = {'token': token};
 
+    if (token === null) {
+        alert("Please login. Redirecting to login page.");
+        location.href = "../index.html";
+    }
+
     $(".remail").hide();
     $(".alert").hide();
     $.ajax({
@@ -88,8 +93,6 @@ $(document).ready(function () {
     });
 
     $("#Cemail").submit(function (event) {
-        if (!validateEmail())
-            return;
         event.preventDefault();
 
         let email = $("#email").val();
@@ -117,8 +120,6 @@ $(document).ready(function () {
     });
 
     $("#Cphone").submit(function (event) {
-        if (!validatePhone())
-            return;
         event.preventDefault();
 
         let phone = $("#phone").val();
